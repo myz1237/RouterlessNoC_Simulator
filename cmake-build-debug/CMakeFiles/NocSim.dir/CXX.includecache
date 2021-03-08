@@ -354,11 +354,11 @@ yaml-cpp/node/parse.h
 yaml-cpp/node/emit.h
 ../lib/yaml-cpp/include/yaml-cpp/yaml-cpp/node/emit.h
 
-/home/myz1237/Desktop/NocSim/src/ConfigureManager.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.cpp
 ConfigureManager.h
-/home/myz1237/Desktop/NocSim/src/ConfigureManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.h
 
-/home/myz1237/Desktop/NocSim/src/ConfigureManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.h
 string
 -
 yaml-cpp/yaml.h
@@ -366,25 +366,25 @@ yaml-cpp/yaml.h
 cmath
 -
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 Traffic.h
-/home/myz1237/Desktop/NocSim/src/Traffic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 
-/home/myz1237/Desktop/NocSim/src/ExbManager.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.cpp
 ExbManager.h
-/home/myz1237/Desktop/NocSim/src/ExbManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.h
 
-/home/myz1237/Desktop/NocSim/src/ExbManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.h
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 Util.h
-/home/myz1237/Desktop/NocSim/src/Util.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 
-/home/myz1237/Desktop/NocSim/src/Flit.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.cpp
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 vector
 -
 ostream
@@ -392,17 +392,17 @@ ostream
 string
 -
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 Util.h
-/home/myz1237/Desktop/NocSim/src/Util.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 RoutingTable.h
-/home/myz1237/Desktop/NocSim/src/RoutingTable.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.cpp
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 string
 -
 iostream
@@ -410,57 +410,69 @@ iostream
 vector
 -
 Ring.h
-/home/myz1237/Desktop/NocSim/src/Ring.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 
-/home/myz1237/Desktop/NocSim/src/Injection.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.cpp
+GlobalStatistic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.h
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.h
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp
 Injection.h
-/home/myz1237/Desktop/NocSim/src/Injection.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
 
-/home/myz1237/Desktop/NocSim/src/Injection.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 ringalgorithm/RingAlgorithms.h
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
 Util.h
-/home/myz1237/Desktop/NocSim/src/Util.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 Traffic.h
-/home/myz1237/Desktop/NocSim/src/Traffic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 vector
 -
 
-/home/myz1237/Desktop/NocSim/src/Main.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.cpp
+LocalStatistic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.h
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.h
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp
 iostream
 -
 ConfigureManager.h
-/home/myz1237/Desktop/NocSim/src/ConfigureManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.h
 Noc.h
-/home/myz1237/Desktop/NocSim/src/Noc.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.h
 
-/home/myz1237/Desktop/NocSim/src/Noc.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.cpp
 Noc.h
-/home/myz1237/Desktop/NocSim/src/Noc.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.h
 
-/home/myz1237/Desktop/NocSim/src/Noc.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.h
 RoutingTable.h
-/home/myz1237/Desktop/NocSim/src/RoutingTable.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 Node.h
-/home/myz1237/Desktop/NocSim/src/Node.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
 Ring.h
-/home/myz1237/Desktop/NocSim/src/Ring.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 ringalgorithm/RingAlgorithms.h
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 vector
 -
 
-/home/myz1237/Desktop/NocSim/src/Node.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp
 Node.h
-/home/myz1237/Desktop/NocSim/src/Node.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
 
-/home/myz1237/Desktop/NocSim/src/Node.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
 iostream
 -
 vector
@@ -468,21 +480,21 @@ vector
 cstring
 -
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 RoutingTable.h
-/home/myz1237/Desktop/NocSim/src/RoutingTable.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 ExbManager.h
-/home/myz1237/Desktop/NocSim/src/ExbManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.h
 Injection.h
-/home/myz1237/Desktop/NocSim/src/Injection.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
 ExbManager.h
-/home/myz1237/Desktop/NocSim/src/ExbManager.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.h
 
-/home/myz1237/Desktop/NocSim/src/Ring.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp
 Ring.h
-/home/myz1237/Desktop/NocSim/src/Ring.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 
-/home/myz1237/Desktop/NocSim/src/Ring.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 vector
 -
 string
@@ -490,45 +502,49 @@ string
 algorithm
 -
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 ringalgorithm/RingAlgorithms.h
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
 Util.h
-/home/myz1237/Desktop/NocSim/src/Util.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 Node.h
-/home/myz1237/Desktop/NocSim/src/Node.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
 
-/home/myz1237/Desktop/NocSim/src/RoutingTable.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.cpp
+RoutingTable.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 vector
 -
 algorithm
 -
 
-/home/myz1237/Desktop/NocSim/src/Traffic.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp
 Traffic.h
-/home/myz1237/Desktop/NocSim/src/Traffic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 
-/home/myz1237/Desktop/NocSim/src/Traffic.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 Flit.h
-/home/myz1237/Desktop/NocSim/src/Flit.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 cstdlib
 -
 cmath
 -
 
-/home/myz1237/Desktop/NocSim/src/Util.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 vector
 -
 
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.cpp
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.cpp
 RingAlgorithms.h
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
 
-/home/myz1237/Desktop/NocSim/src/ringalgorithm/RingAlgorithms.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
 ../GlobalParameter.h
-/home/myz1237/Desktop/NocSim/src/GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 
