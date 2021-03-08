@@ -30,8 +30,9 @@ public:
     //True 说明该EXB已经满了 False 还有位置
     bool check_exb_full(int single_buffer_index);
 
-    void attach(int index, Flit* flit);
-    Flit* dettach();
+    void push(int index, Flit* flit);
+    void pop_and_push(int index, Flit* flit);
+    void pop(int index);
     ExbManager();
     ~ExbManager();
 
