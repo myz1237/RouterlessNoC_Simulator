@@ -45,12 +45,12 @@ void ExbManager::pop_and_push(int index, Flit *flit) {
     }
     //放入新的flit
     m_exb.at(index).at(m_exb_status.at(index)->indicator) = flit;
-
-
+    flit->set_flit_type(Buffered);
 }
 
 void ExbManager::push(int index, Flit *flit) {
     m_exb.at(index).at(++m_exb_status.at(index)->indicator) = flit;
+    flit->set_flit_type(Buffered);
 }
 
 void ExbManager::pop(int index) {
@@ -106,9 +106,9 @@ bool ExbManager::check_exb_full(int single_buffer_index) {
     if(exb_index == -1){
         cerr << "Error in Exb" << endl;
     }else{
-        return m_exb_status.at(exb_index)->indicator == (GlobalParameter::exb_size -1);
+        //以为每次push结束后都会indicator++ 如果满的话 indicator应当指向exb最后的后一位
+        return m_exb_status.at(exb_index)->indicator == GlobalParameter::exb_size;
     }
-    return false;
 }
 
 

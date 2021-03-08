@@ -23,7 +23,7 @@ public:
     //仅用于初始化injection，向所有穿过该节点的ring发送一个flit的包
     void controlpacket_generator(int cycle,vector<int>& curr_ring_id, vector<Ring*>& ring);
 
-    inline void set_exb_interrupt(bool status){m_injection_status = status;}
+    inline void set_exb_interrupt(bool status){m_exb_interrupt = status;}
 
     Injection(int node_id, vector<int>* ring, vector<RoutingTable*>* table,
               vector<pair<int, int>>* ej_order, ExbManager* exb, bool status=false);

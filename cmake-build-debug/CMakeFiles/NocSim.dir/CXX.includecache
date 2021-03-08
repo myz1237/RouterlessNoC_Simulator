@@ -412,12 +412,6 @@ vector
 Ring.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.cpp
-GlobalStatistic.h
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.h
-
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalStatistic.h
-
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp
 Injection.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
@@ -435,12 +429,6 @@ Traffic.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 vector
 -
-
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.cpp
-LocalStatistic.h
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.h
-
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.h
 
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp
 iostream
@@ -511,10 +499,6 @@ Util.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
 Node.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
-
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.cpp
-RoutingTable.h
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
 vector

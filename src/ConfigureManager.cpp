@@ -82,6 +82,7 @@ void configure() {
             break;
         case Avg:
             GlobalParameter::exb_size = get_exb_size(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+            cout << GlobalParameter::exb_size << endl;
             break;
 
     }

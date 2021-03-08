@@ -61,6 +61,7 @@ public:
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
     void handle_all_single_buffer();
     void handle_control_packet();
+    void inj_and_ej();
     void ej_control_packet();
     void init();
     Node(int node_id);
@@ -85,10 +86,13 @@ private:
 
     void recv_flit();
 
+    //EXB-related Function
+    void check_exb(int single_buffer_index);
+
     //专门设计用来接收ejection的
 
     void ejection(Flit* flit, int ring_id);
-    void forward(Flit* flit, int ring_id);
+    void forward(Flit* flit, int ring_id, int single_buffer_index);
 
     void reset_single_buffer();
     void get_ej_order();

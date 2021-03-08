@@ -9,11 +9,11 @@
 #include <vector>
 using namespace std;
 
-
+//TODO 还没有把时钟和packetID接入
 class Noc {
 public:
 
-    void initial();
+
     void run();
     Noc();
     ~Noc();
@@ -28,9 +28,10 @@ private:
 
     vector<RingTopologyTuple*>m_tuple;
 
+    void initial();
     void init_ring();
     void init_routing_table();
-
+    void inj_and_ej(int cycle);
     //Statistics
     void stat_gather();
     void reset_stat();

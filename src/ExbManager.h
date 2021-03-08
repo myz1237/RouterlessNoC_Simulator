@@ -29,6 +29,8 @@ public:
     int check_exb_binded(int single_buffer_index);
     //True 说明该EXB已经满了 False 还有位置
     bool check_exb_full(int single_buffer_index);
+    inline bool check_exb_release(int exb_index)const{
+        return m_exb_status.at(exb_index)->release;}
 
     void push(int index, Flit* flit);
     void pop_and_push(int index, Flit* flit);

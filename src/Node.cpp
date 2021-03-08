@@ -72,22 +72,25 @@ void Node::handle_all_single_buffer() {
         int ctime = m_ej_order.at(i).second;
         int ring_set_index = m_ej_order.at(i).first;
         if(ctime == -2){
-            //为-2说明后面都为-2 不用再check了
-            break;
+            //检查EXB的情况
+            check_exb(ring_set_index);
+            continue;
         }else if(ctime == -1){
-            forward(m_single_buffer.at(m_ej_order.at(i).first),
-                    m_curr_ring_id.at(ring_set_index));
+            forward(m_single_buffer.at(ring_set_index),
+                    m_curr_ring_id.at(ring_set_index),ring_set_index);
             continue;
         }else if(ctime >= 0 && is_ej_full < GlobalParameter::ej_port_nu){
             //要在此node注入
-            ejection(m_single_buffer.at(m_ej_order.at(i).first),
+            ejection(m_single_buffer.at(ring_set_index),
                      m_curr_ring_id.at(ring_set_index));
             is_ej_full++;
+            //Ejection也应该检查这条线上是否绑定了exb
+            check_exb(ring_set_index);
             continue;
         }else if(ctime >= 0){
             //处理应该注入到Node但是因为Ejection Link的限制 只好转发
-            forward(m_single_buffer.at(m_ej_order.at(i).first),
-                    m_curr_ring_id.at(ring_set_index));
+            forward(m_single_buffer.at(ring_set_index),
+                    m_curr_ring_id.at(ring_set_index),ring_set_index);
         }
     }
     //全部处理完 清空single buffer&ej_order
@@ -102,8 +105,9 @@ void Node::ej_control_packet() {
             ejection(m_single_buffer.at(m_ej_order.at(i).first),
                      m_curr_ring_id.at(m_ej_order.at(i).first));
         } else if(m_ej_order.at(i).second == -1){
+            //这里Forward随便给一个值 不会被用到
             forward(m_single_buffer.at(m_ej_order.at(i).first),
-                    m_curr_ring_id.at(m_ej_order.at(i).first));
+                    m_curr_ring_id.at(m_ej_order.at(i).first),-1);
         }
     }
     reset_single_buffer();
@@ -151,21 +155,41 @@ void Node::ejection(Flit *flit, int ring_id) {
         GlobalParameter::ring.at(ring_id)->dettach(flit->get_packet_id());
     }
 }
-void Node::forward(Flit *flit, int ring_id) {
+void Node::forward(Flit *flit, int ring_id,int single_buffer_index) {
     FlitType type = flit->get_flit_type();
     flit->update_hop();
     if(type == Control){
         //记录当前的node_id和hop_count
         flit->update_routing_snifer();
     }else{
-
+        int exb_index = m_exb_manager->check_exb_binded(single_buffer_index);
+        //EXB Bound
+        if(exb_index != -1){
+            if(m_exb_manager->check_exb_full(single_buffer_index)){
+                //exb已经满了 需要触发Pipeline
+                //先暂停Injection
+                //TODO 记得在其他地方恢复injection
+                m_inject->set_exb_interrupt(true);
+                //弹出EXB第一个flit 并装入当前Flit
+                m_exb_manager->pop_and_push(exb_index, flit);
+            }else{
+                //exb没有满
+                //Injection结束了吗
+                if(m_exb_manager->check_exb_release(exb_index)){
+                    //TODO Injection刚刚结束 可有在下个cycle开始新的inject吗
+                    //返回true 需要释放 边装入边弹出
+                    m_exb_manager->pop_and_push(exb_index, flit);
+                }else{
+                    //还没完成 直接装入 最少还有一个位置 内部已经改变过flit的状态了
+                    m_exb_manager->push(exb_index, flit);
+                }
+            }
+        }else{
+            //No Action due to no exb bound
+        }
     }
 }
 
-
-bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
-    return a.second > b.second;
-}
 
 Node::Node(int node_id):m_node_id(node_id){
     m_inject = new Injection(m_node_id, &m_curr_ring_id, &m_table,
@@ -224,6 +248,20 @@ void Node::node_info_output() {
     cout << m_stat;
 }
 
+void Node::check_exb(int single_buffer_index) {
+    int exb_index = m_exb_manager->check_exb_binded(single_buffer_index);
+    if(exb_index != -1){
+        if(m_exb_manager->check_exb_release(exb_index)){
+            //Injection结束 可以释放EXB中的flit了
+            m_exb_manager->pop(exb_index);
+        }else{
+            //No Action due to ongoing injection
+        }
+    }else{
+        //No Action due to no exb bound
+    }
+}
+
 
 ostream& operator<<(ostream& out, Node& node){
     int size = node.m_table.size();
@@ -236,6 +274,14 @@ ostream& operator<<(ostream& out, Node& node){
             << "   " << node.m_table.at(j)->ring2_hop << endl;
     }
     return out;
+}
+
+bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
+    return a.second > b.second;
+}
+
+void Node::inj_and_ej() {
+
 }
 
 ostream& operator<<(ostream& out, Stat& stat){

@@ -12,7 +12,7 @@ injection_rate: 0.02
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
-short_packet_size: 1
+short_packet_size: 2
 #The size of one flit, expressed in bit
 flit_size: 256
 #Bandwidth between two nodes, expressed in bit
@@ -98,7 +98,7 @@ latency_type: both
 #Output detailed information.
 #1--Enable
 #0--Disable
-sim_detail: 1
+sim_detail: 0
 
 #TODO
 clock_period_ps: 200
