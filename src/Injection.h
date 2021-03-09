@@ -23,7 +23,11 @@ public:
     //仅用于初始化injection，向所有穿过该节点的ring发送一个flit的包
     void controlpacket_generator(int cycle,vector<int>& curr_ring_id, vector<Ring*>& ring);
 
-    inline void set_exb_interrupt(bool status){m_exb_interrupt = status;}
+    inline void set_exb_interrupt(bool status, int single_buffer_index){
+        m_exb_interrupt.first= status;
+        m_exb_interrupt.second = single_buffer_index;
+    }
+    pair<bool, int>& get_exb_interrupt();
 
     Injection(int node_id, vector<int>* ring, vector<RoutingTable*>* table,
               vector<pair<int, int>>* ej_order, ExbManager* exb, bool status=false);
@@ -33,13 +37,13 @@ private:
     int m_local_id;
 
     //记录当前packet要发送到的ring在该Node里对应的index
-    int m_packet_ring_id;
+    int m_injecting_ring_index;
 
     //True--Injection ongoing False--No Injection
     bool m_injection_status;
 
     //Extension Buffer Interrupt
-    bool m_exb_interrupt;
+    pair<bool, int> m_exb_interrupt;
 
     Packet* m_ongoing_packet;
 

@@ -72,7 +72,7 @@ void Node::handle_all_single_buffer() {
         int ctime = m_ej_order.at(i).second;
         int ring_set_index = m_ej_order.at(i).first;
         if(ctime == -2){
-            //检查EXB的情况
+            //检查EXB的情况 并释放Injection的锁
             check_exb(ring_set_index);
             continue;
         }else if(ctime == -1){
@@ -84,7 +84,7 @@ void Node::handle_all_single_buffer() {
             ejection(m_single_buffer.at(ring_set_index),
                      m_curr_ring_id.at(ring_set_index));
             is_ej_full++;
-            //Ejection也应该检查这条线上是否绑定了exb
+            //Ejection也应该检查EXB的情况 并释放Injection的锁
             check_exb(ring_set_index);
             continue;
         }else if(ctime >= 0){
@@ -162,30 +162,32 @@ void Node::forward(Flit *flit, int ring_id,int single_buffer_index) {
         //记录当前的node_id和hop_count
         flit->update_routing_snifer();
     }else{
+        //相当于按照single_buffer的index查找对应连接的exb的index
         int exb_index = m_exb_manager->check_exb_binded(single_buffer_index);
         //EXB Bound
         if(exb_index != -1){
-            if(m_exb_manager->check_exb_full(single_buffer_index)){
-                //exb已经满了 需要触发Pipeline
-                //先暂停Injection
-                //TODO 记得在其他地方恢复injection
-                m_inject->set_exb_interrupt(true);
-                //弹出EXB第一个flit 并装入当前Flit
+            //Injection结束了吗
+            if(m_exb_manager->check_exb_release(exb_index)){
+                //Injection结束了
+                //因为exb还和这个single buffer绑定 里面一定还有Flit没有弹出 至少还有一个
+                //所以Pop旧的 Push新的
                 m_exb_manager->pop_and_push(exb_index, flit);
             }else{
-                //exb没有满
-                //Injection结束了吗
-                if(m_exb_manager->check_exb_release(exb_index)){
-                    //TODO Injection刚刚结束 可有在下个cycle开始新的inject吗
-                    //返回true 需要释放 边装入边弹出
+                if(m_exb_manager->check_exb_full(exb_index)){
+                    //exb已经满了 需要触发Pipeline
+                    //先暂停Injection
+                    //TODO 记得在其他地方恢复injection
+                    m_inject->set_exb_interrupt(true, single_buffer_index);
+                    //弹出EXB第一个flit 并装入当前Flit
                     m_exb_manager->pop_and_push(exb_index, flit);
                 }else{
-                    //还没完成 直接装入 最少还有一个位置 内部已经改变过flit的状态了
+                    //exb没满 直接push进去就好
                     m_exb_manager->push(exb_index, flit);
                 }
             }
         }else{
             //No Action due to no exb bound
+            //Forward
         }
     }
 }
@@ -255,7 +257,13 @@ void Node::check_exb(int single_buffer_index) {
             //Injection结束 可以释放EXB中的flit了
             m_exb_manager->pop(exb_index);
         }else{
-            //No Action due to ongoing injection
+            //Check Whether injection need to be unlocked
+            //确实上一个cycle里被暂停 而且绑定的single buffer正是这个
+            if(m_inject->get_exb_interrupt().first &&
+                    m_inject->get_exb_interrupt().second == single_buffer_index){
+                //解绑
+                m_inject->set_exb_interrupt(false, -1);
+            }
         }
     }else{
         //No Action due to no exb bound

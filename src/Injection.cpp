@@ -70,7 +70,7 @@ void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_
 }
 
 void Injection::injector() {
-    if (!m_exb_interrupt) {
+    if (!m_exb_interrupt.first) {
         if (!m_injection_status) {
             //看看有没有要发送的包
             packet_generator();
@@ -98,7 +98,7 @@ void Injection::injector() {
                     m_injection_status = false;
                     //TODO 通知EXB释放
                     //通过m_packet_ring_id查找对应的exb 并通知其释放FLit
-                    m_exb_manager->set_exb_status(m_packet_ring_id, true);
+                    m_exb_manager->set_exb_status(m_injecting_ring_index, true);
                 }
             }
         }
@@ -110,8 +110,9 @@ Injection::Injection(int node_id, vector<int>* ring, vector<RoutingTable*>* tabl
                      m_local_id(node_id), m_curr_ring_id(ring), m_table(table),
                      m_ej_order(ej_order), m_exb_manager(exb), m_injection_status(status){
     m_ongoing_packet = nullptr;
-    m_exb_interrupt = false;
-    m_packet_ring_id = -1;
+    m_exb_interrupt.first = false;
+    m_exb_interrupt.second = -1;
+    m_injecting_ring_index = -1;
 }
 
 Injection::~Injection() {
@@ -170,11 +171,11 @@ here:
                     return;
                 }
                 //存一下ring1的值 如果第二次注入仍然失败了m_packet_ring_id还存的是m_packet_ring_id的值
-                m_packet_ring_id = selected_ring_index;
+                m_injecting_ring_index = selected_ring_index;
                 goto here;
             }else{//未设置尝试second ring 直接Next Cycle
                 m_injection_status = true;
-                m_packet_ring_id = selected_ring_index;
+                m_injecting_ring_index = selected_ring_index;
                 return;
             }
         }else{
@@ -193,17 +194,17 @@ here:
                 if(exb_index == -1){
                     //EXB不空闲 直接next cycle
                     m_injection_status = true;
-                    m_packet_ring_id = selected_ring_index;
+                    m_injecting_ring_index = selected_ring_index;
                     return;
                 }else{//有空闲的EXB
                     GlobalParameter::ring.at(m_curr_ring_id->at(selected_ring_index))
                             ->attach(m_ongoing_packet);
-                    //设定EXB的状态
+                    //TODO 设定EXB的状态
                     m_exb_manager->set_exb_status(exb_index, true, selected_ring_index);
                     //先发个Header
                     m_ongoing_packet->set_flit_status(0, Routing);
                     m_injection_status = true;
-                    m_packet_ring_id = selected_ring_index;
+                    m_injecting_ring_index = selected_ring_index;
                     return;
                 }
             }
@@ -215,14 +216,18 @@ here:
                 m_injection_status = true;
                 return;
             }
-            m_packet_ring_id = selected_ring_index;
+            m_injecting_ring_index = selected_ring_index;
             goto here;
         }else{//未设置尝试second ring 直接Next Cycle
             m_injection_status = true;
-            m_packet_ring_id = selected_ring_index;
+            m_injecting_ring_index = selected_ring_index;
             return;
         }
     }
+}
+
+pair<bool, int> &Injection::get_exb_interrupt(){
+    return m_exb_interrupt;
 }
 
 

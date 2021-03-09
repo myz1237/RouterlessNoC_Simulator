@@ -156,9 +156,7 @@ void Noc::stat_gather() {
 }
 
 void Noc::inj_and_ej(int cycle) {
-    for(int i = 0; i < m_node.size(), i++){
-        m_node.at(i)->m_inject->run_injection(cycle);
-    }
+
 }
 
 

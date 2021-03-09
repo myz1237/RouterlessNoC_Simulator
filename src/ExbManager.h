@@ -4,6 +4,8 @@
 #include "Util.h"
 class Flit;
 
+
+
 typedef struct ExbStatus{
     //TODO 到底要不要这个空闲不空闲 因为他和ring_id_index的状态是一致的 检查ring_id_index就可以知道这个Exb是否再被用
     bool occupied;
@@ -28,13 +30,16 @@ public:
     //single_buffer_index和ringid的index相同
     int check_exb_binded(int single_buffer_index);
     //True 说明该EXB已经满了 False 还有位置
-    bool check_exb_full(int single_buffer_index);
+    bool check_exb_full(int exb_index)const;
+    inline bool check_exb_null(int exb_index)const{
+        return m_exb_status.at(exb_index)->indicator == -1;
+    }
     inline bool check_exb_release(int exb_index)const{
         return m_exb_status.at(exb_index)->release;}
 
-    void push(int index, Flit* flit);
-    void pop_and_push(int index, Flit* flit);
-    void pop(int index);
+    void push(int exb_index, Flit* flit);
+    void pop_and_push(int exb_index, Flit* flit);
+    void pop(int exb_index);
     ExbManager();
     ~ExbManager();
 

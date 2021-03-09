@@ -36,40 +36,49 @@ ExbManager::~ExbManager() {
 }
 
 
-void ExbManager::pop_and_push(int index, Flit *flit) {
+void ExbManager::pop_and_push(int exb_index, Flit *flit) {
     //弹出第一个Flit到Ring上
-    m_exb.at(index).front()->set_flit_type(Routing);
+    m_exb.at(exb_index).front()->set_flit_type(Routing);
     //整个exb前进一个单元
-    for(int i = 1; i <= m_exb_status.at(index)->indicator; i++){
-        m_exb.at(index).at(i-1) = m_exb.at(index).at(i);
+    for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
+        m_exb.at(exb_index).at(i-1) = m_exb.at(exb_index).at(i);
     }
     //放入新的flit
-    m_exb.at(index).at(m_exb_status.at(index)->indicator) = flit;
+    m_exb.at(exb_index).at(m_exb_status.at(exb_index)->indicator) = flit;
     flit->set_flit_type(Buffered);
 }
 
-void ExbManager::push(int index, Flit *flit) {
-    m_exb.at(index).at(++m_exb_status.at(index)->indicator) = flit;
+void ExbManager::push(int exb_index, Flit *flit) {
+    m_exb.at(exb_index).at(++m_exb_status.at(exb_index)->indicator) = flit;
     flit->set_flit_type(Buffered);
 }
 
-void ExbManager::pop(int index) {
-    //弹出第一个Flit到Ring上
-    m_exb.at(index).front()->set_flit_type(Routing);
-    //整个exb前进一个单元
-    for(int i = 1; i <= m_exb_status.at(index)->indicator; i++){
-        m_exb.at(index).at(i-1) = m_exb.at(index).at(i);
+void ExbManager::pop(int exb_index) {
+    //不为空才弹出一个Flit
+    if(!check_exb_null(exb_index)){
+        //弹出第一个Flit到Ring上
+        m_exb.at(exb_index).front()->set_flit_type(Routing);
+        //整个exb前进一个单元
+        for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
+            m_exb.at(exb_index).at(i-1) = m_exb.at(exb_index).at(i);
+        }
+        //原来位置置空
+        m_exb.at(exb_index).at(m_exb_status.at(exb_index)->indicator) = nullptr;
+        //indicator前挪1
+        //并判断此时EXB是否空了
+        if(--m_exb_status.at(exb_index)->indicator == -1){
+            //重置这个EXB的Status
+            m_exb_status.at(exb_index)->ring_id_index = -1;
+            m_exb_status.at(exb_index)->occupied = false;
+            m_exb_status.at(exb_index)->release = false;
+        }
+    }else{
+        //为空，解绑这个exb
+        m_exb_status.at(exb_index)->ring_id_index = -1;
+        m_exb_status.at(exb_index)->occupied = false;
+        m_exb_status.at(exb_index)->release = false;
     }
-    //原来位置置空
-    m_exb.at(index).at(m_exb_status.at(index)->indicator) = nullptr;
-    //indicator前挪1
-    //并判断是否EXB为空
-    if(--m_exb_status.at(index)->indicator == -1){
-        //重置这个EXB的Status
-        m_exb_status.at(index)->ring_id_index = -1;
-        m_exb_status.at(index)->occupied = false;
-        m_exb_status.at(index)->release = false;
-    }
+
 
 }
 
@@ -100,15 +109,10 @@ void ExbManager::set_exb_status(int buffer_index, bool release) {
     }
 }
 
-bool ExbManager::check_exb_full(int single_buffer_index) {
-    int exb_index = check_exb_binded(single_buffer_index);
-
-    if(exb_index == -1){
-        cerr << "Error in Exb" << endl;
-    }else{
-        //以为每次push结束后都会indicator++ 如果满的话 indicator应当指向exb最后的后一位
-        return m_exb_status.at(exb_index)->indicator == GlobalParameter::exb_size;
-    }
+bool ExbManager::check_exb_full(int exb_index) const {
+    return m_exb_status.at(exb_index)->indicator == GlobalParameter::exb_size - 1;
 }
+
+
 
 
