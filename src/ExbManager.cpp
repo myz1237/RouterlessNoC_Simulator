@@ -24,7 +24,7 @@ ExbManager::ExbManager() {
             temp.push_back(nullptr);
         }
         m_exb.push_back(temp);
-        m_exb_status.push_back(new ExbStatus(false, -1, false));
+        m_exb_status.push_back(new ExbStatus(false, -1, false, -1));
     }
 }
 

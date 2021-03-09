@@ -16,8 +16,8 @@ typedef struct ExbStatus{
     //存储当前EXB内的指向
     int indicator;
     ExbStatus():occupied(),ring_id_index(),release(), indicator(){}
-    ExbStatus(bool op, int ring_id_index, bool release, int indicator = -1):occupied(op),
-              ring_id_index(ring_id_index),release(release){}
+    ExbStatus(bool op, int ring_id_index, bool release, int indicator):occupied(op),
+              ring_id_index(ring_id_index),release(release), indicator(indicator){}
 }ExbStatus;
 
 class ExbManager {

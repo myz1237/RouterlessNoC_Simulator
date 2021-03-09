@@ -54,7 +54,7 @@ enum LatencyType{
 namespace GlobalParameter{
     extern int mesh_dim_x;
     extern int mesh_dim_y;
-    extern float injection_rate;
+    extern double injection_rate;
     extern int long_packet_size;
     extern int short_packet_size;
     extern int flit_size;

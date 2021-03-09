@@ -76,7 +76,6 @@ void Noc::init_routing_table() {
 }
 
 void Noc::run() {
-    GlobalParameter::global_cycle = 0;
     initial();
 
     if(GlobalParameter::sim_detail){
@@ -91,15 +90,26 @@ void Noc::run() {
             m_node.at(j)->node_info_output();
         }
     }
+    //Reset Packet ID
+    GlobalParameter::packet_id = 0;
 
+    GlobalParameter::global_cycle = 0;
     //Main Loop of the Simulation
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
 
+        //Move on-ring Packet Forward
+        for(int k = 0; k < GlobalParameter::ring.size(); k++){
+            GlobalParameter::ring.at(k)->update_curr_hop();
+        }
 
-        if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
+        for(int k = 0; k < GlobalParameter::ring.size(); k++){
+            m_node.at(k)->recv_inj_ej_for(GlobalParameter::global_cycle);
+        }
+
+/*        if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
             //Warmup 结束 清空统计数据
             reset_stat();
-        }
+        }*/
         GlobalParameter::global_cycle++;
     }
 

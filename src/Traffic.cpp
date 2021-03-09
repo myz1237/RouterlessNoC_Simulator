@@ -116,6 +116,6 @@ void TrafficBitReverse::setBit(int &x, int w, int v) {
 }*/
 
 int Traffic::get_randomint(const int min, const int max) const {
-    return min +
-           (int) ((double) (max - min + 1) * rand() / (RAND_MAX + 1.0));
+    srand((unsigned)time(0));
+    return (rand()%(max - min + 1)) + min;
 }

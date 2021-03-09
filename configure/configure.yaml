@@ -4,15 +4,15 @@
 #The size of your NoC. Mesh topology is applied
 #Please note that these two parameters must be even.
 #We only use RLrec now, so mesh_dim_x and mesh_dim_y are the same
-mesh_dim_x: 6
-mesh_dim_y: 6
+mesh_dim_x: 4
+mesh_dim_y: 4
 
 #The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.02
+injection_rate: 0.01
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
-short_packet_size: 2
+short_packet_size: 1
 #The size of one flit, expressed in bit
 flit_size: 256
 #Bandwidth between two nodes, expressed in bit
@@ -39,7 +39,7 @@ ring_constraint: 6
 #Available strategy:
 #Max--Use the max size of packet as buffer size. Isolated buffer
 #Avg--Use average size of packet as buffer size. Isolated buffer
-exb_strategy: Avg
+exb_strategy: Max
 exb_num: 2
 
 #Input port size configuration, measured by flit
@@ -47,7 +47,7 @@ in_port_size: 1
 
 #Ejection settings
 #The number of ejection port
-ej_port_nu: 1
+ej_port_nu: 2
 #Algorithm for multiple incoming packets
 #Available algorithm:
 #Oldest--Oldest packets have the highest priority

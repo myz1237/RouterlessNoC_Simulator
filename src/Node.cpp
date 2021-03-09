@@ -12,7 +12,7 @@ void Node::init() {
     for (int i = 0; i < m_curr_ring_id.size(); i++){
         m_single_buffer.push_back(nullptr);
     }
-    m_exb_manager = new ExbManager;
+
     //这时候m_single_buffer, m_curr_ring_id和
     //m_ej_link.reserve(GlobalParameter::ej_port_nu);
 }
@@ -194,6 +194,7 @@ void Node::forward(Flit *flit, int ring_id,int single_buffer_index) {
 
 
 Node::Node(int node_id):m_node_id(node_id){
+    m_exb_manager = new ExbManager;
     m_inject = new Injection(m_node_id, &m_curr_ring_id, &m_table,
                              &m_ej_order, m_exb_manager);
     m_stat.reset();
@@ -288,8 +289,11 @@ bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
     return a.second > b.second;
 }
 
-void Node::inj_and_ej() {
-
+void Node::recv_inj_ej_for(int cycle) {
+    recv_flit();
+    get_ej_order();
+    m_inject->run_injection(cycle);
+    handle_all_single_buffer();
 }
 
 ostream& operator<<(ostream& out, Stat& stat){

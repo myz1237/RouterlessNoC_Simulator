@@ -41,6 +41,7 @@ public:
     //TODO 应不应该存到public呢 还是private呢
     ExbManager* m_exb_manager;
 
+    void recv_inj_ej_for(int cycle);
 
     //Output Function
     void node_info_output();
@@ -61,7 +62,7 @@ public:
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
     void handle_all_single_buffer();
     void handle_control_packet();
-    void inj_and_ej();
+
     void ej_control_packet();
     void init();
     Node(int node_id);

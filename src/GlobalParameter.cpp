@@ -2,7 +2,7 @@
 
 int GlobalParameter::mesh_dim_x;
 int GlobalParameter::mesh_dim_y;
-float GlobalParameter::injection_rate;
+double GlobalParameter::injection_rate;
 int GlobalParameter::long_packet_size;
 int GlobalParameter::short_packet_size;
 int GlobalParameter::flit_size;

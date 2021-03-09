@@ -1,6 +1,6 @@
 #include "Injection.h"
 
-inline
+
 void Injection::run_injection(const int cycle){
     //TODO 这里使用了多态 要注意
     packetinfo_generator(cycle,*GlobalParameter::traffic);
@@ -47,6 +47,7 @@ void Injection::packet_generator() {
         m_ongoing_packet = p;
         //删除该packetinfor的对象和清空指针
         delete m_packetinfo.front();
+        GlobalParameter::packet_id++;
         m_packetinfo.front() = nullptr;
         m_packetinfo.erase(m_packetinfo.begin());
     }
@@ -122,6 +123,7 @@ Injection::~Injection() {
     m_table = nullptr;
     m_exb_manager = nullptr;
     m_ej_order = nullptr;
+    pair<bool, int>().swap(m_exb_interrupt);
 }
 
 RoutingTable* Injection::check_routing_table(int dst_id) {

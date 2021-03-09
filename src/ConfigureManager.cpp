@@ -21,7 +21,7 @@ void configure() {
 
     GlobalParameter::mesh_dim_x = readParam<int>(conf,"mesh_dim_x",2);
     GlobalParameter::mesh_dim_y = readParam<int>(conf,"mesh_dim_y",2);
-    GlobalParameter::injection_rate = readParam<float>(conf,"injection_rate",0.02);;
+    GlobalParameter::injection_rate = readParam<double>(conf,"injection_rate",0.02);;
     GlobalParameter::long_packet_size = readParam<int>(conf,"long_packet_size",5);
     GlobalParameter::short_packet_size = readParam<int>(conf,"short_packet_size",1);
     GlobalParameter::flit_size = readParam<int>(conf,"flit_size",256);
@@ -47,7 +47,7 @@ void configure() {
 
     GlobalParameter::sim_detail = readParam<int>(conf,"sim_detail",0);
 
-    GlobalParameter::injection_cycle = (int)ceil((double)GlobalParameter::injection_rate);
+    GlobalParameter::injection_cycle = 1/(double)GlobalParameter::injection_rate;
 
     if(ring_strategy == "IMR") GlobalParameter::ring_strategy = IMR;
     else if(ring_strategy == "RLrec") GlobalParameter::ring_strategy = RLrec;
@@ -82,7 +82,6 @@ void configure() {
             break;
         case Avg:
             GlobalParameter::exb_size = get_exb_size(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
-            cout << GlobalParameter::exb_size << endl;
             break;
 
     }
