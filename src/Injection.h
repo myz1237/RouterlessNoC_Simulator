@@ -33,6 +33,9 @@ public:
               vector<pair<int, int>>* ej_order, ExbManager* exb, bool status=false);
     ~Injection();
 
+    //Only for test
+    void print_packetinfo();
+
 private:
     int m_local_id;
 

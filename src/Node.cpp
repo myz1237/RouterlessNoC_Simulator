@@ -171,7 +171,14 @@ void Node::forward(Flit *flit, int ring_id,int single_buffer_index) {
                 //Injection结束了
                 //因为exb还和这个single buffer绑定 里面一定还有Flit没有弹出 至少还有一个
                 //所以Pop旧的 Push新的
-                m_exb_manager->pop_and_push(exb_index, flit);
+                if(m_exb_manager->check_exb_null(exb_index)){
+                    //EXB仍为空 说明整个injection期间没有flit存到exb 直接释放他
+                    //single buffer里要转发的flit不用动就好 Ring会在下一个cycle带走他的
+                    m_exb_manager->reset_exb_status(exb_index);
+                }else{
+                    m_exb_manager->pop_and_push(exb_index, flit);
+                }
+
             }else{
                 if(m_exb_manager->check_exb_full(exb_index)){
                     //exb已经满了 需要触发Pipeline

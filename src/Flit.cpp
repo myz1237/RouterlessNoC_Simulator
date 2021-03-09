@@ -113,7 +113,7 @@ void Coordinate::fix_range(Coordinate &dst) {
 
 
 ostream& operator<<(ostream& out, Packet& p){
-    out << "Packet Information:" << endl
+    out << "Packet Content:" << endl
     << "Length:" << p.get_length() << "  " << "Source:" << p.get_src()
     << "  " << "Destination:" << p.get_dst() << "  " << "Creation Time:" << p.get_ctime() << endl;
     for(int i=0;i<p.get_length();i++){
@@ -122,3 +122,11 @@ ostream& operator<<(ostream& out, Packet& p){
     }
     return out;
 }
+
+ostream& operator<<(ostream& out, Packetinfo& p){
+    out << "Packet Information:" << endl
+    << "Source:" << p.src << "  " << "Destination:" << p.dst <<
+    "  "<< "Length:" << p.length << "  "<< "Creation Time:" << p.ctime << endl;
+    return out;
+}
+

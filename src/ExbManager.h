@@ -9,24 +9,26 @@ class Flit;
 typedef struct ExbStatus{
     //TODO 到底要不要这个空闲不空闲 因为他和ring_id_index的状态是一致的 检查ring_id_index就可以知道这个Exb是否再被用
     bool occupied;
-    //也是single_buffer_index
-    int ring_id_index;
+    //也是ring_index
+    int single_buffer_index;
     //是否释放该EXB
     bool release;
     //存储当前EXB内的指向
     int indicator;
-    ExbStatus():occupied(),ring_id_index(),release(), indicator(){}
-    ExbStatus(bool op, int ring_id_index, bool release, int indicator):occupied(op),
-              ring_id_index(ring_id_index),release(release), indicator(indicator){}
+    ExbStatus(): occupied(), single_buffer_index(), release(), indicator(){}
+    ExbStatus(bool op, int ring_id_index, bool release, int indicator): occupied(op),
+                                                                        single_buffer_index(ring_id_index), release(release), indicator(indicator){}
 }ExbStatus;
 
 class ExbManager {
 
 public:
     int exb_available();
-    void set_exb_status(int index, bool status, int buffer_index);
+    //注册EXB使用
+    void set_exb_status(int exb_index, bool status, int buffer_index);
+    //通知EXB释放Injection期间的Flit 根据绑定的single buffer的index设定Release信号
     void set_exb_status(int buffer_index, bool release);
-
+    void reset_exb_status(int exb_index);
     //single_buffer_index和ringid的index相同
     int check_exb_binded(int single_buffer_index);
     //True 说明该EXB已经满了 False 还有位置

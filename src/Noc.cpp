@@ -77,7 +77,7 @@ void Noc::init_routing_table() {
 
 void Noc::run() {
     initial();
-
+    cout << "Routing Table has been generated..." << endl;
     if(GlobalParameter::sim_detail){
         //Output the Routing Table of Each Node
         for(int i = 0; i< m_node.size(); i++){
@@ -96,13 +96,13 @@ void Noc::run() {
     GlobalParameter::global_cycle = 0;
     //Main Loop of the Simulation
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
-
+        cout << "This is Cycle " << GlobalParameter::global_cycle << endl;
         //Move on-ring Packet Forward
         for(int k = 0; k < GlobalParameter::ring.size(); k++){
             GlobalParameter::ring.at(k)->update_curr_hop();
         }
 
-        for(int k = 0; k < GlobalParameter::ring.size(); k++){
+        for(int k = 0; k < m_node.size(); k++){
             m_node.at(k)->recv_inj_ej_for(GlobalParameter::global_cycle);
         }
 
@@ -112,9 +112,17 @@ void Noc::run() {
         }*/
         GlobalParameter::global_cycle++;
     }
-
+    cout << GlobalParameter::injection_cycle << endl;
+    cout << GlobalParameter::packet_id << endl;
+    cout << GlobalParameter::global_cycle << endl;
     //Statistics Output
     stat_gather();
+    cout << endl << endl;
+
+
+/*    for(int q = 0; q < m_node.size(); q++){
+        m_node.at(q)->m_inject->print_packetinfo();
+    }*/
 }
 
 Noc::Noc() {

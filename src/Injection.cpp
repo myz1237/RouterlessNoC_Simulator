@@ -118,12 +118,12 @@ Injection::Injection(int node_id, vector<int>* ring, vector<RoutingTable*>* tabl
 
 Injection::~Injection() {
     free_vetor<Packetinfo*>(m_packetinfo);
+    pair<bool, int>().swap(m_exb_interrupt);
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;
     m_table = nullptr;
     m_exb_manager = nullptr;
     m_ej_order = nullptr;
-    pair<bool, int>().swap(m_exb_interrupt);
 }
 
 RoutingTable* Injection::check_routing_table(int dst_id) {
@@ -201,7 +201,7 @@ here:
                 }else{//有空闲的EXB
                     GlobalParameter::ring.at(m_curr_ring_id->at(selected_ring_index))
                             ->attach(m_ongoing_packet);
-                    //TODO 设定EXB的状态
+                    //TODO 设定EXB的状态 注册该EXB
                     m_exb_manager->set_exb_status(exb_index, true, selected_ring_index);
                     //先发个Header
                     m_ongoing_packet->set_flit_status(0, Routing);
@@ -230,6 +230,12 @@ here:
 
 pair<bool, int> &Injection::get_exb_interrupt(){
     return m_exb_interrupt;
+}
+
+void Injection::print_packetinfo() {
+    for(int i = 0; i < m_packetinfo.size();i++){
+        cout << "Node " << m_local_id << "   " << *m_packetinfo.at(i);
+    }
 }
 
 
