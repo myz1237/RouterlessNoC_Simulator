@@ -93,14 +93,18 @@ private:
     //专门设计用来接收ejection的
 
     void ejection(Flit* flit, int ring_id);
-    void forward(Flit* flit, int ring_id, int single_buffer_index);
+    void forward(Flit* flit);
 
     void reset_single_buffer();
     void get_ej_order();
 
     static bool comp(pair<int, int>&a, pair<int, int>&b);
 
-
+    //新的设计
+    void handle_rest_flit(int action, int single_flit_index);
+    void inject_eject();
+    bool is_injection_ongoing();
+    void continue_inject_packet(int action);
 
 };
 ostream& operator<<(ostream& out, Node& node);

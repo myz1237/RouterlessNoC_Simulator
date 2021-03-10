@@ -87,6 +87,7 @@ void Injection::injector() {
                     break;
                 }
             }//检查之前有没有包因为资源问题还没有开始注入
+
             if(i == 0){
                 try_to_inject();
             }else{
@@ -130,10 +131,9 @@ RoutingTable* Injection::check_routing_table(int dst_id) {
     int i;
     for(i =0; i < m_table->size(); i++){
         if(dst_id == m_table->at(i)->node_id){
-            break;
+            return m_table->at(i);
         }
     }
-    return m_table->at(i);
 }
 
 
@@ -237,6 +237,39 @@ void Injection::print_packetinfo() {
         cout << "Node " << m_local_id << "   " << *m_packetinfo.at(i);
     }
 }
+
+void Injection::inject_new_packet(int ring_index) {
+    //注意这个front返回是该元素的引用--也就是指针的引用 还是指针
+    Packet* p = new Packet(GlobalParameter::packet_id,m_local_id,m_packetinfo.front());
+    //删除该packetinfor的对象和清空指针
+
+    GlobalParameter::ring.at(m_curr_ring_id->at(ring_index))->attach(p);
+    p->set_flit_status(0, Routing);
+
+    if(p->get_length() != 1){
+        //提交给m_ongoing_packet注入
+        m_ongoing_packet = p;
+        //设置之后要去的ringindex
+        m_injecting_ring_index = ring_index;
+    }
+
+    delete m_packetinfo.front();
+    m_packetinfo.front() = nullptr;
+    //TODO 小心这里可能清不掉全部的Packetinfo
+    m_packetinfo.erase(m_packetinfo.begin());
+
+    GlobalParameter::packet_id++;
+}
+
+bool Injection::is_packetinfo_empty() {
+    //empty返回1 否则0
+    if(m_packetinfo.empty()){
+        return true;
+    } else{
+        return false;
+    }
+}
+
 
 
 

@@ -78,6 +78,7 @@ void Noc::init_routing_table() {
 void Noc::run() {
     initial();
     cout << "Routing Table has been generated..." << endl;
+    reset_stat();
     if(GlobalParameter::sim_detail){
         //Output the Routing Table of Each Node
         for(int i = 0; i< m_node.size(); i++){

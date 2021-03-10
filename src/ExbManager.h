@@ -7,17 +7,15 @@ class Flit;
 
 
 typedef struct ExbStatus{
-    //TODO 到底要不要这个空闲不空闲 因为他和ring_id_index的状态是一致的 检查ring_id_index就可以知道这个Exb是否再被用
+    //True就是里面有值 被绑定 False就是可用
     bool occupied;
     //也是ring_index
     int single_buffer_index;
-    //是否释放该EXB
-    bool release;
     //存储当前EXB内的指向
     int indicator;
-    ExbStatus(): occupied(), single_buffer_index(), release(), indicator(){}
-    ExbStatus(bool op, int ring_id_index, bool release, int indicator): occupied(op),
-                                                                        single_buffer_index(ring_id_index), release(release), indicator(indicator){}
+    ExbStatus(): occupied(), single_buffer_index(), indicator(){}
+    ExbStatus(bool op, int ring_id_index, int indicator):
+        occupied(op), single_buffer_index(ring_id_index), indicator(indicator){}
 }ExbStatus;
 
 class ExbManager {

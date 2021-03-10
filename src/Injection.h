@@ -36,6 +36,13 @@ public:
     //Only for test
     void print_packetinfo();
 
+    //新的设计
+    void inject_new_packet(int ring_index);
+    bool is_packetinfo_empty();
+    inline Packet* get_ongoing_packet()const{return m_ongoing_packet;}
+    inline void complete_ongoing_packet(){m_ongoing_packet = nullptr;}
+    inline int get_ongoing_ring_index()const{return m_injecting_ring_index;}
+
 private:
     int m_local_id;
 
@@ -80,6 +87,9 @@ private:
     int check_single_buffer_action(int ring_index);
 
     int ring_selection(int dst, int index);
+
+
+
 };
 
 

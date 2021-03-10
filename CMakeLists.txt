@@ -23,6 +23,6 @@ add_executable( NocSim
                 src/Traffic.cpp src/Traffic.h
                 src/ringalgorithm/RingAlgorithms.cpp src/ringalgorithm/RingAlgorithms.h
                 src/RoutingTable.cpp
-                src/Main.cpp)
+                src/Main.cpp src/Test.cpp)
 
 target_link_libraries(NocSim libyaml-cpp.a)

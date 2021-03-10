@@ -119,18 +119,14 @@ void Node::ejection(Flit *flit, int ring_id) {
     //尝试Ejection
     FlitType type = flit->get_flit_type();
     flit->update_hop();
+    flit->set_flit_type(Ejected);
+    flit->set_atime(GlobalParameter::global_cycle);
+    update_flit_stat(flit->calc_flit_latency());
     if (type == Control){
-        //不计算他的数目和延迟
-        flit->set_flit_type(Ejected);
-        flit->set_atime(GlobalParameter::global_cycle);
         update_routing_table(flit->get_flit_routing(),m_table, ring_id);
         //清除该Packet
         GlobalParameter::ring.at(ring_id)->dettach(flit->get_packet_id());
     }else if (type == Header){
-        flit->set_flit_type(Ejected);
-        flit->set_atime(GlobalParameter::global_cycle);
-        update_flit_stat(flit->calc_flit_latency());
-
         //单个flit的Packet
         //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
         if(GlobalParameter::ring.at(ring_id)->
@@ -139,64 +135,20 @@ void Node::ejection(Flit *flit, int ring_id) {
             //清除该packet
             GlobalParameter::ring.at(ring_id)->dettach(flit->get_packet_id());
         }
-    }else if (type == Payload){
-        flit->set_flit_type(Ejected);
-        flit->set_atime(GlobalParameter::global_cycle);
-
-        update_flit_stat(flit->calc_flit_latency());
-    } else if (type == Tail){
-        flit->set_flit_type(Ejected);
-        flit->set_atime(GlobalParameter::global_cycle);
-
-        update_flit_stat(flit->calc_flit_latency());
+    }else if (type == Tail){
         update_packet_stat(flit->calc_flit_latency());
-
         //清除该packet
         GlobalParameter::ring.at(ring_id)->dettach(flit->get_packet_id());
     }
 }
-void Node::forward(Flit *flit, int ring_id,int single_buffer_index) {
+void Node::forward(Flit *flit) {
     FlitType type = flit->get_flit_type();
     flit->update_hop();
     if(type == Control){
         //记录当前的node_id和hop_count
         flit->update_routing_snifer();
-    }else{
-        //相当于按照single_buffer的index查找对应连接的exb的index
-        int exb_index = m_exb_manager->check_exb_binded(single_buffer_index);
-        //EXB Bound
-        if(exb_index != -1){
-            //Injection结束了吗
-            if(m_exb_manager->check_exb_release(exb_index)){
-                //Injection结束了
-                //因为exb还和这个single buffer绑定 里面一定还有Flit没有弹出 至少还有一个
-                //所以Pop旧的 Push新的
-                if(m_exb_manager->check_exb_null(exb_index)){
-                    //EXB仍为空 说明整个injection期间没有flit存到exb 直接释放他
-                    //single buffer里要转发的flit不用动就好 Ring会在下一个cycle带走他的
-                    m_exb_manager->reset_exb_status(exb_index);
-                }else{
-                    m_exb_manager->pop_and_push(exb_index, flit);
-                }
-
-            }else{
-                if(m_exb_manager->check_exb_full(exb_index)){
-                    //exb已经满了 需要触发Pipeline
-                    //先暂停Injection
-                    //TODO 记得在其他地方恢复injection
-                    m_inject->set_exb_interrupt(true, single_buffer_index);
-                    //弹出EXB第一个flit 并装入当前Flit
-                    m_exb_manager->pop_and_push(exb_index, flit);
-                }else{
-                    //exb没满 直接push进去就好
-                    m_exb_manager->push(exb_index, flit);
-                }
-            }
-        }else{
-            //No Action due to no exb bound
-            //Forward
-        }
     }
+    //其余需要Forward不用动 等着Ring update就行了
 }
 
 
@@ -302,6 +254,101 @@ void Node::recv_inj_ej_for(int cycle) {
     m_inject->run_injection(cycle);
     handle_all_single_buffer();
 }
+
+
+
+void Node::handle_rest_flit(int action, int single_flit_index) {
+    int exb_index = m_exb_manager->check_exb_binded(single_flit_index);
+    if(action == -2){
+        if(exb_index != -1){
+            m_exb_manager->pop(exb_index);
+        }
+    }else if(action == -3){
+        ejection(m_single_buffer.at(single_flit_index),
+                 m_curr_ring_id.at(single_flit_index));
+        if(exb_index != -1){
+            m_exb_manager->pop(exb_index);
+        }
+    }else{
+        // Action = -1/ >=0
+        if(exb_index != -1){
+            m_exb_manager->pop_and_push(exb_index,m_single_buffer.at(single_flit_index));
+        }else{
+            forward(m_single_buffer.at(single_flit_index));
+        }
+    }
+}
+
+bool Node::is_injection_ongoing() {
+    if(m_inject->get_ongoing_packet() == nullptr){
+        return false;
+    }else{
+        return true;
+    }
+
+}
+
+void Node::inject_eject() {
+    if(!is_injection_ongoing()){
+        //false
+        if(!m_inject->is_packetinfo_empty()){
+            //Not Empty
+
+        }
+    }else{
+        //true
+        //Inject the second flit of the previous packet
+
+    }
+}
+
+void Node::continue_inject_packet(int action) {
+    int flit_index;
+
+    //此时Injection里面一定有未注入完成的Packet
+    Packet* p = m_inject->get_ongoing_packet();
+
+    //拿到此时的ring_index 也是single buffer index
+    int ring_index = m_inject->get_ongoing_ring_index();
+
+    //拿到此时这个ring上对应的EXB的index
+    //TODO 记得检查此处会不会为-1
+    int exb_index = m_exb_manager->check_exb_binded(ring_index);
+
+    //查询第一个为Injecting的Flit的位置
+    //一定能查到 循环不可能走完的 i最大为长度减一
+    for(flit_index = 0; flit_index < p->get_length(); flit_index++){
+        if(p->get_flit_status(flit_index) == Injecting){
+            break;
+        }
+    }
+    //TODO 记得检查此处的有没有循环走完的情况！！！
+    //该这个flit的状态
+    p->set_flit_status(flit_index, Routing);
+
+    if(action == -2 || action == -3){
+        if(p->get_flit_type(flit_index) == Tail){
+            //注出完成
+            m_inject->complete_ongoing_packet();
+        }
+
+        //处理可能的注入
+        if(action == -3){
+            ejection(m_single_buffer.at(ring_index), ring_index);
+        }
+    }else{
+        //处理single buffer的转发
+        m_exb_manager->push(exb_index, m_single_buffer.at(ring_index));
+
+        if(p->get_flit_type(flit_index) == Tail){
+            //注出完成
+            m_inject->complete_ongoing_packet();
+        }
+    }
+
+    p = nullptr;
+}
+
 
 ostream& operator<<(ostream& out, Stat& stat){
     out << "\t" << "Received Flit:" << stat.received_flit << endl
