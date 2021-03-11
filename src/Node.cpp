@@ -37,7 +37,6 @@ void Node::reset_single_buffer() {
 }
 
 void Node::get_ej_order() {
-
     vector<pair<int,int>> ctime;
     ctime.resize(m_single_buffer.size());
     for(int i = 0;i < ctime.size(); i++){
@@ -58,6 +57,14 @@ void Node::get_ej_order() {
     }
     //从大到小排列
     sort(ctime.begin(),ctime.end(),comp);
+    //把前ej_port_nu 需要注入的ctime设定为-3作区分
+    //取二者的小值 防止ej比总的buffer到 造成访问不到
+    int edge = min<int>(GlobalParameter::ej_port_nu, m_single_buffer.size());
+    for(int j = 0; j < edge; j++){
+        if(ctime.at(j).second >= 0){
+            ctime.at(j).second = -3;
+        }
+    }
     m_ej_order.swap(ctime);
 }
 
@@ -288,17 +295,23 @@ bool Node::is_injection_ongoing() {
 
 }
 
-void Node::inject_eject() {
+void Node::inject_eject(pair<int, int>& ej_order) {
+    //ring index和single buffer index相同
+    int ring_index = ej_order.first;
+    int action = ej_order.second;
+
     if(!is_injection_ongoing()){
-        //false
+        //此时injection闲
         if(!m_inject->is_packetinfo_empty()){
             //Not Empty
 
         }
+
+
     }else{
         //true
         //Inject the second flit of the previous packet
-
+        continue_inject_packet(action);
     }
 }
 

@@ -102,7 +102,7 @@ private:
 
     //新的设计
     void handle_rest_flit(int action, int single_flit_index);
-    void inject_eject();
+    void inject_eject(pair<int, int>& ej_order);
     bool is_injection_ongoing();
     void continue_inject_packet(int action);
 
