@@ -35,13 +35,7 @@ typedef struct Stat{
 class Node {
 public:
 
-    Injection* m_inject;
-    vector<int>m_curr_ring_id;//存储穿过该node的ringid号
     vector<RoutingTable*>m_table;
-    //TODO 应不应该存到public呢 还是private呢
-    ExbManager* m_exb_manager;
-
-    void recv_inj_ej_for(int cycle);
 
     //Output Function
     void node_info_output();
@@ -58,21 +52,32 @@ public:
     //Stat
     void reset_stat();
 
+    void inject_control_packet();
+
     //添加穿过该node的ring的id号
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
-    void handle_all_single_buffer();
-    void handle_control_packet();
 
+    void handle_control_packet();
     void ej_control_packet();
+
     void init();
     Node(int node_id);
     ~Node();
+
+    void run(int cycle);
 
 private:
     const int m_node_id;
 
     //Statistics
     Stat m_stat;
+
+    ExbManager* m_exb_manager;
+
+    Injection* m_inject;
+    vector<int>m_curr_ring_id;//存储穿过该node的ringid号
+
+
 
     //TODO 暂时不用ej_link 等后面引入为某个packet留link 先简单实现一下
     //vector<bool>m_ej_link;
@@ -87,9 +92,6 @@ private:
 
     void recv_flit();
 
-    //EXB-related Function
-    void check_exb(int single_buffer_index);
-
     //专门设计用来接收ejection的
 
     void ejection(Flit* flit, int ring_id);
@@ -102,7 +104,7 @@ private:
 
     //新的设计
     void handle_rest_flit(int action, int single_flit_index);
-    void inject_eject();
+    int inject_eject();
     bool is_injection_ongoing();
     void continue_inject_packet(int action);
     RoutingTable* check_routing_table(int dst_id);
@@ -110,7 +112,6 @@ private:
     int ring_to_index(int ring_id);
     //拿到想要的ring上的buffer的action
     int get_single_buffer_action(int ring_index);
-
 
 };
 ostream& operator<<(ostream& out, Node& node);

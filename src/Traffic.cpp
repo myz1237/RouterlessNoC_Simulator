@@ -4,15 +4,15 @@
 Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr_time) {
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
-    p->length = get_randomint(GlobalParameter::short_packet_size,
-                              GlobalParameter::long_packet_size);
-    p->ctime = curr_time;
+    p->length = get_randomsize();
 
+    p->ctime = curr_time;
+    //cout << p->length << endl;
     int max_id = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x - 1 ;
     do{
         p->dst = get_randomint(0, max_id);
     }while(p->dst == p->src);
-
+    GlobalParameter::packet_id++;
     return p;
 }
 
@@ -101,19 +101,19 @@ void TrafficBitReverse::setBit(int &x, int w, int v) {
     else if (v == 0)
         x = x & ~mask;
 }
-/*int Traffic::get_randomsize() const{
+int Traffic::get_randomsize() const{
     // 1/(s_to_l+1)的概率产生长packet 其余产生短包
-    int sum = GlobalParameter::short_percent + GlobalParameter::long_percent;
-    double p = (double)GlobalParameter::short_percent/sum;
+    int sum = GlobalParameter::short_packet_ratio + GlobalParameter::long_packet_ratio;
+    double p = (double)GlobalParameter::short_packet_ratio/sum;
     double rnd = rand() / (double) RAND_MAX;
     //出在short的范围内[0,p]
     if(rnd >= 0 && rnd < p){
         return GlobalParameter::short_packet_size;
     } else {
     //出在[p,1) 随机产生2到GlobalParameter::long_packet_size
-        return get_randomint(2, GlobalParameter::long_packet_size);
+        return GlobalParameter::long_packet_size;
     }
-}*/
+}
 
 int Traffic::get_randomint(const int min, const int max) const {
     srand((unsigned)time(0));

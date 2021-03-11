@@ -57,6 +57,8 @@ namespace GlobalParameter{
     extern double injection_rate;
     extern int long_packet_size;
     extern int short_packet_size;
+    extern int long_packet_ratio;
+    extern int short_packet_ratio;
     extern int flit_size;
     extern int bandwidth;
     extern RingStrategy ring_strategy;

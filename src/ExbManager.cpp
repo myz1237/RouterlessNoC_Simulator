@@ -1,15 +1,14 @@
 #include "ExbManager.h"
 
 int ExbManager::exb_available() {
-    int i;
     //找到为空的exb的index并返回
-    for(i = 0; i < m_exb_status.size(); i++){
+    for(int i = 0; i < m_exb_status.size(); i++){
         if(!m_exb_status.at(i)->occupied){
             return i;
         }
     }
     //没找到 返回-1作为提醒
-        return -1;
+    return -1;
 
 }
 
@@ -36,6 +35,9 @@ ExbManager::~ExbManager() {
 
 
 void ExbManager::pop_and_push(int exb_index, Flit *flit) {
+    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
+        return;
+    }
     //弹出第一个Flit到Ring上
     m_exb.at(exb_index).front()->set_flit_type(Routing);
     //整个exb前进一个单元
@@ -53,6 +55,9 @@ void ExbManager::push(int exb_index, Flit *flit) {
 }
 
 void ExbManager::pop(int exb_index) {
+    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
+        return;
+    }
     //弹出第一个Flit到Ring上
     m_exb.at(exb_index).front()->set_flit_type(Routing);
     //整个exb前进一个单元
@@ -97,6 +102,10 @@ void ExbManager::reset_exb_status(int exb_index) {
 
 bool ExbManager::check_exb_full(int exb_index) const {
     return m_exb_status.at(exb_index)->indicator == GlobalParameter::exb_size - 1;
+}
+
+int ExbManager::get_exb_remaining_size(int exb_index) const {
+    return GlobalParameter::exb_size - m_exb_status.at(exb_index)->indicator - 1;
 }
 
 

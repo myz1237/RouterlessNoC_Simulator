@@ -29,8 +29,7 @@ public:
     }
     pair<bool, int>& get_exb_interrupt();
 
-    Injection(int node_id, vector<int>* ring, vector<RoutingTable*>* table,
-              vector<pair<int, int>>* ej_order, ExbManager* exb, bool status=false);
+    Injection(int node_id, vector<int>* ring, bool status=false);
     ~Injection();
 
     //Only for test
@@ -43,7 +42,7 @@ public:
     inline void complete_ongoing_packet(){m_ongoing_packet = nullptr;}
     inline int get_ongoing_ring_index()const{return m_injecting_ring_index;}
     Packetinfo* get_new_packetinfo();
-
+    void packetinfo_generator(int cycle, Traffic& traffic);
 
 private:
     int m_local_id;
@@ -64,31 +63,17 @@ private:
 
     //Node Information
     vector<int>* m_curr_ring_id;
-    vector<RoutingTable*>* m_table;
-    //vector<Flit*>* m_single_buffer;
-    vector<pair<int, int>>* m_ej_order;
     //Exb Manager
     //只调用其函数 并不负责他的创建和释放 归Node管理
-    ExbManager* m_exb_manager;
 
-    //Inject ongoing packet and new packet
-    void injector();
-    int ring_to_index(int ring_id);
-    void try_to_inject();
 
     //如果这里检查src和dst相等 就把该packetinfo删除释放 也就是说该节点不会再产生任何packet
     void packetinfo_attach(Packetinfo* info);
-    void packetinfo_generator(int cycle, Traffic& traffic);
+
     //packetinfo和packet他们的产生不同点在于 packetinfo需要严格按照产生速度
     // 而packet只要满足条件(ring+exb)且m_packetinfo不为空 就要产生packet
     //检查m_packetinfo不为空 就要产生packet 放在exb检查后面
-    void packet_generator();
 
-    //TODO 一定要在Node接受过一轮Flit之后调用
-    RoutingTable * check_routing_table(int dst_id);
-    int check_single_buffer_action(int ring_index);
-
-    int ring_selection(int dst, int index);
 
 
 

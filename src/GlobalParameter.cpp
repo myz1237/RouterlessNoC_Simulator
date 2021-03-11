@@ -5,6 +5,8 @@ int GlobalParameter::mesh_dim_y;
 double GlobalParameter::injection_rate;
 int GlobalParameter::long_packet_size;
 int GlobalParameter::short_packet_size;
+int GlobalParameter::long_packet_ratio;
+int GlobalParameter::short_packet_ratio;
 int GlobalParameter::flit_size;
 int GlobalParameter::bandwidth;
 RingStrategy GlobalParameter::ring_strategy;

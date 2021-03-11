@@ -155,9 +155,6 @@
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h">
 			<Option target="NocSim"/>
 		</Unit>
-		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Test.cpp">
-			<Option target="NocSim"/>
-		</Unit>
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp">
 			<Option target="NocSim"/>
 		</Unit>

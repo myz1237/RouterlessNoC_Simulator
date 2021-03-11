@@ -139,4 +139,5 @@ private:
 //Output Packet
 ostream& operator<<(ostream& out, Packet& p);
 ostream& operator<<(ostream& out, Packetinfo& p);
+
 #endif //NOCSIM_FLIT_H

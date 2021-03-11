@@ -37,8 +37,7 @@ void Noc::init_ring() {
 void Noc::init_routing_table() {
     //向所有ring注入control包
     for(int i = 0; i < m_node.size(); i++){
-        m_node.at(i)->m_inject->controlpacket_generator
-        (0,m_node.at(i)->m_curr_ring_id,GlobalParameter::ring);
+        m_node.at(i)->inject_control_packet();
     }
 
     int flag = 0;
@@ -104,14 +103,15 @@ void Noc::run() {
         }
 
         for(int k = 0; k < m_node.size(); k++){
-            m_node.at(k)->recv_inj_ej_for(GlobalParameter::global_cycle);
+            m_node.at(k)->run(GlobalParameter::global_cycle);
         }
+
+        GlobalParameter::global_cycle++;
 
 /*        if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
             //Warmup 结束 清空统计数据
             reset_stat();
         }*/
-        GlobalParameter::global_cycle++;
     }
     cout << GlobalParameter::injection_cycle << endl;
     cout << GlobalParameter::packet_id << endl;

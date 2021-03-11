@@ -467,33 +467,6 @@ src/RoutingTable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RoutingTable.cpp.s
 .PHONY : src/RoutingTable.cpp.s
 
-src/Test.o: src/Test.cpp.o
-
-.PHONY : src/Test.o
-
-# target to build an object file
-src/Test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/Test.cpp.o
-.PHONY : src/Test.cpp.o
-
-src/Test.i: src/Test.cpp.i
-
-.PHONY : src/Test.i
-
-# target to preprocess a source file
-src/Test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/Test.cpp.i
-.PHONY : src/Test.cpp.i
-
-src/Test.s: src/Test.cpp.s
-
-.PHONY : src/Test.s
-
-# target to generate assembly for a file
-src/Test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/Test.cpp.s
-.PHONY : src/Test.cpp.s
-
 src/Traffic.o: src/Traffic.cpp.o
 
 .PHONY : src/Traffic.o
@@ -593,9 +566,6 @@ help:
 	@echo "... src/RoutingTable.o"
 	@echo "... src/RoutingTable.i"
 	@echo "... src/RoutingTable.s"
-	@echo "... src/Test.o"
-	@echo "... src/Test.i"
-	@echo "... src/Test.s"
 	@echo "... src/Traffic.o"
 	@echo "... src/Traffic.i"
 	@echo "... src/Traffic.s"

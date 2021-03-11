@@ -11,7 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/NocSim.dir/src/Node.cpp.o"
   "CMakeFiles/NocSim.dir/src/Ring.cpp.o"
   "CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o"
-  "CMakeFiles/NocSim.dir/src/Test.cpp.o"
   "CMakeFiles/NocSim.dir/src/Traffic.cpp.o"
   "CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o"
   "NocSim"

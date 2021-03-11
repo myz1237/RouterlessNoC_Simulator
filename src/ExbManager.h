@@ -25,7 +25,7 @@ public:
     //注册EXB使用
     void set_exb_status(int exb_index, bool status, int buffer_index);
     //通知EXB释放Injection期间的Flit 根据绑定的single buffer的index设定Release信号
-    void set_exb_status(int buffer_index, bool release);
+    //void set_exb_status(int buffer_index, bool release);
     void reset_exb_status(int exb_index);
     //single_buffer_index和ringid的index相同
     int check_exb_binded(int single_buffer_index);
@@ -34,11 +34,8 @@ public:
     inline bool check_exb_null(int exb_index)const{
         return m_exb_status.at(exb_index)->indicator == -1;
     }
-    inline bool check_exb_release(int exb_index)const{
-        return m_exb_status.at(exb_index)->release;}
-    inline int get_exb_remaining_size(int exb_index)const{
-        return GlobalParameter::exb_size - m_exb_status.at(exb_index).indicator - 1;
-    }
+    int get_exb_remaining_size(int exb_index)const;
+
 
     void push(int exb_index, Flit* flit);
     void pop_and_push(int exb_index, Flit* flit);

@@ -23,7 +23,8 @@ void configure() {
     GlobalParameter::mesh_dim_y = readParam<int>(conf,"mesh_dim_y",2);
     GlobalParameter::injection_rate = readParam<double>(conf,"injection_rate",0.02);;
     GlobalParameter::long_packet_size = readParam<int>(conf,"long_packet_size",5);
-    GlobalParameter::short_packet_size = readParam<int>(conf,"short_packet_size",1);
+    GlobalParameter::short_packet_size = readParam<int>(conf,"short_ratio",8);
+    GlobalParameter::long_packet_ratio = readParam<int>(conf,"long_ratio",2);
     GlobalParameter::flit_size = readParam<int>(conf,"flit_size",256);
     //TODO handle relationship between bandwidth and flit_size
     GlobalParameter::bandwidth = readParam<int>(conf,"bandwidth",256);
@@ -140,7 +141,7 @@ void configure() {
     }else if(GlobalParameter::traffic_type == Hotspot){
         GlobalParameter::traffic = new TrafficHotspot;
     }
-
+    GlobalParameter::sim_time += GlobalParameter::sim_warmup;
 }
 
 template <typename T>

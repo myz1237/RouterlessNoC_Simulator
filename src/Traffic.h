@@ -8,6 +8,7 @@ struct Packetinfo;
 class Traffic{
 public:
 
+    int get_randomsize() const;
     int get_randomint(const int min, const int max)const;
     virtual Packetinfo* traffic_generator(const int local_id, const int curr_time) = 0;
 };
