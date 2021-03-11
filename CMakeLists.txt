@@ -3,7 +3,7 @@ project(NocSim)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(lib/yaml-cpp/include)
+include_directories(lib/yaml-cpp/include lib/plog/include)
 link_directories(lib/yaml-cpp/lib)
 
 add_executable( NocSim

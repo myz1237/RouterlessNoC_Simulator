@@ -45,6 +45,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/yaml-cpp/include"/>
+					<Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/plog/include"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -69,6 +70,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/yaml-cpp/include"/>
+					<Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/plog/include"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>

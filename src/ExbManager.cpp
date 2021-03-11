@@ -35,9 +35,9 @@ ExbManager::~ExbManager() {
 
 
 void ExbManager::pop_and_push(int exb_index, Flit *flit) {
-    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
+/*    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
         return;
-    }
+    }*/
     //弹出第一个Flit到Ring上
     m_exb.at(exb_index).front()->set_flit_type(Routing);
     //整个exb前进一个单元
@@ -54,10 +54,10 @@ void ExbManager::push(int exb_index, Flit *flit) {
     flit->set_flit_type(Buffered);
 }
 
-void ExbManager::pop(int exb_index) {
-    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
+void ExbManager::pop(int exb_index, int node_id) {
+/*    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
         return;
-    }
+    }*/
     //弹出第一个Flit到Ring上
     m_exb.at(exb_index).front()->set_flit_type(Routing);
     //整个exb前进一个单元
@@ -69,9 +69,12 @@ void ExbManager::pop(int exb_index) {
     //indicator前挪1
     //并判断此时EXB是否空了
     if(--m_exb_status.at(exb_index)->indicator == -1){
+        PLOG_WARNING << "EXB " << exb_index << " is released with single buffer "
+        << m_exb_status.at(exb_index)->single_buffer_index << " at Node " << node_id << " in Cycle " << GlobalParameter::global_cycle;
         //重置这个EXB的Status
         m_exb_status.at(exb_index)->single_buffer_index = -1;
         m_exb_status.at(exb_index)->occupied = false;
+
     }
 
 }
@@ -93,10 +96,13 @@ void ExbManager::set_exb_status(int exb_index, bool status, int buffer_index) {
 }
 
 
-void ExbManager::reset_exb_status(int exb_index) {
+void ExbManager::release_exb(int exb_index, int node_id) {
+    PLOG_WARNING << "EXB " << exb_index << " is released with single buffer "
+               << m_exb_status.at(exb_index)->single_buffer_index << " at Node " << node_id << " in Cycle " << GlobalParameter::global_cycle;
     m_exb_status.at(exb_index)->occupied = false;
     m_exb_status.at(exb_index)->single_buffer_index = -1;
     m_exb_status.at(exb_index)->indicator = -1;
+
 }
 
 
@@ -107,6 +113,7 @@ bool ExbManager::check_exb_full(int exb_index) const {
 int ExbManager::get_exb_remaining_size(int exb_index) const {
     return GlobalParameter::exb_size - m_exb_status.at(exb_index)->indicator - 1;
 }
+
 
 
 

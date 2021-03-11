@@ -91,5 +91,6 @@ namespace GlobalParameter{
     extern int global_cycle;
 }
 
+
 #endif //NOCSIM_GLOBALPARAMETER_H
 

@@ -4,8 +4,8 @@
 Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr_time) {
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
-    p->length = get_randomsize();
-
+    //p->length = get_randomsize();
+    p->length = get_randomint(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     p->ctime = curr_time;
     //cout << p->length << endl;
     int max_id = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x - 1 ;
@@ -106,12 +106,12 @@ int Traffic::get_randomsize() const{
     int sum = GlobalParameter::short_packet_ratio + GlobalParameter::long_packet_ratio;
     double p = (double)GlobalParameter::short_packet_ratio/sum;
     double rnd = rand() / (double) RAND_MAX;
-    //出在short的范围内[0,p]
+    //出在long的范围内[0,p]
     if(rnd >= 0 && rnd < p){
-        return GlobalParameter::short_packet_size;
+        return GlobalParameter::long_packet_size;
     } else {
     //出在[p,1) 随机产生2到GlobalParameter::long_packet_size
-        return GlobalParameter::long_packet_size;
+        return GlobalParameter::short_packet_size;
     }
 }
 

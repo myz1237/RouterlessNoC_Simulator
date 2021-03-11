@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/DemoWchar.dir/Main.o CMakeFiles/DemoWchar.dir/MyClass.o  -o DemoWchar  -lplog 

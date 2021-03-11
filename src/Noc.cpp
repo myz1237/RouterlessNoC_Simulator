@@ -75,7 +75,9 @@ void Noc::init_routing_table() {
 }
 
 void Noc::run() {
+    PLOG_DEBUG << "HI";
     initial();
+
     cout << "Routing Table has been generated..." << endl;
     reset_stat();
     if(GlobalParameter::sim_detail){
@@ -96,7 +98,7 @@ void Noc::run() {
     GlobalParameter::global_cycle = 0;
     //Main Loop of the Simulation
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
-        cout << "This is Cycle " << GlobalParameter::global_cycle << endl;
+        PLOG_INFO << "This is Cycle " << GlobalParameter::global_cycle;
         //Move on-ring Packet Forward
         for(int k = 0; k < GlobalParameter::ring.size(); k++){
             GlobalParameter::ring.at(k)->update_curr_hop();

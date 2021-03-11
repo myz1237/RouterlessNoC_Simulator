@@ -26,7 +26,7 @@ public:
     void set_exb_status(int exb_index, bool status, int buffer_index);
     //通知EXB释放Injection期间的Flit 根据绑定的single buffer的index设定Release信号
     //void set_exb_status(int buffer_index, bool release);
-    void reset_exb_status(int exb_index);
+    void release_exb(int exb_index, int node_id);
     //single_buffer_index和ringid的index相同
     int check_exb_binded(int single_buffer_index);
     //True 说明该EXB已经满了 False 还有位置
@@ -39,7 +39,8 @@ public:
 
     void push(int exb_index, Flit* flit);
     void pop_and_push(int exb_index, Flit* flit);
-    void pop(int exb_index);
+    //这里加入Node id纯粹为了打印log
+    void pop(int exb_index, int node_id);
     ExbManager();
     ~ExbManager();
 

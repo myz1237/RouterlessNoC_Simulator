@@ -23,7 +23,8 @@ void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
     //到该产生包的周期了
     if(cycle % GlobalParameter::injection_cycle == 0){
         packetinfo_attach(traffic.traffic_generator(m_local_id,cycle));
-
+        PLOG_INFO << "Packetinfor " <<  GlobalParameter::packet_id <<" Generated at Node " << m_local_id
+        << " in Cycle " << cycle;
     }
 
 }
@@ -83,12 +84,17 @@ void Injection::inject_new_packet(int ring_index) {
         m_ongoing_packet = p;
         //设置之后要去的ringindex
         m_injecting_ring_index = ring_index;
+        PLOG_DEBUG << "Long Packet " << p->get_id() << " with "<< p->get_length()
+        <<" Flit Complete injection Flit 0 at Node " << m_local_id << " in Cycle " << GlobalParameter::global_cycle;
     }
-
     delete m_packetinfo.front();
-    m_packetinfo.front() = nullptr;
+    //Packetinfo* pi = m_packetinfo.front();
+    //delete pi;
     //TODO 小心这里可能清不掉全部的Packetinfo
     m_packetinfo.erase(m_packetinfo.begin());
+    PLOG_DEBUG_IF(p->get_length() == 1) << "Single Packet " << p->get_id()
+    << " Complete injection at Node " << m_local_id << " in Cycle " << GlobalParameter::global_cycle;
+
 }
 
 bool Injection::is_packetinfo_empty() {

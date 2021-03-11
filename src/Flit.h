@@ -55,6 +55,7 @@ public:
     inline vector<Routingsnifer*>& get_flit_routing(){return m_routing;}
     inline int get_flit_ctime()const{return m_ctime;}
     inline int get_flit_dst()const{return m_dst_id;}
+    inline int get_sequence()const{return m_sequence;}
     inline void set_flit_type(FlitStatus status){m_status = status;}
     inline void set_atime(int cycle){m_atime = cycle;}
     int calc_flit_latency()const;

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/Demo.dir/Main.o CMakeFiles/Demo.dir/MyClass.o  -o Demo  -lplog 

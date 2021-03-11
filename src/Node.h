@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <plog/Log.h>
 #include "Flit.h"
 #include "RoutingTable.h"
 #include "ExbManager.h"

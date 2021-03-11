@@ -7,6 +7,7 @@
 #include "Traffic.h"
 
 #include <vector>
+#include <plog/Log.h>
 class Packet;
 class Ring;
 class Flit;
