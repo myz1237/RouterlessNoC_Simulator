@@ -270,6 +270,10 @@ bool Injection::is_packetinfo_empty() {
     }
 }
 
+Packetinfo *Injection::get_new_packetinfo() {
+    return m_packetinfo.front();
+}
+
 
 
 

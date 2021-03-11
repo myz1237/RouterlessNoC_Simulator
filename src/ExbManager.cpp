@@ -9,9 +9,8 @@ int ExbManager::exb_available() {
         }
     }
     //没找到 返回-1作为提醒
-    if(i == m_exb_status.size()){
         return -1;
-    }
+
 }
 
 ExbManager::ExbManager() {

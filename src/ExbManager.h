@@ -36,6 +36,9 @@ public:
     }
     inline bool check_exb_release(int exb_index)const{
         return m_exb_status.at(exb_index)->release;}
+    inline int get_exb_remaining_size(int exb_index)const{
+        return GlobalParameter::exb_size - m_exb_status.at(exb_index).indicator - 1;
+    }
 
     void push(int exb_index, Flit* flit);
     void pop_and_push(int exb_index, Flit* flit);

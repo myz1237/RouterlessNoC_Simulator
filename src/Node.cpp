@@ -295,24 +295,126 @@ bool Node::is_injection_ongoing() {
 
 }
 
-void Node::inject_eject(pair<int, int>& ej_order) {
-    //ring index和single buffer index相同
-    int ring_index = ej_order.first;
-    int action = ej_order.second;
+void Node::inject_eject() {
+
+    int ring_index;
+    int action;
+    int selection_stategy = 0;
+    int length;
+    int exb_index;
+    int exb_available_index;
+    int remaining_exb_size;
+    Packetinfo *p;
 
     if(!is_injection_ongoing()){
         //此时injection闲
         if(!m_inject->is_packetinfo_empty()){
             //Not Empty
+            p = m_inject->get_new_packetinfo();
+            length = p->length;
+            //选ring 并拿到ring_index
+            ring_index = ring_selection(p->dst, selection_stategy);
+            action = get_single_buffer_action(ring_index);
+            exb_index = m_exb_manager->check_exb_binded(ring_index);
+            exb_available_index = m_exb_manager->exb_available();
+            //Length判断
+            if(length == 1){
+
+                if(action == -2 || action == -3){
+                    if(action == -3){
+                        //处理该ring上的flit
+                        ejection(m_single_buffer.at(ring_index),
+                                        m_curr_ring_id.at(ring_index));
+                    }
+                    //直接注入这个长度为1的Packet
+                    m_inject->inject_new_packet(ring_index);
+                }else{
+
+                    //不会注入了 查看该ring有没有绑定EXB 处理该选中的ring上的flit
+                    //exb_index = m_exb_manager->check_exb_binded(ring_index);
+                    if(exb_index != -1){
+                        //绑定了
+                        //放入EXB中 并弹出EXB第一个flit 此时EXB一定至少一个flit
+                        m_exb_manager->pop_and_push(exb_index, m_single_buffer.at(ring_index));
+                    }else{
+                        //没绑定直接Forward
+                        forward(m_single_buffer.at(ring_index));
+                    }
+                }
+
+            }else{
+                //长度大于1
+
+                if(action == -2){
+
+                    if(exb_index != -1){
+                        //绑定中
+                        m_exb_manager->pop(exb_index);
+                    }else{
+                        //未绑定
+                        //有没有可用的exb呢
+                        if(exb_available_index != -1){
+                            //有可用exb 绑上
+                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
+                            //产生新的packet
+                            m_inject->inject_new_packet(ring_index);
+                        }else{
+                            //无可用exb No Action
+                        }
+                    }
+
+                }else if(action == -3){
+                    //上来先把buffer里的flit注入了
+                    ejection(m_single_buffer.at(ring_index),
+                                m_curr_ring_id.at(ring_index));
+                    if(exb_index != -1){
+                        //绑定中
+                        //还有位置吗 记得加上single flit自己的一个size
+                        remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index) + 1;
+                        if(remaining_exb_size >= length){
+                            //还有位置
+                            m_inject->inject_new_packet(ring_index);
+                        }else{
+                            //没位置了 不注入新的packet了 弹出exb中的一个flit
+                            m_exb_manager->pop(exb_index);
+                        }
+                    }else{
+                        //未绑定
+                        //有没有可用的exb呢
+                        if(exb_available_index != -1){
+                            //有可用exb 绑上
+                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
+                            //产生新的packet
+                            m_inject->inject_new_packet(ring_index);
+                        }else{
+                            //无可用exb No Action
+                        }
+                    }
+
+                }else{
+                    //都是要转发的flit了
+                    //不会再注入了
+                    //是否被绑定了
+                    if(exb_index != -1){
+                        m_exb_manager->pop_and_push(exb_index, m_single_buffer.at(ring_index));
+                    }else{
+                        forward(m_single_buffer.at(ring_index));
+                    }
+                }
+
+            }
 
         }
-
-
     }else{
         //true
         //Inject the second flit of the previous packet
+        //先拿到之前注入的ring index
+        ring_index = m_inject->get_ongoing_ring_index();
+        //查看此时的action
+        action = get_single_buffer_action(ring_index);
         continue_inject_packet(action);
     }
+    //TODO 记得最后清零所有singleflit 和ej order
 }
 
 void Node::continue_inject_packet(int action) {
@@ -347,7 +449,8 @@ void Node::continue_inject_packet(int action) {
 
         //处理可能的注入
         if(action == -3){
-            ejection(m_single_buffer.at(ring_index), ring_index);
+            ejection(m_single_buffer.at(ring_index),
+                            m_curr_ring_id.at(ring_index));
         }
     }else{
         //处理single buffer的转发
@@ -358,8 +461,40 @@ void Node::continue_inject_packet(int action) {
             m_inject->complete_ongoing_packet();
         }
     }
-
     p = nullptr;
+}
+
+RoutingTable *Node::check_routing_table(int dst_id) {
+    for(int i =0; i < m_table.size(); i++){
+        if(dst_id == m_table.at(i)->node_id){
+            return m_table.at(i);
+        }
+    }
+
+}
+
+int Node::ring_selection(int dst, int index) {
+    RoutingTable* table = check_routing_table(dst);
+    if(index){
+        return ring_to_index(table->ring2_id);
+    }else{
+        return ring_to_index(table->ring1_id);;
+    }
+
+}
+
+int Node::ring_to_index(int ring_id) {
+    vector<int>::iterator it = find(m_curr_ring_id.begin(), m_curr_ring_id.end(), ring_id);
+    //拿到该ringid对应的索引
+    return distance(m_curr_ring_id.begin(), it);
+}
+
+int Node::get_single_buffer_action(int ring_index) {
+    for(int i = 0; i < m_ej_order.size(); i++){
+        if(m_ej_order.at(i).first == ring_index){
+            return m_ej_order.at(i).second;
+        }
+    }
 }
 
 

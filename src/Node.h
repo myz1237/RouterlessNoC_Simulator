@@ -102,9 +102,15 @@ private:
 
     //新的设计
     void handle_rest_flit(int action, int single_flit_index);
-    void inject_eject(pair<int, int>& ej_order);
+    void inject_eject();
     bool is_injection_ongoing();
     void continue_inject_packet(int action);
+    RoutingTable* check_routing_table(int dst_id);
+    int ring_selection(int dst, int index);
+    int ring_to_index(int ring_id);
+    //拿到想要的ring上的buffer的action
+    int get_single_buffer_action(int ring_index);
+
 
 };
 ostream& operator<<(ostream& out, Node& node);

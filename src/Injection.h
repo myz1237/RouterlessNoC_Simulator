@@ -42,6 +42,8 @@ public:
     inline Packet* get_ongoing_packet()const{return m_ongoing_packet;}
     inline void complete_ongoing_packet(){m_ongoing_packet = nullptr;}
     inline int get_ongoing_ring_index()const{return m_injecting_ring_index;}
+    Packetinfo* get_new_packetinfo();
+
 
 private:
     int m_local_id;
