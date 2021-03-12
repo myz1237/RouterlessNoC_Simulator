@@ -17,7 +17,7 @@ int GlobalParameter::ej_port_nu;
 EjStrategy GlobalParameter::ej_strategy;
 RoutingStrategy GlobalParameter::routing_strategy;
 TrafficType GlobalParameter::traffic_type;
-vector<pair<int, double>> GlobalParameter::hotspot;
+vector<pair<int, int>> GlobalParameter::hotspot;
 int GlobalParameter::sim_time;
 int GlobalParameter::sim_warmup;
 SimType GlobalParameter::sim_type;

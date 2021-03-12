@@ -4,11 +4,11 @@
 #The size of your NoC. Mesh topology is applied
 #Please note that these two parameters must be even.
 #We only use RLrec now, so mesh_dim_x and mesh_dim_y are the same
-mesh_dim_x: 4
-mesh_dim_y: 4
+mesh_dim_x: 8
+mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.002
+injection_rate: 0.03
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
@@ -73,12 +73,15 @@ routing_strategy: Shortest
 #Hotspot
 #SPLASH
 #PARSEC
-traffic_type: BitReverse
+traffic_type: Uniform
 #Only available when Hopspot is selected.
 #Type Node_ID: possibility
 hotspot:
-  2: 0.25
-  5: 0.03
+  2: 5
+  5: 10
+  9: 15
+  12: 1
+  15: 20
 
 #Simulation parameters
 #Period for run-time simulation, expressed in cycle

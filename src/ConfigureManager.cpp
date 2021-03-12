@@ -120,11 +120,10 @@ void configure() {
         double p;
         for(YAML::const_iterator it= conf["skills"].begin(); it != conf["skills"].end();++it)
         {
-            int node = it->first.as<int>();
-            double p = it->second.as<double>();
+            node = it->first.as<int>();
+            p = it->second.as<int>();
             checkRange<int>(0, GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_y - 1, node);
-            checkRange<double>(0.0, 1.0, p);
-            pair<int,double>t(node,p);
+            pair<int,int>t(node,p);
             GlobalParameter::hotspot.push_back(t);
         }
     }
@@ -140,6 +139,7 @@ void configure() {
     }else if(GlobalParameter::traffic_type == Hotspot){
         GlobalParameter::traffic = new TrafficHotspot(node_sum);
     }
+
     GlobalParameter::sim_time += GlobalParameter::sim_warmup;
 }
 

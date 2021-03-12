@@ -44,6 +44,9 @@ class TrafficHotspot:public Traffic{
 public:
     TrafficHotspot(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
+private:
+    int max_value;
+    int get_dst();
 };
 //TODO SPLASH&PARSEC
 

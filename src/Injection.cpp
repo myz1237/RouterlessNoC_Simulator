@@ -85,6 +85,7 @@ void Injection::inject_new_packet(int ring_index) {
         m_injecting_ring_index = ring_index;
         PLOG_DEBUG << "Long Packet " << p->get_id() << " with "<< p->get_length()
         <<" Flit Complete injection Flit 0 at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
+        PLOG_ERROR_IF(p->get_id() == 1265) << "Packet 1265 " << "Flit 1 Status " << p->get_flit_status(1);
     }
     delete m_packetinfo.front();
     //Packetinfo* pi = m_packetinfo.front();

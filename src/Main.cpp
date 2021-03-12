@@ -15,5 +15,7 @@ int main() {
     Noc* c = new Noc;
     c->run();
     delete c;
+    delete GlobalParameter::traffic;
     c = nullptr;
+    GlobalParameter::traffic = nullptr;
 }

@@ -68,7 +68,7 @@ namespace GlobalParameter{
     extern EjStrategy ej_strategy;
     extern RoutingStrategy routing_strategy;
     extern TrafficType traffic_type;
-    extern vector<pair<int, double>>hotspot;
+    extern vector<pair<int, int>>hotspot;
     extern int sim_time;
     extern int sim_warmup;
     extern SimType sim_type;

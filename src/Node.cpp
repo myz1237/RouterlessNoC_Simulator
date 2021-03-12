@@ -419,7 +419,8 @@ void Node::continue_inject_packet(int action) {
 
     //此时Injection里面一定有未注入完成的Packet
     Packet* p = m_inject->get_ongoing_packet();
-
+    PLOG_ERROR_IF(p->get_id() == 1265) << "Packet 1265 Flit" << 1
+    << " Status " << p->get_flit_status(1);
     //拿到此时的ring_index 也是single buffer index
     int ring_index = m_inject->get_ongoing_ring_index();
 
@@ -431,12 +432,16 @@ void Node::continue_inject_packet(int action) {
     int remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index);
     //查询第一个为Injecting的Flit的位置
     //一定能查到 循环不可能走完的 i最大为长度减一
-    for(flit_index = 0; flit_index < p->get_length(); flit_index++){
+    for(flit_index = 0; flit_index < p->get_length(); ++flit_index){
+        PLOG_ERROR_IF(p->get_id() == 1265) << "Packet 1265 Flit" << flit_index
+        << " Status " << p->get_flit_status(flit_index);
         if(p->get_flit_status(flit_index) == Injecting){
             break;
         }
     }
-    PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection";
+    PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection"
+    << " Packet ID " << p->get_id() << " Size " << p->get_length() << " in Node " << m_node_id
+    << " in Cycle " << GlobalParameter::global_cycle;
     //TODO 记得检查此处的有没有循环走完的情况！！！
 
     //更改这个flit的状态
@@ -480,6 +485,7 @@ void Node::continue_inject_packet(int action) {
         }
 
     }
+    p = nullptr;
 }
 
 RoutingTable *Node::check_routing_table(int dst_id) {

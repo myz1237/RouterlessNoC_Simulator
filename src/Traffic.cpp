@@ -74,28 +74,39 @@ Packetinfo* TrafficHotspot::traffic_generator(const int local_id, const int curr
     double rnd = rand() / (double) RAND_MAX;
     double range_start = 0.0;
     p->src = local_id;
-    p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
-
+    p->length = get_dst();
     p->ctime = curr_time;
 
-    int max_id = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x - 1 ;
-    do{
-        p->dst = random_int(0, max_id);
-        for (size_t i = 0; i < GlobalParameter::hotspot.size(); i++) {
-            if (rnd >= range_start && rnd < range_start + GlobalParameter::hotspot[i].second) {
-                if (local_id != GlobalParameter::hotspot[i].first ) {
-                    p->dst = GlobalParameter::hotspot[i].first;
-                }
-                break;
-            } else
-                range_start += GlobalParameter::hotspot[i].second;	// try next
-        }
-    }while(p->dst == p->src);
     GlobalParameter::packet_id++;
     return p;
 }
 
-TrafficHotspot::TrafficHotspot(int nodeSum) : Traffic(nodeSum) {}
+TrafficHotspot::TrafficHotspot(int nodeSum) : Traffic(nodeSum) {
+    max_value = 0;
+    int size = GlobalParameter::hotspot.size();
+    for(int i = 0; i < size; i++){
+        max_value += GlobalParameter::hotspot.at(i).second;
+    }
+}
+
+int TrafficHotspot::get_dst() {
+    int size = GlobalParameter::hotspot.size();
+    if(size == 1) {
+        return GlobalParameter::hotspot[0].first;
+    }
+
+    int pct = random_int(0,max_value);
+
+    for(size_t i = 0; i < (size - 1); ++i) {
+        int const limit = GlobalParameter::hotspot.at(i).second;
+        if(limit > pct) {
+            return GlobalParameter::hotspot.at(i).first;
+        } else {
+            pct -= limit;
+        }
+    }
+    return GlobalParameter::hotspot.back().first;
+}
 
 
 TrafficBitReverse::TrafficBitReverse(int nodeSum) : Traffic(nodeSum) {}
