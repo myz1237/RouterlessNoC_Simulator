@@ -86,32 +86,6 @@ double Packet::calc_avg_flit_latency() {
     return avg;
 }
 
-
-
-int Coordinate::coor_to_id(const Coordinate &coor) {
-    return (GlobalParameter::mesh_dim_y-coor.y-1)*GlobalParameter::mesh_dim_x+coor.x;
-}
-
-Coordinate Coordinate::id_to_coor(const int id) {
-    return Coordinate(id%GlobalParameter::mesh_dim_x,
-                      (GlobalParameter::mesh_dim_y-id)/GlobalParameter::mesh_dim_y);
-}
-
-void Coordinate::fix_range(Coordinate &dst) {
-    //Transpose1
-    if (dst.x < 0)
-        dst.x = 0;
-    if (dst.y < 0)
-        dst.y = 0;
-    //Transpose2
-    if (dst.x >= GlobalParameter::mesh_dim_x)
-        dst.x = GlobalParameter::mesh_dim_x - 1;
-    if (dst.y >= GlobalParameter::mesh_dim_y)
-        dst.y = GlobalParameter::mesh_dim_y - 1;
-}
-
-
-
 ostream& operator<<(ostream& out, Packet& p){
     out << "Packet Content:" << endl
     << "Length:" << p.get_length() << "  " << "Source:" << p.get_src()

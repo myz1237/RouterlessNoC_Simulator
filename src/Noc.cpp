@@ -75,10 +75,9 @@ void Noc::init_routing_table() {
 }
 
 void Noc::run() {
-    PLOG_DEBUG << "HI";
     initial();
 
-    cout << "Routing Table has been generated..." << endl;
+    PLOG_INFO << "Routing Table has been generated...";
     reset_stat();
     if(GlobalParameter::sim_detail){
         //Output the Routing Table of Each Node
@@ -110,10 +109,13 @@ void Noc::run() {
 
         GlobalParameter::global_cycle++;
 
-/*        if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
+        if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
             //Warmup 结束 清空统计数据
+            GlobalParameter::packet_id = 0;
             reset_stat();
-        }*/
+        }
+
+
     }
     cout << GlobalParameter::injection_cycle << endl;
     cout << GlobalParameter::packet_id << endl;

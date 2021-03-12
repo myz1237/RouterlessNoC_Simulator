@@ -218,11 +218,11 @@ bool Node::is_injection_ongoing() {
 
 int Node::inject_eject() {
 
+    int try_again = 0;
     //记录这次处理的ring_index 如果注入失败 就返回-1
     int return_ring_index;
     int ring_index;
     int action;
-    int selection_stategy = 0;
     int length;
     int exb_index;
     int exb_available_index;
@@ -235,8 +235,9 @@ int Node::inject_eject() {
             //Not Empty
             p = m_inject->get_new_packetinfo();
             length = p->length;
-            //选ring 并拿到ring_index
-            ring_index = ring_selection(p->dst, selection_stategy);
+
+here:       //选ring 并拿到ring_index
+            ring_index = ring_selection(p->dst, try_again);
             action = get_single_buffer_action(ring_index);
             exb_index = m_exb_manager->check_exb_binded(ring_index);
             exb_available_index = m_exb_manager->exb_available();
@@ -247,22 +248,39 @@ int Node::inject_eject() {
             if(length == 1){
 
                 if(action == -2 || action == -3){
-                    if(action == -3){
-                        //处理该ring上的flit
-                        ejection(m_single_buffer.at(ring_index),
-                                        m_curr_ring_id.at(ring_index));
-                    }
+
                     if(exb_index == -1){
                         //没有绑定 直接注
                         //直接注入这个长度为1的Packet
                         m_inject->inject_new_packet(ring_index);
                     }else{
+
+                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                            try_again++;
+                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                            << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                            goto here;
+                        }
+
                         //还有绑定 需要转发exb内的内容
                         m_exb_manager->pop(exb_index, m_node_id);
                     }
 
+                    if(action == -3){
+                        //处理该ring上的flit
+                        ejection(m_single_buffer.at(ring_index),
+                                        m_curr_ring_id.at(ring_index));
+                    }
+
+
                 }else{
 
+                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                        try_again++;
+                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                        << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                        goto here;
+                    }
                     //不会注入了 查看该ring有没有绑定EXB 处理该选中的ring上的flit
                     //exb_index = m_exb_manager->check_exb_binded(ring_index);
                     if(exb_index != -1){
@@ -282,6 +300,14 @@ int Node::inject_eject() {
                     if(exb_index != -1){
                         //绑定中
                         //不在注入
+
+                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                            try_again++;
+                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                            << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                            goto here;
+                        }
+
                         //TODO 按照论文 这里不做注入 但是action为-3时 同样的情况就在buffer size够下 注入了
                         m_exb_manager->pop(exb_index, m_node_id);
                     }else{
@@ -296,13 +322,17 @@ int Node::inject_eject() {
                             m_inject->inject_new_packet(ring_index);
                         }else{
                             //无可用exb No Action
+                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                                try_again++;
+                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                                << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                goto here;
+                            }
                         }
                     }
 
                 }else if(action == -3){
-                    //上来先把buffer里的flit注入了
-                    ejection(m_single_buffer.at(ring_index),
-                                m_curr_ring_id.at(ring_index));
+
                     if(exb_index != -1){
                         //绑定中
                         //还有位置吗 记得加上single flit自己的一个size
@@ -314,6 +344,14 @@ int Node::inject_eject() {
                             m_inject->inject_new_packet(ring_index);
                         }else{
                             //没位置了 不注入新的packet了 弹出exb中的一个flit
+
+                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                                try_again++;
+                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                                << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                goto here;
+                            }
+
                             m_exb_manager->pop(exb_index, m_node_id);
                         }
                     }else{
@@ -328,13 +366,27 @@ int Node::inject_eject() {
                             m_inject->inject_new_packet(ring_index);
                         }else{
                             //无可用exb No Action
+                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                                try_again++;
+                                goto here;
+                            }
+
                         }
                     }
-
+                    //Ejection一定要放到所有判断
+                    ejection(m_single_buffer.at(ring_index), m_curr_ring_id.at(ring_index));
                 }else{
                     //都是要转发的flit了
                     //不会再注入了
                     //是否被绑定了
+
+                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
+                        try_again++;
+                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
+                        << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                        goto here;
+                    }
+
                     if(exb_index != -1){
                         m_exb_manager->pop_and_push(exb_index, m_single_buffer.at(ring_index));
                     }else{

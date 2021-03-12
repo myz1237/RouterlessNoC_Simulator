@@ -65,8 +65,7 @@ void configure() {
     else if(routing_strategy == "Secondwinner") GlobalParameter::routing_strategy = Secondwinner;
 
     if(traffic_type == "Uniform") GlobalParameter::traffic_type = Uniform;
-    else if(traffic_type == "Transpose1") GlobalParameter::traffic_type = Transpose1;
-    else if(traffic_type == "Transpose2") GlobalParameter::traffic_type = Transpose2;
+    else if(traffic_type == "Transpose") GlobalParameter::traffic_type = Transpose;
     else if(traffic_type == "BitReverse") GlobalParameter::traffic_type = BitReverse;
     else if(traffic_type == "Hotspot") GlobalParameter::traffic_type = Hotspot;
 
@@ -133,10 +132,8 @@ void configure() {
     //TODO 还没有写delete的代码
     if(GlobalParameter::traffic_type == Uniform){
         GlobalParameter::traffic = new TrafficUniform;
-    }else if(GlobalParameter::traffic_type == Transpose1){
-        GlobalParameter::traffic = new TrafficTranspose1;
-    }else if(GlobalParameter::traffic_type == Transpose2){
-        GlobalParameter::traffic = new TrafficTranspose2;
+    }else if(GlobalParameter::traffic_type == Transpose){
+        GlobalParameter::traffic = new TrafficTranspose;
     }else if(GlobalParameter::traffic_type == BitReverse){
         GlobalParameter::traffic = new TrafficBitReverse;
     }else if(GlobalParameter::traffic_type == Hotspot){

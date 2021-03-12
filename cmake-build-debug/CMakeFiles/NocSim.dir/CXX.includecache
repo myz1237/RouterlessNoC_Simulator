@@ -108,6 +108,10 @@ vector
 Ring.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp
+Injection.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
+
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
 Flit.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
@@ -144,6 +148,12 @@ Injection.h
 ExbManager.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.h
 
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
+vector
+-
+assert.h
+-
+
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 vector
 -
@@ -168,15 +178,13 @@ vector
 algorithm
 -
 
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp
-Traffic.h
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
-
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
 Flit.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 GlobalParameter.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
+RandomUtil.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
 cstdlib
 -
 cmath

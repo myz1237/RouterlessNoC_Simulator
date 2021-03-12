@@ -7,7 +7,6 @@
 #include <plog/Appenders/ColorConsoleAppender.h>
 
 
-
 //TODO Ejection的时候会不会发生 前面的flit没有竞争成功注入 后面的flit注入呢
 int main() {
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;

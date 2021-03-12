@@ -32,17 +32,6 @@ enum FlitStatus{
     Ejected
 };
 
-class Coordinate{
-public:
-    int x;
-    int y;
-    Coordinate(){}
-    Coordinate(int x, int y):x(x),y(y){}
-    static int coor_to_id(const Coordinate& coor);
-    static Coordinate id_to_coor(const int id);
-    static void fix_range(Coordinate& dst);
-};
-
 //TODO 给Flit加一个指向packet的指针 方便后面flit找Packet
 //TODO 思考发送control包时的current_node id 发送一个cycle 传送一个cycle到下一个node？还是一个cycle 发送后直接到下一个node了？
 class Flit {

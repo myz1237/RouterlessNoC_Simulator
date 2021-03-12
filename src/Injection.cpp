@@ -12,6 +12,7 @@ void Injection::packetinfo_attach(Packetinfo *info){
     if(info->src == info->dst){
         delete info;
         info = nullptr;
+        GlobalParameter::packet_id--;
         return;
     }
     //src和dst不相等 添加该包信息
@@ -38,8 +39,6 @@ void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_
         ring.at(curr_ring_id.at(i))->attach(p);
         //不用通知EXB EXB不用动就好 不会有碰撞
         p->set_flit_status(0, Routing);
-        //packet_id加1
-        GlobalParameter::packet_id++;
     }
 }
 
@@ -85,7 +84,7 @@ void Injection::inject_new_packet(int ring_index) {
         //设置之后要去的ringindex
         m_injecting_ring_index = ring_index;
         PLOG_DEBUG << "Long Packet " << p->get_id() << " with "<< p->get_length()
-        <<" Flit Complete injection Flit 0 at Node " << m_local_id << " in Cycle " << GlobalParameter::global_cycle;
+        <<" Flit Complete injection Flit 0 at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
     }
     delete m_packetinfo.front();
     //Packetinfo* pi = m_packetinfo.front();
@@ -93,7 +92,7 @@ void Injection::inject_new_packet(int ring_index) {
     //TODO 小心这里可能清不掉全部的Packetinfo
     m_packetinfo.erase(m_packetinfo.begin());
     PLOG_DEBUG_IF(p->get_length() == 1) << "Single Packet " << p->get_id()
-    << " Complete injection at Node " << m_local_id << " in Cycle " << GlobalParameter::global_cycle;
+    << " Complete injection at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
 
 }
 

@@ -46,6 +46,7 @@ CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/Traffic.h
@@ -65,6 +66,7 @@ CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/Traffic.h
@@ -84,6 +86,7 @@ CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Traffic.h
@@ -103,6 +106,7 @@ CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/GlobalParameter.cpp
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/Traffic.h
@@ -125,11 +129,15 @@ CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Injection.cpp
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Traffic.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Util.h
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/ringalgorithm/RingAlgorithms.h
+
+CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: ../src/KnuthRng.c
+CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: ../src/KnuthRngWrapper.cpp
 
 CMakeFiles/NocSim.dir/src/LocalStatistic.cpp.o: ../src/LocalStatistic.cpp
 CMakeFiles/NocSim.dir/src/LocalStatistic.cpp.o: ../src/LocalStatistic.h
@@ -189,6 +197,7 @@ CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Main.cpp
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Noc.h
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Traffic.h
@@ -209,6 +218,7 @@ CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Noc.cpp
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Noc.h
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Traffic.h
@@ -228,11 +238,14 @@ CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Node.cpp
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Traffic.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Util.h
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/ringalgorithm/RingAlgorithms.h
+
+CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o: ../src/RandomUtil.cpp
 
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../lib/plog/include/plog/Appenders/IAppender.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../lib/plog/include/plog/Log.h
@@ -246,6 +259,7 @@ CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Ring.cpp
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/RoutingTable.h
@@ -268,6 +282,7 @@ CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Traffic.cpp
@@ -287,6 +302,7 @@ CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/Flit.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/GlobalParameter.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/Injection.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/Node.h
+CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/RandomUtil.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/Ring.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/RoutingTable.h
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/Traffic.h

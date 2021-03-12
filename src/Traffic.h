@@ -2,6 +2,7 @@
 #define NOCSIM_TRAFFIC_H
 #include "Flit.h"
 #include "GlobalParameter.h"
+#include "RandomUtil.h"
 #include <cstdlib>
 #include <cmath>
 struct Packetinfo;
@@ -18,12 +19,12 @@ class TrafficUniform: public Traffic{
 };
 
 //以y=mesh_y - (mesh_y/mesh_x)x为对称轴
-class TrafficTranspose1: public Traffic{
-    Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
-};
-
-//以y = x为对称轴
-class TrafficTranspose2:public Traffic{
+class TrafficTranspose: public Traffic{
+private:
+    int m_shift;
+    inline void generate_shift(int node_sum);
+public:
+    TrafficTranspose();
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 };
 

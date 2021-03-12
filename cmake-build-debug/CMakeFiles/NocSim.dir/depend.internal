@@ -47,6 +47,7 @@ CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -66,6 +67,7 @@ CMakeFiles/NocSim.dir/src/ExbManager.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -85,6 +87,7 @@ CMakeFiles/NocSim.dir/src/Flit.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -104,6 +107,7 @@ CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -126,11 +130,15 @@ CMakeFiles/NocSim.dir/src/Injection.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
+CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRng.c
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRngWrapper.cpp
 CMakeFiles/NocSim.dir/src/LocalStatistic.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.h
@@ -190,6 +198,7 @@ CMakeFiles/NocSim.dir/src/Main.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -210,6 +219,7 @@ CMakeFiles/NocSim.dir/src/Noc.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
@@ -229,11 +239,14 @@ CMakeFiles/NocSim.dir/src/Node.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Util.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.h
+CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.cpp
 CMakeFiles/NocSim.dir/src/Ring.cpp.o
  ../lib/plog/include/plog/Appenders/IAppender.h
  ../lib/plog/include/plog/Log.h
@@ -247,6 +260,7 @@ CMakeFiles/NocSim.dir/src/Ring.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
@@ -269,6 +283,7 @@ CMakeFiles/NocSim.dir/src/Traffic.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp
@@ -288,6 +303,7 @@ CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
+ /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.h

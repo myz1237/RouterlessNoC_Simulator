@@ -124,6 +124,9 @@
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.h">
 			<Option target="NocSim"/>
 		</Unit>
+		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRngWrapper.cpp">
+			<Option target="NocSim"/>
+		</Unit>
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/LocalStatistic.cpp">
 			<Option target="NocSim"/>
 		</Unit>
@@ -143,6 +146,12 @@
 			<Option target="NocSim"/>
 		</Unit>
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h">
+			<Option target="NocSim"/>
+		</Unit>
+		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.cpp">
+			<Option target="NocSim"/>
+		</Unit>
+		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.h">
 			<Option target="NocSim"/>
 		</Unit>
 		<Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp">

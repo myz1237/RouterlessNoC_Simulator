@@ -26,11 +26,9 @@ enum EjStrategy{
 
 enum TrafficType{
     Uniform,
-    Transpose1,
-    Transpose2,
+    Transpose,
     BitReverse,
     Hotspot,
-    RequestandReply,
     SPLASH,
     PARSEC,
 };
