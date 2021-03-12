@@ -128,16 +128,17 @@ void configure() {
             GlobalParameter::hotspot.push_back(t);
         }
     }
+    int node_sum = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x;
     //根据设置初始化各个对象
     //TODO 还没有写delete的代码
     if(GlobalParameter::traffic_type == Uniform){
-        GlobalParameter::traffic = new TrafficUniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
     }else if(GlobalParameter::traffic_type == Transpose){
-        GlobalParameter::traffic = new TrafficTranspose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
     }else if(GlobalParameter::traffic_type == BitReverse){
-        GlobalParameter::traffic = new TrafficBitReverse;
+        GlobalParameter::traffic = new TrafficBitReverse(node_sum);
     }else if(GlobalParameter::traffic_type == Hotspot){
-        GlobalParameter::traffic = new TrafficHotspot;
+        GlobalParameter::traffic = new TrafficHotspot(node_sum);
     }
     GlobalParameter::sim_time += GlobalParameter::sim_warmup;
 }

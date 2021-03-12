@@ -73,7 +73,7 @@ routing_strategy: Shortest
 #Hotspot
 #SPLASH
 #PARSEC
-traffic_type: Transpose
+traffic_type: BitReverse
 #Only available when Hopspot is selected.
 #Type Node_ID: possibility
 hotspot:

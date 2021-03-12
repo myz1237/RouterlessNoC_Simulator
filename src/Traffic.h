@@ -8,13 +8,14 @@
 struct Packetinfo;
 class Traffic{
 public:
-
+    int m_node_sum;
     int get_randomsize() const;
-    int get_randomint(const int min, const int max)const;
+    Traffic(int node_sum);
     virtual Packetinfo* traffic_generator(const int local_id, const int curr_time) = 0;
 };
 class TrafficUniform: public Traffic{
-
+public:
+    TrafficUniform(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 };
 
@@ -22,14 +23,16 @@ class TrafficUniform: public Traffic{
 class TrafficTranspose: public Traffic{
 private:
     int m_shift;
-    inline void generate_shift(int node_sum);
+    inline void generate_shift();
 public:
-    TrafficTranspose();
+    TrafficTranspose(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 };
 
 class TrafficBitReverse:public Traffic{
-    Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
+public:
+    TrafficBitReverse(int nodeSum);
+    Packetinfo* traffic_generator(int local_id, const int curr_time) override;
 
 private:
     inline int getBit(int x, int w){return (x >> w) & 1;}
@@ -38,6 +41,8 @@ private:
 };
 
 class TrafficHotspot:public Traffic{
+public:
+    TrafficHotspot(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 };
 //TODO SPLASH&PARSEC
