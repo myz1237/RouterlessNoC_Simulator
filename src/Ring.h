@@ -29,11 +29,11 @@ public:
     //让packet上ring 由ring来控制
     void attach(Packet* p);
     //去掉该id的packet并清空所占内存
-    void dettach(int packet_id);
+    void dettach(long packet_id);
     //ring上是否还有packet 为空返回true
     inline bool is_empty(){return m_packet.empty();}
 
-    int find_packet_length(int packet_id);
+    int find_packet_length(long packet_id);
     //static inline void initializer_ring(const vector<RingTopologyTuple*>& ring_tuple_set);
     Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node*>& node);
     //TODO 只有最后模拟结束才清理ring中还没有ejection的packet

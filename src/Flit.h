@@ -39,7 +39,7 @@ class Flit {
     friend class Packet;
 public:
     inline void update_hop(){m_hop++;}
-    inline int get_packet_id()const{return m_packet_id;}
+    inline long get_packet_id()const{return m_packet_id;}
     inline FlitType get_flit_type()const{return m_type;}
     inline vector<Routingsnifer*>& get_flit_routing(){return m_routing;}
     inline int get_flit_ctime()const{return m_ctime;}

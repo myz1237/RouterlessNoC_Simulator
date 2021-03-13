@@ -86,7 +86,7 @@ namespace GlobalParameter{
     extern int exb_size;
     extern long packet_id;
     extern vector<Ring*> ring;
-    extern int global_cycle;
+    extern long global_cycle;
 }
 
 

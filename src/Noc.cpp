@@ -19,7 +19,7 @@ void Noc::init_ring() {
     GlobalParameter::ring_algorithm->topology_generate(m_tuple);
     //完成第二步 产生ring实例 同时初始化所有node拥有的ring
     for(int i = 0;i < m_tuple.size(); i++){
-        GlobalParameter::ring.push_back(new Ring(i, m_tuple[i],m_node));
+        GlobalParameter::ring[i] = new Ring(i, m_tuple[i],m_node);
     }
     //产生实例后清除vector
     free_vetor<RingTopologyTuple*>(m_tuple);
@@ -123,13 +123,14 @@ Noc::Noc() {
         m_node[i] = new Node(i);
     }
     m_tuple.reserve(cal_ring_num(m_size));
-    GlobalParameter::ring.reserve(cal_ring_num(m_size));
+    GlobalParameter::ring.resize(cal_ring_num(m_size));
     //RingTopology对象在RingAlgorithm中初始化
 }
 
 Noc::~Noc() {
     free_vetor<Node*>(m_node);
     delete GlobalParameter::ring_algorithm;
+    free_vetor<Ring*>(GlobalParameter::ring);
 }
 
 void Noc::reset_stat() {

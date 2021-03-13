@@ -39,7 +39,7 @@ void Ring::attach(Packet *p) {
     m_packet.push_back(p);
 }
 
-void Ring::dettach(int packet_id) {
+void Ring::dettach(long packet_id) {
     for(vector<Packet*>::iterator iter = m_packet.begin(); iter != m_packet.end(); iter++){
         if((*iter)->get_id() == packet_id){
             delete *iter;
@@ -74,7 +74,7 @@ int Ring::find_next_node(int curr_node) {
     return *(it+1);
 }
 
-int Ring::find_packet_length(int packet_id) {
+int Ring::find_packet_length(long packet_id) {
     for(int i = 0; i < m_packet.size(); i++){
         if(m_packet[i]->get_id() == packet_id){
             return m_packet[i]->get_length();

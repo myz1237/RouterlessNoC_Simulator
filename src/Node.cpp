@@ -414,8 +414,6 @@ void Node::continue_inject_packet(int action) {
 
     //此时Injection里面一定有未注入完成的Packet
     Packet* p = m_inject->get_ongoing_packet();
-    PLOG_ERROR_IF(p->get_id() == 1265) << "Packet 1265 Flit" << 1
-    << " Status " << p->get_flit_status(1);
     //拿到此时的ring_index 也是single buffer index
     int ring_index = m_inject->get_ongoing_ring_index();
 

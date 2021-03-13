@@ -35,5 +35,5 @@ int GlobalParameter::exb_size;
 //记录当前发送packet的id号 全局唯一性
 long GlobalParameter::packet_id = 0;
 
-int GlobalParameter::global_cycle = 0;
+long GlobalParameter::global_cycle = 0;
 
