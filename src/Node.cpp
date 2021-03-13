@@ -1,7 +1,82 @@
 #include "Node.h"
+void Node::run(int cycle) {
+
+    int handled_ring_index;
+    int index;
+    m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
+    recv_flit();
+    get_ej_order();
+    //优先处理要注入的那条ring
+    handled_ring_index = inject_eject();
+    //处理剩下的single flit
+    for(int i = 0; i < m_ej_order.size(); i++){
+        index = m_ej_order[i].first;
+        if(index == handled_ring_index){
+            continue;
+        }else{
+            handle_rest_flit(m_ej_order[i].second, index);
+        }
+    }
+
+    //TODO 记得最后清零所有singleflit 和ej order
+    //不要应该也可用做到
+    reset_single_buffer();
+    vector<pair<int,int>>().swap(m_ej_order);
+}
+
+void Node::reset_stat() {
+    m_stat.reset();
+}
+
+void Node::inject_control_packet() {
+    m_inject->controlpacket_generator(0, m_curr_ring_id);
+}
+
+void Node::handle_control_packet() {
+    //先从ring上接收包
+    recv_flit();
+    //检查每个包并记录状态
+    get_ej_order();
+    //处理包
+    ej_control_packet();
+}
+
+void Node::ej_control_packet() {
+    for(int i = 0; i < m_ej_order.size(); i++){
+        //只要是到达该node的control 不按照ejectionlink的数目收回而是全部收回
+        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
+            ejection(m_single_buffer[m_ej_order[i].first],
+                     m_curr_ring_id[m_ej_order[i].first]);
+        } else if(m_ej_order[i].second == -1){
+            forward(m_single_buffer[m_ej_order[i].first]);
+        }
+    }
+    reset_single_buffer();
+    vector<pair<int,int>>().swap(m_ej_order);
+}
 
 void Node::init() {
     m_single_buffer.resize(m_curr_ring_id.size(), nullptr);
+}
+
+Node::Node(int node_id):m_node_id(node_id){
+    //TODO 这里reserve的数目可能不够 对于8*8是足够了
+    m_curr_ring_id.reserve(100);
+    m_table.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x-1);
+    m_exb_manager = new ExbManager;
+    m_inject = new Injection(m_node_id, &m_curr_ring_id);
+    m_stat.reset();
+}
+
+Node::~Node() {
+    delete m_inject;
+    delete m_exb_manager;
+    m_exb_manager = nullptr;
+    m_inject = nullptr;
+    //注意这里只清空输入buffer的内容 释放空间交给Ring来做
+    clear_vector<Flit*>(m_single_buffer);
+    free_vetor<RoutingTable*>(m_table);
+    vector<pair<int, int>>().swap(m_ej_order);
 }
 
 void Node::recv_flit() {
@@ -49,19 +124,7 @@ void Node::get_ej_order() {
     vector<pair<int,int>>().swap(ctime);
 }
 
-void Node::ej_control_packet() {
-    for(int i = 0; i < m_ej_order.size(); i++){
-        //只要是到达该node的control 不按照ejectionlink的数目收回而是全部收回
-        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
-            ejection(m_single_buffer[m_ej_order[i].first],
-                     m_curr_ring_id[m_ej_order[i].first]);
-        } else if(m_ej_order[i].second == -1){
-            forward(m_single_buffer[m_ej_order[i].first]);
-        }
-    }
-    reset_single_buffer();
-    vector<pair<int,int>>().swap(m_ej_order);
-}
+
 
 
 void Node::ejection(Flit *flit, int ring_id) {
@@ -117,38 +180,8 @@ void Node::forward(Flit *flit) {
 }
 
 
-Node::Node(int node_id):m_node_id(node_id){
-    //TODO 这里reserve的数目可能不够 对于8*8是足够了
-    m_curr_ring_id.reserve(100);
-    m_table.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x-1);
-    m_exb_manager = new ExbManager;
-    m_inject = new Injection(m_node_id, &m_curr_ring_id);
-    m_stat.reset();
-}
 
-Node::~Node() {
-    delete m_inject;
-    delete m_exb_manager;
-    m_exb_manager = nullptr;
-    m_inject = nullptr;
-    //注意这里只清空输入buffer的内容 释放空间交给Ring来做
-    clear_vector<Flit*>(m_single_buffer);
-    free_vetor<RoutingTable*>(m_table);
-    vector<pair<int, int>>().swap(m_ej_order);
-}
 
-void Node::handle_control_packet() {
-    //先从ring上接收包
-    recv_flit();
-    //检查每个包并记录状态
-    get_ej_order();
-    //处理包
-    ej_control_packet();
-}
-
-void Node::reset_stat() {
-    m_stat.reset();
-}
 
 
 void Node::update_flit_stat(int latency) {
@@ -181,7 +214,7 @@ bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
 
 
 void Node::handle_rest_flit(int action, int single_flit_index) {
-    int exb_index = m_exb_manager->check_exb_binded(single_flit_index);
+    int exb_index = m_exb_manager->check_exb_bound(single_flit_index);
     if(action == -2){
         if(exb_index != -1){
             m_exb_manager->pop(exb_index, m_node_id);
@@ -234,7 +267,7 @@ int Node::inject_eject() {
 here:       //选ring 并拿到ring_index
             ring_index = ring_selection(p->dst, try_again);
             action = get_single_buffer_action(ring_index);
-            exb_index = m_exb_manager->check_exb_binded(ring_index);
+            exb_index = m_exb_manager->check_exb_bound(ring_index);
             exb_available_index = m_exb_manager->exb_available();
             //注入成不成功 这条ring的single buffer已经处理过了
             return_ring_index = ring_index;
@@ -276,7 +309,7 @@ here:       //选ring 并拿到ring_index
                         goto here;
                     }
                     //不会注入了 查看该ring有没有绑定EXB 处理该选中的ring上的flit
-                    //exb_index = m_exb_manager->check_exb_binded(ring_index);
+                    //exb_index = m_exb_manager->check_exb_bound(ring_index);
                     if(exb_index != -1){
                         //绑定了
                         //放入EXB中 并弹出EXB第一个flit 此时EXB一定至少一个flit
@@ -420,7 +453,7 @@ void Node::continue_inject_packet(int action) {
     //拿到此时这个ring上对应的EXB的index
     //TODO 记得检查此处会不会为-1
     //正常来说不会用 因为已经绑定了
-    int exb_index = m_exb_manager->check_exb_binded(ring_index);
+    int exb_index = m_exb_manager->check_exb_bound(ring_index);
     PLOG_ERROR_IF(exb_index == -1) << "Error in checking EXB Bound in Continue Injection";
     int remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index);
     //查询第一个为Injecting的Flit的位置
@@ -512,35 +545,6 @@ int Node::get_single_buffer_action(int ring_index) {
             return m_ej_order[i].second;
         }
     }
-}
-
-void Node::run(int cycle) {
-
-    int handled_ring_index;
-    int index;
-    m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
-    recv_flit();
-    get_ej_order();
-    //优先处理要注入的那条ring
-    handled_ring_index = inject_eject();
-    //处理剩下的single flit
-    for(int i = 0; i < m_ej_order.size(); i++){
-        index = m_ej_order[i].first;
-        if(index == handled_ring_index){
-            continue;
-        }else{
-            handle_rest_flit(m_ej_order[i].second, index);
-        }
-    }
-
-    //TODO 记得最后清零所有singleflit 和ej order
-    //不要应该也可用做到
-    reset_single_buffer();
-    vector<pair<int,int>>().swap(m_ej_order);
-}
-
-void Node::inject_control_packet() {
-    m_inject->controlpacket_generator(0, m_curr_ring_id);
 }
 
 

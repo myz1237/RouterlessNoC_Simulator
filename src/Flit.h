@@ -49,6 +49,8 @@ public:
     inline void set_atime(int cycle){m_atime = cycle;}
     int calc_flit_latency()const;
     void update_routing_snifer();
+    Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
+         const int ctime, int hop, int curr_node, int atime = -1);
     ~Flit();
 private:
     const long m_packet_id;
@@ -65,9 +67,6 @@ private:
     FlitStatus m_status;
     //Store routing msg from various rings, only used when control packets are sent
     vector<Routingsnifer*> m_routing;
-
-    Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
-         const int ctime, int hop, int curr_node, int atime = -1);
 };
 
 
@@ -94,7 +93,6 @@ public:
     inline void set_flit_curr_node(int index, int node){m_flit[index]->m_curr_node = node;}
     //inline void set_flit_next_node(int index, int node){m_flit[index]->m_next_node = node;}
     inline void set_flit_status(int index, FlitStatus status){m_flit[index]->m_status = status;}
-
     //Normal Packet Constructor
     Packet(long packet_id, int length, int src, int dst, int node,int ctime, bool finish = false);
     //Control Packet Constructor
@@ -102,6 +100,7 @@ public:
     //Initialize packet by packetinfo
     Packet(long packet_id, int src, Packetinfo *packetinfo, bool finish = false);
     ~Packet();
+
 private:
     //全局上识别packet的标志 同样也作为flit的id号
     const long m_packet_id;

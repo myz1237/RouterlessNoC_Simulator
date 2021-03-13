@@ -24,14 +24,12 @@ public:
     int exb_available();
     //注册EXB使用
     void set_exb_status(int exb_index, bool status, int buffer_index);
-    //通知EXB释放Injection期间的Flit 根据绑定的single buffer的index设定Release信号
-    //void set_exb_status(int buffer_index, bool release);
+    //释放EXB
     void release_exb(int exb_index, int node_id);
     //single_buffer_index和ringid的index相同
-    int check_exb_binded(int single_buffer_index);
-    //True 说明该EXB已经满了 False 还有位置
-    int get_exb_remaining_size(int exb_index)const;
+    int check_exb_bound(int single_buffer_index);
 
+    int get_exb_remaining_size(int exb_index)const;
 
     void push(int exb_index, Flit* flit);
     void pop_and_push(int exb_index, Flit* flit);
@@ -42,7 +40,7 @@ public:
 
 private:
     vector<vector<Flit*>>m_exb;
-    //First存储该exb是否被占用,第二个存储对应single_buffer的index 注意Index Not Ring_id
+    //First存储该exb是否被占用,第二个存储对应single_buffer的index 注意Index而不是 Ring_id
     vector<ExbStatus*>m_exb_status;
 
 };

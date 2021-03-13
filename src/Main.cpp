@@ -9,11 +9,16 @@
 
 //TODO Ejection的时候会不会发生 前面的flit没有竞争成功注入 后面的flit注入呢
 int main() {
+    //Log System Initial
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
+
+    //Read Parameters from Yaml File
     configure();
+
     Noc* c = new Noc;
     c->run();
+
     delete c;
     delete GlobalParameter::traffic;
     c = nullptr;

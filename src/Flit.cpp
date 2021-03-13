@@ -1,5 +1,25 @@
 #include "Flit.h"
 
+int Flit::calc_flit_latency() const {
+    return m_atime-m_ctime;
+}
+
+void Flit::update_routing_snifer() {
+    Routingsnifer* r = new Routingsnifer;
+    r->hop_count = m_hop;
+    r->node_id = m_curr_node;
+    m_routing.push_back(r);
+}
+
+Flit::Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq, const int ctime,
+           int hop, int curr_node, int atime): m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
+                                               m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){
+    if(type == Control) m_routing.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x);
+}
+
+Flit::~Flit() {
+    free_vetor<Routingsnifer*>(m_routing);
+}
 
 Packet::Packet(long packet_id, int length, int src, int dst, int node, int ctime, bool finish):
         m_packet_id(packet_id), m_length(length),m_src_id(src),m_dst_id(dst),
@@ -50,29 +70,6 @@ Packet::~Packet() {
     //注意m_flit有时候是空的 free的时候一定要判断vector是否为空
     free_vetor<Flit*>(m_flit);
 }
-
-Flit::~Flit() {
-    free_vetor<Routingsnifer*>(m_routing);
-}
-
-void Flit::update_routing_snifer() {
-    Routingsnifer* r = new Routingsnifer;
-    r->hop_count = m_hop;
-    r->node_id = m_curr_node;
-    m_routing.push_back(r);
-}
-
-int Flit::calc_flit_latency() const {
-    return m_atime-m_ctime;
-}
-
-Flit::Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq, const int ctime,
-           int hop, int curr_node, int atime): m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
-        m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){
-    if(type == Control) m_routing.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x);
-}
-
-
 
 //Add one flit into the packet
 void Packet::attach(Flit *flit) {

@@ -13,7 +13,6 @@ using namespace std;
 class Noc {
 public:
 
-
     void run();
     Noc();
     ~Noc();

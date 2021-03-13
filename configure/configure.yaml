@@ -4,13 +4,13 @@
 #The size of your NoC. Mesh topology is applied
 #Please note that these two parameters must be even.
 #We only use RLrec now, so mesh_dim_x and mesh_dim_y are the same
-mesh_dim_x: 6
-mesh_dim_y: 6
+mesh_dim_x: 8
+mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.08
+injection_rate: 0.1
 #The number of flit per long packet
-long_packet_size: 5
+long_packet_size: 6
 #The number of flit per short packet
 short_packet_size: 1
 

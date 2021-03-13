@@ -38,9 +38,6 @@ public:
 
     vector<RoutingTable*>m_table;
 
-    //Output Function
-    void node_info_output();
-
     // Getter Function
     inline int get_received_flit()const{return m_stat.received_flit;}
     inline int get_received_packet()const{return m_stat.received_packet;}
@@ -49,15 +46,16 @@ public:
     inline int get_max_flit_delay()const{return m_stat.max_flit_delay;}
     inline int get_max_packet_delay()const{return m_stat.max_packet_delay;}
     inline int get_node_id()const{return m_node_id;}
+    //添加穿过该node的ring的id号
+    inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
+
+    //Main Function
+    void run(int cycle);
 
     //Stat
     void reset_stat();
 
     void inject_control_packet();
-
-    //添加穿过该node的ring的id号
-    inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
-
     void handle_control_packet();
     void ej_control_packet();
 
@@ -65,7 +63,8 @@ public:
     Node(int node_id);
     ~Node();
 
-    void run(int cycle);
+    //Output Function
+    void node_info_output();
 
 private:
     const int m_node_id;
