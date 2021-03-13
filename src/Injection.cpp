@@ -51,6 +51,8 @@ Injection::Injection(int node_id, vector<int>* ring, bool status):
 }
 
 Injection::~Injection() {
+    PLOG_DEBUG_IF(!m_packetinfo.empty()) << "Node " << m_local_id <<
+    " Remaining Packet Info " << m_packetinfo.size();
     free_vetor<Packetinfo*>(m_packetinfo);
     pair<bool, int>().swap(m_exb_interrupt);
     m_ongoing_packet = nullptr;

@@ -124,10 +124,6 @@ vector
 plog/Log.h
 -
 
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp
-Node.h
-/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
-
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.h
 iostream
 -
@@ -153,6 +149,10 @@ vector
 -
 assert.h
 -
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp
+Ring.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.h
 vector

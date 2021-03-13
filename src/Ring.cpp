@@ -56,6 +56,8 @@ void Ring::dettach(int packet_id) {
 
 
 Ring::~Ring() {
+    PLOG_DEBUG_IF(!m_packet.empty()) << "Ring " << m_ring_id <<
+    " Remaining Packet  " << m_packet.size();
     free_vetor<Packet*>(m_packet);
     vector<int>().swap(m_ring_node_order);
 }
