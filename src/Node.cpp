@@ -79,11 +79,83 @@ Node::~Node() {
     vector<pair<int, int>>().swap(m_ej_order);
 }
 
+void Node::update_flit_stat(int latency) {
+    m_stat.received_flit++;
+    m_stat.flit_delay += latency;
+
+    if(latency > m_stat.max_flit_delay){
+        m_stat.max_flit_delay = latency;
+    }
+}
+
+
+void Node::update_packet_stat(int latency) {
+    m_stat.received_packet++;
+    m_stat.packet_delay += latency;
+
+    if(latency > m_stat.max_packet_delay){
+        m_stat.max_packet_delay = latency;
+    }
+}
+
 void Node::recv_flit() {
     for(int i = 0; i<m_curr_ring_id.size(); i++){
         m_single_buffer[i] = GlobalParameter::
                 ring[m_curr_ring_id[i]]->flit_check(m_node_id);
     }
+}
+
+void Node::ejection(Flit *flit, int ring_id) {
+    //尝试Ejection
+    FlitType type = flit->get_flit_type();
+    flit->update_hop();
+    flit->set_flit_type(Ejected);
+    flit->set_atime(GlobalParameter::global_cycle);
+    update_flit_stat(flit->calc_flit_latency());
+
+    PLOG_DEBUG_IF(type == Payload) << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
+                                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
+
+    if (type == Control){
+        update_routing_table(flit->get_flit_routing(),m_table, ring_id);
+        update_packet_stat(flit->calc_flit_latency());
+
+        //清除该Packet
+        GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+    }else if (type == Header){
+        //单个flit的Packet
+        //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
+        if(GlobalParameter::ring[ring_id]->
+                find_packet_length(flit->get_packet_id()) == 1){
+            update_packet_stat(flit->calc_flit_latency());
+
+            PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
+                       << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+
+            //清除该packet
+            GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+        }else{
+            PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Header Flit Arrived at Node "
+                       << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+        }
+    }else if (type == Tail){
+
+        PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Tail Flit Arrived at Node "
+                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
+        update_packet_stat(flit->calc_flit_latency());
+        //清除该packet
+        GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+    }
+}
+
+void Node::forward(Flit *flit) {
+    FlitType type = flit->get_flit_type();
+    flit->update_hop();
+    if(type == Control){
+        //记录当前的node_id和hop_count
+        flit->update_routing_snifer();
+    }
+    //其余需要Forward不用动 等着Ring update就行了
 }
 
 void Node::reset_single_buffer() {
@@ -124,90 +196,6 @@ void Node::get_ej_order() {
     vector<pair<int,int>>().swap(ctime);
 }
 
-
-
-
-void Node::ejection(Flit *flit, int ring_id) {
-    //尝试Ejection
-    FlitType type = flit->get_flit_type();
-    flit->update_hop();
-    flit->set_flit_type(Ejected);
-    flit->set_atime(GlobalParameter::global_cycle);
-    update_flit_stat(flit->calc_flit_latency());
-
-    PLOG_DEBUG_IF(type == Payload) << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
-    << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
-
-    if (type == Control){
-        update_routing_table(flit->get_flit_routing(),m_table, ring_id);
-        update_packet_stat(flit->calc_flit_latency());
-
-        //清除该Packet
-        GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
-    }else if (type == Header){
-        //单个flit的Packet
-        //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
-        if(GlobalParameter::ring[ring_id]->
-        find_packet_length(flit->get_packet_id()) == 1){
-            update_packet_stat(flit->calc_flit_latency());
-
-            PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
-            << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-
-            //清除该packet
-            GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
-        }else{
-            PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Header Flit Arrived at Node "
-                                          << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-        }
-    }else if (type == Tail){
-
-        PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Tail Flit Arrived at Node "
-                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
-        update_packet_stat(flit->calc_flit_latency());
-        //清除该packet
-        GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
-    }
-}
-void Node::forward(Flit *flit) {
-    FlitType type = flit->get_flit_type();
-    flit->update_hop();
-    if(type == Control){
-        //记录当前的node_id和hop_count
-        flit->update_routing_snifer();
-    }
-    //其余需要Forward不用动 等着Ring update就行了
-}
-
-
-
-
-
-
-void Node::update_flit_stat(int latency) {
-    m_stat.received_flit++;
-    m_stat.flit_delay += latency;
-
-    if(latency > m_stat.max_flit_delay){
-        m_stat.max_flit_delay = latency;
-    }
-}
-
-
-void Node::update_packet_stat(int latency) {
-    m_stat.received_packet++;
-    m_stat.packet_delay += latency;
-
-    if(latency > m_stat.max_packet_delay){
-        m_stat.max_packet_delay = latency;
-    }
-}
-
-void Node::node_info_output() {
-    cout << m_stat;
-}
-
-
 bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
     return a.second > b.second;
 }
@@ -235,15 +223,6 @@ void Node::handle_rest_flit(int action, int single_flit_index) {
     }
 }
 
-bool Node::is_injection_ongoing() {
-    if(m_inject->get_ongoing_packet() == nullptr){
-        return false;
-    }else{
-        return true;
-    }
-
-}
-
 int Node::inject_eject() {
 
     int try_again = 0;
@@ -264,7 +243,7 @@ int Node::inject_eject() {
             p = m_inject->get_new_packetinfo();
             length = p->length;
 
-here:       //选ring 并拿到ring_index
+            here:       //选ring 并拿到ring_index
             ring_index = ring_selection(p->dst, try_again);
             action = get_single_buffer_action(ring_index);
             exb_index = m_exb_manager->check_exb_bound(ring_index);
@@ -286,7 +265,7 @@ here:       //选ring 并拿到ring_index
                         if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                             try_again++;
                             PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                            << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                             goto here;
                         }
 
@@ -305,7 +284,7 @@ here:       //选ring 并拿到ring_index
                     if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                         try_again++;
                         PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                        << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                         goto here;
                     }
                     //不会注入了 查看该ring有没有绑定EXB 处理该选中的ring上的flit
@@ -331,7 +310,7 @@ here:       //选ring 并拿到ring_index
                         if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                             try_again++;
                             PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                            << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                             goto here;
                         }
 
@@ -344,7 +323,7 @@ here:       //选ring 并拿到ring_index
                             //有可用exb 绑上
                             m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
                             PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
-                            << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                             //产生新的packet
                             m_inject->inject_new_packet(ring_index);
                         }else{
@@ -352,7 +331,7 @@ here:       //选ring 并拿到ring_index
                             if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                                 try_again++;
                                 PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                                 goto here;
                             }
                         }
@@ -366,7 +345,7 @@ here:       //选ring 并拿到ring_index
                         remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index) + 1;
                         if(remaining_exb_size >= length){
                             PLOG_WARNING << "EXB " << exb_index << " is Rebound with single buffer "
-                                       << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                             //还有位置
                             m_inject->inject_new_packet(ring_index);
                         }else{
@@ -375,7 +354,7 @@ here:       //选ring 并拿到ring_index
                             if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                                 try_again++;
                                 PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                                 goto here;
                             }
 
@@ -388,7 +367,7 @@ here:       //选ring 并拿到ring_index
                             //有可用exb 绑上
                             m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
                             PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
-                                       << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                             //产生新的packet
                             m_inject->inject_new_packet(ring_index);
                         }else{
@@ -410,7 +389,7 @@ here:       //选ring 并拿到ring_index
                     if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
                         try_again++;
                         PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                        << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
+                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
                         goto here;
                     }
 
@@ -440,6 +419,15 @@ here:       //选ring 并拿到ring_index
     }
     p = nullptr;
     return return_ring_index;
+}
+
+bool Node::is_injection_ongoing() {
+    if(m_inject->get_ongoing_packet() == nullptr){
+        return false;
+    }else{
+        return true;
+    }
+
 }
 
 void Node::continue_inject_packet(int action) {
@@ -547,6 +535,9 @@ int Node::get_single_buffer_action(int ring_index) {
     }
 }
 
+void Node::node_info_output() {
+    cout << m_stat;
+}
 
 ostream& operator<<(ostream& out, Stat& stat){
     out << "\t" << "Received Flit:" << stat.received_flit << endl

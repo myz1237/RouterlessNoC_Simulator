@@ -50,30 +50,6 @@ void Ring::dettach(long packet_id) {
     }
 }
 
-
-
-
-Ring::~Ring() {
-    PLOG_DEBUG_IF(!m_packet.empty()) << "Ring " << m_ring_id <<
-    " Remaining Packet  " << m_packet.size();
-    free_vetor<Packet*>(m_packet);
-    vector<int>().swap(m_ring_node_order);
-}
-
-
-int Ring::find_next_node(int curr_node) {
-    vector<int>::iterator it = find(m_ring_node_order.begin(), m_ring_node_order.end(), curr_node);
-    if(it == m_ring_node_order.end()){
-        cerr << "Cannot find this node" <<endl;
-    }
-    //说明是最后一个 则返回第一个
-    if(it == m_ring_node_order.end()-1){
-        return m_ring_node_order.front();
-    }
-    //否则直接返回下一个
-    return *(it+1);
-}
-
 int Ring::find_packet_length(long packet_id) {
     for(int i = 0; i < m_packet.size(); i++){
         if(m_packet[i]->get_id() == packet_id){
@@ -110,6 +86,26 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
         reverse(m_ring_node_order.begin(),m_ring_node_order.end());
     }
 
+}
+
+Ring::~Ring() {
+    PLOG_DEBUG_IF(!m_packet.empty()) << "Ring " << m_ring_id <<
+    " Remaining Packet  " << m_packet.size();
+    free_vetor<Packet*>(m_packet);
+    vector<int>().swap(m_ring_node_order);
+}
+
+int Ring::find_next_node(int curr_node) {
+    vector<int>::iterator it = find(m_ring_node_order.begin(), m_ring_node_order.end(), curr_node);
+    if(it == m_ring_node_order.end()){
+        cerr << "Cannot find this node" <<endl;
+    }
+    //说明是最后一个 则返回第一个
+    if(it == m_ring_node_order.end()-1){
+        return m_ring_node_order.front();
+    }
+    //否则直接返回下一个
+    return *(it+1);
 }
 
 void Ring::print_ring_order() {

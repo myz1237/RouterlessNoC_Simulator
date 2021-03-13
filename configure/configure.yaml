@@ -8,9 +8,9 @@ mesh_dim_x: 8
 mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.1
+injection_rate: 0.04
 #The number of flit per long packet
-long_packet_size: 6
+long_packet_size: 5
 #The number of flit per short packet
 short_packet_size: 1
 
@@ -85,9 +85,9 @@ hotspot:
 
 #Simulation parameters
 #Period for run-time simulation, expressed in cycle
-sim_time: 10000
+sim_time: 100000
 #Period for warm-up, expressed in cycle
-sim_warmup: 5000
+sim_warmup: 10000
 #Simulation result type:
 #Throughput--drain NoC when reaching run-time period. Some packets may not be injected, ejected or forwarded
 #Latency--drain NoC until all ongoing packets have been ejected into nodes.

@@ -18,8 +18,10 @@ class Ring {
 
 public:
 
+    //ring上是否还有packet 为空返回true
+    inline bool is_empty(){return m_packet.empty();}
 
-//在每个cycle开始的时候就更新current node
+    //在每个cycle开始的时候就更新current node
     void update_curr_hop();
 
     //检查该ring上有没有flit的currentnode是该nodeid的
@@ -30,8 +32,6 @@ public:
     void attach(Packet* p);
     //去掉该id的packet并清空所占内存
     void dettach(long packet_id);
-    //ring上是否还有packet 为空返回true
-    inline bool is_empty(){return m_packet.empty();}
 
     int find_packet_length(long packet_id);
     //static inline void initializer_ring(const vector<RingTopologyTuple*>& ring_tuple_set);
