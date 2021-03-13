@@ -22,7 +22,7 @@ private:
 
     //Node-Related stuff
     vector<Node *> m_node;
-    int m_size = GlobalParameter::mesh_dim_x;
+    int m_size;
 
     //Ring-Related stuff
 
@@ -31,10 +31,10 @@ private:
     void initial();
     void init_ring();
     void init_routing_table();
-    void inj_and_ej(int cycle);
     //Statistics
     void stat_gather();
     void reset_stat();
+    int cal_ring_num(int mesh_x);
 
 
 

@@ -129,7 +129,7 @@ void configure() {
     }
     int node_sum = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x;
     //根据设置初始化各个对象
-    //TODO 还没有写delete的代码
+
     if(GlobalParameter::traffic_type == Uniform){
         GlobalParameter::traffic = new TrafficUniform(node_sum);
     }else if(GlobalParameter::traffic_type == Transpose){

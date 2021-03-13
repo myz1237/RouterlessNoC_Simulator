@@ -22,15 +22,9 @@ public:
     //Core function of Injection
     void run_injection(int cycle);
     //仅用于初始化injection，向所有穿过该节点的ring发送一个flit的包
-    void controlpacket_generator(int cycle,vector<int>& curr_ring_id, vector<Ring*>& ring);
+    void controlpacket_generator(int cycle,vector<int>& curr_ring_id);
 
-    inline void set_exb_interrupt(bool status, int single_buffer_index){
-        m_exb_interrupt.first= status;
-        m_exb_interrupt.second = single_buffer_index;
-    }
-    pair<bool, int>& get_exb_interrupt();
-
-    Injection(int node_id, vector<int>* ring, bool status=false);
+    Injection(int node_id, vector<int>* curr_ring_id);
     ~Injection();
 
     //Only for test
@@ -51,11 +45,7 @@ private:
     //记录当前packet要发送到的ring在该Node里对应的index
     int m_injecting_ring_index;
 
-    //True--Injection ongoing False--No Injection
-    bool m_injection_status;
-
     //Extension Buffer Interrupt
-    pair<bool, int> m_exb_interrupt;
 
     Packet* m_ongoing_packet;
 
@@ -69,7 +59,7 @@ private:
 
 
     //如果这里检查src和dst相等 就把该packetinfo删除释放 也就是说该节点不会再产生任何packet
-    void packetinfo_attach(Packetinfo* info);
+    void packetinfo_attach(Packetinfo* info, int cycle);
 
     //packetinfo和packet他们的产生不同点在于 packetinfo需要严格按照产生速度
     // 而packet只要满足条件(ring+exb)且m_packetinfo不为空 就要产生packet

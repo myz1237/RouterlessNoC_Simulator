@@ -1,15 +1,13 @@
 #include "Ring.h"
 
-
-
 void Ring::update_curr_hop() {
     int curr_node;
     for(int i = 0; i<m_packet.size(); i++){
-        for(int j = 0; j<m_packet.at(i)->get_length(); j++){
+        for(int j = 0; j<m_packet[i]->get_length(); j++){
             //查找在途的flit 并更新
-            if(m_packet.at(i)->get_flit_status(j) == Routing){
-                curr_node = m_packet.at(i)->get_flit_curr_node(j);
-                m_packet.at(i)->set_flit_curr_node(j, find_next_node(curr_node));
+            if(m_packet[i]->get_flit_status(j) == Routing){
+                curr_node = m_packet[i]->get_flit_curr_node(j);
+                m_packet[i]->set_flit_curr_node(j, find_next_node(curr_node));
             }
         }
     }
@@ -22,10 +20,10 @@ Flit* Ring::flit_check(int node_id) {
     int counter = 0;
     for(i = 0; i<m_packet.size(); i++){
         counter++;
-        for(j = 0; j<m_packet.at(i)->get_length(); j++){
-            if(m_packet.at(i)->get_flit_curr_node(j) == node_id &&
-            m_packet.at(i)->get_flit_status(j) == Routing){
-                return m_packet.at(i)->get_flit(j);
+        for(j = 0; j<m_packet[i]->get_length(); j++){
+            if(m_packet[i]->get_flit_curr_node(j) == node_id &&
+            m_packet[i]->get_flit_status(j) == Routing){
+                return m_packet[i]->get_flit(j);
             }
         }
     }
@@ -62,11 +60,6 @@ Ring::~Ring() {
     vector<int>().swap(m_ring_node_order);
 }
 
-/*void Ring::initializer_ring(const vector<RingTopologyTuple *> &ring_tuple_set) {
-    for(int i = 0; i< ring_tuple_set.size(); i++){
-        GlobalParameter::ring.push_back(new Ring(i, ring_tuple_set.at(i)));
-    }
-}*/
 
 int Ring::find_next_node(int curr_node) {
     vector<int>::iterator it = find(m_ring_node_order.begin(), m_ring_node_order.end(), curr_node);
@@ -77,18 +70,14 @@ int Ring::find_next_node(int curr_node) {
     if(it == m_ring_node_order.end()-1){
         return m_ring_node_order.front();
     }
-    //直接返回下一个
+    //否则直接返回下一个
     return *(it+1);
 }
 
-
-
-
-
 int Ring::find_packet_length(int packet_id) {
     for(int i = 0; i < m_packet.size(); i++){
-        if(m_packet.at(i)->get_id() == packet_id){
-            return m_packet.at(i)->get_length();
+        if(m_packet[i]->get_id() == packet_id){
+            return m_packet[i]->get_length();
         }
     }
     return 0;
@@ -102,19 +91,19 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
     for(int i = 0; i<=length-1 ; i++){
         m_ring_node_order.push_back(ring_tuple->m_ul+i);
         //把穿过该node的ringid添加到该node的curr_ring数组中
-        node.at(ring_tuple->m_ul+i)->set_curr_ring(ring_id);
+        node[ring_tuple->m_ul+i]->set_curr_ring(ring_id);
     }
     for(int j = 0; j<=width-1; j++){
         m_ring_node_order.push_back(ring_tuple->m_ul+length+j*size);
-        node.at(ring_tuple->m_ul+length+j*size)->set_curr_ring(ring_id);
+        node[ring_tuple->m_ul+length+j*size]->set_curr_ring(ring_id);
     }
     for(int k = 0; k<=length; k++){
         m_ring_node_order.push_back(ring_tuple->m_lr-k);
-        node.at(ring_tuple->m_lr-k)->set_curr_ring(ring_id);
+        node[ring_tuple->m_lr-k]->set_curr_ring(ring_id);
     }
     for (int q = width-1; q >= 1; q--) {
         m_ring_node_order.push_back(ring_tuple->m_ul+q*size);
-        node.at(ring_tuple->m_ul+q*size)->set_curr_ring(ring_id);
+        node[ring_tuple->m_ul+q*size]->set_curr_ring(ring_id);
     }
     //逆时针需要翻转
     if(ring_tuple->m_dir == 1){

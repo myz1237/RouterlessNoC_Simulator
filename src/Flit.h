@@ -67,10 +67,7 @@ private:
     vector<Routingsnifer*> m_routing;
 
     Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
-         const int ctime, int hop, int curr_node, int atime = -1):
-         m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
-         m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){}
-
+         const int ctime, int hop, int curr_node, int atime = -1);
 };
 
 
@@ -93,16 +90,11 @@ public:
     //inline int get_flit_next_node(int index)const{return m_flit[index]->m_next_node;}
     inline int get_flit_hop(int index)const{return m_flit[index]->m_hop;}
     inline int get_flit_seq(int index)const{return m_flit[index]->m_sequence;}
-    //TODO 小心 未来可能会出内存上的问题 暂时不用
-    inline vector<Routingsnifer*>& get_flit_routing(){return m_flit[0]->m_routing;}
 
-    inline void set_flit_atime(int index, int time){m_flit[index]->m_atime = time;}
     inline void set_flit_curr_node(int index, int node){m_flit[index]->m_curr_node = node;}
     //inline void set_flit_next_node(int index, int node){m_flit[index]->m_next_node = node;}
     inline void set_flit_status(int index, FlitStatus status){m_flit[index]->m_status = status;}
 
-    int calc_packet_latency()const;
-    double calc_avg_flit_latency();
     //Normal Packet Constructor
     Packet(long packet_id, int length, int src, int dst, int node,int ctime, bool finish = false);
     //Control Packet Constructor

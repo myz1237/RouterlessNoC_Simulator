@@ -85,7 +85,7 @@ namespace GlobalParameter{
     //The size of buffer for each EXB
     extern int exb_size;
     extern long packet_id;
-    extern vector<Ring*>ring;
+    extern vector<Ring*> ring;
     extern int global_cycle;
 }
 

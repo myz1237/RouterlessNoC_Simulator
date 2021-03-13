@@ -22,7 +22,6 @@ public:
 //在每个cycle开始的时候就更新current node
     void update_curr_hop();
 
-    inline int get_ring_id()const{return m_ring_id;}
     //检查该ring上有没有flit的currentnode是该nodeid的
     //返回packet在数组中的位置，以及flit在该packet的位置
     //把Flit指针返回

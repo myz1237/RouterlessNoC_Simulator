@@ -30,10 +30,6 @@ public:
     //single_buffer_index和ringid的index相同
     int check_exb_binded(int single_buffer_index);
     //True 说明该EXB已经满了 False 还有位置
-    bool check_exb_full(int exb_index)const;
-    inline bool check_exb_null(int exb_index)const{
-        return m_exb_status.at(exb_index)->indicator == -1;
-    }
     int get_exb_remaining_size(int exb_index)const;
 
 

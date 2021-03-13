@@ -19,53 +19,40 @@ void Noc::init_ring() {
     GlobalParameter::ring_algorithm->topology_generate(m_tuple);
     //完成第二步 产生ring实例 同时初始化所有node拥有的ring
     for(int i = 0;i < m_tuple.size(); i++){
-        GlobalParameter::ring.push_back(new Ring(i, m_tuple.at(i),m_node));
+        GlobalParameter::ring.push_back(new Ring(i, m_tuple[i],m_node));
     }
-/*    for(int k = 0; k < m_tuple.size(); k++){
-        GlobalParameter::ring.at(k)->print_ring_order();
-    }*/
-
     //产生实例后清除vector
     free_vetor<RingTopologyTuple*>(m_tuple);
-
     //Node中的single buffer要在curr_ring_id后初始化
     for(int j = 0; j < m_node.size(); j++){
-        m_node.at(j)->init();
+        m_node[j]->init();
     }
 }
 //所有node向ring上发送control包 然后等待 不计入cycle中
 void Noc::init_routing_table() {
     //向所有ring注入control包
     for(int i = 0; i < m_node.size(); i++){
-        m_node.at(i)->inject_control_packet();
+        m_node[i]->inject_control_packet();
     }
 
-    int flag = 0;
     while(true){
         int counter = 0;
-        //Check whether inject or forward in and after the second cycle
-        if(flag != 0){
-            for(int k = 0; k < m_node.size(); k++){
-                m_node.at(k)->ej_control_packet();
-            }
-        }
-        flag++;
 
         //Move Packets forward
         for(int j = 0;j< GlobalParameter::ring.size(); j++){
-            GlobalParameter::ring.at(j)->update_curr_hop();
+            GlobalParameter::ring[j]->update_curr_hop();
         }
 
 
         for(int q = 0; q < m_node.size(); q++){
-            m_node.at(q)->handle_control_packet();
+            m_node[q]->handle_control_packet();
         }
 
         //single flit检查是否有packet达到 到达后直接送到ejection处理 产生routingtable
         //检查所有ring是否都为空 空了说明routingtable产生完成
         for(int k = 0;k < GlobalParameter::ring.size(); k++){
             //有一个不是空就还没有结束 继续循环
-            if(GlobalParameter::ring.at(k)->is_empty()){
+            if(GlobalParameter::ring[k]->is_empty()){
                 counter++;
             }
         }
@@ -82,13 +69,13 @@ void Noc::run() {
     if(GlobalParameter::sim_detail){
         //Output the Routing Table of Each Node
         for(int i = 0; i< m_node.size(); i++){
-            cout << *m_node.at(i);
+            cout << *m_node[i];
         }
         cout << endl << endl;
         //Output the Statistics of Each Node
         for(int j = 0; j< m_node.size(); j++){
-            cout << "Node" << m_node.at(j)->get_node_id() << ":" << endl;
-            m_node.at(j)->node_info_output();
+            cout << "Node" << m_node[j]->get_node_id() << ":" << endl;
+            m_node[j]->node_info_output();
         }
     }
     //Reset Packet ID
@@ -100,11 +87,11 @@ void Noc::run() {
         PLOG_INFO << "This is Cycle " << GlobalParameter::global_cycle;
         //Move on-ring Packet Forward
         for(int k = 0; k < GlobalParameter::ring.size(); k++){
-            GlobalParameter::ring.at(k)->update_curr_hop();
+            GlobalParameter::ring[k]->update_curr_hop();
         }
 
-        for(int k = 0; k < m_node.size(); k++){
-            m_node.at(k)->run(GlobalParameter::global_cycle);
+        for(int q = 0; q < m_node.size(); q++){
+            m_node[q]->run(GlobalParameter::global_cycle);
         }
 
         GlobalParameter::global_cycle++;
@@ -115,7 +102,6 @@ void Noc::run() {
             reset_stat();
         }
 
-
     }
     cout << GlobalParameter::injection_cycle << endl;
     cout << GlobalParameter::packet_id << endl;
@@ -124,27 +110,31 @@ void Noc::run() {
     stat_gather();
     cout << endl << endl;
 
-
 /*    for(int q = 0; q < m_node.size(); q++){
-        m_node.at(q)->m_inject->print_packetinfo();
+        m_node[q]->m_inject->print_packetinfo();
     }*/
 }
 
 Noc::Noc() {
     //初始化Node对象
+    m_size = GlobalParameter::mesh_dim_x;
+    m_node.resize(m_size*m_size);
     for(int i = 0; i < m_size*m_size; i++){
-        m_node.push_back(new Node(i));
+        m_node[i] = new Node(i);
     }
+    m_tuple.reserve(cal_ring_num(m_size));
+    GlobalParameter::ring.reserve(cal_ring_num(m_size));
     //RingTopology对象在RingAlgorithm中初始化
 }
 
 Noc::~Noc() {
     free_vetor<Node*>(m_node);
+    delete GlobalParameter::ring_algorithm;
 }
 
 void Noc::reset_stat() {
     for(int i =0; i < m_node.size(); i++){
-        m_node.at(i)->reset_stat();
+        m_node[i]->reset_stat();
     }
 }
 
@@ -157,14 +147,14 @@ void Noc::stat_gather() {
     int max_flit = 0;
     int max_packet = 0;
     for(int i = 0; i < m_node.size(); i++){
-        recv_flit += m_node.at(i)->get_received_flit();
-        recv_packet += m_node.at(i)->get_received_packet();
-        flit_latency += m_node.at(i)->get_flit_delay();
-        packet_latency += m_node.at(i)->get_packet_delay();
-        if(m_node.at(i)->get_max_flit_delay() > max_flit)
-            max_flit = m_node.at(i)->get_max_flit_delay();
-        if(m_node.at(i)->get_max_packet_delay() > max_packet)
-            max_packet = m_node.at(i)->get_max_packet_delay();
+        recv_flit += m_node[i]->get_received_flit();
+        recv_packet += m_node[i]->get_received_packet();
+        flit_latency += m_node[i]->get_flit_delay();
+        packet_latency += m_node[i]->get_packet_delay();
+        if(m_node[i]->get_max_flit_delay() > max_flit)
+            max_flit = m_node[i]->get_max_flit_delay();
+        if(m_node[i]->get_max_packet_delay() > max_packet)
+            max_packet = m_node[i]->get_max_packet_delay();
     }
     stat.received_flit = recv_flit;
     stat.received_packet = recv_packet;
@@ -178,8 +168,11 @@ void Noc::stat_gather() {
     cout << stat;
 }
 
-void Noc::inj_and_ej(int cycle) {
 
+int Noc::cal_ring_num(int mesh_x) {
+    if(mesh_x == 0 || mesh_x == 1) return 0;
+    if(mesh_x == 2) return 2;
+    return 1 + 2 * (mesh_x - 2) + mesh_x - 1 + cal_ring_num(mesh_x - 2);
 }
 
 

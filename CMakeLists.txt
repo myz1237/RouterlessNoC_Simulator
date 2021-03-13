@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.5.1)
 project(NocSim)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -12,9 +12,7 @@ add_executable( NocSim
                 src/Node.cpp src/Node.h
                 src/Ring.cpp src/Ring.h
                 src/Noc.cpp src/Noc.h
-                src/LocalStatistic.cpp src/LocalStatistic.h
-                src/GlobalStatistic.cpp src/GlobalStatistic.h
-                src/Node.cpp src/Node.h
+        src/Node.cpp src/Node.h
                 src/ExbManager.cpp src/ExbManager.h
                 src/Flit.cpp src/Flit.h
                 src/RoutingTable.h

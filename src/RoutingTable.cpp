@@ -7,8 +7,8 @@ void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&t
         counter = 0;
         for(int j = 0; j< temp.size(); j++){
             //有的话 应该只能找到一个匹配
-            if(snifer.at(i)->node_id == temp.at(j)->node_id){
-                swap(snifer.at(i),temp.at(j), ring_id);
+            if(snifer[i]->node_id == temp[j]->node_id){
+                swap(snifer[i],temp[j], ring_id);
                 break;
             }
             counter++;
@@ -17,11 +17,11 @@ void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&t
         if(counter == temp.size()){
             //没找到 加入该节点
             RoutingTable *p = new RoutingTable;
-            p->node_id = snifer.at(i)->node_id;
+            p->node_id = snifer[i]->node_id;
             p->ring1_id = ring_id;
-            p->ring1_hop = snifer.at(i)->hop_count;
+            p->ring1_hop = snifer[i]->hop_count;
             p->ring2_id = ring_id;
-            p->ring2_hop = snifer.at(i)->hop_count;
+            p->ring2_hop = snifer[i]->hop_count;
             temp.push_back(p);
         }
 
