@@ -447,8 +447,6 @@ void Node::continue_inject_packet(int action) {
     //查询第一个为Injecting的Flit的位置
     //一定能查到 循环不可能走完的 i最大为长度减一
     for(flit_index = 0; flit_index < p->get_length(); ++flit_index){
-        PLOG_ERROR_IF(p->get_id() == 1265) << "Packet 1265 Flit" << flit_index
-        << " Status " << p->get_flit_status(flit_index);
         if(p->get_flit_status(flit_index) == Injecting){
             break;
         }

@@ -525,6 +525,8 @@ Util.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.cpp
 Flit.h
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
+GlobalParameter.h
+/home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.h
 
 /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.h
 vector

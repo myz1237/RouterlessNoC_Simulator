@@ -16,7 +16,7 @@ void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_
 
 void Injection::inject_new_packet(int ring_index) {
     //注意这个front返回是该元素的引用--也就是指针的引用 还是指针
-    Packet* p = new Packet(GlobalParameter::packet_id,m_local_id,m_packetinfo.front());
+    Packet* p = new Packet(m_local_id,m_packetinfo.front());
     //删除该packetinfor的对象和清空指针
 
     GlobalParameter::ring.at(m_curr_ring_id->at(ring_index))->attach(p);
@@ -58,17 +58,38 @@ Packetinfo *Injection::get_new_packetinfo() {
 }
 
 void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
+    //第一次
+    if(cycle == 0){
+        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
+    }
+    int length = m_ongoing_packetinfo->length;
+    int difference = cycle - m_time;
+    if(difference * GlobalParameter::injection_rate - length >= 0){
+        //改一下时间
+        m_ongoing_packetinfo->ctime = cycle;
+        //发送该infor
+        packetinfo_attach(m_ongoing_packetinfo, cycle);
+        //记录发送时间
+        m_time = cycle;
+        //再写一个packetinfo进来
+        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
+    }else{
+        //等待下一个cycle
+    }
+/*
     //到该产生包的周期了
     if(cycle % GlobalParameter::injection_cycle == 0){
         packetinfo_attach(traffic.traffic_generator(m_local_id,cycle),cycle);
-    }
+    }*/
 
 }
 
 Injection::Injection(int node_id, vector<int>* curr_ring_id):
         m_local_id(node_id), m_curr_ring_id(curr_ring_id){
-    m_packetinfo.reserve(10);
+    m_packetinfo.reserve(20);
     m_ongoing_packet = nullptr;
+    m_ongoing_packetinfo = nullptr;
+    m_time = 0;
     m_injecting_ring_index = -1;
 }
 
@@ -78,21 +99,22 @@ Injection::~Injection() {
     free_vetor<Packetinfo*>(m_packetinfo);
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;
-
+    m_ongoing_packetinfo = nullptr;
+    m_time = 0;
 }
 
 void Injection::packetinfo_attach(Packetinfo *info, int cycle){
     //如果这里检查src和dst相等 就把该packetinfo删除释放 也就是说该节点不会再产生任何packet
-    if(info->src == info->dst){
+/*    if(info->src == info->dst){
         delete info;
         info = nullptr;
         GlobalParameter::packet_id--;
         return;
-    }
+    }*/
     //src和dst不相等 添加该包信息
+    PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
+    << " in Cycle " << cycle;
     m_packetinfo.push_back(info);
-    PLOG_INFO << "Packetinfor " <<  GlobalParameter::packet_id <<" Generated at Node " << m_local_id
-              << " in Cycle " << cycle;
 }
 
 void Injection::print_packetinfo() {

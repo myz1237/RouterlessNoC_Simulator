@@ -42,7 +42,7 @@ void Noc::run() {
         }
 
     }
-    cout << GlobalParameter::injection_cycle << endl;
+    //cout << GlobalParameter::injection_cycle << endl;
     cout << GlobalParameter::packet_id << endl;
     cout << GlobalParameter::global_cycle << endl;
     //Statistics Output

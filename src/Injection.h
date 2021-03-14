@@ -40,6 +40,12 @@ public:
 private:
     int m_local_id;
 
+    //记录当前要发的packetinfo
+    Packetinfo* m_ongoing_packetinfo;
+
+    //记录上一次发送info的时间
+    int m_time;
+
     //记录当前packet要发送到的ring在该Node里对应的index
     int m_injecting_ring_index;
 

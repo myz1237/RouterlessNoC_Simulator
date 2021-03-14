@@ -11,6 +11,7 @@ class Packet;
 //Only used when control packets are sent, otherwise it is NULL
 
 typedef struct Packetinfo {
+    long id;
     int src;
     int dst;
     int length;
@@ -98,7 +99,7 @@ public:
     //Control Packet Constructor
     Packet(long packet_id, int length, int src, int ctime, bool finish = false);
     //Initialize packet by packetinfo
-    Packet(long packet_id, int src, Packetinfo *packetinfo, bool finish = false);
+    Packet(int src, Packetinfo *packetinfo, bool finish = false);
     ~Packet();
 
 private:

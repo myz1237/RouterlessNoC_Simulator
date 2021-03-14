@@ -1,4 +1,6 @@
 #include "Flit.h"
+#include "GlobalParameter.h"
+
 
 int Flit::calc_flit_latency() const {
     return m_atime-m_ctime;
@@ -47,21 +49,21 @@ Packet::Packet(long packet_id, int length, int src, int ctime, bool finish):
     this->attach(new Flit(packet_id, src,src,Control,0,ctime,0,src));
 }
 
-Packet::Packet(long packet_id, int src, Packetinfo *packetinfo, bool finish):m_length(packetinfo->length),
-        m_packet_id(packet_id),m_src_id(packetinfo->src),m_dst_id(packetinfo->dst),m_curr_node(src),
+Packet::Packet(int src, Packetinfo *packetinfo, bool finish):m_length(packetinfo->length),
+        m_packet_id(packetinfo->id),m_src_id(packetinfo->src),m_dst_id(packetinfo->dst),m_curr_node(src),
         m_ctime(packetinfo->ctime),m_finish(finish){
     m_flit.reserve(m_length);
-    this->attach(new Flit(packet_id, m_src_id,m_dst_id,Header,0,m_ctime,0,m_curr_node));
+    this->attach(new Flit(m_packet_id, m_src_id,m_dst_id,Header,0,m_ctime,0,m_curr_node));
     if(m_length == 2){
         //2-flit packet: Header+Tail
-        this->attach(new Flit(packet_id, m_src_id,m_dst_id,Tail,1,m_ctime,0,m_curr_node));
+        this->attach(new Flit(m_packet_id, m_src_id,m_dst_id,Tail,1,m_ctime,0,m_curr_node));
     } else if(m_length > 1){
         //For 3 or more flits packet
         //Add payload flit into the packet
         for(int i=1; i<=m_length-2; i++){
-            this->attach(new Flit(packet_id, m_src_id,m_dst_id,Payload,i,m_ctime,0,m_curr_node));
+            this->attach(new Flit(m_packet_id, m_src_id,m_dst_id,Payload,i,m_ctime,0,m_curr_node));
         }
-        this->attach(new Flit(packet_id, m_src_id,m_dst_id,Tail,m_length-1, m_ctime,0,m_curr_node));
+        this->attach(new Flit(m_packet_id, m_src_id,m_dst_id,Tail,m_length-1, m_ctime,0,m_curr_node));
     }
 }
 
@@ -88,9 +90,9 @@ ostream& operator<<(ostream& out, Packet& p){
 }
 
 ostream& operator<<(ostream& out, Packetinfo& p){
-    out << "Packet Information:" << endl
-    << "Source:" << p.src << "  " << "Destination:" << p.dst <<
-    "  "<< "Length:" << p.length << "  "<< "Creation Time:" << p.ctime << endl;
+    out << "Packet Information: " << "ID: " << p.id
+    << " Source:" << p.src << "  " << "Destination:" << p.dst <<
+    "  "<< "Length:" << p.length << "  "<< "Creation Time:" << p.ctime;
     return out;
 }
 
