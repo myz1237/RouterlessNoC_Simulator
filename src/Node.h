@@ -50,7 +50,7 @@ public:
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
 
     //Main Function
-    void run(int cycle);
+    void run(long cycle);
 
     //Stat
     void reset_stat();

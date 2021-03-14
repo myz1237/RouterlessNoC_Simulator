@@ -1,5 +1,5 @@
 #include "Node.h"
-void Node::run(int cycle) {
+void Node::run(long cycle) {
 
     int handled_ring_index;
     int index;

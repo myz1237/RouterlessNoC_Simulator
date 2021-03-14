@@ -8,7 +8,7 @@ mesh_dim_x: 8
 mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.04
+injection_rate: 0.02
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
