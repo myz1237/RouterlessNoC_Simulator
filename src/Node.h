@@ -85,7 +85,7 @@ private:
     //第一个存储本来的次序之后用来得到ring_id和single_buffer
     vector<pair<int, int>>m_ej_order;
     //记录已经注入的packetid，并存储期望的下一个的sequence
-    vector<pair<int, int>>m_ej_record;
+    vector<pair<long, int>>m_ej_record;
 
     void update_flit_stat(int latency);
     void update_packet_stat(int latency);
@@ -100,7 +100,7 @@ private:
     void reset_single_buffer();
     void get_ej_order();
     bool check_record(long packet_id, int seq);
-    void update_record(long packet_id, FlitType type);
+    void update_record(long packet_id, int type);
 
     static bool comp(pair<int, int>&a, pair<int, int>&b);
 
@@ -117,4 +117,5 @@ private:
 };
 ostream& operator<<(ostream& out, Node& node);
 ostream& operator<<(ostream& out, Stat& stat);
+bool operator==(const pair<long, int>& a, const pair<long, int>& b);
 #endif //NOCSIM_NODE_H

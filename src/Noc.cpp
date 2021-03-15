@@ -24,7 +24,9 @@ void Noc::run() {
     //Main Loop of the Simulation
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
         PLOG_INFO << "This is Cycle " << GlobalParameter::global_cycle;
+#if DEBUG
         packet_tracer();
+#endif
         //Move on-ring Packet Forward
         for(int k = 0; k < GlobalParameter::ring.size(); k++){
             GlobalParameter::ring[k]->update_curr_hop();

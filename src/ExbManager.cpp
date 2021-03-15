@@ -44,7 +44,9 @@ int ExbManager::get_exb_remaining_size(int exb_index) const {
 void ExbManager::push(int exb_index, Flit *flit) {
     m_exb[exb_index][++m_exb_status.at(exb_index)->indicator] = flit;
     flit->set_flit_type(Buffered);
+#if DEBUG
     Flit_tracer("Push", flit);
+#endif
 }
 
 void ExbManager::pop_and_push(int exb_index, Flit *flit) {
@@ -53,7 +55,9 @@ void ExbManager::pop_and_push(int exb_index, Flit *flit) {
     }*/
     //弹出第一个Flit到Ring上
     m_exb[exb_index].front()->set_flit_type(Routing);
+#if DEBUG
     Flit_tracer("Pop and Push", m_exb[exb_index].front());
+#endif
     //整个exb前进一个单元
     for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
         m_exb[exb_index][i-1] = m_exb[exb_index][i];
@@ -61,7 +65,9 @@ void ExbManager::pop_and_push(int exb_index, Flit *flit) {
     //放入新的flit
     m_exb[exb_index][m_exb_status[exb_index]->indicator] = flit;
     flit->set_flit_type(Buffered);
+#if DEBUG
     Flit_tracer("Pop and Push", flit);
+#endif
 }
 
 
@@ -71,7 +77,9 @@ void ExbManager::pop(int exb_index, int node_id) {
     }*/
     //弹出第一个Flit到Ring上
     m_exb[exb_index].front()->set_flit_type(Routing);
+#if DEBUG
     Flit_tracer("Pop ", m_exb[exb_index].front());
+#endif
     //整个exb前进一个单元
     for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
         m_exb[exb_index][i-1] = m_exb[exb_index][i];

@@ -6,7 +6,7 @@ Traffic::Traffic(int node_sum):m_node_sum(node_sum){}
 Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr_time) {
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
-    p->id = GlobalParameter::packet_id++;
+    p->id = GlobalParameter::packet_id;
     p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     p->ctime = curr_time;
 
@@ -14,6 +14,7 @@ Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr
     do{
         p->dst = random_int(0, max_id);
     }while(p->dst == p->src);
+    GlobalParameter::packet_id++;
     return p;
 }
 

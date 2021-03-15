@@ -105,13 +105,6 @@ Injection::~Injection() {
 }
 
 void Injection::packetinfo_attach(Packetinfo *info, int cycle){
-    //如果这里检查src和dst相等 就把该packetinfo删除释放 也就是说该节点不会再产生任何packet
-/*    if(info->src == info->dst){
-        delete info;
-        info = nullptr;
-        GlobalParameter::packet_id--;
-        return;
-    }*/
     //src和dst不相等 添加该包信息
     PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
     << " in Cycle " << cycle;

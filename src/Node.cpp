@@ -1,8 +1,9 @@
 #include "Node.h"
 void Node::run(long cycle) {
-
+#if DEBUG
     PLOG_INFO << "Node " << m_node_id << " First Print ";
     m_exb_manager->Exb_tracer();
+#endif
     int handled_ring_index;
     int index;
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
@@ -24,9 +25,11 @@ void Node::run(long cycle) {
     //不要应该也可用做到
     reset_single_buffer();
     vector<pair<int,int>>().swap(m_ej_order);
+#if DEBUG
     PLOG_INFO << "Node " << m_node_id << " Second Print ";
     PLOG_INFO << "Node " << m_node_id << " EXB Tracer";
     m_exb_manager->Exb_tracer();
+#endif
 }
 
 void Node::reset_stat() {
@@ -81,7 +84,7 @@ Node::~Node() {
     clear_vector<Flit*>(m_single_buffer);
     free_vetor<RoutingTable*>(m_table);
     vector<pair<int, int>>().swap(m_ej_order);
-    vector<pair<int, int>>().swap(m_ej_record);
+    vector<pair<long, int>>().swap(m_ej_record);
 }
 
 void Node::update_flit_stat(int latency) {
@@ -120,7 +123,7 @@ void Node::ejection(Flit *flit, int ring_id) {
 
 
     if (type == Control){
-        ControlFlit* controlFlit = static_cast<ControlFlit *>(flit);
+        //ControlFlit* controlFlit = static_cast<ControlFlit *>(flit);
         update_routing_table(flit->get_flit_routing(),m_table, ring_id);
         update_packet_stat(flit->calc_flit_latency());
 
@@ -179,7 +182,7 @@ void Node::reset_single_buffer() {
 }
 
 void Node::get_ej_order() {
-    int tail_index, payload_index, header_index = 0;
+    int tail_index = 0, payload_index = 0, header_index = 0;
     vector<pair<int,int>> ctime(m_single_buffer.size());
     for(int i = 0;i < ctime.size(); i++){
         //代表这是index为i的ring上的single flit 用这个index找到对应的ring_id
@@ -206,6 +209,8 @@ void Node::get_ej_order() {
                 }else{
                     ctime[i].second = -1;
                 }
+            }else if(type == Control){
+                ctime[i].second = m_single_buffer[i]->get_flit_ctime();
             }else{
                 //Header
                 ctime[i].second = 2;
@@ -226,17 +231,17 @@ void Node::get_ej_order() {
     int index;
     for(int j = 0;j < header_index; j++){
         index = ctime[j].first;
-        ctime[j].second = m_single_buffer[j]->get_flit_ctime();
+        ctime[j].second = m_single_buffer[index]->get_flit_ctime();
     }
     sort(ctime.begin(), ctime.begin()+header_index, comp);
     for(int k = header_index; k < payload_index; k++){
         index = ctime[k].first;
-        ctime[k].second = m_single_buffer[k]->get_flit_ctime();
+        ctime[k].second = m_single_buffer[index]->get_flit_ctime();
     }
     sort(ctime.begin()+header_index, ctime.begin()+header_index+payload_index, comp);
     for(int q = payload_index; q < tail_index; q++){
         index = ctime[q].first;
-        ctime[q].second = m_single_buffer[q]->get_flit_ctime();
+        ctime[q].second = m_single_buffer[index]->get_flit_ctime();
     }
     sort(ctime.begin()+header_index+payload_index, ctime.begin()+header_index+payload_index+tail_index, comp);
 
@@ -246,10 +251,13 @@ void Node::get_ej_order() {
     //把前ej_port_nu 需要注入的ctime设定为-3作区分
     //取二者的小值 防止ej比总的buffer数量大 造成访问不到
     int edge = min<int>(GlobalParameter::ej_port_nu, m_single_buffer.size());
-    for(int t = 0; t < edge; t++){
-        if(ctime[t].second >= 0){
+    index = 0;
+    for(int t = 0; t < ctime.size(); t++){
+        if(ctime[t].second >= 0 && index < edge){
             //TODO 记得
             ctime[t].second = -3;
+            index++;
+            if(index == edge) break;
         }
     }
     m_ej_order.swap(ctime);
@@ -257,21 +265,24 @@ void Node::get_ej_order() {
 }
 
 bool Node::check_record(long packet_id, int seq){
-    vector<pair<int, int>>::iterator it = find(m_ej_record.begin(),
+    vector<pair<long, int>>::iterator it = find(m_ej_record.begin(),
                                                m_ej_record.end(),make_pair(packet_id,seq));
     if(it == m_ej_record.end()){
+        //没找到
         return false;
     }else{
         return true;
     }
 }
 
-void Node::update_record(long packet_id, FlitType type){
+void Node::update_record(long packet_id, int type){
+    int i;
     if(type == Header){
+        //注册新的packet记录
         m_ej_record.emplace_back(packet_id, 1);
         return;
     }
-    for(int i = 0; i < m_ej_record.size(); i++){
+    for(i = 0; i < m_ej_record.size(); i++){
         if(m_ej_record[i].first == packet_id){
             if(type == Tail){
                 m_ej_record.erase(m_ej_record.begin()+i);
@@ -282,6 +293,9 @@ void Node::update_record(long packet_id, FlitType type){
             return;
         }
     }
+    if(i == m_ej_record.size())
+        cerr << "Error in Recording" << endl;
+
 }
 
 bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
@@ -657,4 +671,7 @@ ostream& operator<<(ostream& out, Node& node){
             << "   " << node.m_table[j]->ring2_hop << endl;
     }
     return out;
+}
+bool operator==(const pair<long, int>& a, const pair<long, int>& b){
+    return a.first == b.first && a.second == b.second;
 }

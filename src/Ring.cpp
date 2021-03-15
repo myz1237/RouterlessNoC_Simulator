@@ -40,6 +40,7 @@ void Ring::attach(Packet *p) {
 }
 
 void Ring::dettach(long packet_id) {
+    //取消前要不要检查各个flit是不是已经injection了
     for(vector<Packet*>::iterator iter = m_packet.begin(); iter != m_packet.end(); iter++){
         if((*iter)->get_id() == packet_id){
             delete *iter;
