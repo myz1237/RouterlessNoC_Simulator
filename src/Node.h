@@ -100,6 +100,7 @@ private:
     void reset_single_buffer();
     void get_ej_order();
     bool check_record(long packet_id, int seq);
+    void update_record(long packet_id, FlitType type);
 
     static bool comp(pair<int, int>&a, pair<int, int>&b);
 

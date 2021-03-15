@@ -118,8 +118,6 @@ void Node::ejection(Flit *flit, int ring_id) {
     flit->set_atime(GlobalParameter::global_cycle);
     update_flit_stat(flit->calc_flit_latency());
 
-    PLOG_DEBUG_IF(type == Payload) << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
-                                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
 
     if (type == Control){
         ControlFlit* controlFlit = static_cast<ControlFlit *>(flit);
@@ -128,6 +126,7 @@ void Node::ejection(Flit *flit, int ring_id) {
 
         //清除该Packet
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+        return;
     }else if (type == Header){
         //单个flit的Packet
         //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
@@ -140,15 +139,24 @@ void Node::ejection(Flit *flit, int ring_id) {
 
             //清除该packet
             GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+            return;
         }else{
             PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Header Flit Arrived at Node "
                        << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+            //注册该Packet 下一个seq应该是自己的+1
+            update_record(flit->get_packet_id(), type);
+            return;
         }
-    }else if (type == Tail){
-
+    } else if(type == Payload){
+        PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
+                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
+        update_record(flit->get_packet_id(), type);
+        return;
+    } else if (type == Tail){
         PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Tail Flit Arrived at Node "
                    << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
         update_packet_stat(flit->calc_flit_latency());
+        update_record(flit->get_packet_id(), type);
         //清除该packet
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
     }
@@ -171,6 +179,7 @@ void Node::reset_single_buffer() {
 }
 
 void Node::get_ej_order() {
+    int tail_index, payload_index, header_index = 0;
     vector<pair<int,int>> ctime(m_single_buffer.size());
     for(int i = 0;i < ctime.size(); i++){
         //代表这是index为i的ring上的single flit 用这个index找到对应的ring_id
@@ -184,7 +193,8 @@ void Node::get_ej_order() {
             if(type == Tail){
                 if(check_record(packet_id,seq)){
                     //确实有该record
-                    ctime[i].second = 2;
+                    ctime[i].second = 0;
+                    tail_index++;
                 }else{
                     //说明前面的flit也没有注入 转发走
                     ctime[i].second = -1;
@@ -192,12 +202,14 @@ void Node::get_ej_order() {
             }else if(type == Payload){
                 if(check_record(packet_id,seq)){
                     ctime[i].second = 1;
+                    payload_index++;
                 }else{
                     ctime[i].second = -1;
                 }
             }else{
                 //Header
-                ctime[i].second = 0;
+                ctime[i].second = 2;
+                header_index++;
             }
         } else if(m_single_buffer[i] != nullptr &&
                 m_single_buffer[i]->get_flit_dst() != m_node_id){
@@ -208,17 +220,36 @@ void Node::get_ej_order() {
             ctime[i].second = -2;
         }
     }
-    //从大到小排列
+    //从大到小
     sort(ctime.begin(),ctime.end(),comp);
+    //Header, Payload, Tail分段排序
+    int index;
+    for(int j = 0;j < header_index; j++){
+        index = ctime[j].first;
+        ctime[j].second = m_single_buffer[j]->get_flit_ctime();
+    }
+    sort(ctime.begin(), ctime.begin()+header_index, comp);
+    for(int k = header_index; k < payload_index; k++){
+        index = ctime[k].first;
+        ctime[k].second = m_single_buffer[k]->get_flit_ctime();
+    }
+    sort(ctime.begin()+header_index, ctime.begin()+header_index+payload_index, comp);
+    for(int q = payload_index; q < tail_index; q++){
+        index = ctime[q].first;
+        ctime[q].second = m_single_buffer[q]->get_flit_ctime();
+    }
+    sort(ctime.begin()+header_index+payload_index, ctime.begin()+header_index+payload_index+tail_index, comp);
 
+    //翻转一下
+    reverse(ctime.begin(),ctime.end());
 
     //把前ej_port_nu 需要注入的ctime设定为-3作区分
     //取二者的小值 防止ej比总的buffer数量大 造成访问不到
     int edge = min<int>(GlobalParameter::ej_port_nu, m_single_buffer.size());
-    for(int j = 0; j < edge; j++){
-        if(ctime[j].second >= 0){
+    for(int t = 0; t < edge; t++){
+        if(ctime[t].second >= 0){
             //TODO 记得
-            ctime[j].second = -3;
+            ctime[t].second = -3;
         }
     }
     m_ej_order.swap(ctime);
@@ -232,6 +263,24 @@ bool Node::check_record(long packet_id, int seq){
         return false;
     }else{
         return true;
+    }
+}
+
+void Node::update_record(long packet_id, FlitType type){
+    if(type == Header){
+        m_ej_record.emplace_back(packet_id, 1);
+        return;
+    }
+    for(int i = 0; i < m_ej_record.size(); i++){
+        if(m_ej_record[i].first == packet_id){
+            if(type == Tail){
+                m_ej_record.erase(m_ej_record.begin()+i);
+                return;
+            }
+            //指向下一个flit
+            m_ej_record[i].second++;
+            return;
+        }
     }
 }
 
