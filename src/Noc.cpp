@@ -40,12 +40,10 @@ void Noc::run() {
 
         if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
             //Warmup 结束 清空统计数据
-            GlobalParameter::packet_id = 0;
             reset_stat();
         }
 
     }
-    //cout << GlobalParameter::injection_cycle << endl;
     cout << GlobalParameter::packet_id << endl;
     cout << GlobalParameter::global_cycle << endl;
     //Statistics Output

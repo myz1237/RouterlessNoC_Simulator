@@ -25,15 +25,13 @@ LatencyType GlobalParameter::latency_type;
 int GlobalParameter::sim_detail;
 int GlobalParameter::exb_num;
 
-int GlobalParameter::injection_cycle;
-//vector<RoutingTable*> GlobalParameter::routing_table;
 vector<Ring*> GlobalParameter::ring;
 Traffic* GlobalParameter::traffic;
 RingAlgorithms* GlobalParameter::ring_algorithm;
 int GlobalParameter::exb_size;
 
 //记录当前发送packet的id号 全局唯一性
-long GlobalParameter::packet_id = 0;
+volatile long GlobalParameter::packet_id = 0;
 
 long GlobalParameter::global_cycle = 0;
 

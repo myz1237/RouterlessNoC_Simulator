@@ -49,8 +49,6 @@ void configure() {
 
     GlobalParameter::sim_detail = readParam<int>(conf,"sim_detail",0);
 
-    GlobalParameter::injection_cycle = 1/(double)GlobalParameter::injection_rate;
-
     if(ring_strategy == "IMR") GlobalParameter::ring_strategy = IMR;
     else if(ring_strategy == "RLrec") GlobalParameter::ring_strategy = RLrec;
 

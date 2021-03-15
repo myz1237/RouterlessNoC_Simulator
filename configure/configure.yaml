@@ -8,7 +8,7 @@ mesh_dim_x: 8
 mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in flit per cycle per node
-injection_rate: 0.225
+injection_rate: 0.005
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
@@ -73,7 +73,7 @@ routing_strategy: Shortest
 #Hotspot
 #SPLASH
 #PARSEC
-traffic_type: Uniform
+traffic_type: Hotspot
 #Only available when Hopspot is selected.
 #Type Node_ID: possibility
 hotspot:
@@ -90,7 +90,7 @@ hotspot:
 #Period for run-time simulation, expressed in cycle
 sim_time: 10000
 #Period for warm-up, expressed in cycle
-sim_warmup: 1000
+sim_warmup: 2000
 #Simulation result type:
 #Throughput--drain NoC when reaching run-time period. Some packets may not be injected, ejected or forwarded
 #Latency--drain NoC until all ongoing packets have been ejected into nodes.

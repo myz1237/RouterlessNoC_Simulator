@@ -75,16 +75,11 @@ namespace GlobalParameter{
     extern LatencyType latency_type;
     extern int sim_detail;
 
-    //GlobalParameter used during the project
-    //injection_cycle = ceil(1/injection_rate)
-    extern int injection_cycle;
-    //static vector<RoutingTable*>routing_table;
-    //static vector<Ring*>ring;
     extern Traffic* traffic;
     extern RingAlgorithms* ring_algorithm;
     //The size of buffer for each EXB
     extern int exb_size;
-    extern long packet_id;
+    extern volatile long packet_id;
     extern vector<Ring*> ring;
     extern long global_cycle;
     extern int error;
