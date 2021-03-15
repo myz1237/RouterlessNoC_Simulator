@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="NocSim" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="NocSim">
+         <Option output="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/NocSim" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/lib/plog/include" />
+            <Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/lib/yaml-cpp/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 NocSim" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="NocSim/fast">
+         <Option output="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/NocSim" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/lib/plog/include" />
+            <Add directory="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/lib/yaml-cpp/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 NocSim/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/myz1237/Desktop/RouterlessNoC_Simulator-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ConfigureManager.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ConfigureManager.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ExbManager.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ExbManager.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Flit.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Flit.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/GlobalParameter.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/GlobalParameter.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Injection.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Injection.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/KnuthRngWrapper.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Main.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Noc.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Noc.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Node.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Node.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/RandomUtil.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/RandomUtil.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Ring.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Ring.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/RoutingTable.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/RoutingTable.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Traffic.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Traffic.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/Util.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ringalgorithm/RingAlgorithms.cpp">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/src/ringalgorithm/RingAlgorithms.h">
+         <Option target="NocSim"/>
+      </Unit>
+      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-main/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>
