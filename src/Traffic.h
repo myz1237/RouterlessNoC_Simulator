@@ -9,8 +9,9 @@ struct Packetinfo;
 class Traffic{
 public:
     int m_node_sum;
-    int get_randomsize() const;
+    int random_2size() const;
     Traffic(int node_sum);
+    ~Traffic(){}
     virtual Packetinfo* traffic_generator(const int local_id, const int curr_time) = 0;
 };
 class TrafficUniform: public Traffic{
@@ -25,12 +26,14 @@ private:
     int m_shift;
     inline void generate_shift();
 public:
+    ~TrafficTranspose(){}
     TrafficTranspose(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 };
 
 class TrafficBitReverse:public Traffic{
 public:
+    ~TrafficBitReverse(){}
     TrafficBitReverse(int nodeSum);
     Packetinfo* traffic_generator(int local_id, const int curr_time) override;
 
@@ -42,6 +45,7 @@ private:
 
 class TrafficHotspot:public Traffic{
 public:
+    ~TrafficHotspot(){}
     TrafficHotspot(int nodeSum);
     Packetinfo* traffic_generator(const int local_id, const int curr_time) override;
 private:

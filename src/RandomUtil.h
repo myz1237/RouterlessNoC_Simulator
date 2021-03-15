@@ -5,13 +5,16 @@
 #include <assert.h>
 // interface to Knuth's RANARRAY RNG
 void   ran_start(long seed);
-long   ran_next();
+long   ran_next( );
+void   ranf_start(long seed);
+double ranf_next( );
 
 inline void random_seed(long seed) {
     ran_start(seed);
+    ranf_start(seed);
 }
 
-inline unsigned long random_long() {
+inline unsigned long next_random_long() {
     return ran_next();
 }
 
@@ -20,5 +23,14 @@ inline int random_int(int min, int max) {
     return (ran_next() % (max-min+1)+min);
 }
 
+// Returns a random floating-point value in the rage [0,1]
+inline double next_random_double(  ) {
+    return ranf_next( );
+}
+
+// Returns a random floating-point value in the rage [0,max]
+inline double random_double( double max ) {
+    return ( ranf_next( ) * max );
+}
 
 #endif //NOCSIM_RANDOMUTIL_H

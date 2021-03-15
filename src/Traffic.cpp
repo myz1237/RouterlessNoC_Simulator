@@ -7,7 +7,11 @@ Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
     p->id = GlobalParameter::packet_id;
-    p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+    if(GlobalParameter::method_size_generator){
+        p->length = random_2size();
+    }else{
+        p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+    }
     p->ctime = curr_time;
 
     int max_id = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x - 1 ;
@@ -25,7 +29,13 @@ Packetinfo* TrafficTranspose::traffic_generator(const int local_id, const int cu
     int const mask_hi = mask_lo << m_shift;
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
-    p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+
+    if(GlobalParameter::method_size_generator){
+        p->length = random_2size();
+    }else{
+        p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+    }
+
     p->ctime = curr_time;
     p->dst = (((local_id >> m_shift) & mask_lo) | ((local_id << m_shift) & mask_hi));
     p->id = GlobalParameter::packet_id++;
@@ -53,7 +63,12 @@ Packetinfo* TrafficBitReverse::traffic_generator(int local_id, const int curr_ti
     int dst = 0;
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
-    p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+
+    if(GlobalParameter::method_size_generator){
+        p->length = random_2size();
+    }else{
+        p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+    }
 
     p->ctime = curr_time;
 
@@ -72,7 +87,13 @@ Packetinfo* TrafficHotspot::traffic_generator(const int local_id, const int curr
     Packetinfo *p = new Packetinfo;
 
     p->src = local_id;
-    p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+
+    if(GlobalParameter::method_size_generator){
+        p->length = random_2size();
+    }else{
+        p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+    }
+
     p->ctime = curr_time;
     p->id = GlobalParameter::packet_id++;
     p->dst = get_dst();
@@ -109,17 +130,13 @@ int TrafficHotspot::get_dst() {
 
 TrafficBitReverse::TrafficBitReverse(int nodeSum) : Traffic(nodeSum) {}
 
-int Traffic::get_randomsize() const{
-    // 1/(s_to_l+1)的概率产生长packet 其余产生短包
-    int sum = GlobalParameter::short_packet_ratio + GlobalParameter::long_packet_ratio;
-    double p = (double)GlobalParameter::short_packet_ratio/sum;
-    double rnd = rand() / (double) RAND_MAX;
-    //出在long的范围内[0,p]
-    if(rnd >= 0 && rnd < p){
-        return GlobalParameter::long_packet_size;
-    } else {
-    //出在[p,1) 随机产生2到GlobalParameter::long_packet_size
+int Traffic::random_2size() const{
+    double sum = GlobalParameter::short_packet_ratio + GlobalParameter::long_packet_ratio;
+    double p = GlobalParameter::short_packet_ratio / sum;
+    if(random_double(1) < p){
         return GlobalParameter::short_packet_size;
+    }else{
+        return GlobalParameter::long_packet_size;
     }
 }
 

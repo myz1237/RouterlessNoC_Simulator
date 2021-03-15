@@ -26,8 +26,10 @@ public:
     //仅用于初始化injection，向所有穿过该节点的ring发送一个flit的包
     void controlpacket_generator(int cycle,vector<int>& curr_ring_id);
     void inject_new_packet(int ring_index);
-    bool is_packetinfo_empty();
-    Packetinfo* get_new_packetinfo();
+    bool is_packetinfo_empty()const;
+    bool is_injection_interrupted()const;
+    void set_interrupt(bool status);
+    Packetinfo* get_new_packetinfo()const;
     void packetinfo_generator(int cycle, Traffic& traffic);
 
     //Only for test
@@ -48,6 +50,9 @@ private:
 
     //记录当前packet要发送到的ring在该Node里对应的index
     int m_injecting_ring_index;
+
+    //Interrupt Injection
+    bool m_interrupt;
 
     //Extension Buffer Interrupt
 

@@ -1,5 +1,5 @@
 #This is the configure file for NocSim
-#You may create a new file for your own routerless NoC
+#You may create a new file for your own Routerless NoC
 
 #The size of your NoC. Mesh topology is applied
 #Please note that these two parameters must be even.
@@ -8,12 +8,17 @@ mesh_dim_x: 8
 mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in flit per cycle per node
-injection_rate: 0.005
+injection_rate: 0.05
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
 short_packet_size: 1
+#Method of size generation
+#0-->generate size between short and long
+#1-->only generate short and long, two size packet.
+method_size_generator: 1
 
+#If choosing 1 above, please fill ratio of short to long
 short_ratio: 8
 long_ratio: 2
 
@@ -43,7 +48,7 @@ ring_constraint: 6
 #Available strategy:
 #Max--Use the max size of packet as buffer size. Isolated buffer
 #Avg--Use average size of packet as buffer size. Isolated buffer
-exb_strategy: Max
+exb_strategy: Avg
 exb_num: 2
 
 #Input port size configuration, measured by flit
@@ -73,7 +78,7 @@ routing_strategy: Shortest
 #Hotspot
 #SPLASH
 #PARSEC
-traffic_type: Hotspot
+traffic_type: Transpose
 #Only available when Hopspot is selected.
 #Type Node_ID: possibility
 hotspot:
@@ -88,9 +93,9 @@ hotspot:
 
 #Simulation parameters
 #Period for run-time simulation, expressed in cycle
-sim_time: 10000
+sim_time: 1000
 #Period for warm-up, expressed in cycle
-sim_warmup: 2000
+sim_warmup: 100
 #Simulation result type:
 #Throughput--drain NoC when reaching run-time period. Some packets may not be injected, ejected or forwarded
 #Latency--drain NoC until all ongoing packets have been ejected into nodes.

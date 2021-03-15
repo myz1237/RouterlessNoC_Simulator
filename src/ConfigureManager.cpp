@@ -22,20 +22,19 @@ void configure() {
     GlobalParameter::mesh_dim_x = readParam<int>(conf,"mesh_dim_x",2);
     GlobalParameter::mesh_dim_y = readParam<int>(conf,"mesh_dim_y",2);
     GlobalParameter::injection_rate = readParam<double>(conf,"injection_rate",0.02);;
+
     GlobalParameter::long_packet_size = readParam<int>(conf,"long_packet_size",5);
     GlobalParameter::short_packet_size = readParam<int>(conf,"short_packet_size",1);
+    GlobalParameter::method_size_generator = readParam<int>(conf,"method_size_generator",0);
     GlobalParameter::short_packet_ratio = readParam<int>(conf,"short_ratio",8);
     GlobalParameter::long_packet_ratio = readParam<int>(conf,"long_ratio",2);
-    GlobalParameter::flit_size = readParam<int>(conf,"flit_size",256);
-    //TODO handle relationship between bandwidth and flit_size
-    GlobalParameter::bandwidth = readParam<int>(conf,"bandwidth",256);
+
     string ring_strategy = readParam<string>(conf,"ring_strategy","RLrec");
 
     //GlobalParameter::ring_constraint = readParam<int>(conf,"ring_constraint",6);
 
     string exb_strategy = readParam<string>(conf,"exb_strategy","Max");
     GlobalParameter::exb_num = readParam<int>(conf,"exb_num",2);
-    GlobalParameter::in_port_size = readParam<int>(conf,"in_port_size",1);
     GlobalParameter::ej_port_nu = readParam<int>(conf,"ej_port_nu",1);
     string ej_strategy = readParam<string>(conf,"ej_strategy","Oldest");
     string routing_strategy = readParam<string>(conf, "routing_strategy", "Shortest");
@@ -67,20 +66,16 @@ void configure() {
     else if(traffic_type == "BitReverse") GlobalParameter::traffic_type = BitReverse;
     else if(traffic_type == "Hotspot") GlobalParameter::traffic_type = Hotspot;
 
-    if(sim_type == "Latency") GlobalParameter::sim_type = Latency;
-    else if(sim_type == "Throughput") GlobalParameter::sim_type = Throughput;
-
-    if(latency_type == "Packets") GlobalParameter::latency_type = Packets;
-    else if(latency_type == "Flits") GlobalParameter::latency_type = Flits;
-    else if(latency_type == "Both") GlobalParameter::latency_type = Both;
-
     //Decide exb parameters according to exb strategy
     switch (GlobalParameter::exb_strategy) {
         case Max:
             GlobalParameter::exb_size = GlobalParameter::long_packet_size;
+            GlobalParameter::enable_interrupt = false;
             break;
         case Avg:
+            //GlobalParameter::exb_size = GlobalParameter::long_packet_size - 1;
             GlobalParameter::exb_size = get_exb_size(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+            GlobalParameter::enable_interrupt = true;
             break;
 
     }

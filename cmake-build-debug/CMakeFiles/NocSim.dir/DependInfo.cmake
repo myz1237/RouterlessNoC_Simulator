@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/GlobalParameter.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o"
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Injection.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/Injection.cpp.o"
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
+  "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Main.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/Main.cpp.o"
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Noc.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/Noc.cpp.o"
   "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Node.cpp" "/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/src/Node.cpp.o"

@@ -41,7 +41,7 @@ void Injection::inject_new_packet(int ring_index) {
     p = nullptr;
 }
 
-bool Injection::is_packetinfo_empty() {
+bool Injection::is_packetinfo_empty()const {
     //empty返回1 否则0
     if(m_packetinfo.empty()){
         return true;
@@ -50,7 +50,16 @@ bool Injection::is_packetinfo_empty() {
     }
 }
 
-Packetinfo *Injection::get_new_packetinfo() {
+bool Injection::is_injection_interrupted()const {
+    return m_interrupt;
+}
+
+void Injection::set_interrupt(bool status) {
+    m_interrupt = status;
+}
+
+
+Packetinfo *Injection::get_new_packetinfo()const {
     return m_packetinfo.front();
 }
 
@@ -90,6 +99,7 @@ Injection::Injection(int node_id, vector<int>* curr_ring_id):
         m_local_id(node_id), m_curr_ring_id(curr_ring_id){
     m_ongoing_packet = nullptr;
     m_ongoing_packetinfo = nullptr;
+    m_interrupt = false;
     m_time = 0;
     m_injecting_ring_index = -1;
 }
@@ -116,3 +126,6 @@ void Injection::print_packetinfo() {
         cout << "Node " << m_local_id << "   " << *m_packetinfo[i];
     }
 }
+
+
+

@@ -7,11 +7,12 @@
 #include <plog/Appenders/ColorConsoleAppender.h>
 #define DEBUG 0
 
-//TODO Ejection的时候会不会发生 前面的flit没有竞争成功注入 后面的flit注入呢
 int main() {
     //Log System Initial
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
+
+    random_seed(time(NULL));
 
     //Read Parameters from Yaml File
     configure();
@@ -23,5 +24,4 @@ int main() {
     delete GlobalParameter::traffic;
     c = nullptr;
     GlobalParameter::traffic = nullptr;
-    cout<< GlobalParameter::error<<endl;
 }

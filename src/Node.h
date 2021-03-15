@@ -77,6 +77,8 @@ private:
     Injection* m_inject;
     vector<int>m_curr_ring_id;//存储穿过该node的ringid号
 
+
+
     //TODO 暂时不用ej_link 等后面引入为某个packet留link 先简单实现一下
     //vector<bool>m_ej_link;
     vector<int>m_is_ej_idle;

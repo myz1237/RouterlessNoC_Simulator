@@ -55,15 +55,12 @@ namespace GlobalParameter{
     extern double injection_rate;
     extern int long_packet_size;
     extern int short_packet_size;
+    extern int method_size_generator;
     extern int long_packet_ratio;
     extern int short_packet_ratio;
-    extern int flit_size;
-    extern int bandwidth;
     extern RingStrategy ring_strategy;
-    //extern int ring_constraint;
     extern ExbStrategy exb_strategy;
     extern int exb_num;
-    extern int in_port_size;
     extern int ej_port_nu;
     extern EjStrategy ej_strategy;
     extern RoutingStrategy routing_strategy;
@@ -71,17 +68,15 @@ namespace GlobalParameter{
     extern vector<pair<int, int>>hotspot;
     extern int sim_time;
     extern int sim_warmup;
-    extern SimType sim_type;
-    extern LatencyType latency_type;
     extern int sim_detail;
 
     extern Traffic* traffic;
     extern RingAlgorithms* ring_algorithm;
-    //The size of buffer for each EXB
     extern int exb_size;
-    extern volatile long packet_id;
+    extern long packet_id;
     extern vector<Ring*> ring;
     extern long global_cycle;
+    extern bool enable_interrupt;
     extern int error;
 }
 
