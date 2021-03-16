@@ -16,9 +16,10 @@ int main() {
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
 
+    /*Set system time as a seed*/
     //random_seed(time(NULL));
 
-    //Read Parameters from Yaml File
+    /*Read Parameters from Yaml File*/
     configure();
 
     Noc* c = new Noc;

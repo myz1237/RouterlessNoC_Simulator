@@ -1,49 +1,51 @@
 
 #include "Noc.h"
 void Noc::run() {
+    /*Record the number of receive packets during the warm_up stage*/
     long warm_up_packet = 0;
-    initial();
 
+    initial();
     PLOG_INFO << "Routing Table has been generated...";
     reset_stat();
+
+
     if(GlobalParameter::sim_detail){
-        //Output the Routing Table of Each Node
+        /*Output the Routing Table of Each Node*/
         for(int i = 0; i< m_node.size(); i++){
             cout << *m_node[i];
         }
         cout << endl << endl;
-        //Output the Statistics of Each Node
-        for(int j = 0; j< m_node.size(); j++){
-            cout << "Node" << m_node[j]->get_node_id() << ":" << endl;
-            m_node[j]->node_info_output();
-        }
     }
-    //Reset Packet ID
-    GlobalParameter::packet_id = 0;
 
+    /*Clear variables*/
+    GlobalParameter::packet_id = 0;
     GlobalParameter::global_cycle = 0;
-    //Main Loop of the Simulation
+
+    /*Main Loop of the Simulation*/
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
+
         PLOG_INFO << "This is Cycle " << GlobalParameter::global_cycle;
 #if DEBUG
         packet_tracer();
 #endif
-        //Move on-ring Packet Forward
+        /*Move on-ring Packets Forward*/
         for(int k = 0; k < GlobalParameter::ring.size(); k++){
             GlobalParameter::ring[k]->update_curr_hop();
         }
 
+        /*Receive incoming packets, injection, ejection and buffered*/
         for(int q = 0; q < m_node.size(); q++){
             m_node[q]->run(GlobalParameter::global_cycle);
         }
 
+        /*Warm_up stage ends, clear statistics data*/
         if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
-            //Warmup 结束 清空统计数据
             reset_stat();
             warm_up_packet = GlobalParameter::packet_id + 1;
             left_packet_num_gather();
             PLOG_INFO << "Warm Up Ends!";
         }
+
         GlobalParameter::global_cycle++;
     }
     cout << endl << endl;
@@ -52,13 +54,11 @@ void Noc::run() {
     cout << "\t" << "Total Warm up cycle: " << GlobalParameter::sim_warmup << endl;
     cout << "\t" << "Total Sim cycle " << GlobalParameter::sim_time - GlobalParameter::sim_warmup << endl;
     stat_gather();
-/*    for(int q = 0; q < m_node.size(); q++){
-        m_node[q]->m_inject->print_packetinfo();
-    }*/
+
 }
 
 Noc::Noc() {
-    //初始化Node对象
+
     m_size = GlobalParameter::mesh_dim_x;
     m_node.resize(m_size*m_size);
     for(int i = 0; i < m_size*m_size; i++){
@@ -67,9 +67,11 @@ Noc::Noc() {
     m_tuple.reserve(cal_ring_num(m_size));
     GlobalParameter::ring.resize(cal_ring_num(m_size));
     packet_num_correction = 0;
+
 }
 
 Noc::~Noc() {
+
     free_vetor<Node*>(m_node);
     delete GlobalParameter::ring_algorithm;
     delete GlobalParameter::traffic;

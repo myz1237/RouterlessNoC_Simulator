@@ -2,30 +2,31 @@
 
 
 void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_id) {
-    //这里实际上没有遵守cycle的概念 只是为了方便 同时向所有穿过该node的ring注入control包
     Packet* p;
+    /*Loop to access all id of rings across this node*/
     for(int i = 0; i < curr_ring_id.size(); i++){
+        /*Call Control packet constructor*/
         p = new Packet(GlobalParameter::packet_id,1,m_local_id,cycle);
-        //将该包注册到所有的ring上
+        /*Register this packet on the ring*/
         GlobalParameter::ring[curr_ring_id[i]]->attach(p);
-        //不用通知EXB EXB不用动就好 不会有碰撞
+        /*Change status, move to next node*/
         p->set_flit_status(0, Routing);
     }
     p = nullptr;
 }
 
 void Injection::inject_new_packet(int ring_index) {
-    //注意这个front返回是该元素的引用--也就是指针的引用 还是指针
+
     Packet* p = new Packet(m_local_id,m_packetinfo.front());
-    //删除该packetinfor的对象和清空指针
+
     GlobalParameter::ring.at(m_curr_ring_id->at(ring_index))->attach(p);
 
     p->set_flit_status(0, Routing);
 
     if(p->get_length() != 1){
-        //提交给m_ongoing_packet注入
+        /*Store the pointer of this long packet*/
         m_ongoing_packet = p;
-        //设置之后要去的ringindex
+        /*Record which ring_index it used*/
         m_injecting_ring_index = ring_index;
         PLOG_DEBUG << "Long Packet " << p->get_id() << " with "<< p->get_length()
                    <<" Flit Complete injection Flit 0 at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
@@ -33,7 +34,7 @@ void Injection::inject_new_packet(int ring_index) {
 
     delete m_packetinfo.front();
     m_packetinfo.front() = nullptr;
-    //TODO 小心这里可能清不掉全部的Packetinfo
+    /*Injection Complete, delete the first element and move forward the queue*/
     m_packetinfo.erase(m_packetinfo.begin());
 
     PLOG_DEBUG_IF(p->get_length() == 1) << "Single Packet " << p->get_id()
@@ -42,35 +43,29 @@ void Injection::inject_new_packet(int ring_index) {
 }
 
 void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
-    //第一次
+    /*First Cycle, the entrance of the injection loop*/
     if(cycle == 0){
         m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
     }
     int length = m_ongoing_packetinfo->length;
     int difference = cycle - m_time;
     if(difference * GlobalParameter::injection_rate - length >= 0){
-        //改一下时间
         m_ongoing_packetinfo->ctime = cycle;
+        /*Abandon non-meaning packetinfo and get a new one*/
         if(m_ongoing_packetinfo->dst == m_local_id){
             m_time = cycle;
             m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
             return;
         }
-        //发送该infor
+
         packetinfo_attach(m_ongoing_packetinfo, cycle);
-        //记录发送时间
+        /*Record this injection cycle*/
         m_time = cycle;
-        //再写一个packetinfo进来
+        /*Get a new packetinfo for next cycle*/
         m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
     }else{
-        //等待下一个cycle
+        /*No action, wait for the next cycle*/
     }
-/*
-    //到该产生包的周期了
-    if(cycle % GlobalParameter::injection_cycle == 0){
-        packetinfo_attach(traffic.traffic_generator(m_local_id,cycle),cycle);
-    }*/
-
 }
 
 Injection::Injection(int node_id, vector<int>* curr_ring_id):

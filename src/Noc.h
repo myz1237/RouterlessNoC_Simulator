@@ -22,7 +22,10 @@
 #include <vector>
 using namespace std;
 
-//TODO 还没有把时钟和packetID接入
+/**
+ * @brief Class Noc Definition
+ *        Link all nodes in the network and drive it
+ */
 class Noc {
 public:
 
@@ -31,29 +34,37 @@ public:
     ~Noc();
 
 private:
-
-    //Node-Related stuff
-    vector<Node *> m_node;
+    /*Size of NoC, equal to GlobalParameter::mesh_dim_x or mesh_dim_y*/
     int m_size;
 
-    //Correct packet num
+    /*Statistics usage, correct the num of received packets during the simulation*/
     int packet_num_correction;
 
-    //Ring-Related stuff
+    /*Node sets*/
+    vector<Node *> m_node;
+
+    /*Direct results of Ring Topology Algorithms*/
     vector<RingTopologyTuple*>m_tuple;
 
     void initial();
     void init_ring();
     void init_routing_table();
-    //Statistics
-    void stat_gather();
-    int left_packet_num_gather();
-    void reset_stat();
     int cal_ring_num(int mesh_x)const;
 
+    /**
+     * @brief Gather all statistics from nodes after simulation finishes
+     */
+    void stat_gather();
+    void reset_stat();
+
+    /**
+     * @brief Gather the number of on-ring packets
+     *        and the number of packetinfo in injection queues during the warm_up stage
+     *        Aim to figure out the exact number of received packets during the simulation
+     */
+    int left_packet_num_gather();
+
     void packet_tracer();
-
-
 
 };
 

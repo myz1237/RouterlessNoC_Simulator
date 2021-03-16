@@ -84,7 +84,8 @@ public:
      *                 -->Yes, put the packetinfo to the injeciton queue
      *                    Update the time cycle of this injection
      *                 -->No, wait for the next cycle
-     *        the function, Node::continue_inject_packet(), will inject the rest
+     *        Abandon the packetinfo, whose source and dst are the same.
+     *        No much sense to inject a packet to the node itself.
      * @param traffic  reference of traffic object, determined in configuration phrase
      */
     void packetinfo_generator(int cycle, Traffic& traffic);
@@ -121,15 +122,13 @@ private:
      * */
     vector<Packetinfo*> m_packetinfo;
 
-    /*A pointer to ring id*/
+    /*A pointer to ring_id vector stored in Node object*/
     vector<int>* m_curr_ring_id;
 
-    //如果这里检查src和dst相等 就把该packetinfo删除释放 也就是说该节点不会再产生任何packet
+    /**
+     * @brief Push back Packetinfo into the injeciton queue
+     */
     void packetinfo_attach(Packetinfo* info, int cycle);
-
-    //packetinfo和packet他们的产生不同点在于 packetinfo需要严格按照产生速度
-    // 而packet只要满足条件(ring+exb)且m_packetinfo不为空 就要产生packet
-    //检查m_packetinfo不为空 就要产生packet 放在exb检查后面
 
 };
 
