@@ -105,8 +105,11 @@ Injection::Injection(int node_id, vector<int>* curr_ring_id):
 }
 
 Injection::~Injection() {
+#if DEBUG
     PLOG_DEBUG_IF(!m_packetinfo.empty()) << "Node " << m_local_id <<
                                          " Remaining Packet Info " << m_packetinfo.size();
+#endif
+    GlobalParameter::unrecv_packet_num += m_packetinfo.size();
     free_vetor<Packetinfo*>(m_packetinfo);
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;

@@ -21,6 +21,7 @@ typedef struct Stat{
     int packet_delay;
     int max_flit_delay;
     int max_packet_delay;
+    long packet_id_for_max_delay;
 
     //Node里面是不计算下面的两个值的
     double flit_throughput;
@@ -45,7 +46,9 @@ public:
     inline int get_packet_delay()const{return m_stat.packet_delay;}
     inline int get_max_flit_delay()const{return m_stat.max_flit_delay;}
     inline int get_max_packet_delay()const{return m_stat.max_packet_delay;}
+    inline long get_packet_id_for_max_delay()const{return m_stat.packet_id_for_max_delay;}
     inline int get_node_id()const{return m_node_id;}
+
     //添加穿过该node的ring的id号
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
 
@@ -66,6 +69,9 @@ public:
     //Output Function
     void node_info_output();
 
+    //For correction
+    int left_injecting_packet_num()const;
+
 private:
     const int m_node_id;
 
@@ -76,8 +82,6 @@ private:
 
     Injection* m_inject;
     vector<int>m_curr_ring_id;//存储穿过该node的ringid号
-
-
 
     //TODO 暂时不用ej_link 等后面引入为某个packet留link 先简单实现一下
     //vector<bool>m_ej_link;
@@ -90,7 +94,7 @@ private:
     vector<pair<long, int>>m_ej_record;
 
     void update_flit_stat(int latency);
-    void update_packet_stat(int latency);
+    void update_packet_stat(int latency, long packet_id);
 
     void recv_flit();
 
@@ -100,7 +104,7 @@ private:
     void forward(Flit* flit);
 
     void reset_single_buffer();
-    void get_ej_order();
+    void ej_arbitrator();
     bool check_record(long packet_id, int seq);
     void update_record(long packet_id, int type);
 

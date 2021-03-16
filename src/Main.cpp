@@ -21,7 +21,6 @@ int main() {
     c->run();
 
     delete c;
-    delete GlobalParameter::traffic;
     c = nullptr;
-    GlobalParameter::traffic = nullptr;
+
 }

@@ -77,7 +77,7 @@ namespace GlobalParameter{
     extern vector<Ring*> ring;
     extern long global_cycle;
     extern bool enable_interrupt;
-    extern int error;
+    extern int unrecv_packet_num;
 }
 
 

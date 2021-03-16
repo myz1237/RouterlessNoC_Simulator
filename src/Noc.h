@@ -23,8 +23,10 @@ private:
     vector<Node *> m_node;
     int m_size;
 
-    //Ring-Related stuff
+    //Correct packet num
+    int packet_num_correction;
 
+    //Ring-Related stuff
     vector<RingTopologyTuple*>m_tuple;
 
     void initial();
@@ -32,8 +34,9 @@ private:
     void init_routing_table();
     //Statistics
     void stat_gather();
+    int left_packet_num_gather();
     void reset_stat();
-    int cal_ring_num(int mesh_x);
+    int cal_ring_num(int mesh_x)const;
 
     void packet_tracer();
 

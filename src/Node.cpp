@@ -8,7 +8,7 @@ void Node::run(long cycle) {
     int index;
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
     recv_flit();
-    get_ej_order();
+    ej_arbitrator();
     //优先处理要注入的那条ring
     handled_ring_index = inject_eject();
     //处理剩下的single flit
@@ -44,7 +44,7 @@ void Node::handle_control_packet() {
     //先从ring上接收包
     recv_flit();
     //检查每个包并记录状态
-    get_ej_order();
+    ej_arbitrator();
     //处理包
     ej_control_packet();
 }
@@ -97,12 +97,13 @@ void Node::update_flit_stat(int latency) {
 }
 
 
-void Node::update_packet_stat(int latency) {
+void Node::update_packet_stat(int latency, long packet_id) {
     m_stat.received_packet++;
     m_stat.packet_delay += latency;
 
     if(latency > m_stat.max_packet_delay){
         m_stat.max_packet_delay = latency;
+        m_stat.packet_id_for_max_delay = packet_id;
     }
 }
 
@@ -125,7 +126,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     if (type == Control){
         //ControlFlit* controlFlit = static_cast<ControlFlit *>(flit);
         update_routing_table(flit->get_flit_routing(),m_table, ring_id);
-        update_packet_stat(flit->calc_flit_latency());
+        update_packet_stat(flit->calc_flit_latency(),flit->get_packet_id());
 
         //清除该Packet
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
@@ -135,7 +136,7 @@ void Node::ejection(Flit *flit, int ring_id) {
         //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
         if(GlobalParameter::ring[ring_id]->
                 find_packet_length(flit->get_packet_id()) == 1){
-            update_packet_stat(flit->calc_flit_latency());
+            update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
 
             PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
                        << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
@@ -158,7 +159,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     } else if (type == Tail){
         PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Tail Flit Arrived at Node "
                    << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
-        update_packet_stat(flit->calc_flit_latency());
+        update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
         update_record(flit->get_packet_id(), type);
         //清除该packet
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
@@ -181,7 +182,7 @@ void Node::reset_single_buffer() {
     }
 }
 
-void Node::get_ej_order() {
+void Node::ej_arbitrator() {
     int tail_index = 0, payload_index = 0, header_index = 0;
     vector<pair<int,int>> ctime(m_single_buffer.size());
     for(int i = 0;i < ctime.size(); i++){
@@ -675,17 +676,22 @@ void Node::node_info_output() {
     cout << m_stat;
 }
 
+int Node::left_injecting_packet_num() const {
+    return m_inject->left_packetinfo_num();
+}
+
 ostream& operator<<(ostream& out, Stat& stat){
-    out << "\t" << "Received Flit:" << stat.received_flit << endl
-         << "\t" << "Received Packet:" << stat.received_packet << endl
-         << "\t" << "Max Flit Delay:" << stat.max_flit_delay << endl
-         << "\t" << "Max Packet Delay:" << stat.max_packet_delay << endl;
+    out << "\t" << "Received Flit: " << stat.received_flit << endl
+         << "\t" << "Received Packet: " << stat.received_packet << endl
+         << "\t" << "Max Flit Delay: " << stat.max_flit_delay << endl
+         << "\t" << "Max Packet Delay: " << stat.max_packet_delay << endl
+         << "\t" << "Packet ID of Max Packet Delay: " << stat.packet_id_for_max_delay << endl;
     //不等0说明是NoC调用 因为Node是不计算下面四个指标的 默认为0
     if(stat.flit_throughput != 0)
-        out  << "\t" << "Flit Throughput:" << stat.flit_throughput << endl
-              << "\t" << "Packet Throughput:" << stat.packet_throughput << endl
-              << "\t" << "Average Flit Latency:" << stat.avg_flit_latency << endl
-              << "\t" << "Average Packet Latency:" << stat.avg_packet_latency << endl;
+        out  << "\t" << "Flit Throughput: " << stat.flit_throughput << endl
+              << "\t" << "Packet Throughput: " << stat.packet_throughput << endl
+              << "\t" << "Average Flit Latency: " << stat.avg_flit_latency << endl
+              << "\t" << "Average Packet Latency: " << stat.avg_packet_latency << endl;
     return out;
 }
 

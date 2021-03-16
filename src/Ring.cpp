@@ -90,8 +90,11 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
 }
 
 Ring::~Ring() {
+#if DEBUG
     PLOG_DEBUG_IF(!m_packet.empty()) << "Ring " << m_ring_id <<
     " Remaining Packet  " << m_packet.size();
+#endif
+    GlobalParameter::unrecv_packet_num += m_packet.size();
     free_vetor<Packet*>(m_packet);
     vector<int>().swap(m_ring_node_order);
 }

@@ -19,7 +19,9 @@ class Ring {
 public:
 
     //ring上是否还有packet 为空返回true
-    inline bool is_empty(){return m_packet.empty();}
+    inline bool is_empty()const{return m_packet.empty();}
+    //返回此时ring中packet数目
+    inline int left_packet_num()const{return m_packet.size();}
 
     //在每个cycle开始的时候就更新current node
     void update_curr_hop();

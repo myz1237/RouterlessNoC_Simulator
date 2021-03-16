@@ -23,6 +23,9 @@ public:
     inline void complete_ongoing_packet(){m_ongoing_packet = nullptr;}
     inline int get_ongoing_ring_index()const{return m_injecting_ring_index;}
 
+    //For Correction
+    int left_packetinfo_num()const{return m_packetinfo.size();}
+
     //仅用于初始化injection，向所有穿过该节点的ring发送一个flit的包
     void controlpacket_generator(int cycle,vector<int>& curr_ring_id);
     void inject_new_packet(int ring_index);

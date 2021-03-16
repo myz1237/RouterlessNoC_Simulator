@@ -32,5 +32,7 @@ long GlobalParameter::global_cycle = 0;
 
 bool GlobalParameter::enable_interrupt;
 
-int GlobalParameter::error = 0;
+int GlobalParameter::unrecv_packet_num = 0;
+
+
 
