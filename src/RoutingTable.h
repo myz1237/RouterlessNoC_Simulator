@@ -1,3 +1,15 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     Flit.h                                                          *
+*  @brief    Data structures for routing tables and how to calculate them    *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_ROUTINGTABLE_H
 #define NOCSIM_ROUTINGTABLE_H
 

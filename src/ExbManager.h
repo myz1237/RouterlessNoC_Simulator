@@ -1,3 +1,18 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     ExbManager.h                                                    *
+*  @brief    Extension Buffers are implemented in this file, with two        *
+*            main functions, Pop and Push. Our new pipeline buffer           *
+*            strategy is also included                                       *
+*                                                                            *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_EXBMANAGER_H
 #define NOCSIM_EXBMANAGER_H
 #include "Flit.h"
@@ -5,46 +20,72 @@
 class Flit;
 
 
-
+/**
+ * @brief Status for each extension buffer
+ */
 typedef struct ExbStatus{
-    //True就是里面有值 被绑定 False就是可用
-    bool occupied;
-    //也是ring_index
-    int single_buffer_index;
-    //存储当前EXB内的指向
-    int indicator;
+
+    bool occupied;           /*is occupied or not*/
+
+    int single_buffer_index; /*index for input buffer or ring. Only valid in a Node*/
+
+    int indicator;           /*pointer to the newest flit stored in one exb*/
+
     ExbStatus(): occupied(), single_buffer_index(), indicator(){}
     ExbStatus(bool op, int ring_id_index, int indicator):
         occupied(op), single_buffer_index(ring_id_index), indicator(indicator){}
 }ExbStatus;
 
+/**
+ * @brief Extension Buffers array and management
+ * @func  Register and release exb
+ *        Maintain and Update Exb status.
+ *        Provide Pop and Push functions for exb manipulation
+ */
 class ExbManager {
 
 public:
+    /**
+    * @return Exact index or -1 if unavailable
+    */
     int exb_available();
-    //注册EXB使用
+
+    /**
+    * @brief  Register an Exb
+    */
     void set_exb_status(int exb_index, bool status, int buffer_index);
-    //释放EXB
+
     void release_exb(int exb_index, int node_id);
-    //single_buffer_index和ringid的index相同
+
+    /**
+    * @brief  Check whether this ring is bound with a exb or not
+    * @param  single_buffer_index  Input buffer index in a node
+    * @return Exact index or -1 if no binding
+    */
     int check_exb_bound(int single_buffer_index);
 
     int get_exb_remaining_size(int exb_index)const;
 
     void push(int exb_index, Flit* flit);
     void pop_and_push(int exb_index, Flit* flit);
-    //这里加入Node id纯粹为了打印log
+
+    /**
+    * @brief  Pop one flit from an exb. Release it if empty after the pop action
+    * @param  node_id   Just to print a log
+    */
     void pop(int exb_index, int node_id);
+
     ExbManager();
     ~ExbManager();
 
-    //Test
     void Exb_tracer();
     void Flit_tracer(const string& str, Flit *flit);
 
 private:
+    /*Extension Buffer space*/
     vector<vector<Flit*>>m_exb;
-    //First存储该exb是否被占用,第二个存储对应single_buffer的index 注意Index而不是 Ring_id
+    /*Status for each exb
+    Use the same index to access one exb and its status*/
     vector<ExbStatus*>m_exb_status;
 
 };

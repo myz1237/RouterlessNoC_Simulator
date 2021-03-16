@@ -41,28 +41,6 @@ void Injection::inject_new_packet(int ring_index) {
     p = nullptr;
 }
 
-bool Injection::is_packetinfo_empty()const {
-    //empty返回1 否则0
-    if(m_packetinfo.empty()){
-        return true;
-    } else{
-        return false;
-    }
-}
-
-bool Injection::is_injection_interrupted()const {
-    return m_interrupt;
-}
-
-void Injection::set_interrupt(bool status) {
-    m_interrupt = status;
-}
-
-
-Packetinfo *Injection::get_new_packetinfo()const {
-    return m_packetinfo.front();
-}
-
 void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
     //第一次
     if(cycle == 0){
@@ -117,17 +95,17 @@ Injection::~Injection() {
     m_time = 0;
 }
 
-void Injection::packetinfo_attach(Packetinfo *info, int cycle){
-    //src和dst不相等 添加该包信息
-    PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
-    << " in Cycle " << cycle;
-    m_packetinfo.push_back(info);
-}
-
 void Injection::print_packetinfo() {
     for(int i = 0; i < m_packetinfo.size();i++){
         cout << "Node " << m_local_id << "   " << *m_packetinfo[i];
     }
+}
+
+void Injection::packetinfo_attach(Packetinfo *info, int cycle){
+    //src和dst不相等 添加该包信息
+    PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
+              << " in Cycle " << cycle;
+    m_packetinfo.push_back(info);
 }
 
 

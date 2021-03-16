@@ -1,8 +1,20 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     Flit.h                                                          *
+*  @brief    An interface for random number generator provided by D E Knuth  *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_RANDOMUTIL_H
 #define NOCSIM_RANDOMUTIL_H
 
 #include <vector>
-#include <assert.h>
+
 // interface to Knuth's RANARRAY RNG
 void   ran_start(long seed);
 long   ran_next( );

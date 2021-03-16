@@ -1,20 +1,18 @@
 #include "ExbManager.h"
 
 int ExbManager::exb_available() {
-    //找到为空的exb的index并返回
+
     for(int i = 0; i < m_exb_status.size(); i++){
         if(!m_exb_status[i]->occupied){
             return i;
         }
     }
-    //没找到 返回-1作为提醒
-    return -1;
 
+    return -1;
 }
 
 void ExbManager::set_exb_status(int exb_index, bool status, int buffer_index) {
     m_exb_status[exb_index]->occupied = status;
-    //指示对应哪个Ring的index
     m_exb_status[exb_index]->single_buffer_index = buffer_index;
 }
 
@@ -43,28 +41,25 @@ int ExbManager::get_exb_remaining_size(int exb_index) const {
 
 void ExbManager::push(int exb_index, Flit *flit) {
     m_exb[exb_index][++m_exb_status.at(exb_index)->indicator] = flit;
-    flit->set_flit_type(Buffered);
+    flit->set_flit_status(Buffered);
 #if DEBUG
     Flit_tracer("Push", flit);
 #endif
 }
 
 void ExbManager::pop_and_push(int exb_index, Flit *flit) {
-/*    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
-        return;
-    }*/
-    //弹出第一个Flit到Ring上
-    m_exb[exb_index].front()->set_flit_type(Routing);
+    /*Pop out the first flit into the ring*/
+    m_exb[exb_index].front()->set_flit_status(Routing);
 #if DEBUG
     Flit_tracer("Pop and Push", m_exb[exb_index].front());
 #endif
-    //整个exb前进一个单元
+    /*Move forward */
     for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
         m_exb[exb_index][i-1] = m_exb[exb_index][i];
     }
-    //放入新的flit
+    /*Insert the new flit*/
     m_exb[exb_index][m_exb_status[exb_index]->indicator] = flit;
-    flit->set_flit_type(Buffered);
+    flit->set_flit_status(Buffered);
 #if DEBUG
     Flit_tracer("Pop and Push", flit);
 #endif
@@ -72,26 +67,18 @@ void ExbManager::pop_and_push(int exb_index, Flit *flit) {
 
 
 void ExbManager::pop(int exb_index, int node_id) {
-/*    if(get_exb_remaining_size(exb_index) == GlobalParameter::exb_size){
-        return;
-    }*/
-    //弹出第一个Flit到Ring上
-    m_exb[exb_index].front()->set_flit_type(Routing);
+    m_exb[exb_index].front()->set_flit_status(Routing);
 #if DEBUG
     Flit_tracer("Pop ", m_exb[exb_index].front());
 #endif
-    //整个exb前进一个单元
     for(int i = 1; i <= m_exb_status.at(exb_index)->indicator; i++){
         m_exb[exb_index][i-1] = m_exb[exb_index][i];
     }
-    //原来位置置空
     m_exb[exb_index][m_exb_status.at(exb_index)->indicator] = nullptr;
-    //indicator前挪1
-    //并判断此时EXB是否空了
+    /*Release the Exb if empty after the pop*/
     if(--m_exb_status[exb_index]->indicator == -1){
         PLOG_WARNING << "EXB " << exb_index << " is released with single buffer "
         << m_exb_status[exb_index]->single_buffer_index << " at Node " << node_id << " in Cycle " << GlobalParameter::global_cycle;
-        //重置这个EXB的Status
         m_exb_status[exb_index]->single_buffer_index = -1;
         m_exb_status[exb_index]->occupied = false;
     }

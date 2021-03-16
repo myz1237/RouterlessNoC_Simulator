@@ -1,3 +1,17 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     Flit.h                                                          *
+*  @brief    This file defines what modules one node should have.            *
+*            Instantiated NoC and schedule injection, extensiont buffer,     *
+*            ejection and rings across itself                                *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_NODE_H
 #define NOCSIM_NODE_H
 #include <iostream>

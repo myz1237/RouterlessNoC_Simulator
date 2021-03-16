@@ -118,7 +118,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     //尝试Ejection
     FlitType type = flit->get_flit_type();
     flit->update_hop();
-    flit->set_flit_type(Ejected);
+    flit->set_flit_status(Ejected);
     flit->set_atime(GlobalParameter::global_cycle);
     update_flit_stat(flit->calc_flit_latency());
 

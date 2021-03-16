@@ -11,7 +11,6 @@ int GlobalParameter::short_packet_ratio;
 RingStrategy GlobalParameter::ring_strategy;
 ExbStrategy GlobalParameter::exb_strategy;
 int GlobalParameter::ej_port_nu;
-EjStrategy GlobalParameter::ej_strategy;
 RoutingStrategy GlobalParameter::routing_strategy;
 TrafficType GlobalParameter::traffic_type;
 vector<pair<int, int>> GlobalParameter::hotspot;
@@ -24,14 +23,9 @@ vector<Ring*> GlobalParameter::ring;
 Traffic* GlobalParameter::traffic;
 RingAlgorithms* GlobalParameter::ring_algorithm;
 int GlobalParameter::exb_size;
-
-//记录当前发送packet的id号 全局唯一性
 long GlobalParameter::packet_id = 0;
-
 long GlobalParameter::global_cycle = 0;
-
 bool GlobalParameter::enable_interrupt;
-
 int GlobalParameter::unrecv_packet_num = 0;
 
 

@@ -5,6 +5,10 @@
 #include <plog/Initializers/RollingFileInitializer.h>
 #include <plog/Formatters/TxtFormatter.h>
 #include <plog/Appenders/ColorConsoleAppender.h>
+
+//------------------------------------------------------------------------
+// Debug Defines. Set 1 to print flood of information of Packet and EXB
+//------------------------------------------------------------------------
 #define DEBUG 0
 
 int main() {
@@ -12,7 +16,7 @@ int main() {
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
 
-    random_seed(time(NULL));
+    //random_seed(time(NULL));
 
     //Read Parameters from Yaml File
     configure();

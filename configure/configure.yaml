@@ -32,7 +32,7 @@ ring_strategy: RLrec
 #Available strategy:
 #Max--Use the max size of packet as buffer size. Isolated buffer
 #Avg--Use average size of packet as buffer size. Isolated buffer
-exb_strategy: Max
+exb_strategy: Avg
 exb_num: 2
 
 #Ejection settings
@@ -47,7 +47,7 @@ ej_strategy: Oldest
 #Available algorithm:
 #Shortest
 #Secondwinner
-routing_strategy: Shortest
+routing_strategy: Secondwinner
 
 
 #Traffic Generation
@@ -75,7 +75,7 @@ hotspot:
 #Period for run-time simulation, expressed in cycle
 sim_time: 10000
 #Period for warm-up, expressed in cycle
-sim_warmup: 1000
+sim_warmup: 3000
 #Output detailed information.
 #1--Enable, Output Routing Information and Statistics of each node
 #0--Disable

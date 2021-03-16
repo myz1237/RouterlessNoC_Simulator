@@ -1,3 +1,16 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     Flit.h                                                          *
+*  @brief    Four types of synthetic traffic patterns, uniform, transpose    *
+*            bit reverse and hot spots.                                      *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_TRAFFIC_H
 #define NOCSIM_TRAFFIC_H
 #include "Flit.h"
