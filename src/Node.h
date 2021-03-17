@@ -73,7 +73,7 @@ public:
     inline int get_node_id()const{return m_node_id;}
 
     /**
-     * @brief Attach id of rings across this node
+     * @brief Attach ids of rings across this node to the vector
      */
     inline void set_curr_ring(int ring_id){m_curr_ring_id.push_back(ring_id);}
 

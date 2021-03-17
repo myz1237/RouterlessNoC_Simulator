@@ -87,8 +87,6 @@ void Noc::initial() {
     init_routing_table();
 }
 
-//1.根据ring_strategy选择对应的算法类 并调用其generate方法 产生ring的原始结构tuple
-//2.通过tuple 产生n个node序列，并给node类上的ringid记录数组添加相应的ringid
 void Noc::init_ring() {
 
     if(GlobalParameter::ring_strategy == IMR){
@@ -96,7 +94,7 @@ void Noc::init_ring() {
     }else if(GlobalParameter::ring_strategy == RLrec){
         GlobalParameter::ring_algorithm = new RlrecAlgorithms;
     }
-    /*Generate intermediate results of ring topology*/
+    /*Generate results of ring topology*/
     GlobalParameter::ring_algorithm->topology_generate(m_tuple);
     /*New rings through RingTopologyTuple*/
     for(int i = 0;i < m_tuple.size(); i++){

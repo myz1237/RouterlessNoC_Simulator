@@ -242,8 +242,6 @@ CMakeFiles/NocSim.dir/src/Node.cpp.o
  /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Traffic.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Util.h
  /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ringalgorithm/RingAlgorithms.h
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
- /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.cpp
 CMakeFiles/NocSim.dir/src/Ring.cpp.o
  ../lib/plog/include/plog/Appenders/IAppender.h
  ../lib/plog/include/plog/Log.h

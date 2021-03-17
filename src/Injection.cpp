@@ -45,24 +45,24 @@ void Injection::inject_new_packet(int ring_index) {
 void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
     /*First Cycle, the entrance of the injection loop*/
     if(cycle == 0){
-        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
+        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
     }
     int length = m_ongoing_packetinfo->length;
     int difference = cycle - m_time;
     if(difference * GlobalParameter::injection_rate - length >= 0){
-        m_ongoing_packetinfo->ctime = cycle;
         /*Abandon non-meaning packetinfo and get a new one*/
         if(m_ongoing_packetinfo->dst == m_local_id){
-            m_time = cycle;
-            m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
+            //m_time = cycle;
+            GlobalParameter::packet_id--;
+            m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
             return;
         }
-
+        m_ongoing_packetinfo->ctime = cycle;
         packetinfo_attach(m_ongoing_packetinfo, cycle);
         /*Record this injection cycle*/
         m_time = cycle;
         /*Get a new packetinfo for next cycle*/
-        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id, cycle);
+        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
     }else{
         /*No action, wait for the next cycle*/
     }

@@ -22,7 +22,7 @@ void RlrecAlgorithms::topology_generate(vector<RingTopologyTuple*>& topology) {
             //cout << ul+noc_size*j << " " << lr+(2+j-2*layer)*noc_size <<endl;
         }
     }
-    //layer1下有有两个方向，在这里添加顺时针方向
+    /*Add closewise ring of layer 1 to the tuple array*/
     topology.push_back(new RingTopologyTuple((noc_size*noc_size-noc_size-2)/2,
                                         (noc_size*noc_size+noc_size)/2,0));
     //cout << (noc_size*noc_size+noc_size)/2 << " " << (noc_size*noc_size-noc_size-2)/2 <<endl;

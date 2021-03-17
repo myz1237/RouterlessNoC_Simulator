@@ -1,9 +1,9 @@
 
 #include "Traffic.h"
 
-Traffic::Traffic(int node_sum):m_node_sum(node_sum){}
+Traffic::Traffic(int node_sum): m_node_num(node_sum){}
 
-Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr_time) {
+Packetinfo* TrafficUniform::traffic_generator(const int local_id) {
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
     p->id = GlobalParameter::packet_id;
@@ -12,8 +12,6 @@ Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr
     }else{
         p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     }
-    p->ctime = curr_time;
-
     int max_id = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x - 1 ;
     do{
         p->dst = random_int(0, max_id);
@@ -24,7 +22,7 @@ Packetinfo* TrafficUniform::traffic_generator(const int local_id, const int curr
 
 TrafficUniform::TrafficUniform(int nodeSum) : Traffic(nodeSum) {}
 
-Packetinfo* TrafficTranspose::traffic_generator(const int local_id, const int curr_time) {
+Packetinfo* TrafficTranspose::traffic_generator(const int local_id) {
     int const mask_lo = (1 << m_shift) - 1;
     int const mask_hi = mask_lo << m_shift;
     Packetinfo *p = new Packetinfo;
@@ -35,15 +33,13 @@ Packetinfo* TrafficTranspose::traffic_generator(const int local_id, const int cu
     }else{
         p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     }
-
-    p->ctime = curr_time;
     p->dst = (((local_id >> m_shift) & mask_lo) | ((local_id << m_shift) & mask_hi));
     p->id = GlobalParameter::packet_id++;
     return p;
 }
 
 void TrafficTranspose::generate_shift() {
-    while(m_node_sum >>= 1) {
+    while(m_node_num >>= 1) {
         ++m_shift;
     }
     if(m_shift % 2) {
@@ -59,7 +55,7 @@ TrafficTranspose::TrafficTranspose(int nodeSum) : Traffic(nodeSum), m_shift(0) {
 }
 
 
-Packetinfo* TrafficBitReverse::traffic_generator(int local_id, const int curr_time) {
+Packetinfo* TrafficBitReverse::traffic_generator(int local_id) {
     int dst = 0;
     Packetinfo *p = new Packetinfo;
     p->src = local_id;
@@ -70,9 +66,7 @@ Packetinfo* TrafficBitReverse::traffic_generator(int local_id, const int curr_ti
         p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     }
 
-    p->ctime = curr_time;
-
-    for(int n = m_node_sum; n > 1; n >>= 1) {
+    for(int n = m_node_num; n > 1; n >>= 1) {
         dst = (dst << 1) | (local_id % 2);
         local_id >>= 1;
     }
@@ -83,7 +77,7 @@ Packetinfo* TrafficBitReverse::traffic_generator(int local_id, const int curr_ti
 
 
 
-Packetinfo* TrafficHotspot::traffic_generator(const int local_id, const int curr_time) {
+Packetinfo* TrafficHotspot::traffic_generator(const int local_id) {
     Packetinfo *p = new Packetinfo;
 
     p->src = local_id;
@@ -93,8 +87,6 @@ Packetinfo* TrafficHotspot::traffic_generator(const int local_id, const int curr
     }else{
         p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
     }
-
-    p->ctime = curr_time;
     p->id = GlobalParameter::packet_id++;
     p->dst = get_dst();
     return p;

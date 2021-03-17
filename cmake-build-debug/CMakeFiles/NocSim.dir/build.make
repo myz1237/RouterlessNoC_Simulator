@@ -345,33 +345,9 @@ CMakeFiles/NocSim.dir/src/Main.cpp.o.provides: CMakeFiles/NocSim.dir/src/Main.cp
 CMakeFiles/NocSim.dir/src/Main.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/Main.cpp.o
 
 
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o: CMakeFiles/NocSim.dir/flags.make
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o: ../src/RandomUtil.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.cpp
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.cpp > CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.cpp -o CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires:
-
-.PHONY : CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
-	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides.build
-.PHONY : CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
-
-
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: ../src/KnuthRngWrapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp
 
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.i: cmake_force
@@ -395,7 +371,7 @@ CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.provides.build: CMakeFiles/NocSi
 
 CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o: ../src/KunthRngDoubleWrapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp
 
 CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.i: cmake_force
@@ -431,7 +407,6 @@ NocSim_OBJECTS = \
 "CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o" \
 "CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o" \
 "CMakeFiles/NocSim.dir/src/Main.cpp.o" \
-"CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o" \
 "CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o" \
 "CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
 
@@ -450,12 +425,11 @@ NocSim: CMakeFiles/NocSim.dir/src/Traffic.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/Main.cpp.o
-NocSim: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o
 NocSim: CMakeFiles/NocSim.dir/build.make
 NocSim: CMakeFiles/NocSim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable NocSim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable NocSim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/NocSim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -475,7 +449,6 @@ CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/Traffic.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/Main.cpp.o.requires
-CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.requires
 

@@ -3,17 +3,16 @@
 void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&temp, int ring_id){
     int counter = 0;
     for(int i = 0;i < snifer.size(); i++){
-        //检查该temp里面有没有这个node_id
         counter = 0;
         for(int j = 0; j< temp.size(); j++){
-            //有的话 应该只能找到一个匹配
+            /*Check whether there has been a record about this node*/
             if(snifer[i]->node_id == temp[j]->node_id){
                 swap(snifer[i],temp[j], ring_id);
                 break;
             }
             counter++;
         }
-
+        /*New node, add it to the table*/
         if(counter == temp.size()){
             //没找到 加入该节点
             RoutingTable *p = new RoutingTable;
@@ -27,6 +26,7 @@ void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&t
 
     }
 }
+/*Try best to make ring1_id and ring2_id different*/
 void swap(Routingsnifer* snifer, RoutingTable* table, int ring_id){
     int test = snifer->hop_count;
     int ring1_hop = table->ring1_hop;

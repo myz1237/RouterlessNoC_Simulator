@@ -139,9 +139,6 @@
       <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Node.h">
          <Option target="NocSim"/>
       </Unit>
-      <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.cpp">
-         <Option target="NocSim"/>
-      </Unit>
       <Unit filename="/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RandomUtil.h">
          <Option target="NocSim"/>
       </Unit>

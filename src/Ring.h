@@ -32,43 +32,62 @@ class Ring {
 
 public:
 
-    //ring上是否还有packet 为空返回true
     inline bool is_empty()const{return m_packet.empty();}
-    //返回此时ring中packet数目
+
+    /**
+     * @brief  Stat how many packets are left after the warm up stage and simulation
+     */
     inline int left_packet_num()const{return m_packet.size();}
 
-    //在每个cycle开始的时候就更新current node
+    /**
+     * @brief  Simulate wires' actions
+     *         Move on-ring packets forward
+     *         Only flits with 'Routing' Status move to the next node
+     */
     void update_curr_hop();
 
-    //检查该ring上有没有flit的currentnode是该nodeid的
-    //返回packet在数组中的位置，以及flit在该packet的位置
-    //把Flit指针返回
+    /**
+     * @brief  Figure out whether flits arrive in your node
+     * @return If so, return the pointer, or null
+     */
     Flit* flit_check(int node_id);
-    //让packet上ring 由ring来控制
-    void attach(Packet* p);
-    //去掉该id的packet并清空所占内存
+
+    inline void attach(Packet* p){m_packet.push_back(p);}
+
+    /**
+     * @brief  Dettach a packet and delete the memory occupied
+     */
     void dettach(long packet_id);
 
     int find_packet_length(long packet_id);
-    //static inline void initializer_ring(const vector<RingTopologyTuple*>& ring_tuple_set);
+
+    /**
+     * @brief  New a memory space for the ring
+     *         Calculate all node ids crossed by one ring
+     *         Attach its ring id to corresponding notes(m_curr_ring_id)
+     *         In this way, each node know
+     * @param ring_id
+     * @param ring_tuple A pointer to ring topology results from Algorithm
+     * @param node       Reference of the node set
+     */
     Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node*>& node);
-    //TODO 只有最后模拟结束才清理ring中还没有ejection的packet
     ~Ring();
 
-    //TODO 两个测试函数
+    /*Only for test*/
     void print_ring_order();
     void print_packet_info();
 
 
 private:
     int m_ring_id;
-    //存储每个在该ring上的packet
+    /*On-ring Packet array*/
     vector<Packet*>m_packet;
-    //存储每一个ring经过的node节点的序列
+    /*Node ids crossed by this ring*/
     vector<int> m_ring_node_order;
-
+    /**
+     * @brief  Tell on-ring packets where to go in the cycle
+     */
     int find_next_node(int curr_node);
-
 
 };
 

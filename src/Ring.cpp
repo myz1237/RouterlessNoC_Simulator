@@ -1,12 +1,13 @@
 #include "Ring.h"
 
+/*Loop to find Flits with 'Routing' status and assign these flits to the next node id*/
 void Ring::update_curr_hop() {
     int curr_node;
     for(int i = 0; i<m_packet.size(); i++){
         for(int j = 0; j<m_packet[i]->get_length(); j++){
-            //查找在途的flit 并更新
             if(m_packet[i]->get_flit_status(j) == Routing){
                 curr_node = m_packet[i]->get_flit_curr_node(j);
+                /*Set the next node id*/
                 m_packet[i]->set_flit_curr_node(j, find_next_node(curr_node));
             }
         }
@@ -28,19 +29,13 @@ Flit* Ring::flit_check(int node_id) {
         }
     }
     if(counter == m_packet.size()){
-        //没有找到
+        /*No flit arrives in this node*/
         return nullptr;
     }
 
 }
 
-
-void Ring::attach(Packet *p) {
-    m_packet.push_back(p);
-}
-
 void Ring::dettach(long packet_id) {
-    //取消前要不要检查各个flit是不是已经injection了
     for(vector<Packet*>::iterator iter = m_packet.begin(); iter != m_packet.end(); iter++){
         if((*iter)->get_id() == packet_id){
             delete *iter;
@@ -60,6 +55,7 @@ int Ring::find_packet_length(long packet_id) {
     return 0;
 }
 
+/*Translate ring_tuple into several node ids*/
 Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
     m_ring_id = ring_id;
     int size = GlobalParameter::mesh_dim_x;
@@ -67,7 +63,7 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
     int width = (ring_tuple->m_lr - ring_tuple->m_ul) / size;
     for(int i = 0; i<=length-1 ; i++){
         m_ring_node_order.push_back(ring_tuple->m_ul+i);
-        //把穿过该node的ringid添加到该node的curr_ring数组中
+        /*Record this ring id to the node's vector, m_curr_ring_id*/
         node[ring_tuple->m_ul+i]->set_curr_ring(ring_id);
     }
     for(int j = 0; j<=width-1; j++){
@@ -94,6 +90,7 @@ Ring::~Ring() {
     PLOG_DEBUG_IF(!m_packet.empty()) << "Ring " << m_ring_id <<
     " Remaining Packet  " << m_packet.size();
 #endif
+    /*Add on-ring packets after simulation ends to the variable */
     GlobalParameter::unrecv_packet_num += m_packet.size();
     free_vetor<Packet*>(m_packet);
     vector<int>().swap(m_ring_node_order);
@@ -104,11 +101,11 @@ int Ring::find_next_node(int curr_node) {
     if(it == m_ring_node_order.end()){
         cerr << "Cannot find this node" <<endl;
     }
-    //说明是最后一个 则返回第一个
+    /*End of the vector, return the first element*/
     if(it == m_ring_node_order.end()-1){
         return m_ring_node_order.front();
     }
-    //否则直接返回下一个
+    /*Return the next element*/
     return *(it+1);
 }
 
