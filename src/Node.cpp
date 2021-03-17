@@ -9,11 +9,12 @@ void Node::run(long cycle) {
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
     recv_flit();
     ej_arbitrator();
-    //优先处理要注入的那条ring
+
     handled_ring_index = inject_eject();
-    //处理剩下的single flit
+    /*Handle the rest of packets*/
     for(int i = 0; i < m_ej_order.size(); i++){
         index = m_ej_order[i].first;
+        /*Except the single buffer handled above*/
         if(index == handled_ring_index){
             continue;
         }else{
@@ -21,10 +22,9 @@ void Node::run(long cycle) {
         }
     }
 
-    //TODO 记得最后清零所有singleflit 和ej order
-    //不要应该也可用做到
     reset_single_buffer();
     vector<pair<int,int>>().swap(m_ej_order);
+
 #if DEBUG
     PLOG_INFO << "Node " << m_node_id << " Second Print ";
     PLOG_INFO << "Node " << m_node_id << " EXB Tracer";
@@ -41,34 +41,23 @@ void Node::inject_control_packet() {
 }
 
 void Node::handle_control_packet() {
-    //先从ring上接收包
     recv_flit();
-    //检查每个包并记录状态
     ej_arbitrator();
-    //处理包
-    ej_control_packet();
+    ej_fwd_control_packet();
 }
 
-void Node::ej_control_packet() {
-    for(int i = 0; i < m_ej_order.size(); i++){
-        //只要是到达该node的control 不按照ejectionlink的数目收回而是全部收回
-        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
-            ejection(m_single_buffer[m_ej_order[i].first],
-                     m_curr_ring_id[m_ej_order[i].first]);
-        } else if(m_ej_order[i].second == -1){
-            forward(m_single_buffer[m_ej_order[i].first]);
-        }
-    }
-    reset_single_buffer();
-    vector<pair<int,int>>().swap(m_ej_order);
+int Node::left_injecting_packet_num() const {
+    return m_inject->left_packetinfo_num();
 }
 
 void Node::init() {
+    /*Fixed array size */
     m_single_buffer.resize(m_curr_ring_id.size(), nullptr);
 }
 
 Node::Node(int node_id):m_node_id(node_id){
-    m_curr_ring_id.reserve(100);
+    /*Reserve array size with an estimated vale*/
+    m_curr_ring_id.reserve(50);
     m_table.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x-1);
     m_exb_manager = new ExbManager;
     m_inject = new Injection(m_node_id, &m_curr_ring_id);
@@ -80,11 +69,16 @@ Node::~Node() {
     delete m_exb_manager;
     m_exb_manager = nullptr;
     m_inject = nullptr;
-    //注意这里只清空输入buffer的内容 释放空间交给Ring来做
+
+    /*Only to clear single buffer values not to delete flit objects*/
     clear_vector<Flit*>(m_single_buffer);
     free_vetor<RoutingTable*>(m_table);
     vector<pair<int, int>>().swap(m_ej_order);
     vector<pair<long, int>>().swap(m_ej_record);
+}
+
+void Node::node_info_output() {
+    cout << m_stat;
 }
 
 void Node::update_flit_stat(int latency) {
@@ -96,7 +90,6 @@ void Node::update_flit_stat(int latency) {
     }
 }
 
-
 void Node::update_packet_stat(int latency, long packet_id) {
     m_stat.received_packet++;
     m_stat.packet_delay += latency;
@@ -105,6 +98,21 @@ void Node::update_packet_stat(int latency, long packet_id) {
         m_stat.max_packet_delay = latency;
         m_stat.packet_id_for_max_delay = packet_id;
     }
+}
+
+void Node::ej_fwd_control_packet() {
+
+    for(int i = 0; i < m_ej_order.size(); i++){
+        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
+            ejection(m_single_buffer[m_ej_order[i].first],
+                     m_curr_ring_id[m_ej_order[i].first]);
+        } else if(m_ej_order[i].second == -1){
+            forward(m_single_buffer[m_ej_order[i].first]);
+        }
+    }
+
+    reset_single_buffer();
+    vector<pair<int,int>>().swap(m_ej_order);
 }
 
 void Node::recv_flit() {
@@ -298,11 +306,6 @@ void Node::update_record(long packet_id, int type){
         cerr << "Error in Recording" << endl;
 
 }
-
-bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
-    return a.second > b.second;
-}
-
 
 void Node::handle_rest_flit(int action, int single_flit_index) {
     int exb_index = m_exb_manager->check_exb_bound(single_flit_index);
@@ -639,7 +642,7 @@ void Node::continue_inject_packet(int action) {
     p = nullptr;
 }
 
-RoutingTable *Node::check_routing_table(int dst_id) {
+RoutingTable *Node::search_routing_table(int dst_id) {
     for(int i =0; i < m_table.size(); i++){
         if(dst_id == m_table[i]->node_id){
             return m_table[i];
@@ -649,7 +652,7 @@ RoutingTable *Node::check_routing_table(int dst_id) {
 }
 
 int Node::ring_selection(int dst, int index) {
-    RoutingTable* table = check_routing_table(dst);
+    RoutingTable* table = search_routing_table(dst);
     if(index){
         return ring_to_index(table->ring2_id);
     }else{
@@ -670,14 +673,6 @@ int Node::get_single_buffer_action(int ring_index) {
             return m_ej_order[i].second;
         }
     }
-}
-
-void Node::node_info_output() {
-    cout << m_stat;
-}
-
-int Node::left_injecting_packet_num() const {
-    return m_inject->left_packetinfo_num();
 }
 
 ostream& operator<<(ostream& out, Stat& stat){

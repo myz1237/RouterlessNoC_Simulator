@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     GlobalParameter.h                                                          *
 *  @brief    This file stores parameters read from ConfigureManager.h        *
 *            Global variable definition                                      *
 *                                                                            *

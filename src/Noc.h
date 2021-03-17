@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     Noc.h                                                          *
 *  @brief    Abstract definition of NoC.                                     *
 *            It consists of all nodes in a NoC and provides essential        *
 *            drive functions                                                 *

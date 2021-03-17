@@ -78,6 +78,7 @@ Noc::~Noc() {
     GlobalParameter::ring_algorithm = nullptr;
     GlobalParameter::traffic = nullptr;
     free_vetor<Ring*>(GlobalParameter::ring);
+    /*Output unreceived packets after the simulation stops*/
     cout << "\t" << "UnReceived Packet：" << GlobalParameter::unrecv_packet_num;
 }
 
@@ -89,27 +90,27 @@ void Noc::initial() {
 //1.根据ring_strategy选择对应的算法类 并调用其generate方法 产生ring的原始结构tuple
 //2.通过tuple 产生n个node序列，并给node类上的ringid记录数组添加相应的ringid
 void Noc::init_ring() {
-    //完成第一步
+
     if(GlobalParameter::ring_strategy == IMR){
         GlobalParameter::ring_algorithm = new ImrAlgorithms;
     }else if(GlobalParameter::ring_strategy == RLrec){
         GlobalParameter::ring_algorithm = new RlrecAlgorithms;
     }
+    /*Generate intermediate results of ring topology*/
     GlobalParameter::ring_algorithm->topology_generate(m_tuple);
-    //完成第二步 产生ring实例 同时初始化所有node拥有的ring
+    /*New rings through RingTopologyTuple*/
     for(int i = 0;i < m_tuple.size(); i++){
         GlobalParameter::ring[i] = new Ring(i, m_tuple[i],m_node);
     }
-    //产生实例后清除vector
+
     free_vetor<RingTopologyTuple*>(m_tuple);
-    //Node中的single buffer要在curr_ring_id后初始化
     for(int j = 0; j < m_node.size(); j++){
         m_node[j]->init();
     }
 }
-//所有node向ring上发送control包 然后等待 不计入cycle中
+
 void Noc::init_routing_table() {
-    //向所有ring注入control包
+
     for(int i = 0; i < m_node.size(); i++){
         m_node[i]->inject_control_packet();
     }
@@ -117,25 +118,21 @@ void Noc::init_routing_table() {
     while(true){
         int counter = 0;
 
-        //Move Packets forward
         for(int j = 0;j< GlobalParameter::ring.size(); j++){
             GlobalParameter::ring[j]->update_curr_hop();
         }
-
 
         for(int q = 0; q < m_node.size(); q++){
             m_node[q]->handle_control_packet();
         }
 
-        //single flit检查是否有packet达到 到达后直接送到ejection处理 产生routingtable
-        //检查所有ring是否都为空 空了说明routingtable产生完成
+
         for(int k = 0;k < GlobalParameter::ring.size(); k++){
-            //有一个不是空就还没有结束 继续循环
             if(GlobalParameter::ring[k]->is_empty()){
                 counter++;
             }
         }
-        //所有都为空 跳出循环
+        /*Jump out when there is no on-ring packet in all rings*/
         if(counter == GlobalParameter::ring.size()) break;
     }
 }

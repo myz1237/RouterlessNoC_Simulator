@@ -1,3 +1,14 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     Util.h                                                          *
+*  @brief    Convenient tools for this program                               *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
 #ifndef NOCSIM_UTIL_H
 #define NOCSIM_UTIL_H
 #include <vector>

@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     Injection.h                                                          *
 *  @brief    Injection is a part of Network Interface. This file             *
 *            illustrates when and how to inject a flit and a packet.         *
 *                                                                            *

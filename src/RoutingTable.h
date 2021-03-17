@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     RoutingTable.h                                                          *
 *  @brief    Data structures for routing tables and how to calculate them    *
 *                                                                            *
 *  @author   Yizhuo Meng                                                     *

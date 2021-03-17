@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     RandomUtil.h                                                          *
 *  @brief    An interface for random number generator provided by D E Knuth  *
 *                                                                            *
 *  @author   Yizhuo Meng                                                     *

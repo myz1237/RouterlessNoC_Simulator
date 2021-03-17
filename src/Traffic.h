@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     Traffic.h                                                          *
 *  @brief    Four types of synthetic traffic patterns, uniform, transpose    *
 *            bit reverse and hot spots.                                      *
 *                                                                            *

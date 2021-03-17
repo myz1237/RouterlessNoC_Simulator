@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Routerless Network-on-Chip Simulator                                      *
 *                                                                            *
-*  @file     Flit.h                                                          *
+*  @file     Ring.h                                                          *
 *  @brief    Rings are like electrical wires, receiving packets and carry    *
 *            carry them to destinations. This file defines rings             *
 *            initialization and specific functions                           *
