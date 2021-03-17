@@ -252,13 +252,13 @@ private:
      * @brief Continue to inject long packets, whose header flit has been injected in the last cycle
      *        Handle the single buffer on the ring to be chosen for injecting this packet
      */
-    void continue_inject_packet(int action);
+    void continue_inject_packet();
 
     /**
      * @brief  Selection appropriate rings according to the destination
      * @param  dst   Destination of the packet
      * @param  index 0-->Choose the shortest path
-     *              1-->Choose the second shortest path. Valid in routing_strategy, Secondwinner
+     *               1-->Choose the second shortest path. Valid in routing_strategy, Secondwinner
      * @return ring_index Directly return index of the ring in the current node
      *                    Easy access to corresponding single buffer
      */
@@ -273,7 +273,7 @@ private:
     int ring_to_index(int ring_id);
 
     /**
-     * @brief  Find creation time of specific single buffer
+     * @brief  Find ejection order(Tag) of specific single buffer
      * @return Return the action, the second value of ejection order
      */
     int get_single_buffer_action(int ring_index);
