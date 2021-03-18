@@ -86,6 +86,7 @@ namespace GlobalParameter{
     extern bool enable_interrupt;
     /*Record the number of packets in rings or injection queues*/
     extern int unrecv_packet_num;
+
 }
 
 

@@ -78,7 +78,7 @@ public:
 
     Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
          const int ctime, int hop, int curr_node, int atime = -1);
-    ~Flit();
+    virtual ~Flit(){}
 
     const long m_packet_id;
     const int m_src_id;

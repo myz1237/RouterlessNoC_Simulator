@@ -91,10 +91,11 @@ Injection::~Injection() {
 #endif
     GlobalParameter::unrecv_packet_num += m_injection_queue.size();
     free_vetor<Packetinfo*>(m_injection_queue);
+    if(m_ongoing_packetinfo != nullptr)
+        delete m_ongoing_packetinfo;
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;
     m_ongoing_packetinfo = nullptr;
-    m_time = 0;
 }
 
 void Injection::print_packetinfo() {

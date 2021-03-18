@@ -89,6 +89,7 @@ public:
      * @param  cycle Time
      */
     void run(long cycle);
+    void testrun(long cycle);
 
     /**
      * @brief Clear statistics data of the node

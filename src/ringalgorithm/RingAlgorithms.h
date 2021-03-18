@@ -21,17 +21,20 @@ public:
 
 class RingAlgorithms {
 public:
+    virtual ~RingAlgorithms(){}
     virtual void topology_generate(vector<RingTopologyTuple*>& topology)=0;
 };
 
 class RlrecAlgorithms : public RingAlgorithms {
 public:
+    ~RlrecAlgorithms(){}
     void topology_generate(vector<RingTopologyTuple*>& topology);
 
 };
 /*Less efficient Algorithm, under Construction*/
 class ImrAlgorithms : public RingAlgorithms{
 public:
+    ~ImrAlgorithms(){}
     void topology_generate(vector<RingTopologyTuple*>& topology);
 
 };

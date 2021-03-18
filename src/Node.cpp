@@ -9,7 +9,38 @@ void Node::run(long cycle) {
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
     recv_flit();
     ej_arbitrator();
+    handled_ring_index = inject_eject();
+    /*Handle the rest of packets*/
+    for(int i = 0; i < m_ej_order.size(); i++){
+        index = m_ej_order[i].first;
+        /*Except the single buffer handled above*/
+        if(index == handled_ring_index){
+            continue;
+        }else{
+            handle_rest_flit(m_ej_order[i].second, index);
+        }
+    }
 
+    reset_single_buffer();
+    vector<pair<int,int>>().swap(m_ej_order);
+
+#if DEBUG
+    PLOG_INFO << "Node " << m_node_id << " Second Print ";
+    PLOG_INFO << "Node " << m_node_id << " EXB Tracer";
+    m_exb_manager->Exb_tracer();
+#endif
+}
+
+void Node::testrun(long cycle) {
+#if DEBUG
+    PLOG_INFO << "Node " << m_node_id << " First Print ";
+    m_exb_manager->Exb_tracer();
+#endif
+    int handled_ring_index;
+    int index;
+    //m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
+    recv_flit();
+    ej_arbitrator();
     handled_ring_index = inject_eject();
     /*Handle the rest of packets*/
     for(int i = 0; i < m_ej_order.size(); i++){

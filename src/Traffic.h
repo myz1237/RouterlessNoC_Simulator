@@ -41,7 +41,7 @@ public:
      */
     int random_2size()const;
     Traffic(int node_sum);
-    ~Traffic(){}
+    virtual ~Traffic(){}
     virtual Packetinfo* traffic_generator(const int local_id) = 0;
 };
 class TrafficUniform: public Traffic{

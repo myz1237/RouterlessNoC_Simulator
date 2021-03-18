@@ -10,8 +10,6 @@ Flit::Flit(const long packet_id, const int src, const int dst, const FlitType ty
            int hop, int curr_node, int atime): m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
                                                m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){}
 
-Flit::~Flit() {}
-
 ControlFlit::ControlFlit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
                          const int ctime, int hop, int curr_node):Flit(packet_id, src, dst, type, seq, ctime, hop, curr_node) {
     m_routing.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x);

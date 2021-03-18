@@ -47,8 +47,33 @@ void Noc::run() {
 
         GlobalParameter::global_cycle++;
     }
-    stat_gather();
 
+/*    while(1){
+        int counter = 0;
+        for(int k = 0; k < GlobalParameter::ring.size(); k++){
+            GlobalParameter::ring[k]->update_curr_hop();
+        }
+
+        *//*Receive incoming packets, injection, ejection and buffered*//*
+        for(int q = 0; q < m_node.size(); q++){
+            m_node[q]->testrun(GlobalParameter::global_cycle);
+        }
+
+        for(int k = 0;k < GlobalParameter::ring.size(); k++){
+            if(GlobalParameter::ring[k]->is_empty()){
+                counter++;
+            }
+        }
+        *//*Jump out when there is no on-ring packet in all rings*//*
+        if(counter == GlobalParameter::ring.size()) break;
+
+        GlobalParameter::global_cycle++;
+    }
+
+    for(int i=0;i<64;i++){
+        cout <<"Node " <<i <<":  "<<m_node[i]->left_injection_queue_packet() << endl;
+    }*/
+    stat_gather();
     /*Console Output*/
     cout << endl;
     cout << "\t" << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
@@ -56,6 +81,7 @@ void Noc::run() {
          << "\t" << "Total Warm up cycle: " << GlobalParameter::sim_warmup << endl
          << "\t" << "Total Sim cycle " << GlobalParameter::sim_time - GlobalParameter::sim_warmup << endl
          << *m_stat;
+    cout << endl << flit_num_correction << endl << packet_num_correction;
     /*File Output*/
     PLOG_INFO_(1) << endl
          << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
@@ -93,7 +119,6 @@ Noc::Noc() {
 Noc::~Noc() {
 
     free_vetor<Node*>(m_node);
-    delete GlobalParameter::ring_algorithm;
     delete GlobalParameter::traffic;
     GlobalParameter::ring_algorithm = nullptr;
     GlobalParameter::traffic = nullptr;
@@ -119,11 +144,12 @@ void Noc::init_ring() {
     }
     /*Generate results of ring topology*/
     GlobalParameter::ring_algorithm->topology_generate(m_tuple);
+    delete GlobalParameter::ring_algorithm;
+
     /*New rings through RingTopologyTuple*/
     for(int i = 0;i < m_tuple.size(); i++){
         GlobalParameter::ring[i] = new Ring(i, m_tuple[i],m_node);
     }
-
     free_vetor<RingTopologyTuple*>(m_tuple);
     for(int j = 0; j < m_node.size(); j++){
         m_node[j]->init();
@@ -206,7 +232,6 @@ int Noc::stat_correction() {
     for(int i = 0; i < GlobalParameter::ring.size(); i++){
         packet_num_correction += GlobalParameter::ring[i]->left_packet();
         flit_num_correction += GlobalParameter::ring[i]->left_flit();
-
     }
     for(int j = 0; j < m_size * m_size; j++){
         packet_num_correction += m_node[j]->left_injection_queue_packet();
