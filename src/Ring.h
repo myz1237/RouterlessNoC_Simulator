@@ -35,10 +35,14 @@ public:
     inline bool is_empty()const{return m_packet.empty();}
 
     /**
-     * @brief  Stat how many packets are left after the warm up stage and simulation
+     * @brief  Count the number of packets left after the warm up stage
      */
-    inline int left_packet_num()const{return m_packet.size();}
+    inline int left_packet()const{return m_packet.size();}
 
+    /**
+     * @brief  Count the number of flits left after the warm up stage
+     */
+    int left_flit();
     /**
      * @brief  Simulate wires' actions
      *         Move on-ring packets forward

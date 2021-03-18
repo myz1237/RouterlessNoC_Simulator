@@ -1,5 +1,12 @@
 #include "Injection.h"
 
+int Injection::left_flit_in_queue() {
+    int left_flit = 0;
+    for(int i = 0; i < m_injection_queue.size(); i++){
+        left_flit += m_injection_queue[i]->length;
+    }
+    return left_flit;
+}
 
 void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_id) {
     Packet* p;
@@ -17,7 +24,7 @@ void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_
 
 void Injection::inject_new_packet(int ring_index) {
 
-    Packet* p = new Packet(m_local_id,m_packetinfo.front());
+    Packet* p = new Packet(m_local_id, m_injection_queue.front());
 
     GlobalParameter::ring.at(m_curr_ring_id->at(ring_index))->attach(p);
 
@@ -32,10 +39,10 @@ void Injection::inject_new_packet(int ring_index) {
                    <<" Flit Complete injection Flit 0 at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
     }
 
-    delete m_packetinfo.front();
-    m_packetinfo.front() = nullptr;
+    delete m_injection_queue.front();
+    m_injection_queue.front() = nullptr;
     /*Injection Complete, delete the first element and move forward the queue*/
-    m_packetinfo.erase(m_packetinfo.begin());
+    m_injection_queue.erase(m_injection_queue.begin());
 
     PLOG_DEBUG_IF(p->get_length() == 1) << "Single Packet " << p->get_id()
                                         << " Complete injection at Node " << m_local_id << " Dst " <<  p->get_dst() << " in Cycle " << GlobalParameter::global_cycle;
@@ -79,11 +86,11 @@ Injection::Injection(int node_id, vector<int>* curr_ring_id):
 
 Injection::~Injection() {
 #if DEBUG
-    PLOG_DEBUG_IF(!m_packetinfo.empty()) << "Node " << m_local_id <<
-                                         " Remaining Packet Info " << m_packetinfo.size();
+    PLOG_DEBUG_IF(!m_injection_queue.empty()) << "Node " << m_local_id <<
+                                         " Remaining Packet Info " << m_injection_queue.size();
 #endif
-    GlobalParameter::unrecv_packet_num += m_packetinfo.size();
-    free_vetor<Packetinfo*>(m_packetinfo);
+    GlobalParameter::unrecv_packet_num += m_injection_queue.size();
+    free_vetor<Packetinfo*>(m_injection_queue);
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;
     m_ongoing_packetinfo = nullptr;
@@ -91,8 +98,8 @@ Injection::~Injection() {
 }
 
 void Injection::print_packetinfo() {
-    for(int i = 0; i < m_packetinfo.size();i++){
-        cout << "Node " << m_local_id << "   " << *m_packetinfo[i];
+    for(int i = 0; i < m_injection_queue.size(); i++){
+        cout << "Node " << m_local_id << "   " << *m_injection_queue[i];
     }
 }
 
@@ -100,8 +107,10 @@ void Injection::packetinfo_attach(Packetinfo *info, int cycle){
     //src和dst不相等 添加该包信息
     PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
               << " in Cycle " << cycle;
-    m_packetinfo.push_back(info);
+    m_injection_queue.push_back(info);
 }
+
+
 
 
 

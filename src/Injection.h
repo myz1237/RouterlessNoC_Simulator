@@ -44,19 +44,22 @@ public:
     inline int get_ongoing_ring_index()const{return m_injecting_ring_index;}
     inline bool is_injection_interrupted()const{return m_interrupt;}
     inline void set_interrupt(bool status){m_interrupt = status;}
-    inline bool is_packetinfo_empty()const{return m_packetinfo.empty()?true:false;}
+    inline bool is_packetinfo_empty()const{return m_injection_queue.empty() ? true : false;}
 
     /**
      * @brief Return the oldest packetinfo to the node
      */
-    inline Packetinfo* get_new_packetinfo()const{return m_packetinfo.front();}
+    inline Packetinfo* get_new_packetinfo()const{return m_injection_queue.front();}
 
     /**
-     * @brief Get the size of injection queue
-     *        Called to calculate how many packetinfo leaves when simulation ends
+     * @brief Get the size of injection queue when warmup ends
      */
-    int left_packetinfo_num()const{return m_packetinfo.size();}
+    int left_packet_in_queue()const{return m_injection_queue.size();}
 
+    /**
+     * @brief Get the number of flits left when warmup ends
+     */
+    int left_flit_in_queue();
     /**
      * @brief Send control packet for each ring across the current node
      *        This function does not obey the sequential injection,
@@ -118,9 +121,9 @@ private:
     bool m_interrupt;
 
     /* Injection Queue
-     * Always access the first element(also the oldest one)
+     * Always access the first element(the oldest one)
      * */
-    vector<Packetinfo*> m_packetinfo;
+    vector<Packetinfo*> m_injection_queue;
 
     /*A pointer to ring_id vector stored in Node object*/
     vector<int>* m_curr_ring_id;

@@ -112,7 +112,8 @@ public:
      * @brief return the number of packetinfo in the injection queue
      *        Injection Pimpl
      */
-    int left_injecting_packet_num()const;
+    int left_injection_queue_packet()const;
+    int left_injection_queue_flit()const;
     void init();
 
     Node(int node_id);

@@ -10,12 +10,17 @@
 // Debug Defines. Set 1 to print flood of information of Packet and EXB
 //------------------------------------------------------------------------
 #define DEBUG 0
+#define CONSOLE_OUPTUT 1
 
 int main() {
     //Log System Initial
+#if CONSOLE_OUPTUT
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
-
+#else
+    plog::init(plog::debug, "../Log/runtime.txt", 1000000);
+#endif
+    plog::init<1>(plog::debug, "../Log/result.txt", 1000000);
     /*Set system time as a seed*/
     //random_seed(time(NULL));
 

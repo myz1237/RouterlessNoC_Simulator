@@ -5,17 +5,17 @@ YAML::Node conf;
 
 void configure() {
 
-    cout << "Load Configuration file.." << endl;
+    PLOG_INFO << "Load Configuration file.." << endl;
     try {
         conf = YAML::LoadFile("../configure/configure.yaml");
-        cout << "Done" << endl;
+        PLOG_INFO << "Done" << endl;
     }catch(YAML::BadFile &e){
-        cout << " Failed" << endl;
-        cerr << "Error: The specified YAML configuration file was not found!" << endl;
+        PLOG_ERROR << " Failed" << endl;
+        PLOG_ERROR << "Error: The specified YAML configuration file was not found!" << endl;
         exit(0);
     } catch (YAML::ParserException &pe){
-        cout << " Failed" << endl;
-        cerr << "ERROR at line " << pe.mark.line +1 << " column " << pe.mark.column + 1 << ": "<< pe.msg << ". Please check indentation." << endl;
+        PLOG_ERROR << " Failed" << endl;
+        PLOG_ERROR << "ERROR at line " << pe.mark.line +1 << " column " << pe.mark.column + 1 << ": "<< pe.msg << ". Please check indentation." << endl;
         exit(0);
     }
 

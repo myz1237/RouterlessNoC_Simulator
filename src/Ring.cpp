@@ -1,5 +1,16 @@
 #include "Ring.h"
 
+int Ring::left_flit() {
+    int left_flit = 0;
+    for(int i = 0; i<m_packet.size(); i++){
+        for(int j = 0; j<m_packet[i]->get_length(); j++){
+            if(m_packet[i]->get_flit_status(j) != Ejected)
+                left_flit++;
+        }
+    }
+    return left_flit;
+}
+
 /*Loop to find Flits with 'Routing' status and assign these flits to the next node id*/
 void Ring::update_curr_hop() {
     int curr_node;

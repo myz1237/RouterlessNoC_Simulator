@@ -39,12 +39,17 @@ private:
 
     /*Statistics usage, correct the num of received packets during the simulation*/
     int packet_num_correction;
+    /*Statistics usage, correct the num of received flits during the simulation*/
+    int flit_num_correction;
 
     /*Node sets*/
     vector<Node *> m_node;
 
     /*Direct results of Ring Topology Algorithms*/
     vector<RingTopologyTuple*>m_tuple;
+
+    /*Record Statistics Data*/
+    Stat* m_stat;
 
     void initial();
     void init_ring();
@@ -62,7 +67,7 @@ private:
      *        and the number of packetinfo in injection queues during the warm_up stage
      *        Aim to figure out the exact number of received packets during the simulation
      */
-    int left_packet_num_gather();
+    int stat_correction();
 
     void packet_tracer();
 

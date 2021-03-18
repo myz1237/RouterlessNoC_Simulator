@@ -46,8 +46,12 @@ void Node::handle_control_packet() {
     ej_fwd_control_packet();
 }
 
-int Node::left_injecting_packet_num() const {
-    return m_inject->left_packetinfo_num();
+int Node::left_injection_queue_packet()const{
+    return m_inject->left_packet_in_queue();
+}
+
+int Node::left_injection_queue_flit()const{
+    return m_inject->left_flit_in_queue();
 }
 
 void Node::init() {
@@ -675,9 +679,9 @@ ostream& operator<<(ostream& out, Stat& stat){
     //不等0说明是NoC调用 因为Node是不计算下面四个指标的 默认为0
     if(stat.flit_throughput != 0)
         out  << "\t" << "Flit Throughput: " << stat.flit_throughput << endl
-              << "\t" << "Packet Throughput: " << stat.packet_throughput << endl
-              << "\t" << "Average Flit Latency: " << stat.avg_flit_latency << endl
-              << "\t" << "Average Packet Latency: " << stat.avg_packet_latency << endl;
+             << "\t" << "Packet Throughput: " << stat.packet_throughput << endl
+             << "\t" << "Average Flit Latency: " << stat.avg_flit_latency << endl
+             << "\t" << "Average Packet Latency: " << stat.avg_packet_latency << endl;
     return out;
 }
 
