@@ -12,18 +12,21 @@
 
 #ifndef NOCSIM_ROUTINGTABLE_H
 #define NOCSIM_ROUTINGTABLE_H
-
+#include "Ring.h"
 #include <vector>
 #include <algorithm>
+class Ring;
 using namespace std;
 
 typedef struct RoutingTable{
 
-    int node_id;   /*ID of destination*/
-    int ring1_id;  /*Shortest path*/
-    int ring1_hop;
-    int ring2_id;  /*Second choice, may be the same as the ring1_id*/
-    int ring2_hop;
+    int node_id;                     /*ID of destination*/
+    int routing_index;               /*Point to the next Routing Info*/
+    vector<pair<int, int>> routing;  /*Routing Info: Ring ID + Hop Count*/
+
+    void table_sort();               /*Sort Routing Info by Hop Count in the increasing order*/
+    void reset_index(){routing_index = 0;}
+    ~RoutingTable();
 }RoutingTable;
 
 /**
@@ -36,9 +39,9 @@ typedef struct Routingsnifer {
 }Routingsnifer;
 
 /**
- * @brief Update the current routing table when receiving one routing msg from a control packet
+ * @brief Update the current routing routing when receiving one routing msg from a control packet
  * @param ring_id Id of the ring where the node receive a control packet
  */
 void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&temp, int ring_id);
-void swap(Routingsnifer* snifer, RoutingTable* table, int ring_id);
+static bool table_comp(pair<int, int>&a, pair<int, int>&b){return a.second < b.second;}
 #endif //NOCSIM_ROUTINGTABLE_H

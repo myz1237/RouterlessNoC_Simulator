@@ -6,10 +6,15 @@ void Node::run(long cycle) {
 #endif
     int handled_ring_index;
     int index;
+
+    reset_routing_table_index();
+    reset_self_loop_counter();
+
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
     recv_flit();
     ej_arbitrator();
     handled_ring_index = inject_eject();
+
     /*Handle the rest of packets*/
     for(int i = 0; i < m_ej_order.size(); i++){
         index = m_ej_order[i].first;
@@ -20,7 +25,7 @@ void Node::run(long cycle) {
             handle_rest_flit(m_ej_order[i].second, index);
         }
     }
-
+    /*Clear Input Buffer, wait for next cycle*/
     reset_single_buffer();
     vector<pair<int,int>>().swap(m_ej_order);
 
@@ -31,36 +36,11 @@ void Node::run(long cycle) {
 #endif
 }
 
-void Node::testrun(long cycle) {
-#if DEBUG
-    PLOG_INFO << "Node " << m_node_id << " First Print ";
-    m_exb_manager->Exb_tracer();
-#endif
-    int handled_ring_index;
-    int index;
-    //m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
-    recv_flit();
-    ej_arbitrator();
-    handled_ring_index = inject_eject();
-    /*Handle the rest of packets*/
-    for(int i = 0; i < m_ej_order.size(); i++){
-        index = m_ej_order[i].first;
-        /*Except the single buffer handled above*/
-        if(index == handled_ring_index){
-            continue;
-        }else{
-            handle_rest_flit(m_ej_order[i].second, index);
-        }
+void Node::sort_routing_table() {
+    int size = m_table.size();
+    for(int i = 0; i < size; i++){
+        m_table[i]->table_sort();
     }
-
-    reset_single_buffer();
-    vector<pair<int,int>>().swap(m_ej_order);
-
-#if DEBUG
-    PLOG_INFO << "Node " << m_node_id << " Second Print ";
-    PLOG_INFO << "Node " << m_node_id << " EXB Tracer";
-    m_exb_manager->Exb_tracer();
-#endif
 }
 
 void Node::reset_stat() {
@@ -72,6 +52,7 @@ void Node::inject_control_packet() {
 }
 
 void Node::handle_control_packet() {
+
     recv_flit();
     ej_arbitrator();
     ej_fwd_control_packet();
@@ -116,7 +97,28 @@ void Node::node_info_output() {
     cout << m_stat;
 }
 
+void Node::print_routing_table() {
+    int size = m_table.size();
+    for(int i = 0; i < size; i++){
+        RoutingTable* table = m_table[i];
+        PLOG_INFO_(1) << "Node: " << m_node_id << " To Node: " << table->node_id;
+        int table_size = table->routing.size();
+        for(int j = 0;j < table_size; j++){
+            PLOG_INFO_(1) << "Available Ring: " << table->routing[j].first
+            << " Hop Count: " << table->routing[j].second;
+        }
+    }
+}
+
+void Node::reset_routing_table_index() {
+    int size =m_table.size();
+    for(int i = 0; i < size; i++){
+        m_table[i]->reset_index();
+    }
+}
+
 void Node::update_flit_stat(int latency) {
+
     m_stat.received_flit++;
     m_stat.flit_delay += latency;
 
@@ -126,6 +128,7 @@ void Node::update_flit_stat(int latency) {
 }
 
 void Node::update_packet_stat(int latency, long packet_id) {
+
     m_stat.received_packet++;
     m_stat.packet_delay += latency;
 
@@ -167,7 +170,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     update_flit_stat(flit->calc_flit_latency());
 
     if (type == Control){
-        /*Extract Routing msg from the control Packet and Update the current routing table*/
+        /*Extract Routing msg from the control Packet and Update the current routing routing*/
         update_routing_table(flit->get_flit_routing(),m_table, ring_id);
         update_packet_stat(flit->calc_flit_latency(),flit->get_packet_id());
 
@@ -177,7 +180,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     }else if (type == Header){
 
         if(GlobalParameter::ring[ring_id]->
-                find_packet_length(flit->get_packet_id()) == 1){
+                find_packet_length_by_ID(flit->get_packet_id()) == 1){
             update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
 
             PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
@@ -255,6 +258,8 @@ void Node::ej_arbitrator() {
         ctime[i].first = i;
         if(m_single_buffer[i] != nullptr &&
         m_single_buffer[i]->get_flit_dst() == m_node_id){
+            if(m_single_buffer[i]->get_hop() > 255)
+                exit(0);
             FlitType type = m_single_buffer[i]->get_flit_type();
             long packet_id = m_single_buffer[i]->get_packet_id();
             int seq = m_single_buffer[i]->get_sequence();
@@ -328,7 +333,7 @@ bool Node::check_record(long packet_id, int seq){
     vector<pair<long, int>>::iterator it = find(m_ej_record.begin(),
                                                m_ej_record.end(),make_pair(packet_id,seq));
     if(it == m_ej_record.end()){
-        //没找到
+        /*No Record Found*/
         return false;
     }else{
         return true;
@@ -348,14 +353,11 @@ void Node::update_record(long packet_id, int type){
                 m_ej_record.erase(m_ej_record.begin()+i);
                 return;
             }
-            //指向下一个flit
+            /*Increase the Expected Sequence Number by 1*/
             m_ej_record[i].second++;
             return;
         }
     }
-    /*Only for test*/
-    if(i == m_ej_record.size())
-        cerr << "Error in Recording" << endl;
 }
 
 /* Null buffer or buffer to be ejected, check whether this buffer is bound with an EXB
@@ -387,7 +389,6 @@ void Node::handle_rest_flit(int action, int single_flit_index) {
 /*Please check the paper for details*/
 int Node::inject_eject() {
 
-    int try_again = 0;
     int return_ring_index;
     int ring_index;
     int action;
@@ -404,7 +405,10 @@ int Node::inject_eject() {
             p = m_inject->get_new_packetinfo();
             length = p->length;
 
-here:       ring_index = ring_selection(p->dst, try_again);
+here:       ring_index = ring_selection(p->dst);
+            /*Have tries all options, No rings available this cycle*/
+            if(ring_index == -1) return -1;
+
             action = get_single_buffer_action(ring_index);
             exb_index = m_exb_manager->check_exb_bound(ring_index);
             exb_available_index = m_exb_manager->exb_available();
@@ -418,14 +422,9 @@ here:       ring_index = ring_selection(p->dst, try_again);
                         /*No bound, directly inject this one-flit packet*/
                         m_inject->inject_new_packet(ring_index);
                     }else{
-                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                            try_again++;
-                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                            goto here;
-                        }
-                        /*Bound, pop one flit from EXB*/
-                        m_exb_manager->pop(exb_index, m_node_id);
+                        /*Bound, fail to inject*/
+                        /*Try another Ring*/
+                        goto here;
                     }
 
                     if(action == -3){
@@ -434,35 +433,20 @@ here:       ring_index = ring_selection(p->dst, try_again);
                     }
 
                 }else{
-                    /*Single buffers need to be forwarded, no injection*/
-                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                        try_again++;
-                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                        goto here;
-                    }
-                    if(exb_index != -1){
-                        m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
-                    }else{
-                        /*No bound, directly forward*/
-                        forward(m_single_buffer[ring_index]);
-                    }
+                    /*Received Flit needs to be forwarded, fail to inject*/
+                    /*Try another Ring*/
+                    goto here;
                 }
             }else{
                 /*Long Packet with more than 1 flit*/
-                if(action == -2){
+                if(action == -2 || action == -3){
 
                     if(exb_index != -1){
                         /*Bound, injection cancelled*/
-                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                            try_again++;
-                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                            goto here;
-                        }
-                        m_exb_manager->pop(exb_index, m_node_id);
-                    }else{
+                        /*Try another Ring*/
+                        goto here;
 
+                    }else{
                         if(exb_available_index != -1){
                             /*No bound and exb available*/
                             /*Bind this exb to the single buffer*/
@@ -471,89 +455,25 @@ here:       ring_index = ring_selection(p->dst, try_again);
                                          << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                             /*Inject the header flit of the long packet*/
                             m_inject->inject_new_packet(ring_index);
+                            if(action == -3){
+                                ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
+                            }
                         }else{
                             /*No action if exb unavailable*/
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                                goto here;
-                            }
+                            /*Wait for next cycle to inject*/
+                            return_ring_index = -1;
                         }
                     }
-
-                }else if(action == -3){
-
-                    if(exb_index != -1){
-
-                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                            try_again++;
-                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                            goto here;
-                        }
-                        m_exb_manager->pop(exb_index, m_node_id);
-               /*       remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index) + 1;
-                        if(remaining_exb_size >= length){
-                            PLOG_WARNING << "EXB " << exb_index << " is Rebound with single buffer "
-                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-                            //还有位置
-                            m_inject->inject_new_packet(ring_index);
-                        }else{
-                            //没位置了 不注入新的packet了 弹出exb中的一个flit
-
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                                goto here;
-                            }
-                            m_exb_manager->pop(exb_index, m_node_id);
-                        }*/
-                    }else{
-                        if(exb_available_index != -1){
-                            //有可用exb 绑上
-                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
-                            PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
-                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-                            //产生新的packet
-                            m_inject->inject_new_packet(ring_index);
-                        }else{
-                            //无可用exb No Action
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                goto here;
-                            }
-
-                        }
-                    }
-                    /*No matter how the condition is, remember to eject this single buffer*/
-                    ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
-
                 }else{
-                    /*Single buffers need to be forwarded, No injection*/
-                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                        try_again++;
-                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                        goto here;
-                    }
-
-                    if(exb_index != -1){
-                        m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
-                    }else{
-                        forward(m_single_buffer[ring_index]);
-                    }
+                    /*Received Flit needs to be forwarded, No injection*/
+                    /*Try another Ring*/
+                    goto here;
                 }
-
             }
-
         }else{
             /*Empty injection queue*/
             return_ring_index = -1;
         }
-
-
     }else{
         /*Injection is going on, inject the rest flits of the previous packet*/
         continue_inject_packet();
@@ -582,9 +502,8 @@ void Node::continue_inject_packet() {
     int ring_index = m_inject->get_ongoing_ring_index();
     int action = get_single_buffer_action(ring_index);
 
-    /*Only for test*/
     int exb_index = m_exb_manager->check_exb_bound(ring_index);
-    PLOG_ERROR_IF(exb_index == -1) << "Error in checking EXB Bound in Continue Injection";
+    /*PLOG_ERROR_IF(exb_index == -1) << "Error in checking EXB Bound in Continue Injection";*/
     int remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index);
 
     /*Find the first flit to be injected*/
@@ -593,9 +512,9 @@ void Node::continue_inject_packet() {
             break;
         }
     }
-    PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection"
+    /*PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection"
     << " Packet ID " << p->get_id() << " Size " << p->get_length() << " in Node " << m_node_id
-    << " in Cycle " << GlobalParameter::global_cycle;
+    << " in Cycle " << GlobalParameter::global_cycle;*/
 
     if(action == -2 || action == -3){
 
@@ -670,26 +589,34 @@ void Node::continue_inject_packet() {
 }
 
 RoutingTable *Node::search_routing_table(int dst_id) {
-    for(int i =0; i < m_table.size(); i++){
+    int size = m_table.size();
+    for(int i =0; i < size; i++){
         if(dst_id == m_table[i]->node_id){
             return m_table[i];
         }
     }
 }
 
-int Node::ring_selection(int dst, int index) {
-    RoutingTable* table = search_routing_table(dst);
-    if(index){
-        return ring_to_index(table->ring2_id);
-    }else{
-        return ring_to_index(table->ring1_id);;
+int Node::ring_selection(int dst) {
+    if(dst == m_node_id){
+        int size = m_curr_ring_id.size();
+        /*Have tries all options, No rings available this cycle*/
+        if(m_self_loop_counter == size) return -1;
+        return m_self_loop_counter++;
     }
+    RoutingTable* table = search_routing_table(dst);
+    int routing_table_size = table->routing.size();
+    int &routing_index = table->routing_index;
 
+    /*Have tries all options, No rings available this cycle*/
+    if(routing_index == routing_table_size) return -1;
+
+    return ring_to_index(table->routing[routing_index++].first);
 }
 
 int Node::ring_to_index(int ring_id) {
     vector<int>::iterator it = find(m_curr_ring_id.begin(), m_curr_ring_id.end(), ring_id);
-    //拿到该ringid对应的索引
+    /*Get the index of rings across this node*/
     return distance(m_curr_ring_id.begin(), it);
 }
 
@@ -716,20 +643,6 @@ ostream& operator<<(ostream& out, Stat& stat){
     return out;
 }
 
-
-ostream& operator<<(ostream& out, Node& node){
-    int size = node.m_table.size();
-    out << "Node" << node.get_node_id() << " " << "Routing Table:"<< endl;
-    out << "Number of list: " << size  <<endl;
-    for(int j = 0; j < size; j++){
-        out << node.m_table[j]->node_id
-            << "   " << node.m_table[j]->ring1_id
-            << "   " << node.m_table[j]->ring1_hop
-            << "   " <<node.m_table[j]->ring2_id
-            << "   " << node.m_table[j]->ring2_hop << endl;
-    }
-    return out;
-}
 bool operator==(const pair<long, int>& a, const pair<long, int>& b){
     return a.first == b.first && a.second == b.second;
 }

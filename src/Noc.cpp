@@ -11,10 +11,12 @@ void Noc::run() {
     if(GlobalParameter::sim_detail){
         /*Output the Routing Table of Each Node*/
         for(int i = 0; i< m_node.size(); i++){
-            cout << *m_node[i];
+            m_node[i]->print_routing_table();
         }
-        cout << endl << endl;
     }
+/*    for(int i = 0; i< m_node.size(); i++){
+        m_node[i]->adjust_routing_table();
+    }*/
 
     /*Clear variables*/
     GlobalParameter::packet_id = 0;
@@ -22,7 +24,7 @@ void Noc::run() {
 
     /*Main Loop of the Simulation*/
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
-
+        //random_seed(time(NULL));
         PLOG_INFO << "This is Cycle " << GlobalParameter::global_cycle;
 #if DEBUG
         packet_tracer();
@@ -41,11 +43,17 @@ void Noc::run() {
         if(GlobalParameter::global_cycle == GlobalParameter::sim_warmup){
             reset_stat();
             warm_up_packet = GlobalParameter::packet_id + 1;
-            stat_correction();
+            //stat_correction();
             PLOG_INFO << "Warm Up Ends!";
         }
 
         GlobalParameter::global_cycle++;
+/*        for(int q = 0; q < m_node.size(); q++){
+            if(m_node[q]->get_max_packet_delay() == 23){
+                PLOG_INFO_(1) << "Time when it occurs: "<<GlobalParameter::global_cycle;
+                return;
+            }
+        }*/
     }
 
 /*    while(1){
@@ -54,7 +62,6 @@ void Noc::run() {
             GlobalParameter::ring[k]->update_curr_hop();
         }
 
-        *//*Receive incoming packets, injection, ejection and buffered*//*
         for(int q = 0; q < m_node.size(); q++){
             m_node[q]->testrun(GlobalParameter::global_cycle);
         }
@@ -64,15 +71,15 @@ void Noc::run() {
                 counter++;
             }
         }
-        *//*Jump out when there is no on-ring packet in all rings*//*
+
         if(counter == GlobalParameter::ring.size()) break;
 
         GlobalParameter::global_cycle++;
-    }
+    }*/
 
     for(int i=0;i<64;i++){
         cout <<"Node " <<i <<":  "<<m_node[i]->left_injection_queue_packet() << endl;
-    }*/
+    }
     stat_gather();
     /*Console Output*/
     cout << endl;
@@ -98,7 +105,6 @@ void Noc::run() {
          << "Packet Throughput: " << m_stat->packet_throughput << endl
          << "Average Flit Latency: " << m_stat->avg_flit_latency << endl
          << "Average Packet Latency: " << m_stat->avg_packet_latency;
-
 }
 
 Noc::Noc() {
@@ -182,6 +188,11 @@ void Noc::init_routing_table() {
         /*Jump out when there is no on-ring packet in all rings*/
         if(counter == GlobalParameter::ring.size()) break;
     }
+
+    for(int g = 0; g < m_node.size(); g++){
+        m_node[g]->sort_routing_table();
+    }
+
 }
 
 int Noc::cal_ring_num(int mesh_x)const {
@@ -193,8 +204,8 @@ int Noc::cal_ring_num(int mesh_x)const {
 void Noc::stat_gather() {
     int recv_flit = 0;
     int recv_packet = 0;
-    int flit_latency = 0;
-    int packet_latency = 0;
+    long flit_latency = 0;
+    long packet_latency = 0;
     int max_flit_delay = 0;
     int max_packet_delay = 0;
     long packet_id_for_max_delay = 0;
@@ -242,7 +253,7 @@ int Noc::stat_correction() {
 
 void Noc::packet_tracer(){
     for(int j = 0;j< GlobalParameter::ring.size(); j++){
-        GlobalParameter::ring[j]->print_packet_info();
+        GlobalParameter::ring[j]->print_onring_packet_flit_info();
     }
 }
 

@@ -57,7 +57,7 @@ void Ring::dettach(long packet_id) {
     }
 }
 
-int Ring::find_packet_length(long packet_id) {
+int Ring::find_packet_length_by_ID(long packet_id) {
     for(int i = 0; i < m_packet.size(); i++){
         if(m_packet[i]->get_id() == packet_id){
             return m_packet[i]->get_length();
@@ -74,6 +74,7 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
     int width = (ring_tuple->m_lr - ring_tuple->m_ul) / size;
     for(int i = 0; i<=length-1 ; i++){
         m_ring_node_order.push_back(ring_tuple->m_ul+i);
+
         /*Record this ring id to the node's vector, m_curr_ring_id*/
         node[ring_tuple->m_ul+i]->set_curr_ring(ring_id);
     }
@@ -89,7 +90,7 @@ Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
         m_ring_node_order.push_back(ring_tuple->m_ul+q*size);
         node[ring_tuple->m_ul+q*size]->set_curr_ring(ring_id);
     }
-    //逆时针需要翻转
+    /*Reverse needed, if anti-clockwise*/
     if(ring_tuple->m_dir == 1){
         reverse(m_ring_node_order.begin(),m_ring_node_order.end());
     }
@@ -120,14 +121,14 @@ int Ring::find_next_node(int curr_node) {
     return *(it+1);
 }
 
-void Ring::print_ring_order() {
+void Ring::print_node_order_0n_ring() {
     for(int i=0; i<m_ring_node_order.size();i++){
         cout<< m_ring_node_order.at(i)<<"  ";
     }
     cout << endl;
 }
 
-void Ring::print_packet_info(){
+void Ring::print_onring_packet_flit_info(){
     for(int i=0; i<m_packet.size();i++){
         PLOG_INFO<< "Packet ID " << m_packet[i]->get_id() << " Sourece "
                  << m_packet[i]->get_src()<< " Dest "<< m_packet[i]->get_dst();
@@ -136,6 +137,16 @@ void Ring::print_packet_info(){
             << " Status " << m_packet[i]->get_flit_status(j);
         }
 
+    }
+}
+
+void Ring::print_packet_info(long packet_id) {
+    for (int i = 0; i < m_packet.size(); i++) {
+        if (m_packet[i]->get_id() == packet_id) {
+            PLOG_INFO_(1) << "Packet ID " << m_packet[i]->get_id() << " Sourece "
+                          << m_packet[i]->get_src() << " Dest " << m_packet[i]->get_dst()
+                          << " Ring ID: " << m_ring_id;
+        }
     }
 }
 

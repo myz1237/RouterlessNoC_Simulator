@@ -1,0 +1,12 @@
+﻿2021-03-21 00:54:11.512 INFO  Warmup Cycle: 10000
+2021-03-21 00:54:11.512 INFO  Simulation Cycle: 100000
+2021-03-21 00:54:11.512 INFO  Injection Rate: 0.005
+2021-03-21 00:54:11.512 INFO  Injection Queue: 10
+2021-03-21 00:54:11.512 INFO  Traffic Type: Uniform
+2021-03-21 00:54:11.512 INFO  Packet Size: Random
+2021-03-21 00:54:11.512 INFO  EXB Strategy: Max
+2021-03-21 00:54:11.512 INFO  Routing Strategy: Shortest
+2021-03-21 00:54:11.722 INFO  Packet ID 263 Sourece 2 Dest 17 Ring ID: 25
+2021-03-21 00:54:11.722 INFO  Time when it occurs: 800
+2021-03-21 00:54:11.723 INFO  UnReceived Packet：1
+

@@ -20,6 +20,7 @@
 #include "RoutingTable.h"
 using namespace std;
 class Packet;
+class Routingsnifer;
 
 /**
  * @brief Intermediate variable for Packet
@@ -39,7 +40,7 @@ enum FlitType{
     Header,
     Payload,
     Tail,
-    Control /*Only for Routing table generation*/
+    Control /*Only for Routing routing generation*/
 };
 
 /**
@@ -70,7 +71,7 @@ public:
     inline int get_sequence()const{return m_sequence;}
     inline int get_hop()const{return m_hop;}
     inline void set_flit_status(FlitStatus status){ m_status = status;}
-    inline void set_atime(int cycle){m_atime = cycle;}
+    inline void set_atime(long cycle){m_atime = cycle;}
     int calc_flit_latency()const;
 
     virtual void update_routing_snifer() {}
@@ -83,14 +84,14 @@ public:
     const long m_packet_id;
     const int m_src_id;
     const int m_dst_id;
-    const FlitType m_type;
-    const int m_sequence; /*Sequence Num, located the position of the flit in the packet 0--(length-1)*/
-    const int m_ctime;    /*Creation Time, expressed in cycle*/
+    const FlitType m_type;  /*Header, Payload, Tail, Control*/
+    const int m_sequence;   /*Sequence Num, located the position of the flit in the packet 0--(length-1)*/
+    const int m_ctime;      /*Creation Time, expressed in cycle*/
 
-    int m_atime;          /*Arrive Time Default Value: -1---Not Arrive*/
-    int m_hop;            /*Record current hop count*/
-    int m_curr_node;      /*Current node of the flit. Update at the beginning of each cycle*/
-    FlitStatus m_status;  /*Store routing msg from various rings, only used when control packets are sent*/
+    int m_atime;            /*Arrive Time Default Value: -1---Not Arrive*/
+    int m_hop;              /*Record current hop count*/
+    int m_curr_node;        /*Current node of the flit. Update at the beginning of each cycle*/
+    FlitStatus m_status;    /*Store routing msg from various rings, only used when control packets are sent*/
 
 };
 
@@ -170,6 +171,7 @@ private:
     const int m_dst_id;
     const int m_ctime;
     int m_curr_node;
+
     /*Store and manipulate flits*/
     vector<Flit*>m_flit;
 
@@ -179,6 +181,7 @@ private:
     void attach(Flit* flit);
 
 };
+
 /*Output packet information*/
 ostream& operator<<(ostream& out, Packet& p);
 /*Output packetinfo information*/

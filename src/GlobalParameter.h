@@ -58,15 +58,14 @@ namespace GlobalParameter{
     extern int long_packet_size;
     extern int short_packet_size;
     extern int method_size_generator;
-    extern int long_packet_ratio;
-    extern int short_packet_ratio;
+    extern vector<pair<int, int>> packet_size_with_ratio;
     extern RingStrategy ring_strategy;
     extern ExbStrategy exb_strategy;
     extern int exb_num;
     extern int ej_port_nu;
     extern RoutingStrategy routing_strategy;
     extern TrafficType traffic_type;
-    extern vector<pair<int, int>>hotspot;
+    extern vector<pair<int, int>> hotspot;
     extern int sim_time;
     extern int sim_warmup;
     extern int sim_detail;
@@ -86,6 +85,11 @@ namespace GlobalParameter{
     extern bool enable_interrupt;
     /*Record the number of packets in rings or injection queues*/
     extern int unrecv_packet_num;
+
+    extern int psum;
+
+
+
 
 }
 

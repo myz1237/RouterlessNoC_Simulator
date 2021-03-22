@@ -25,8 +25,6 @@ void configure() {
     GlobalParameter::long_packet_size = readParam<int>(conf,"long_packet_size",5);
     GlobalParameter::short_packet_size = readParam<int>(conf,"short_packet_size",1);
     GlobalParameter::method_size_generator = readParam<int>(conf,"method_size_generator",0);
-    GlobalParameter::short_packet_ratio = readParam<int>(conf,"short_ratio",8);
-    GlobalParameter::long_packet_ratio = readParam<int>(conf,"long_ratio",2);
     string ring_strategy = readParam<string>(conf,"ring_strategy","RLrec");
     string exb_strategy = readParam<string>(conf,"exb_strategy","Max");
     GlobalParameter::exb_num = readParam<int>(conf,"exb_num",2);
@@ -84,6 +82,18 @@ void configure() {
     if(GlobalParameter::sim_time < GlobalParameter::sim_warmup){
         cerr << "Error: Sim_time must be greater than sim_warmup" << endl;
         exit(0);
+    }
+
+    if(GlobalParameter::method_size_generator == 1){
+        int size;
+        int p;
+        for(YAML::const_iterator it= conf["packet_ratio"].begin(); it != conf["packet_ratio"].end();++it)
+        {
+            size = it->first.as<int>();
+            p = it->second.as<int>();
+            GlobalParameter::psum += p;
+            GlobalParameter::packet_size_with_ratio.emplace_back(size, p);
+        }
     }
 
     if(GlobalParameter::traffic_type == Hotspot){

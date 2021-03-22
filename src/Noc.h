@@ -30,6 +30,7 @@ class Noc {
 public:
 
     void run();
+    void test();
     Noc();
     ~Noc();
 

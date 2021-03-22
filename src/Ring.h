@@ -32,6 +32,8 @@ class Ring {
 
 public:
 
+    inline int get_ring_size()const{return m_ring_node_order.size();}
+    inline void attach(Packet* p){m_packet.push_back(p);}
     inline bool is_empty()const{return m_packet.empty();}
 
     /**
@@ -56,14 +58,12 @@ public:
      */
     Flit* flit_check(int node_id);
 
-    inline void attach(Packet* p){m_packet.push_back(p);}
-
     /**
      * @brief  Dettach a packet and delete the memory occupied
      */
     void dettach(long packet_id);
 
-    int find_packet_length(long packet_id);
+    int find_packet_length_by_ID(long packet_id);
 
     /**
      * @brief  New a memory space for the ring
@@ -77,17 +77,22 @@ public:
     Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node*>& node);
     ~Ring();
 
-    /*Only for test*/
-    void print_ring_order();
-    void print_packet_info();
+    /*Only for time_to_generate_packetinfor*/
+    void print_node_order_0n_ring();
+    void print_onring_packet_flit_info();
+    void print_packet_info(long packet_id);
 
 
 private:
+
     int m_ring_id;
+
     /*On-ring Packet array*/
     vector<Packet*>m_packet;
+
     /*Node ids crossed by this ring*/
     vector<int> m_ring_node_order;
+
     /**
      * @brief  Tell on-ring packets where to go in the cycle
      */

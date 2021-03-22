@@ -26,24 +26,33 @@ struct Packetinfo;
  */
 class Traffic{
 public:
-    /*The number of nodes*/
+
+    /*The number of nodes in NoC*/
     int m_node_num;
 
     /**
-     * @brief Randomly choose two types of size for a packet
-     *        Two types of size:
-     *                   GlobalParameter::short_packet_size
-     *                   GlobalParameter::long_packet_size
-     *        Possibility of each type:
-     *                   short_ratio/(long_ratio + short_ratio)
-     *                   long_ratio/(long_ratio + short_ratio)
-     *        If GlobalParameter::method_size_generator is set 1, this function will be called
+     * @brief Generate the size of the next packet according to your settings
+     *        Only available when method_size_generator in Yaml File is set 1
      */
-    int random_2size()const;
+    int get_next_packet_size()const;
+
+    /**
+    * @brief Calculate the average packet size according to your settings
+    */
+    double get_avg_packet_size()const;
+
+    /**
+    * @brief Control whether to generate a packet infor
+    *        Get a random Double Value
+     *       Return true, if it is smaller than injection rate
+    */
+    bool time_to_generate_packetinfor()const;
+
     Traffic(int node_sum);
     virtual ~Traffic(){}
     virtual Packetinfo* traffic_generator(const int local_id) = 0;
 };
+
 class TrafficUniform: public Traffic{
 public:
     TrafficUniform(int nodeSum);

@@ -6,8 +6,7 @@ double GlobalParameter::injection_rate;
 int GlobalParameter::long_packet_size;
 int GlobalParameter::short_packet_size;
 int GlobalParameter::method_size_generator;
-int GlobalParameter::long_packet_ratio;
-int GlobalParameter::short_packet_ratio;
+vector<pair<int, int>> GlobalParameter::packet_size_with_ratio;
 RingStrategy GlobalParameter::ring_strategy;
 ExbStrategy GlobalParameter::exb_strategy;
 int GlobalParameter::ej_port_nu;
@@ -27,6 +26,8 @@ long GlobalParameter::packet_id = 0;
 long GlobalParameter::global_cycle = 0;
 bool GlobalParameter::enable_interrupt;
 int GlobalParameter::unrecv_packet_num = 0;
+int GlobalParameter::psum = 0;
+
 
 
 

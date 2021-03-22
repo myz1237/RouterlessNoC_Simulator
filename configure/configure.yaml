@@ -8,19 +8,23 @@ mesh_dim_x: 8
 mesh_dim_y: 8
 
 #The speed of injection of each node, expressed in flit per cycle per node
-injection_rate: 0.005
+injection_rate: 0.225
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
 short_packet_size: 1
 #Method of size generation
 #0-->generate size between short and long
-#1-->only generate short and long, two size packet.
-method_size_generator: 1
+#1-->generate packet size with possibility
+method_size_generator: 0
 
-#If choosing 1 above, please fill ratio of short to long
-short_ratio: 8
-long_ratio: 2
+#Format:
+#       packet size: possibility
+#packet size and possibility must be integer
+packet_ratio:
+  5: 2
+  1: 8
+
 
 #Ring configuration
 #Algorithm used to generate the layout of the NoC
@@ -33,7 +37,7 @@ ring_strategy: RLrec
 #Max--Use the max size of packet as buffer size. Isolated buffer
 #Avg--Use average size of packet as buffer size. Isolated buffer
 exb_strategy: Max
-exb_num: 2
+exb_num: 1
 
 #Ejection settings
 #The number of ejection port
@@ -56,9 +60,7 @@ routing_strategy: Shortest
 #Transpose
 #BitReverse
 #Hotspot
-#SPLASH
-#PARSEC
-traffic_type: Hotspot
+traffic_type: Transpose
 #Only available when Hopspot is selected.
 #Type Node_ID: weight
 hotspot:

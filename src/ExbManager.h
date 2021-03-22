@@ -17,6 +17,7 @@
 #define NOCSIM_EXBMANAGER_H
 #include "Flit.h"
 #include "Util.h"
+#include "Test.h"
 class Flit;
 
 
@@ -51,7 +52,7 @@ public:
     int exb_available();
 
     /**
-    * @brief  Register an Exb
+    * @brief  Register an EXB
     */
     void set_exb_status(int exb_index, bool status, int buffer_index);
 
@@ -82,6 +83,7 @@ public:
     void Flit_tracer(const string& str, Flit *flit);
 
 private:
+
     /*Extension Buffer space*/
     vector<vector<Flit*>>m_exb;
     /*Status for each exb

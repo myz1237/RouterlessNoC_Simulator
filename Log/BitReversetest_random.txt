@@ -1,0 +1,225 @@
+﻿2021-03-22 00:17:25.217 INFO  Warmup Cycle: 10000
+2021-03-22 00:17:25.217 INFO  Simulation Cycle: 100000
+2021-03-22 00:17:25.217 INFO  Injection Rate: 0.05
+2021-03-22 00:17:25.217 INFO  Injection Queue: 15
+2021-03-22 00:17:25.217 INFO  Traffic Type: BitReverse
+2021-03-22 00:17:25.217 INFO  Packet Size: Random
+2021-03-22 00:17:25.217 INFO  EXB Strategy: Max
+2021-03-22 00:17:25.217 INFO  Routing Strategy: Shortest
+2021-03-22 00:18:17.730 INFO  
+Number of Packet sent during warm up phrase: 10732
+Number of Packet sent during warm up phrase: 10732
+Number of Packet sent during sim phrase: 106399
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 318728
+Received Packet: 106389
+Max Flit Delay: 65
+Max Packet Delay: 66
+Packet ID of Max Packet Delay: 48573
+Flit Throughput: 0.0505917
+Packet Throughput: 0.0168871
+Average Flit Latency: 9.82738
+Average Packet Latency: 10.495
+2021-03-22 00:18:17.731 INFO  UnReceived Packet：18
+
+2021-03-22 00:18:17.733 INFO  Warmup Cycle: 10000
+2021-03-22 00:18:17.733 INFO  Simulation Cycle: 100000
+2021-03-22 00:18:17.733 INFO  Injection Rate: 0.1
+2021-03-22 00:18:17.733 INFO  Injection Queue: 15
+2021-03-22 00:18:17.733 INFO  Traffic Type: BitReverse
+2021-03-22 00:18:17.733 INFO  Packet Size: Random
+2021-03-22 00:18:17.733 INFO  EXB Strategy: Max
+2021-03-22 00:18:17.733 INFO  Routing Strategy: Shortest
+2021-03-22 00:19:38.594 INFO  
+Number of Packet sent during warm up phrase: 21219
+Number of Packet sent during warm up phrase: 21219
+Number of Packet sent during sim phrase: 212789
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 638705
+Received Packet: 212797
+Max Flit Delay: 206
+Max Packet Delay: 207
+Packet ID of Max Packet Delay: 125908
+Flit Throughput: 0.101382
+Packet Throughput: 0.0337773
+Average Flit Latency: 10.7787
+Average Packet Latency: 11.4352
+2021-03-22 00:19:38.594 INFO  UnReceived Packet：34
+
+2021-03-22 00:19:38.597 INFO  Warmup Cycle: 10000
+2021-03-22 00:19:38.597 INFO  Simulation Cycle: 100000
+2021-03-22 00:19:38.597 INFO  Injection Rate: 0.15
+2021-03-22 00:19:38.597 INFO  Injection Queue: 15
+2021-03-22 00:19:38.597 INFO  Traffic Type: BitReverse
+2021-03-22 00:19:38.597 INFO  Packet Size: Random
+2021-03-22 00:19:38.597 INFO  EXB Strategy: Max
+2021-03-22 00:19:38.597 INFO  Routing Strategy: Shortest
+2021-03-22 00:21:27.203 INFO  
+Number of Packet sent during warm up phrase: 31648
+Number of Packet sent during warm up phrase: 31648
+Number of Packet sent during sim phrase: 316058
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 949111
+Received Packet: 316055
+Max Flit Delay: 2443
+Max Packet Delay: 2443
+Packet ID of Max Packet Delay: 196824
+Flit Throughput: 0.150653
+Packet Throughput: 0.0501675
+Average Flit Latency: 20.3941
+Average Packet Latency: 21.0567
+2021-03-22 00:21:27.204 INFO  UnReceived Packet：99
+
+2021-03-22 00:21:27.206 INFO  Warmup Cycle: 10000
+2021-03-22 00:21:27.206 INFO  Simulation Cycle: 100000
+2021-03-22 00:21:27.206 INFO  Injection Rate: 0.2
+2021-03-22 00:21:27.206 INFO  Injection Queue: 15
+2021-03-22 00:21:27.206 INFO  Traffic Type: BitReverse
+2021-03-22 00:21:27.206 INFO  Packet Size: Random
+2021-03-22 00:21:27.206 INFO  EXB Strategy: Max
+2021-03-22 00:21:27.206 INFO  Routing Strategy: Shortest
+2021-03-22 00:23:40.657 INFO  
+Number of Packet sent during warm up phrase: 40060
+Number of Packet sent during warm up phrase: 40060
+Number of Packet sent during sim phrase: 400216
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1200283
+Received Packet: 400195
+Max Flit Delay: 86135
+Max Packet Delay: 86136
+Packet ID of Max Packet Delay: 230
+Flit Throughput: 0.190521
+Packet Throughput: 0.063523
+Average Flit Latency: 24.4998
+Average Packet Latency: 25.3269
+2021-03-22 00:23:40.657 INFO  UnReceived Packet：243
+
+2021-03-22 00:23:40.660 INFO  Warmup Cycle: 10000
+2021-03-22 00:23:40.660 INFO  Simulation Cycle: 100000
+2021-03-22 00:23:40.660 INFO  Injection Rate: 0.25
+2021-03-22 00:23:40.660 INFO  Injection Queue: 15
+2021-03-22 00:23:40.660 INFO  Traffic Type: BitReverse
+2021-03-22 00:23:40.660 INFO  Packet Size: Random
+2021-03-22 00:23:40.660 INFO  EXB Strategy: Max
+2021-03-22 00:23:40.660 INFO  Routing Strategy: Shortest
+2021-03-22 00:26:28.749 INFO  
+Number of Packet sent during warm up phrase: 48551
+Number of Packet sent during warm up phrase: 48551
+Number of Packet sent during sim phrase: 482898
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1447920
+Received Packet: 482906
+Max Flit Delay: 11343
+Max Packet Delay: 11344
+Packet ID of Max Packet Delay: 462755
+Flit Throughput: 0.229829
+Packet Throughput: 0.0766517
+Average Flit Latency: 21.9726
+Average Packet Latency: 22.6016
+2021-03-22 00:26:28.749 INFO  UnReceived Packet：394
+
+2021-03-22 00:26:28.752 INFO  Warmup Cycle: 10000
+2021-03-22 00:26:28.752 INFO  Simulation Cycle: 100000
+2021-03-22 00:26:28.752 INFO  Injection Rate: 0.3
+2021-03-22 00:26:28.752 INFO  Injection Queue: 15
+2021-03-22 00:26:28.752 INFO  Traffic Type: BitReverse
+2021-03-22 00:26:28.752 INFO  Packet Size: Random
+2021-03-22 00:26:28.752 INFO  EXB Strategy: Max
+2021-03-22 00:26:28.752 INFO  Routing Strategy: Shortest
+2021-03-22 00:29:37.300 INFO  
+Number of Packet sent during warm up phrase: 56647
+Number of Packet sent during warm up phrase: 56647
+Number of Packet sent during sim phrase: 566279
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1699420
+Received Packet: 566295
+Max Flit Delay: 85618
+Max Packet Delay: 85619
+Packet ID of Max Packet Delay: 412
+Flit Throughput: 0.269749
+Packet Throughput: 0.0898881
+Average Flit Latency: 22.436
+Average Packet Latency: 22.73
+2021-03-22 00:29:37.301 INFO  UnReceived Packet：602
+
+2021-03-22 00:29:37.303 INFO  Warmup Cycle: 10000
+2021-03-22 00:29:37.303 INFO  Simulation Cycle: 100000
+2021-03-22 00:29:37.303 INFO  Injection Rate: 0.35
+2021-03-22 00:29:37.303 INFO  Injection Queue: 15
+2021-03-22 00:29:37.303 INFO  Traffic Type: BitReverse
+2021-03-22 00:29:37.303 INFO  Packet Size: Random
+2021-03-22 00:29:37.303 INFO  EXB Strategy: Max
+2021-03-22 00:29:37.303 INFO  Routing Strategy: Shortest
+2021-03-22 00:32:56.146 INFO  
+Number of Packet sent during warm up phrase: 64559
+Number of Packet sent during warm up phrase: 64559
+Number of Packet sent during sim phrase: 644102
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1930543
+Received Packet: 644126
+Max Flit Delay: 12643
+Max Packet Delay: 12644
+Packet ID of Max Packet Delay: 161530
+Flit Throughput: 0.306435
+Packet Throughput: 0.102242
+Average Flit Latency: 25.2269
+Average Packet Latency: 25.8064
+2021-03-22 00:32:56.147 INFO  UnReceived Packet：856
+
+2021-03-22 00:32:56.149 INFO  Warmup Cycle: 10000
+2021-03-22 00:32:56.149 INFO  Simulation Cycle: 100000
+2021-03-22 00:32:56.149 INFO  Injection Rate: 0.4
+2021-03-22 00:32:56.149 INFO  Injection Queue: 15
+2021-03-22 00:32:56.149 INFO  Traffic Type: BitReverse
+2021-03-22 00:32:56.149 INFO  Packet Size: Random
+2021-03-22 00:32:56.149 INFO  EXB Strategy: Max
+2021-03-22 00:32:56.149 INFO  Routing Strategy: Shortest
+2021-03-22 00:36:32.330 INFO  
+Number of Packet sent during warm up phrase: 71750
+Number of Packet sent during warm up phrase: 71750
+Number of Packet sent during sim phrase: 715582
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 2146739
+Received Packet: 715566
+Max Flit Delay: 106131
+Max Packet Delay: 106131
+Packet ID of Max Packet Delay: 460
+Flit Throughput: 0.340752
+Packet Throughput: 0.113582
+Average Flit Latency: 24.0294
+Average Packet Latency: 24.9375
+2021-03-22 00:36:32.331 INFO  UnReceived Packet：1168
+
+2021-03-22 00:36:32.334 INFO  Warmup Cycle: 10000
+2021-03-22 00:36:32.334 INFO  Simulation Cycle: 100000
+2021-03-22 00:36:32.334 INFO  Injection Rate: 0.45
+2021-03-22 00:36:32.334 INFO  Injection Queue: 15
+2021-03-22 00:36:32.334 INFO  Traffic Type: BitReverse
+2021-03-22 00:36:32.334 INFO  Packet Size: Random
+2021-03-22 00:36:32.334 INFO  EXB Strategy: Max
+2021-03-22 00:36:32.334 INFO  Routing Strategy: Shortest
+2021-03-22 00:41:05.491 INFO  
+Number of Packet sent during warm up phrase: 78876
+Number of Packet sent during warm up phrase: 78876
+Number of Packet sent during sim phrase: 787598
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 2362212
+Received Packet: 787589
+Max Flit Delay: 6385
+Max Packet Delay: 6386
+Packet ID of Max Packet Delay: 616038
+Flit Throughput: 0.374954
+Packet Throughput: 0.125014
+Average Flit Latency: 26.4372
+Average Packet Latency: 27.0781
+2021-03-22 00:41:05.491 INFO  UnReceived Packet：1506
+

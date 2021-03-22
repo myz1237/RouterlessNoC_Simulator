@@ -8,7 +8,7 @@ int Injection::left_flit_in_queue() {
     return left_flit;
 }
 
-void Injection::controlpacket_generator(const int cycle, vector<int>& curr_ring_id) {
+void Injection::controlpacket_generator(const long cycle, vector<int>& curr_ring_id) {
     Packet* p;
     /*Loop to access all id of rings across this node*/
     for(int i = 0; i < curr_ring_id.size(); i++){
@@ -49,38 +49,20 @@ void Injection::inject_new_packet(int ring_index) {
     p = nullptr;
 }
 
-void Injection::packetinfo_generator(int cycle, Traffic& traffic) {
-    /*First Cycle, the entrance of the injection loop*/
-    if(cycle == 0){
-        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
-    }
-    int length = m_ongoing_packetinfo->length;
-    int difference = cycle - m_time;
-    if(difference * GlobalParameter::injection_rate - length >= 0){
-        /*Abandon non-meaning packetinfo and get a new one*/
-        if(m_ongoing_packetinfo->dst == m_local_id){
-            //m_time = cycle;
-            GlobalParameter::packet_id--;
-            m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
-            return;
-        }
-        m_ongoing_packetinfo->ctime = cycle;
-        packetinfo_attach(m_ongoing_packetinfo, cycle);
-        /*Record this injection cycle*/
-        m_time = cycle;
-        /*Get a new packetinfo for next cycle*/
-        m_ongoing_packetinfo = traffic.traffic_generator(m_local_id);
-    }else{
-        /*No action, wait for the next cycle*/
+void Injection::packetinfo_generator(const long cycle, Traffic& traffic) {
+
+    Packetinfo* p = traffic.traffic_generator(m_local_id);
+    if(p != nullptr){
+
+        p->ctime = cycle;
+        packetinfo_attach(p, cycle);
     }
 }
 
 Injection::Injection(int node_id, vector<int>* curr_ring_id):
         m_local_id(node_id), m_curr_ring_id(curr_ring_id){
     m_ongoing_packet = nullptr;
-    m_ongoing_packetinfo = nullptr;
     m_interrupt = false;
-    m_time = 0;
     m_injecting_ring_index = -1;
 }
 
@@ -91,11 +73,8 @@ Injection::~Injection() {
 #endif
     GlobalParameter::unrecv_packet_num += m_injection_queue.size();
     free_vetor<Packetinfo*>(m_injection_queue);
-    if(m_ongoing_packetinfo != nullptr)
-        delete m_ongoing_packetinfo;
     m_ongoing_packet = nullptr;
     m_curr_ring_id = nullptr;
-    m_ongoing_packetinfo = nullptr;
 }
 
 void Injection::print_packetinfo() {
@@ -104,8 +83,7 @@ void Injection::print_packetinfo() {
     }
 }
 
-void Injection::packetinfo_attach(Packetinfo *info, int cycle){
-    //src和dst不相等 添加该包信息
+void Injection::packetinfo_attach(Packetinfo *info, const long cycle){
     PLOG_INFO << "Packetinfor " <<  info->id <<" Generated at Node " << m_local_id
               << " in Cycle " << cycle;
     m_injection_queue.push_back(info);

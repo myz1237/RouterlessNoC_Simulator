@@ -26,6 +26,7 @@
 class Injection;
 class Flit;
 class ExbManager;
+class RoutingTable;
 using namespace std;
 
 /**
@@ -34,8 +35,8 @@ using namespace std;
 typedef struct Stat{
     int received_flit;
     int received_packet;
-    int flit_delay;
-    int packet_delay;
+    long flit_delay;
+    long packet_delay;
     int max_flit_delay;
     int max_packet_delay;
     long packet_id_for_max_delay; /*Record the id of packet with max delay*/
@@ -65,12 +66,11 @@ public:
     /*Getter functions*/
     inline int get_received_flit()const{return m_stat.received_flit;}
     inline int get_received_packet()const{return m_stat.received_packet;}
-    inline int get_flit_delay()const{return m_stat.flit_delay;}
-    inline int get_packet_delay()const{return m_stat.packet_delay;}
+    inline long get_flit_delay()const{return m_stat.flit_delay;}
+    inline long get_packet_delay()const{return m_stat.packet_delay;}
     inline int get_max_flit_delay()const{return m_stat.max_flit_delay;}
     inline int get_max_packet_delay()const{return m_stat.max_packet_delay;}
     inline long get_packet_id_for_max_delay()const{return m_stat.packet_id_for_max_delay;}
-    inline int get_node_id()const{return m_node_id;}
 
     /**
      * @brief Attach ids of rings across this node to the vector
@@ -89,7 +89,7 @@ public:
      * @param  cycle Time
      */
     void run(long cycle);
-    void testrun(long cycle);
+    void sort_routing_table();
 
     /**
      * @brief Clear statistics data of the node
@@ -123,9 +123,21 @@ public:
     /*Only for Test*/
     void node_info_output();
 
+    /**
+     * @brief Print Details of Routing Table
+     *        To enable this function, set 1 to the variable, sim_detail in Yaml Flie
+     */
+    void print_routing_table();
+
 private:
 
     const int m_node_id;
+
+    /* Count how many times a self-loop packet tries to find an idle ring
+     * Fail to inject when the counter is equal to the number of rings across this node,
+     * meaning that all rings are busy now.
+     * */
+    int m_self_loop_counter;
 
     Stat m_stat;
 
@@ -169,6 +181,10 @@ private:
      *                 Second: Expected Sequence Number of next flit
      * */
     vector<pair<long, int>>m_ej_record;
+
+    inline void reset_self_loop_counter(){m_self_loop_counter = 0;}
+
+    void reset_routing_table_index();
 
     /*Gather Statistics of received flits or packets*/
     void update_flit_stat(int latency);
@@ -259,12 +275,11 @@ private:
     /**
      * @brief  Selection appropriate rings according to the destination
      * @param  dst   Destination of the packet
-     * @param  index 0-->Choose the shortest path
-     *               1-->Choose the second shortest path. Valid in routing_strategy, Secondwinner
-     * @return ring_index Directly return index of the ring in the current node
-     *                    Easy access to corresponding single buffer
+     * @return Directly return index of the ring in the current node
+     *         Return -1, if all rings are busy, inject in the next cycle
      */
-    int ring_selection(int dst, int index);
+    int ring_selection(int dst);
+
     RoutingTable* search_routing_table(int dst_id);
 
     /**
@@ -283,7 +298,6 @@ private:
     static bool comp(pair<int, int>&a, pair<int, int>&b){return a.second > b.second;}
 };
 
-ostream& operator<<(ostream& out, Node& node);
 ostream& operator<<(ostream& out, Stat& stat);
 bool operator==(const pair<long, int>& a, const pair<long, int>& b);
 #endif //NOCSIM_NODE_H
