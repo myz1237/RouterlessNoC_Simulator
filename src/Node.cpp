@@ -258,6 +258,7 @@ void Node::ej_arbitrator() {
         ctime[i].first = i;
         if(m_single_buffer[i] != nullptr &&
         m_single_buffer[i]->get_flit_dst() == m_node_id){
+            //TODO 注意！
             if(m_single_buffer[i]->get_hop() > 255)
                 exit(0);
             FlitType type = m_single_buffer[i]->get_flit_type();
@@ -387,20 +388,19 @@ void Node::handle_rest_flit(int action, int single_flit_index) {
 }
 
 /*Please check the paper for details*/
-int Node::inject_eject() {
-
+int Node::inject_eject(){
     int return_ring_index;
     int ring_index;
     int action;
     int length;
     int exb_index;
     int exb_available_index;
-    int remaining_exb_size;
     Packetinfo *p;
 
     if(!is_injection_ongoing()){
 
         if(!m_inject->is_packetinfo_empty()){
+
             /*Retrieve the oldest packetinfo*/
             p = m_inject->get_new_packetinfo();
             length = p->length;
@@ -414,66 +414,61 @@ here:       ring_index = ring_selection(p->dst);
             exb_available_index = m_exb_manager->exb_available();
             return_ring_index = ring_index;
 
-            if(length == 1){
+            if(action == -2 || action == -3){
 
-                if(action == -2 || action == -3){
+                if(exb_index != -1){
 
-                    if(exb_index == -1){
-                        /*No bound, directly inject this one-flit packet*/
-                        m_inject->inject_new_packet(ring_index);
-                    }else{
-                        /*Bound, fail to inject*/
-                        /*Try another Ring*/
-                        goto here;
-                    }
-
-                    if(action == -3){
-                        /*Do not forget to handle the buffer to be ejected*/
-                        ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
-                    }
-
-                }else{
-                    /*Received Flit needs to be forwarded, fail to inject*/
+                    /*Bound, fail to inject*/
                     /*Try another Ring*/
                     goto here;
-                }
-            }else{
-                /*Long Packet with more than 1 flit*/
-                if(action == -2 || action == -3){
+                }else{
 
-                    if(exb_index != -1){
-                        /*Bound, injection cancelled*/
-                        /*Try another Ring*/
-                        goto here;
+                    /*No bound*/
+                    if(length == 1){
+                        /*Inject this single packet*/
+                        m_inject->inject_new_packet(ring_index);
+
+                        if(action == -3){
+                            /*Do not forget to handle the buffer to be ejected*/
+                            ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
+                        }
 
                     }else{
+
+                        /*Long Packet Injection*/
                         if(exb_available_index != -1){
-                            /*No bound and exb available*/
-                            /*Bind this exb to the single buffer*/
+
+                            /*EXB Availbale. Bind it and inject the packet*/
                             m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
                             PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
                                          << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                             /*Inject the header flit of the long packet*/
                             m_inject->inject_new_packet(ring_index);
+
                             if(action == -3){
                                 ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
                             }
+
                         }else{
                             /*No action if exb unavailable*/
                             /*Wait for next cycle to inject*/
                             return_ring_index = -1;
                         }
                     }
-                }else{
-                    /*Received Flit needs to be forwarded, No injection*/
-                    /*Try another Ring*/
-                    goto here;
                 }
+            }else{
+
+                /*Flit in the input buffer needs to be forwarded*/
+                /*Fail to Inject*/
+                goto here;
             }
+
         }else{
+
             /*Empty injection queue*/
             return_ring_index = -1;
         }
+
     }else{
         /*Injection is going on, inject the rest flits of the previous packet*/
         continue_inject_packet();
@@ -482,6 +477,7 @@ here:       ring_index = ring_selection(p->dst);
     p = nullptr;
     return return_ring_index;
 }
+
 
 bool Node::is_injection_ongoing() {
     if(m_inject->get_ongoing_packet() == nullptr){

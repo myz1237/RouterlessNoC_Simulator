@@ -25,24 +25,25 @@ int main() {
     plog::init(plog::debug, "../Log/runtime", 1000000);
 #endif
     //plog::init<1>(plog::debug, "../Log/transposesecondresult.txt", 1000000);
-    plog::init<1>(plog::debug, "../Log/test.txt", 1000000);
+    plog::init<1>(plog::debug, "../Log/hotspot.txt", 1000000);
     //plog::init<1>(plog::debug, "../Log/validate.txt", 1000000);
 
     /*Read Parameters from Yaml File*/
-/*    configure();
-    run();*/
+/*
+    configure();
+    run();
+*/
 
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 15; i++){
         configure();
-        GlobalParameter::injection_rate += 0.05 * i;
+        GlobalParameter::injection_rate += 0.005 * i;
         run();
     }
-
-
 
 }
 
 void config_output(){
+
     PLOG_INFO_(1) << "Warmup Cycle: " <<GlobalParameter::sim_warmup;
     PLOG_INFO_(1) << "Simulation Cycle: " <<GlobalParameter::sim_time - GlobalParameter::sim_warmup;
     PLOG_INFO_(1) << "Injection Rate: " <<GlobalParameter::injection_rate;
@@ -61,11 +62,10 @@ void config_output(){
 
 void run(){
     /*Set system time as a seed*/
-    random_seed(time(NULL));
+    //random_seed(time(NULL));
     config_output();
     Noc* c = new Noc;
     c->run();
-    //c->time_to_generate_packetinfor();
     delete c;
     c = nullptr;
 }

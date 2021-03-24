@@ -264,6 +264,7 @@ private:
      *         return -1, if no injection occurs
      */
     int inject_eject();
+
     bool is_injection_ongoing();
 
     /**

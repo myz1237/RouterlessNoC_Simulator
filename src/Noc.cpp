@@ -14,9 +14,6 @@ void Noc::run() {
             m_node[i]->print_routing_table();
         }
     }
-/*    for(int i = 0; i< m_node.size(); i++){
-        m_node[i]->adjust_routing_table();
-    }*/
 
     /*Clear variables*/
     GlobalParameter::packet_id = 0;
@@ -48,39 +45,14 @@ void Noc::run() {
         }
 
         GlobalParameter::global_cycle++;
-/*        for(int q = 0; q < m_node.size(); q++){
-            if(m_node[q]->get_max_packet_delay() == 23){
-                PLOG_INFO_(1) << "Time when it occurs: "<<GlobalParameter::global_cycle;
-                return;
-            }
-        }*/
     }
-
-/*    while(1){
-        int counter = 0;
-        for(int k = 0; k < GlobalParameter::ring.size(); k++){
-            GlobalParameter::ring[k]->update_curr_hop();
-        }
-
-        for(int q = 0; q < m_node.size(); q++){
-            m_node[q]->testrun(GlobalParameter::global_cycle);
-        }
-
-        for(int k = 0;k < GlobalParameter::ring.size(); k++){
-            if(GlobalParameter::ring[k]->is_empty()){
-                counter++;
-            }
-        }
-
-        if(counter == GlobalParameter::ring.size()) break;
-
-        GlobalParameter::global_cycle++;
-    }*/
 
     for(int i=0;i<64;i++){
         cout <<"Node " <<i <<":  "<<m_node[i]->left_injection_queue_packet() << endl;
     }
+
     stat_gather();
+
     /*Console Output*/
     cout << endl;
     cout << "\t" << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
@@ -88,7 +60,7 @@ void Noc::run() {
          << "\t" << "Total Warm up cycle: " << GlobalParameter::sim_warmup << endl
          << "\t" << "Total Sim cycle " << GlobalParameter::sim_time - GlobalParameter::sim_warmup << endl
          << *m_stat;
-    cout << endl << flit_num_correction << endl << packet_num_correction;
+
     /*File Output*/
     PLOG_INFO_(1) << endl
          << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
