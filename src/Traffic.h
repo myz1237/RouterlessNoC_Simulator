@@ -98,7 +98,6 @@ private:
     int max_value;
     int get_dst();
 };
-//TODO SPLASH&PARSEC
 
 
 #endif //NOCSIM_TRAFFIC_H

@@ -44,4 +44,5 @@ typedef struct Routingsnifer {
  */
 void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&temp, int ring_id);
 static bool table_comp(pair<int, int>&a, pair<int, int>&b){return a.second < b.second;}
+static bool table_comp_with_ring_size(pair<int, int>&a, pair<int, int>&b);
 #endif //NOCSIM_ROUTINGTABLE_H

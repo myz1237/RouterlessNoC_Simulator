@@ -7,11 +7,14 @@ void Noc::run() {
     initial();
     PLOG_INFO << "Routing Table has been generated...";
     reset_stat();
-
     if(GlobalParameter::sim_detail){
         /*Output the Routing Table of Each Node*/
-        for(int i = 0; i< m_node.size(); i++){
+        for(int i = 0; i< m_size*m_size; i++){
             m_node[i]->print_routing_table();
+        }
+        int ring_size = GlobalParameter::ring.size();
+        for(int j = 0; j < ring_size; j++){
+            GlobalParameter::ring[j]->print_node_order_on_ring();
         }
     }
 
@@ -228,6 +231,8 @@ void Noc::packet_tracer(){
         GlobalParameter::ring[j]->print_onring_packet_flit_info();
     }
 }
+
+
 
 
 

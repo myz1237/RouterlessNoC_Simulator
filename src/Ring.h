@@ -78,10 +78,9 @@ public:
     ~Ring();
 
     /*Only for time_to_generate_packetinfor*/
-    void print_node_order_0n_ring();
+    void print_node_order_on_ring();
     void print_onring_packet_flit_info();
     void print_packet_info(long packet_id);
-
 
 private:
 

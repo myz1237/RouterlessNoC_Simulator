@@ -630,7 +630,7 @@ ostream& operator<<(ostream& out, Stat& stat){
          << "\t" << "Max Flit Delay: " << stat.max_flit_delay << endl
          << "\t" << "Max Packet Delay: " << stat.max_packet_delay << endl
          << "\t" << "Packet ID of Max Packet Delay: " << stat.packet_id_for_max_delay << endl;
-    //不等0说明是NoC调用 因为Node是不计算下面四个指标的 默认为0
+    /*Only used for NoC Statistics, Node Statistics won't enter this statement*/
     if(stat.flit_throughput != 0)
         out  << "\t" << "Flit Throughput: " << stat.flit_throughput << endl
              << "\t" << "Packet Throughput: " << stat.packet_throughput << endl

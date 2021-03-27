@@ -83,7 +83,7 @@ sim_warmup: 10000
 #Output detailed information.
 #1--Enable, Output Routing Information and Statistics of each node
 #0--Disable
-sim_detail: 0
+sim_detail: 1
 
 
 

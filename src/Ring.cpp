@@ -121,9 +121,11 @@ int Ring::find_next_node(int curr_node) {
     return *(it+1);
 }
 
-void Ring::print_node_order_0n_ring() {
+void Ring::print_node_order_on_ring() {
+    PLOG_INFO_(1) << "Ring ID " << m_ring_id;
     for(int i=0; i<m_ring_node_order.size();i++){
-        cout<< m_ring_node_order.at(i)<<"  ";
+
+        PLOG_INFO_(1) << " Node on the ring: " <<m_ring_node_order.at(i);
     }
     cout << endl;
 }
