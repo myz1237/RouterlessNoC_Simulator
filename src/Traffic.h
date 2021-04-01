@@ -66,6 +66,7 @@ private:
 public:
     ~TrafficTranspose(){}
     TrafficTranspose(int nodeSum);
+
     /**
      * @brief Generate Transpose Traffic
      *        Codes which calculate destinations are copied from BookSim Program
@@ -77,6 +78,7 @@ class TrafficBitReverse:public Traffic{
 public:
     ~TrafficBitReverse(){}
     TrafficBitReverse(int nodeSum);
+
     /**
      * @brief Generate BitReverse Traffic
      *        Codes which calculate destinations are copied from BookSim Program
@@ -89,6 +91,7 @@ class TrafficHotspot:public Traffic{
 public:
     ~TrafficHotspot(){}
     TrafficHotspot(int nodeSum);
+
     /**
      * @brief Generate Hotspot Traffic
      *        Codes which calculate destinations are copied from BookSim Program

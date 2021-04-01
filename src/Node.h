@@ -183,7 +183,6 @@ private:
     vector<pair<long, int>>m_ej_record;
 
     inline void reset_self_loop_counter(){m_self_loop_counter = 0;}
-
     void reset_routing_table_index();
 
     /*Gather Statistics of received flits or packets*/

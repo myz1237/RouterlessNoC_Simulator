@@ -53,7 +53,6 @@ void Injection::packetinfo_generator(const long cycle, Traffic& traffic) {
 
     Packetinfo* p = traffic.traffic_generator(m_local_id);
     if(p != nullptr){
-
         p->ctime = cycle;
         packetinfo_attach(p, cycle);
     }

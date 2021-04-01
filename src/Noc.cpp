@@ -7,6 +7,7 @@ void Noc::run() {
     initial();
     PLOG_INFO << "Routing Table has been generated...";
     reset_stat();
+    /*Output details of routing tables and rings*/
     if(GlobalParameter::sim_detail){
         /*Output the Routing Table of Each Node*/
         for(int i = 0; i< m_size*m_size; i++){
@@ -22,6 +23,7 @@ void Noc::run() {
     GlobalParameter::packet_id = 0;
     GlobalParameter::global_cycle = 0;
 
+    int ring_nu = GlobalParameter::ring.size();
     /*Main Loop of the Simulation*/
     while(GlobalParameter::global_cycle != GlobalParameter::sim_time){
         //random_seed(time(NULL));
@@ -30,7 +32,8 @@ void Noc::run() {
         packet_tracer();
 #endif
         /*Move on-ring Packets Forward*/
-        for(int k = 0; k < GlobalParameter::ring.size(); k++){
+        for(int k = 0; k < ring_nu; k++){
+            GlobalParameter::ring[k]->count_onring_packet();
             GlobalParameter::ring[k]->update_curr_hop();
         }
 
@@ -50,9 +53,14 @@ void Noc::run() {
         GlobalParameter::global_cycle++;
     }
 
-    for(int i=0;i<64;i++){
+    /*Print the number of packetinfor stored in Injection Queue*/
+/*    for(int i = 0;i< 64;i++){
+        //PLOG_INFO_(1) <<"Node " <<i <<":  "<<m_node[i]->left_injection_queue_packet();
         cout <<"Node " <<i <<":  "<<m_node[i]->left_injection_queue_packet() << endl;
-    }
+    }*/
+/*    for(int g = 0; g < ring_nu; g++){
+        PLOG_INFO_(1) << "Ring " << g << ": " << GlobalParameter::ring[g]->get_onring_packet_counter() << endl;
+    }*/
 
     stat_gather();
 

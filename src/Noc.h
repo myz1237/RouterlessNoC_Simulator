@@ -30,7 +30,6 @@ class Noc {
 public:
 
     void run();
-    void test();
     Noc();
     ~Noc();
 
@@ -52,9 +51,13 @@ private:
     /*Record Statistics Data*/
     Stat* m_stat;
 
+    /**
+     * @brief Generate ring topology and routing tables
+     */
     void initial();
     void init_ring();
     void init_routing_table();
+
     int cal_ring_num(int mesh_x)const;
 
     /**

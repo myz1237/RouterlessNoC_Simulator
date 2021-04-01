@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -577,6 +577,18 @@ vector
 -
 plog/Log.h
 -
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRng.c
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngDouble.c
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp
+KnuthRng.c
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRng.c
+
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp
+KnuthRngDouble.c
+/home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngDouble.c
 
 /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Main.cpp
 iostream

@@ -7,15 +7,17 @@ Packetinfo* TrafficUniform::traffic_generator(const int local_id) {
     if(time_to_generate_packetinfor()){
         Packetinfo *p = new Packetinfo;
         p->src = local_id;
-        p->id = GlobalParameter::packet_id;
+        p->id = GlobalParameter::packet_id++;
         if(GlobalParameter::method_size_generator){
             p->length = get_next_packet_size();
         }else{
             p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
         }
-        p->dst = random_int(0, m_node_num - 1);
+        do{
+            p->dst = random_int(0, m_node_num - 1);
+        } while (p->dst == local_id);
+        //p->dst = random_int(0, m_node_num - 1);
 
-        GlobalParameter::packet_id++;
         return p;
     }else{
         return nullptr;
@@ -38,6 +40,7 @@ Packetinfo* TrafficTranspose::traffic_generator(const int local_id) {
             p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
         }
         p->dst = (((local_id >> m_shift) & mask_lo) | ((local_id << m_shift) & mask_hi));
+        if(p->dst == local_id) return nullptr;
         p->id = GlobalParameter::packet_id++;
         return p;
     }else{
@@ -79,6 +82,7 @@ Packetinfo* TrafficBitReverse::traffic_generator(int local_id) {
             local_id >>= 1;
         }
         p->dst = dst;
+        if(p->dst == local_id) return nullptr;
         p->id = GlobalParameter::packet_id++;
         return p;
     }else{
@@ -99,8 +103,9 @@ Packetinfo* TrafficHotspot::traffic_generator(const int local_id) {
         } else {
             p->length = random_int(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
         }
-        p->id = GlobalParameter::packet_id++;
         p->dst = get_dst();
+        if(p->dst == local_id) return nullptr;
+        p->id = GlobalParameter::packet_id++;
         return p;
     }else{
         return nullptr;

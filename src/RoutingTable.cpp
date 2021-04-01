@@ -2,6 +2,7 @@
 
 void RoutingTable::table_sort() {
     sort(routing.begin(), routing.end(), table_comp);
+    //sort(routing.begin(), routing.end(), table_comp_with_ring_size);
 }
 
 RoutingTable::~RoutingTable(){
@@ -38,5 +39,5 @@ static bool table_comp_with_ring_size(pair<int, int>&a, pair<int, int>&b){
     int test_2 = b.second;
     vector<Ring*>& ring = GlobalParameter::ring;
     if(test_1 != test_2) return test_1 < test_2;
-    if(test_1 == test_2) return ring[a.first]->get_ring_size() < ring[a.first]->get_ring_size();
+    if(test_1 == test_2) return ring[a.first]->get_ring_size() < ring[b.first]->get_ring_size();
 }

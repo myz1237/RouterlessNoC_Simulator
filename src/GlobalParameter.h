@@ -47,7 +47,6 @@ enum TrafficType{
 
 enum RoutingStrategy{
     Shortest,      /*Always use the shortest path to the dst*/
-    Secondwinner   /*Try the second choice if the shortest one unavailable*/
 };
 
 namespace GlobalParameter{

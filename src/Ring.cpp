@@ -57,7 +57,7 @@ void Ring::dettach(long packet_id) {
     }
 }
 
-int Ring::find_packet_length_by_ID(long packet_id) {
+int Ring::find_packet_length_by_id(long packet_id) {
     for(int i = 0; i < m_packet.size(); i++){
         if(m_packet[i]->get_id() == packet_id){
             return m_packet[i]->get_length();
@@ -68,6 +68,7 @@ int Ring::find_packet_length_by_ID(long packet_id) {
 
 /*Translate ring_tuple into several node ids*/
 Ring::Ring(int ring_id, RingTopologyTuple *ring_tuple, vector<Node *>& node){
+    m_onring_packet_counter = 0;
     m_ring_id = ring_id;
     int size = GlobalParameter::mesh_dim_x;
     int length = (ring_tuple->m_lr - ring_tuple->m_ul) % size;
@@ -151,6 +152,11 @@ void Ring::print_packet_info(long packet_id) {
         }
     }
 }
+
+void Ring::count_onring_packet(){
+    m_onring_packet_counter += m_packet.size();
+}
+
 
 
 

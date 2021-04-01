@@ -180,7 +180,7 @@ void Node::ejection(Flit *flit, int ring_id) {
     }else if (type == Header){
 
         if(GlobalParameter::ring[ring_id]->
-                find_packet_length_by_ID(flit->get_packet_id()) == 1){
+                find_packet_length_by_id(flit->get_packet_id()) == 1){
             update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
 
             PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
@@ -317,6 +317,7 @@ void Node::ej_arbitrator() {
     reverse(ctime.begin(),ctime.end());
 
     int edge = min<int>(GlobalParameter::ej_port_nu, m_single_buffer.size());
+    //int edge = GlobalParameter::ej_port_nu;
     index = 0;
     for(int t = 0; t < ctime.size(); t++){
         /*Ejection Tag*/

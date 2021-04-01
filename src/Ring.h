@@ -63,7 +63,7 @@ public:
      */
     void dettach(long packet_id);
 
-    int find_packet_length_by_ID(long packet_id);
+    int find_packet_length_by_id(long packet_id);
 
     /**
      * @brief  New a memory space for the ring
@@ -81,10 +81,13 @@ public:
     void print_node_order_on_ring();
     void print_onring_packet_flit_info();
     void print_packet_info(long packet_id);
+    void count_onring_packet();
 
 private:
 
     int m_ring_id;
+
+    int m_onring_packet_counter;
 
     /*On-ring Packet array*/
     vector<Packet*>m_packet;

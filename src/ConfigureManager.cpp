@@ -45,7 +45,6 @@ void configure() {
     else if(exb_strategy == "Avg") GlobalParameter::exb_strategy = Avg;
 
     if(routing_strategy == "Shortest") GlobalParameter::routing_strategy = Shortest;
-    else if(routing_strategy == "Secondwinner") GlobalParameter::routing_strategy = Secondwinner;
 
     if(traffic_type == "Uniform") GlobalParameter::traffic_type = Uniform;
     else if(traffic_type == "Transpose") GlobalParameter::traffic_type = Transpose;
