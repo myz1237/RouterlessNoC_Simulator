@@ -25,16 +25,12 @@ int main() {
 #else
     plog::init(plog::debug, "../Log/runtime.txt", 1000000);
 #endif
-    //plog::init<1>(plog::debug, "../Log/transposesecondresult.txt", 1000000);
-    plog::init<1>(plog::debug, "../Log/Intensive_Hotspot_Max&321.txt", 1000000);
-    //plog::init<1>(plog::debug, "../Log/validate.txt", 1000000);
+    plog::init<1>(plog::debug, "../Log/final_results", 1000000);
 
     /*Read Parameters from Yaml File*/
 
-/*
     configure();
     run();
-*/
 
 /*TODO 记得运行前 改成5 flit的packet 注释掉configuration里面traffic的代码 记得文件名也改一下*/
 
@@ -356,7 +352,7 @@ int main() {
     }
 */
 
-    for(int i = 0; i < 12; i++){
+/*    for(int i = 0; i < 12; i++){
         configure();
         GlobalParameter::traffic_type = Hotspot;
         GlobalParameter::traffic = new TrafficHotspot(node_sum);
@@ -395,7 +391,7 @@ int main() {
         GlobalParameter::enable_interrupt = true;
         GlobalParameter::injection_rate += 0.02 * i;
         run();
-    }
+    }*/
 
 }
 
@@ -421,8 +417,8 @@ void config_output(){
 
 void run(){
     /*Set system time as a seed*/
-    //random_seed(time(NULL));
-    random_seed(1);
+    random_seed(time(NULL));
+    //random_seed(1);
     config_output();
     Noc* c = new Noc;
     c->run();
