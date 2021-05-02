@@ -77,10 +77,25 @@ public:
     */
     void pop(int exb_index, int node_id);
 
+    /**
+    * @brief  Pop one flit from an exb. Only called when interrupt occurs
+    * @param  node_id   Just to print a log
+    */
     void interrupt_pop(int exb_index, int node_id);
 
+    /**
+    * @brief  Calculate how many flits need to be popped/forwarded, when interruption occurs
+    * @param  single_flit_packet_id  Packet ID of buffered flits
+    */
     int cal_forward_packet_length(int exb_index, long single_flit_packet_id);
 
+    /**
+    * @brief  Recalculate how many flits need to be popped/forwarded.
+    *         If incoming flits in input buffers belongs to the same packet as flits being forwarded/popped.
+    * @param  single_flit_packet_id  Packet ID of buffered flits
+    *         original_length Original value calculated by
+    *             cal_forward_packet_length(int exb_index, long single_flit_packet_id)
+    */
     int cal_forward_packet_length(int exb_index, long single_flit_packet_id, int original_length);
 
     ExbManager();
