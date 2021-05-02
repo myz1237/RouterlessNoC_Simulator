@@ -1,0 +1,2325 @@
+﻿2021-04-27 07:06:21.516 INFO  Warmup Cycle: 10000
+2021-04-27 07:06:21.516 INFO  Simulation Cycle: 100000
+2021-04-27 07:06:21.516 INFO  Injection Rate: 0.005
+2021-04-27 07:06:21.516 INFO  The number of ejection link: 2
+2021-04-27 07:06:21.516 INFO  The number of EXB: 1
+2021-04-27 07:06:21.516 INFO  Traffic Type: Transpose
+2021-04-27 07:06:21.516 INFO  Packet Size: Random
+2021-04-27 07:06:21.516 INFO  EXB Strategy: Max
+2021-04-27 07:06:21.516 INFO  Routing Strategy: Shortest
+2021-04-27 07:06:48.776 INFO  
+Number of Packet sent during warm up phrase: 979
+Number of Packet sent during sim phrase: 9386
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 28033
+Received Packet: 9386
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 9360
+Flit Throughput: 0.00444968
+Packet Throughput: 0.00148984
+Average Flit Latency: 7.4163
+Average Packet Latency: 8.0749
+2021-04-27 07:06:48.777 INFO  UnReceived Packet：0
+
+2021-04-27 07:06:48.780 INFO  Warmup Cycle: 10000
+2021-04-27 07:06:48.780 INFO  Simulation Cycle: 100000
+2021-04-27 07:06:48.780 INFO  Injection Rate: 0.005
+2021-04-27 07:06:48.780 INFO  The number of ejection link: 2
+2021-04-27 07:06:48.780 INFO  The number of EXB: 1
+2021-04-27 07:06:48.780 INFO  Traffic Type: Transpose
+2021-04-27 07:06:48.780 INFO  Packet Size: Random
+2021-04-27 07:06:48.780 INFO  EXB Strategy: Max
+2021-04-27 07:06:48.780 INFO  Routing Strategy: Shortest
+2021-04-27 07:07:16.381 INFO  
+Number of Packet sent during warm up phrase: 979
+Number of Packet sent during sim phrase: 9386
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 28033
+Received Packet: 9386
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 9360
+Flit Throughput: 0.00444968
+Packet Throughput: 0.00148984
+Average Flit Latency: 7.4163
+Average Packet Latency: 8.0749
+2021-04-27 07:07:16.382 INFO  UnReceived Packet：0
+
+2021-04-27 07:07:16.384 INFO  Warmup Cycle: 10000
+2021-04-27 07:07:16.384 INFO  Simulation Cycle: 100000
+2021-04-27 07:07:16.384 INFO  Injection Rate: 0.01
+2021-04-27 07:07:16.384 INFO  The number of ejection link: 2
+2021-04-27 07:07:16.384 INFO  The number of EXB: 1
+2021-04-27 07:07:16.384 INFO  Traffic Type: Transpose
+2021-04-27 07:07:16.384 INFO  Packet Size: Random
+2021-04-27 07:07:16.384 INFO  EXB Strategy: Max
+2021-04-27 07:07:16.384 INFO  Routing Strategy: Shortest
+2021-04-27 07:07:47.467 INFO  
+Number of Packet sent during warm up phrase: 1915
+Number of Packet sent during sim phrase: 18744
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 56460
+Received Packet: 18742
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 3009
+Flit Throughput: 0.0089619
+Packet Throughput: 0.00297492
+Average Flit Latency: 7.49943
+Average Packet Latency: 8.16028
+2021-04-27 07:07:47.468 INFO  UnReceived Packet：2
+
+2021-04-27 07:07:47.471 INFO  Warmup Cycle: 10000
+2021-04-27 07:07:47.471 INFO  Simulation Cycle: 100000
+2021-04-27 07:07:47.471 INFO  Injection Rate: 0.015
+2021-04-27 07:07:47.471 INFO  The number of ejection link: 2
+2021-04-27 07:07:47.471 INFO  The number of EXB: 1
+2021-04-27 07:07:47.471 INFO  Traffic Type: Transpose
+2021-04-27 07:07:47.471 INFO  Packet Size: Random
+2021-04-27 07:07:47.471 INFO  EXB Strategy: Max
+2021-04-27 07:07:47.471 INFO  Routing Strategy: Shortest
+2021-04-27 07:08:21.924 INFO  
+Number of Packet sent during warm up phrase: 2876
+Number of Packet sent during sim phrase: 28180
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 84701
+Received Packet: 28181
+Max Flit Delay: 22
+Max Packet Delay: 22
+Packet ID of Max Packet Delay: 18372
+Flit Throughput: 0.0134446
+Packet Throughput: 0.00447317
+Average Flit Latency: 7.53838
+Average Packet Latency: 8.20925
+2021-04-27 07:08:21.926 INFO  UnReceived Packet：6
+
+2021-04-27 07:08:21.929 INFO  Warmup Cycle: 10000
+2021-04-27 07:08:21.929 INFO  Simulation Cycle: 100000
+2021-04-27 07:08:21.929 INFO  Injection Rate: 0.02
+2021-04-27 07:08:21.929 INFO  The number of ejection link: 2
+2021-04-27 07:08:21.929 INFO  The number of EXB: 1
+2021-04-27 07:08:21.929 INFO  Traffic Type: Transpose
+2021-04-27 07:08:21.929 INFO  Packet Size: Random
+2021-04-27 07:08:21.929 INFO  EXB Strategy: Max
+2021-04-27 07:08:21.929 INFO  Routing Strategy: Shortest
+2021-04-27 07:08:59.362 INFO  
+Number of Packet sent during warm up phrase: 3793
+Number of Packet sent during sim phrase: 37460
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 112825
+Received Packet: 37460
+Max Flit Delay: 23
+Max Packet Delay: 23
+Packet ID of Max Packet Delay: 30440
+Flit Throughput: 0.0179087
+Packet Throughput: 0.00594603
+Average Flit Latency: 7.5923
+Average Packet Latency: 8.27258
+2021-04-27 07:08:59.363 INFO  UnReceived Packet：11
+
+2021-04-27 07:08:59.365 INFO  Warmup Cycle: 10000
+2021-04-27 07:08:59.365 INFO  Simulation Cycle: 100000
+2021-04-27 07:08:59.365 INFO  Injection Rate: 0.025
+2021-04-27 07:08:59.365 INFO  The number of ejection link: 2
+2021-04-27 07:08:59.365 INFO  The number of EXB: 1
+2021-04-27 07:08:59.365 INFO  Traffic Type: Transpose
+2021-04-27 07:08:59.365 INFO  Packet Size: Random
+2021-04-27 07:08:59.365 INFO  EXB Strategy: Max
+2021-04-27 07:08:59.365 INFO  Routing Strategy: Shortest
+2021-04-27 07:09:40.604 INFO  
+Number of Packet sent during warm up phrase: 4720
+Number of Packet sent during sim phrase: 46908
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 141354
+Received Packet: 46909
+Max Flit Delay: 24
+Max Packet Delay: 24
+Packet ID of Max Packet Delay: 30614
+Flit Throughput: 0.0224371
+Packet Throughput: 0.00744587
+Average Flit Latency: 7.66597
+Average Packet Latency: 8.32665
+2021-04-27 07:09:40.606 INFO  UnReceived Packet：16
+
+2021-04-27 07:09:40.610 INFO  Warmup Cycle: 10000
+2021-04-27 07:09:40.610 INFO  Simulation Cycle: 100000
+2021-04-27 07:09:40.610 INFO  Injection Rate: 0.03
+2021-04-27 07:09:40.610 INFO  The number of ejection link: 2
+2021-04-27 07:09:40.610 INFO  The number of EXB: 1
+2021-04-27 07:09:40.610 INFO  Traffic Type: Transpose
+2021-04-27 07:09:40.610 INFO  Packet Size: Random
+2021-04-27 07:09:40.610 INFO  EXB Strategy: Max
+2021-04-27 07:09:40.610 INFO  Routing Strategy: Shortest
+2021-04-27 07:10:25.677 INFO  
+Number of Packet sent during warm up phrase: 5657
+Number of Packet sent during sim phrase: 56137
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 169041
+Received Packet: 56141
+Max Flit Delay: 26
+Max Packet Delay: 26
+Packet ID of Max Packet Delay: 22148
+Flit Throughput: 0.0268319
+Packet Throughput: 0.00891127
+Average Flit Latency: 7.69485
+Average Packet Latency: 8.36228
+2021-04-27 07:10:25.678 INFO  UnReceived Packet：21
+
+2021-04-27 07:10:25.681 INFO  Warmup Cycle: 10000
+2021-04-27 07:10:25.681 INFO  Simulation Cycle: 100000
+2021-04-27 07:10:25.681 INFO  Injection Rate: 0.035
+2021-04-27 07:10:25.681 INFO  The number of ejection link: 2
+2021-04-27 07:10:25.681 INFO  The number of EXB: 1
+2021-04-27 07:10:25.681 INFO  Traffic Type: Transpose
+2021-04-27 07:10:25.681 INFO  Packet Size: Random
+2021-04-27 07:10:25.681 INFO  EXB Strategy: Max
+2021-04-27 07:10:25.681 INFO  Routing Strategy: Shortest
+2021-04-27 07:11:14.663 INFO  
+Number of Packet sent during warm up phrase: 6598
+Number of Packet sent during sim phrase: 65649
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 197450
+Received Packet: 65652
+Max Flit Delay: 38
+Max Packet Delay: 38
+Packet ID of Max Packet Delay: 31314
+Flit Throughput: 0.0313413
+Packet Throughput: 0.010421
+Average Flit Latency: 7.74794
+Average Packet Latency: 8.42072
+2021-04-27 07:11:14.664 INFO  UnReceived Packet：26
+
+2021-04-27 07:11:14.666 INFO  Warmup Cycle: 10000
+2021-04-27 07:11:14.666 INFO  Simulation Cycle: 100000
+2021-04-27 07:11:14.666 INFO  Injection Rate: 0.04
+2021-04-27 07:11:14.666 INFO  The number of ejection link: 2
+2021-04-27 07:11:14.666 INFO  The number of EXB: 1
+2021-04-27 07:11:14.666 INFO  Traffic Type: Transpose
+2021-04-27 07:11:14.666 INFO  Packet Size: Random
+2021-04-27 07:11:14.666 INFO  EXB Strategy: Max
+2021-04-27 07:11:14.666 INFO  Routing Strategy: Shortest
+2021-04-27 07:12:06.470 INFO  
+Number of Packet sent during warm up phrase: 7529
+Number of Packet sent during sim phrase: 74963
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 225390
+Received Packet: 74968
+Max Flit Delay: 32
+Max Packet Delay: 32
+Packet ID of Max Packet Delay: 76197
+Flit Throughput: 0.0357762
+Packet Throughput: 0.0118997
+Average Flit Latency: 7.81105
+Average Packet Latency: 8.48213
+2021-04-27 07:12:06.472 INFO  UnReceived Packet：31
+
+2021-04-27 07:12:06.474 INFO  Warmup Cycle: 10000
+2021-04-27 07:12:06.474 INFO  Simulation Cycle: 100000
+2021-04-27 07:12:06.474 INFO  Injection Rate: 0.045
+2021-04-27 07:12:06.474 INFO  The number of ejection link: 2
+2021-04-27 07:12:06.474 INFO  The number of EXB: 1
+2021-04-27 07:12:06.474 INFO  Traffic Type: Transpose
+2021-04-27 07:12:06.474 INFO  Packet Size: Random
+2021-04-27 07:12:06.474 INFO  EXB Strategy: Max
+2021-04-27 07:12:06.474 INFO  Routing Strategy: Shortest
+2021-04-27 07:13:00.215 INFO  
+Number of Packet sent during warm up phrase: 8482
+Number of Packet sent during sim phrase: 84291
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 253472
+Received Packet: 84295
+Max Flit Delay: 30
+Max Packet Delay: 30
+Packet ID of Max Packet Delay: 45236
+Flit Throughput: 0.0402337
+Packet Throughput: 0.0133802
+Average Flit Latency: 7.8576
+Average Packet Latency: 8.52737
+2021-04-27 07:13:00.217 INFO  UnReceived Packet：37
+
+2021-04-27 07:13:00.219 INFO  Warmup Cycle: 10000
+2021-04-27 07:13:00.219 INFO  Simulation Cycle: 100000
+2021-04-27 07:13:00.219 INFO  Injection Rate: 0.05
+2021-04-27 07:13:00.219 INFO  The number of ejection link: 2
+2021-04-27 07:13:00.219 INFO  The number of EXB: 1
+2021-04-27 07:13:00.219 INFO  Traffic Type: Transpose
+2021-04-27 07:13:00.219 INFO  Packet Size: Random
+2021-04-27 07:13:00.219 INFO  EXB Strategy: Max
+2021-04-27 07:13:00.219 INFO  Routing Strategy: Shortest
+2021-04-27 07:13:57.391 INFO  
+Number of Packet sent during warm up phrase: 9392
+Number of Packet sent during sim phrase: 93461
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 280646
+Received Packet: 93470
+Max Flit Delay: 26
+Max Packet Delay: 26
+Packet ID of Max Packet Delay: 74479
+Flit Throughput: 0.044547
+Packet Throughput: 0.0148365
+Average Flit Latency: 7.90891
+Average Packet Latency: 8.57928
+2021-04-27 07:13:57.392 INFO  UnReceived Packet：43
+
+2021-04-27 07:13:57.395 INFO  Warmup Cycle: 10000
+2021-04-27 07:13:57.395 INFO  Simulation Cycle: 100000
+2021-04-27 07:13:57.395 INFO  Injection Rate: 0.055
+2021-04-27 07:13:57.395 INFO  The number of ejection link: 2
+2021-04-27 07:13:57.395 INFO  The number of EXB: 1
+2021-04-27 07:13:57.395 INFO  Traffic Type: Transpose
+2021-04-27 07:13:57.395 INFO  Packet Size: Random
+2021-04-27 07:13:57.395 INFO  EXB Strategy: Max
+2021-04-27 07:13:57.395 INFO  Routing Strategy: Shortest
+2021-04-27 07:14:57.538 INFO  
+Number of Packet sent during warm up phrase: 10301
+Number of Packet sent during sim phrase: 102970
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 309362
+Received Packet: 102976
+Max Flit Delay: 32
+Max Packet Delay: 32
+Packet ID of Max Packet Delay: 35501
+Flit Throughput: 0.0491051
+Packet Throughput: 0.0163454
+Average Flit Latency: 7.96536
+Average Packet Latency: 8.63433
+2021-04-27 07:14:57.539 INFO  UnReceived Packet：49
+
+2021-04-27 07:14:57.543 INFO  Warmup Cycle: 10000
+2021-04-27 07:14:57.543 INFO  Simulation Cycle: 100000
+2021-04-27 07:14:57.543 INFO  Injection Rate: 0.06
+2021-04-27 07:14:57.543 INFO  The number of ejection link: 2
+2021-04-27 07:14:57.544 INFO  The number of EXB: 1
+2021-04-27 07:14:57.544 INFO  Traffic Type: Transpose
+2021-04-27 07:14:57.544 INFO  Packet Size: Random
+2021-04-27 07:14:57.544 INFO  EXB Strategy: Max
+2021-04-27 07:14:57.544 INFO  Routing Strategy: Shortest
+2021-04-27 07:16:02.888 INFO  
+Number of Packet sent during warm up phrase: 11216
+Number of Packet sent during sim phrase: 112338
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 337436
+Received Packet: 112343
+Max Flit Delay: 46
+Max Packet Delay: 46
+Packet ID of Max Packet Delay: 37667
+Flit Throughput: 0.0535613
+Packet Throughput: 0.0178322
+Average Flit Latency: 8.02761
+Average Packet Latency: 8.70132
+2021-04-27 07:16:02.889 INFO  UnReceived Packet：57
+
+2021-04-27 07:16:02.892 INFO  Warmup Cycle: 10000
+2021-04-27 07:16:02.892 INFO  Simulation Cycle: 100000
+2021-04-27 07:16:02.892 INFO  Injection Rate: 0.065
+2021-04-27 07:16:02.892 INFO  The number of ejection link: 2
+2021-04-27 07:16:02.892 INFO  The number of EXB: 1
+2021-04-27 07:16:02.892 INFO  Traffic Type: Transpose
+2021-04-27 07:16:02.892 INFO  Packet Size: Random
+2021-04-27 07:16:02.892 INFO  EXB Strategy: Max
+2021-04-27 07:16:02.892 INFO  Routing Strategy: Shortest
+2021-04-27 07:17:10.784 INFO  
+Number of Packet sent during warm up phrase: 12148
+Number of Packet sent during sim phrase: 121688
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 365314
+Received Packet: 121692
+Max Flit Delay: 30
+Max Packet Delay: 30
+Packet ID of Max Packet Delay: 30925
+Flit Throughput: 0.0579863
+Packet Throughput: 0.0193162
+Average Flit Latency: 8.08534
+Average Packet Latency: 8.75225
+2021-04-27 07:17:10.785 INFO  UnReceived Packet：67
+
+2021-04-27 07:17:10.788 INFO  Warmup Cycle: 10000
+2021-04-27 07:17:10.788 INFO  Simulation Cycle: 100000
+2021-04-27 07:17:10.788 INFO  Injection Rate: 0.07
+2021-04-27 07:17:10.788 INFO  The number of ejection link: 2
+2021-04-27 07:17:10.788 INFO  The number of EXB: 1
+2021-04-27 07:17:10.788 INFO  Traffic Type: Transpose
+2021-04-27 07:17:10.788 INFO  Packet Size: Random
+2021-04-27 07:17:10.788 INFO  EXB Strategy: Max
+2021-04-27 07:17:10.788 INFO  Routing Strategy: Shortest
+2021-04-27 07:18:21.718 INFO  
+Number of Packet sent during warm up phrase: 13107
+Number of Packet sent during sim phrase: 130909
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 392925
+Received Packet: 130914
+Max Flit Delay: 39
+Max Packet Delay: 39
+Packet ID of Max Packet Delay: 19987
+Flit Throughput: 0.062369
+Packet Throughput: 0.02078
+Average Flit Latency: 8.1447
+Average Packet Latency: 8.80533
+2021-04-27 07:18:21.719 INFO  UnReceived Packet：78
+
+2021-04-27 07:18:21.722 INFO  Warmup Cycle: 10000
+2021-04-27 07:18:21.722 INFO  Simulation Cycle: 100000
+2021-04-27 07:18:21.722 INFO  Injection Rate: 0.075
+2021-04-27 07:18:21.722 INFO  The number of ejection link: 2
+2021-04-27 07:18:21.722 INFO  The number of EXB: 1
+2021-04-27 07:18:21.722 INFO  Traffic Type: Transpose
+2021-04-27 07:18:21.722 INFO  Packet Size: Random
+2021-04-27 07:18:21.722 INFO  EXB Strategy: Max
+2021-04-27 07:18:21.722 INFO  Routing Strategy: Shortest
+2021-04-27 07:19:35.320 INFO  
+Number of Packet sent during warm up phrase: 14039
+Number of Packet sent during sim phrase: 140345
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 421167
+Received Packet: 140346
+Max Flit Delay: 43
+Max Packet Delay: 43
+Packet ID of Max Packet Delay: 73068
+Flit Throughput: 0.0668519
+Packet Throughput: 0.0222771
+Average Flit Latency: 8.17674
+Average Packet Latency: 8.85355
+2021-04-27 07:19:35.322 INFO  UnReceived Packet：92
+
+2021-04-27 07:19:35.324 INFO  Warmup Cycle: 10000
+2021-04-27 07:19:35.324 INFO  Simulation Cycle: 100000
+2021-04-27 07:19:35.324 INFO  Injection Rate: 0.08
+2021-04-27 07:19:35.324 INFO  The number of ejection link: 2
+2021-04-27 07:19:35.324 INFO  The number of EXB: 1
+2021-04-27 07:19:35.324 INFO  Traffic Type: Transpose
+2021-04-27 07:19:35.324 INFO  Packet Size: Random
+2021-04-27 07:19:35.324 INFO  EXB Strategy: Max
+2021-04-27 07:19:35.324 INFO  Routing Strategy: Shortest
+2021-04-27 07:20:52.391 INFO  
+Number of Packet sent during warm up phrase: 14965
+Number of Packet sent during sim phrase: 149804
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 449350
+Received Packet: 149810
+Max Flit Delay: 36
+Max Packet Delay: 36
+Packet ID of Max Packet Delay: 90242
+Flit Throughput: 0.0713254
+Packet Throughput: 0.0237794
+Average Flit Latency: 8.23174
+Average Packet Latency: 8.90029
+2021-04-27 07:20:52.394 INFO  UnReceived Packet：107
+
+2021-04-27 07:20:52.397 INFO  Warmup Cycle: 10000
+2021-04-27 07:20:52.397 INFO  Simulation Cycle: 100000
+2021-04-27 07:20:52.397 INFO  Injection Rate: 0.085
+2021-04-27 07:20:52.397 INFO  The number of ejection link: 2
+2021-04-27 07:20:52.397 INFO  The number of EXB: 1
+2021-04-27 07:20:52.397 INFO  Traffic Type: Transpose
+2021-04-27 07:20:52.397 INFO  Packet Size: Random
+2021-04-27 07:20:52.397 INFO  EXB Strategy: Max
+2021-04-27 07:20:52.397 INFO  Routing Strategy: Shortest
+2021-04-27 07:22:13.659 INFO  
+Number of Packet sent during warm up phrase: 15901
+Number of Packet sent during sim phrase: 159131
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 477259
+Received Packet: 159135
+Max Flit Delay: 39
+Max Packet Delay: 39
+Packet ID of Max Packet Delay: 153216
+Flit Throughput: 0.0757554
+Packet Throughput: 0.0252595
+Average Flit Latency: 8.28065
+Average Packet Latency: 8.94808
+2021-04-27 07:22:13.661 INFO  UnReceived Packet：122
+
+2021-04-27 07:22:13.665 INFO  Warmup Cycle: 10000
+2021-04-27 07:22:13.665 INFO  Simulation Cycle: 100000
+2021-04-27 07:22:13.665 INFO  Injection Rate: 0.09
+2021-04-27 07:22:13.665 INFO  The number of ejection link: 2
+2021-04-27 07:22:13.665 INFO  The number of EXB: 1
+2021-04-27 07:22:13.665 INFO  Traffic Type: Transpose
+2021-04-27 07:22:13.665 INFO  Packet Size: Random
+2021-04-27 07:22:13.665 INFO  EXB Strategy: Max
+2021-04-27 07:22:13.665 INFO  Routing Strategy: Shortest
+2021-04-27 07:23:38.137 INFO  
+Number of Packet sent during warm up phrase: 16879
+Number of Packet sent during sim phrase: 168458
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 505078
+Received Packet: 168463
+Max Flit Delay: 47
+Max Packet Delay: 47
+Packet ID of Max Packet Delay: 28524
+Flit Throughput: 0.0801711
+Packet Throughput: 0.0267402
+Average Flit Latency: 8.34067
+Average Packet Latency: 9.00113
+2021-04-27 07:23:38.139 INFO  UnReceived Packet：137
+
+2021-04-27 07:23:38.142 INFO  Warmup Cycle: 10000
+2021-04-27 07:23:38.142 INFO  Simulation Cycle: 100000
+2021-04-27 07:23:38.142 INFO  Injection Rate: 0.095
+2021-04-27 07:23:38.142 INFO  The number of ejection link: 2
+2021-04-27 07:23:38.142 INFO  The number of EXB: 1
+2021-04-27 07:23:38.142 INFO  Traffic Type: Transpose
+2021-04-27 07:23:38.142 INFO  Packet Size: Random
+2021-04-27 07:23:38.142 INFO  EXB Strategy: Max
+2021-04-27 07:23:38.142 INFO  Routing Strategy: Shortest
+2021-04-27 07:25:05.293 INFO  
+Number of Packet sent during warm up phrase: 17860
+Number of Packet sent during sim phrase: 177711
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 533037
+Received Packet: 177714
+Max Flit Delay: 47
+Max Packet Delay: 47
+Packet ID of Max Packet Delay: 160694
+Flit Throughput: 0.084609
+Packet Throughput: 0.0282086
+Average Flit Latency: 8.38259
+Average Packet Latency: 9.0521
+2021-04-27 07:25:05.294 INFO  UnReceived Packet：153
+
+2021-04-27 07:25:05.298 INFO  Warmup Cycle: 10000
+2021-04-27 07:25:05.298 INFO  Simulation Cycle: 100000
+2021-04-27 07:25:05.298 INFO  Injection Rate: 0.1
+2021-04-27 07:25:05.298 INFO  The number of ejection link: 2
+2021-04-27 07:25:05.298 INFO  The number of EXB: 1
+2021-04-27 07:25:05.298 INFO  Traffic Type: Transpose
+2021-04-27 07:25:05.299 INFO  Packet Size: Random
+2021-04-27 07:25:05.299 INFO  EXB Strategy: Max
+2021-04-27 07:25:05.299 INFO  Routing Strategy: Shortest
+2021-04-27 07:26:34.753 INFO  
+Number of Packet sent during warm up phrase: 18798
+Number of Packet sent during sim phrase: 187133
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 561196
+Received Packet: 187139
+Max Flit Delay: 55
+Max Packet Delay: 55
+Packet ID of Max Packet Delay: 186483
+Flit Throughput: 0.0890787
+Packet Throughput: 0.0297046
+Average Flit Latency: 8.43267
+Average Packet Latency: 9.10193
+2021-04-27 07:26:34.754 INFO  UnReceived Packet：170
+
+2021-04-27 07:26:34.757 INFO  Warmup Cycle: 10000
+2021-04-27 07:26:34.757 INFO  Simulation Cycle: 100000
+2021-04-27 07:26:34.757 INFO  Injection Rate: 0.105
+2021-04-27 07:26:34.757 INFO  The number of ejection link: 2
+2021-04-27 07:26:34.757 INFO  The number of EXB: 1
+2021-04-27 07:26:34.757 INFO  Traffic Type: Transpose
+2021-04-27 07:26:34.757 INFO  Packet Size: Random
+2021-04-27 07:26:34.757 INFO  EXB Strategy: Max
+2021-04-27 07:26:34.757 INFO  Routing Strategy: Shortest
+2021-04-27 07:28:08.885 INFO  
+Number of Packet sent during warm up phrase: 19734
+Number of Packet sent during sim phrase: 196573
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 589666
+Received Packet: 196580
+Max Flit Delay: 46
+Max Packet Delay: 46
+Packet ID of Max Packet Delay: 33849
+Flit Throughput: 0.0935978
+Packet Throughput: 0.0312032
+Average Flit Latency: 8.47833
+Average Packet Latency: 9.14842
+2021-04-27 07:28:08.887 INFO  UnReceived Packet：188
+
+2021-04-27 07:28:08.890 INFO  Warmup Cycle: 10000
+2021-04-27 07:28:08.890 INFO  Simulation Cycle: 100000
+2021-04-27 07:28:08.890 INFO  Injection Rate: 0.11
+2021-04-27 07:28:08.890 INFO  The number of ejection link: 2
+2021-04-27 07:28:08.890 INFO  The number of EXB: 1
+2021-04-27 07:28:08.890 INFO  Traffic Type: Transpose
+2021-04-27 07:28:08.890 INFO  Packet Size: Random
+2021-04-27 07:28:08.890 INFO  EXB Strategy: Max
+2021-04-27 07:28:08.890 INFO  Routing Strategy: Shortest
+2021-04-27 07:29:45.088 INFO  
+Number of Packet sent during warm up phrase: 20705
+Number of Packet sent during sim phrase: 205862
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 617642
+Received Packet: 205864
+Max Flit Delay: 75
+Max Packet Delay: 75
+Packet ID of Max Packet Delay: 69188
+Flit Throughput: 0.0980384
+Packet Throughput: 0.0326768
+Average Flit Latency: 8.54418
+Average Packet Latency: 9.20949
+2021-04-27 07:29:45.090 INFO  UnReceived Packet：209
+
+2021-04-27 07:29:45.094 INFO  Warmup Cycle: 10000
+2021-04-27 07:29:45.094 INFO  Simulation Cycle: 100000
+2021-04-27 07:29:45.094 INFO  Injection Rate: 0.115
+2021-04-27 07:29:45.094 INFO  The number of ejection link: 2
+2021-04-27 07:29:45.094 INFO  The number of EXB: 1
+2021-04-27 07:29:45.094 INFO  Traffic Type: Transpose
+2021-04-27 07:29:45.094 INFO  Packet Size: Random
+2021-04-27 07:29:45.094 INFO  EXB Strategy: Max
+2021-04-27 07:29:45.094 INFO  Routing Strategy: Shortest
+2021-04-27 07:31:25.867 INFO  
+Number of Packet sent during warm up phrase: 21618
+Number of Packet sent during sim phrase: 215133
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 645366
+Received Packet: 215137
+Max Flit Delay: 58
+Max Packet Delay: 58
+Packet ID of Max Packet Delay: 81351
+Flit Throughput: 0.102439
+Packet Throughput: 0.0341487
+Average Flit Latency: 8.58102
+Average Packet Latency: 9.25218
+2021-04-27 07:31:25.868 INFO  UnReceived Packet：231
+
+2021-04-27 07:31:25.871 INFO  Warmup Cycle: 10000
+2021-04-27 07:31:25.871 INFO  Simulation Cycle: 100000
+2021-04-27 07:31:25.871 INFO  Injection Rate: 0.12
+2021-04-27 07:31:25.871 INFO  The number of ejection link: 2
+2021-04-27 07:31:25.871 INFO  The number of EXB: 1
+2021-04-27 07:31:25.871 INFO  Traffic Type: Transpose
+2021-04-27 07:31:25.871 INFO  Packet Size: Random
+2021-04-27 07:31:25.871 INFO  EXB Strategy: Max
+2021-04-27 07:31:25.871 INFO  Routing Strategy: Shortest
+2021-04-27 07:33:08.753 INFO  
+Number of Packet sent during warm up phrase: 22549
+Number of Packet sent during sim phrase: 224557
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 673287
+Received Packet: 224557
+Max Flit Delay: 67
+Max Packet Delay: 67
+Packet ID of Max Packet Delay: 162084
+Flit Throughput: 0.106871
+Packet Throughput: 0.035644
+Average Flit Latency: 8.63749
+Average Packet Latency: 9.31462
+2021-04-27 07:33:08.754 INFO  UnReceived Packet：255
+
+2021-04-27 07:33:08.757 INFO  Warmup Cycle: 10000
+2021-04-27 07:33:08.757 INFO  Simulation Cycle: 100000
+2021-04-27 07:33:08.757 INFO  Injection Rate: 0.125
+2021-04-27 07:33:08.757 INFO  The number of ejection link: 2
+2021-04-27 07:33:08.757 INFO  The number of EXB: 1
+2021-04-27 07:33:08.757 INFO  Traffic Type: Transpose
+2021-04-27 07:33:08.757 INFO  Packet Size: Random
+2021-04-27 07:33:08.757 INFO  EXB Strategy: Max
+2021-04-27 07:33:08.757 INFO  Routing Strategy: Shortest
+2021-04-27 07:34:54.929 INFO  
+Number of Packet sent during warm up phrase: 23484
+Number of Packet sent during sim phrase: 233876
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 701632
+Received Packet: 233877
+Max Flit Delay: 130
+Max Packet Delay: 130
+Packet ID of Max Packet Delay: 183054
+Flit Throughput: 0.11137
+Packet Throughput: 0.0371233
+Average Flit Latency: 8.70776
+Average Packet Latency: 9.37437
+2021-04-27 07:34:54.930 INFO  UnReceived Packet：278
+
+2021-04-27 07:34:54.933 INFO  Warmup Cycle: 10000
+2021-04-27 07:34:54.933 INFO  Simulation Cycle: 100000
+2021-04-27 07:34:54.933 INFO  Injection Rate: 0.13
+2021-04-27 07:34:54.933 INFO  The number of ejection link: 2
+2021-04-27 07:34:54.933 INFO  The number of EXB: 1
+2021-04-27 07:34:54.933 INFO  Traffic Type: Transpose
+2021-04-27 07:34:54.933 INFO  Packet Size: Random
+2021-04-27 07:34:54.933 INFO  EXB Strategy: Max
+2021-04-27 07:34:54.933 INFO  Routing Strategy: Shortest
+2021-04-27 07:36:44.246 INFO  
+Number of Packet sent during warm up phrase: 24393
+Number of Packet sent during sim phrase: 243311
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 729615
+Received Packet: 243309
+Max Flit Delay: 68
+Max Packet Delay: 68
+Packet ID of Max Packet Delay: 116535
+Flit Throughput: 0.115812
+Packet Throughput: 0.0386205
+Average Flit Latency: 8.75681
+Average Packet Latency: 9.42529
+2021-04-27 07:36:44.248 INFO  UnReceived Packet：302
+
+2021-04-27 07:36:44.250 INFO  Warmup Cycle: 10000
+2021-04-27 07:36:44.251 INFO  Simulation Cycle: 100000
+2021-04-27 07:36:44.251 INFO  Injection Rate: 0.135
+2021-04-27 07:36:44.251 INFO  The number of ejection link: 2
+2021-04-27 07:36:44.251 INFO  The number of EXB: 1
+2021-04-27 07:36:44.251 INFO  Traffic Type: Transpose
+2021-04-27 07:36:44.251 INFO  Packet Size: Random
+2021-04-27 07:36:44.251 INFO  EXB Strategy: Max
+2021-04-27 07:36:44.251 INFO  Routing Strategy: Shortest
+2021-04-27 07:38:37.009 INFO  
+Number of Packet sent during warm up phrase: 25293
+Number of Packet sent during sim phrase: 252884
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 759105
+Received Packet: 252884
+Max Flit Delay: 74
+Max Packet Delay: 74
+Packet ID of Max Packet Delay: 232257
+Flit Throughput: 0.120493
+Packet Throughput: 0.0401403
+Average Flit Latency: 8.82612
+Average Packet Latency: 9.48948
+2021-04-27 07:38:37.011 INFO  UnReceived Packet：327
+
+2021-04-27 07:38:37.013 INFO  Warmup Cycle: 10000
+2021-04-27 07:38:37.013 INFO  Simulation Cycle: 100000
+2021-04-27 07:38:37.013 INFO  Injection Rate: 0.14
+2021-04-27 07:38:37.013 INFO  The number of ejection link: 2
+2021-04-27 07:38:37.013 INFO  The number of EXB: 1
+2021-04-27 07:38:37.013 INFO  Traffic Type: Transpose
+2021-04-27 07:38:37.013 INFO  Packet Size: Random
+2021-04-27 07:38:37.013 INFO  EXB Strategy: Max
+2021-04-27 07:38:37.013 INFO  Routing Strategy: Shortest
+2021-04-27 07:40:32.473 INFO  
+Number of Packet sent during warm up phrase: 26220
+Number of Packet sent during sim phrase: 262291
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 787176
+Received Packet: 262293
+Max Flit Delay: 83
+Max Packet Delay: 83
+Packet ID of Max Packet Delay: 267367
+Flit Throughput: 0.124949
+Packet Throughput: 0.0416338
+Average Flit Latency: 8.87832
+Average Packet Latency: 9.54614
+2021-04-27 07:40:32.474 INFO  UnReceived Packet：353
+
+2021-04-27 07:40:32.477 INFO  Warmup Cycle: 10000
+2021-04-27 07:40:32.477 INFO  Simulation Cycle: 100000
+2021-04-27 07:40:32.477 INFO  Injection Rate: 0.145
+2021-04-27 07:40:32.477 INFO  The number of ejection link: 2
+2021-04-27 07:40:32.477 INFO  The number of EXB: 1
+2021-04-27 07:40:32.477 INFO  Traffic Type: Transpose
+2021-04-27 07:40:32.477 INFO  Packet Size: Random
+2021-04-27 07:40:32.477 INFO  EXB Strategy: Max
+2021-04-27 07:40:32.477 INFO  Routing Strategy: Shortest
+2021-04-27 07:42:31.789 INFO  
+Number of Packet sent during warm up phrase: 27187
+Number of Packet sent during sim phrase: 271745
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 815714
+Received Packet: 271745
+Max Flit Delay: 123
+Max Packet Delay: 123
+Packet ID of Max Packet Delay: 256962
+Flit Throughput: 0.129478
+Packet Throughput: 0.0431341
+Average Flit Latency: 8.93586
+Average Packet Latency: 9.60157
+2021-04-27 07:42:31.791 INFO  UnReceived Packet：379
+
+2021-04-27 07:42:31.796 INFO  Warmup Cycle: 10000
+2021-04-27 07:42:31.796 INFO  Simulation Cycle: 100000
+2021-04-27 07:42:31.796 INFO  Injection Rate: 0.15
+2021-04-27 07:42:31.796 INFO  The number of ejection link: 2
+2021-04-27 07:42:31.796 INFO  The number of EXB: 1
+2021-04-27 07:42:31.796 INFO  Traffic Type: Transpose
+2021-04-27 07:42:31.796 INFO  Packet Size: Random
+2021-04-27 07:42:31.796 INFO  EXB Strategy: Max
+2021-04-27 07:42:31.796 INFO  Routing Strategy: Shortest
+2021-04-27 07:44:34.626 INFO  
+Number of Packet sent during warm up phrase: 28123
+Number of Packet sent during sim phrase: 281108
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 843604
+Received Packet: 281110
+Max Flit Delay: 104
+Max Packet Delay: 104
+Packet ID of Max Packet Delay: 135343
+Flit Throughput: 0.133905
+Packet Throughput: 0.0446206
+Average Flit Latency: 9.00108
+Average Packet Latency: 9.66064
+2021-04-27 07:44:34.628 INFO  UnReceived Packet：404
+
+2021-04-27 07:44:34.631 INFO  Warmup Cycle: 10000
+2021-04-27 07:44:34.631 INFO  Simulation Cycle: 100000
+2021-04-27 07:44:34.631 INFO  Injection Rate: 0.155
+2021-04-27 07:44:34.631 INFO  The number of ejection link: 2
+2021-04-27 07:44:34.631 INFO  The number of EXB: 1
+2021-04-27 07:44:34.631 INFO  Traffic Type: Transpose
+2021-04-27 07:44:34.631 INFO  Packet Size: Random
+2021-04-27 07:44:34.631 INFO  EXB Strategy: Max
+2021-04-27 07:44:34.631 INFO  Routing Strategy: Shortest
+2021-04-27 07:46:39.935 INFO  
+Number of Packet sent during warm up phrase: 29069
+Number of Packet sent during sim phrase: 290366
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 871238
+Received Packet: 290366
+Max Flit Delay: 127
+Max Packet Delay: 127
+Packet ID of Max Packet Delay: 250061
+Flit Throughput: 0.138292
+Packet Throughput: 0.0460898
+Average Flit Latency: 9.08074
+Average Packet Latency: 9.73391
+2021-04-27 07:46:39.936 INFO  UnReceived Packet：430
+
+2021-04-27 07:46:39.940 INFO  Warmup Cycle: 10000
+2021-04-27 07:46:39.940 INFO  Simulation Cycle: 100000
+2021-04-27 07:46:39.940 INFO  Injection Rate: 0.16
+2021-04-27 07:46:39.940 INFO  The number of ejection link: 2
+2021-04-27 07:46:39.940 INFO  The number of EXB: 1
+2021-04-27 07:46:39.940 INFO  Traffic Type: Transpose
+2021-04-27 07:46:39.940 INFO  Packet Size: Random
+2021-04-27 07:46:39.940 INFO  EXB Strategy: Max
+2021-04-27 07:46:39.940 INFO  Routing Strategy: Shortest
+2021-04-27 07:48:47.327 INFO  
+Number of Packet sent during warm up phrase: 30012
+Number of Packet sent during sim phrase: 299691
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 898881
+Received Packet: 299694
+Max Flit Delay: 131
+Max Packet Delay: 131
+Packet ID of Max Packet Delay: 164584
+Flit Throughput: 0.14268
+Packet Throughput: 0.0475705
+Average Flit Latency: 9.12672
+Average Packet Latency: 9.78843
+2021-04-27 07:48:47.329 INFO  UnReceived Packet：455
+
+2021-04-27 07:48:47.333 INFO  Warmup Cycle: 10000
+2021-04-27 07:48:47.333 INFO  Simulation Cycle: 100000
+2021-04-27 07:48:47.333 INFO  Injection Rate: 0.165
+2021-04-27 07:48:47.333 INFO  The number of ejection link: 2
+2021-04-27 07:48:47.333 INFO  The number of EXB: 1
+2021-04-27 07:48:47.333 INFO  Traffic Type: Transpose
+2021-04-27 07:48:47.333 INFO  Packet Size: Random
+2021-04-27 07:48:47.333 INFO  EXB Strategy: Max
+2021-04-27 07:48:47.333 INFO  Routing Strategy: Shortest
+2021-04-27 07:50:57.716 INFO  
+Number of Packet sent during warm up phrase: 30965
+Number of Packet sent during sim phrase: 309017
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 926946
+Received Packet: 309019
+Max Flit Delay: 159
+Max Packet Delay: 159
+Packet ID of Max Packet Delay: 321742
+Flit Throughput: 0.147134
+Packet Throughput: 0.0490506
+Average Flit Latency: 9.20114
+Average Packet Latency: 9.85808
+2021-04-27 07:50:57.717 INFO  UnReceived Packet：480
+
+2021-04-27 07:50:57.721 INFO  Warmup Cycle: 10000
+2021-04-27 07:50:57.721 INFO  Simulation Cycle: 100000
+2021-04-27 07:50:57.721 INFO  Injection Rate: 0.17
+2021-04-27 07:50:57.721 INFO  The number of ejection link: 2
+2021-04-27 07:50:57.721 INFO  The number of EXB: 1
+2021-04-27 07:50:57.721 INFO  Traffic Type: Transpose
+2021-04-27 07:50:57.721 INFO  Packet Size: Random
+2021-04-27 07:50:57.721 INFO  EXB Strategy: Max
+2021-04-27 07:50:57.721 INFO  Routing Strategy: Shortest
+2021-04-27 07:53:11.486 INFO  
+Number of Packet sent during warm up phrase: 31915
+Number of Packet sent during sim phrase: 318368
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 955276
+Received Packet: 318367
+Max Flit Delay: 203
+Max Packet Delay: 203
+Packet ID of Max Packet Delay: 317199
+Flit Throughput: 0.151631
+Packet Throughput: 0.0505344
+Average Flit Latency: 9.27488
+Average Packet Latency: 9.92721
+2021-04-27 07:53:11.488 INFO  UnReceived Packet：510
+
+2021-04-27 07:53:11.491 INFO  Warmup Cycle: 10000
+2021-04-27 07:53:11.491 INFO  Simulation Cycle: 100000
+2021-04-27 07:53:11.491 INFO  Injection Rate: 0.175
+2021-04-27 07:53:11.491 INFO  The number of ejection link: 2
+2021-04-27 07:53:11.491 INFO  The number of EXB: 1
+2021-04-27 07:53:11.491 INFO  Traffic Type: Transpose
+2021-04-27 07:53:11.491 INFO  Packet Size: Random
+2021-04-27 07:53:11.491 INFO  EXB Strategy: Max
+2021-04-27 07:53:11.491 INFO  Routing Strategy: Shortest
+2021-04-27 07:55:26.918 INFO  
+Number of Packet sent during warm up phrase: 32823
+Number of Packet sent during sim phrase: 327856
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 983199
+Received Packet: 327859
+Max Flit Delay: 173
+Max Packet Delay: 173
+Packet ID of Max Packet Delay: 109499
+Flit Throughput: 0.156063
+Packet Throughput: 0.0520411
+Average Flit Latency: 9.31206
+Average Packet Latency: 9.97456
+2021-04-27 07:55:26.919 INFO  UnReceived Packet：533
+
+2021-04-27 07:55:26.923 INFO  Warmup Cycle: 10000
+2021-04-27 07:55:26.923 INFO  Simulation Cycle: 100000
+2021-04-27 07:55:26.923 INFO  Injection Rate: 0.18
+2021-04-27 07:55:26.923 INFO  The number of ejection link: 2
+2021-04-27 07:55:26.923 INFO  The number of EXB: 1
+2021-04-27 07:55:26.923 INFO  Traffic Type: Transpose
+2021-04-27 07:55:26.923 INFO  Packet Size: Random
+2021-04-27 07:55:26.923 INFO  EXB Strategy: Max
+2021-04-27 07:55:26.923 INFO  Routing Strategy: Shortest
+2021-04-27 07:57:45.889 INFO  
+Number of Packet sent during warm up phrase: 33710
+Number of Packet sent during sim phrase: 337293
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1011944
+Received Packet: 337296
+Max Flit Delay: 177
+Max Packet Delay: 177
+Packet ID of Max Packet Delay: 235961
+Flit Throughput: 0.160626
+Packet Throughput: 0.053539
+Average Flit Latency: 9.44224
+Average Packet Latency: 10.1035
+2021-04-27 07:57:45.891 INFO  UnReceived Packet：559
+
+2021-04-27 07:57:45.896 INFO  Warmup Cycle: 10000
+2021-04-27 07:57:45.896 INFO  Simulation Cycle: 100000
+2021-04-27 07:57:45.896 INFO  Injection Rate: 0.185
+2021-04-27 07:57:45.896 INFO  The number of ejection link: 2
+2021-04-27 07:57:45.896 INFO  The number of EXB: 1
+2021-04-27 07:57:45.896 INFO  Traffic Type: Transpose
+2021-04-27 07:57:45.896 INFO  Packet Size: Random
+2021-04-27 07:57:45.896 INFO  EXB Strategy: Max
+2021-04-27 07:57:45.896 INFO  Routing Strategy: Shortest
+2021-04-27 08:00:09.943 INFO  
+Number of Packet sent during warm up phrase: 34649
+Number of Packet sent during sim phrase: 346509
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1040172
+Received Packet: 346509
+Max Flit Delay: 207
+Max Packet Delay: 207
+Packet ID of Max Packet Delay: 137371
+Flit Throughput: 0.165107
+Packet Throughput: 0.0550014
+Average Flit Latency: 9.49363
+Average Packet Latency: 10.1518
+2021-04-27 08:00:09.945 INFO  UnReceived Packet：590
+
+2021-04-27 08:00:09.948 INFO  Warmup Cycle: 10000
+2021-04-27 08:00:09.948 INFO  Simulation Cycle: 100000
+2021-04-27 08:00:09.948 INFO  Injection Rate: 0.19
+2021-04-27 08:00:09.948 INFO  The number of ejection link: 2
+2021-04-27 08:00:09.948 INFO  The number of EXB: 1
+2021-04-27 08:00:09.948 INFO  Traffic Type: Transpose
+2021-04-27 08:00:09.948 INFO  Packet Size: Random
+2021-04-27 08:00:09.948 INFO  EXB Strategy: Max
+2021-04-27 08:00:09.948 INFO  Routing Strategy: Shortest
+2021-04-27 08:02:36.804 INFO  
+Number of Packet sent during warm up phrase: 35630
+Number of Packet sent during sim phrase: 355791
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1067234
+Received Packet: 355792
+Max Flit Delay: 215
+Max Packet Delay: 215
+Packet ID of Max Packet Delay: 184247
+Flit Throughput: 0.169402
+Packet Throughput: 0.0564749
+Average Flit Latency: 9.56804
+Average Packet Latency: 10.2183
+2021-04-27 08:02:36.806 INFO  UnReceived Packet：620
+
+2021-04-27 08:02:36.811 INFO  Warmup Cycle: 10000
+2021-04-27 08:02:36.811 INFO  Simulation Cycle: 100000
+2021-04-27 08:02:36.811 INFO  Injection Rate: 0.195
+2021-04-27 08:02:36.811 INFO  The number of ejection link: 2
+2021-04-27 08:02:36.811 INFO  The number of EXB: 1
+2021-04-27 08:02:36.811 INFO  Traffic Type: Transpose
+2021-04-27 08:02:36.811 INFO  Packet Size: Random
+2021-04-27 08:02:36.811 INFO  EXB Strategy: Max
+2021-04-27 08:02:36.811 INFO  Routing Strategy: Shortest
+2021-04-27 08:05:06.167 INFO  
+Number of Packet sent during warm up phrase: 36540
+Number of Packet sent during sim phrase: 365148
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1095252
+Received Packet: 365149
+Max Flit Delay: 209
+Max Packet Delay: 209
+Packet ID of Max Packet Delay: 131698
+Flit Throughput: 0.17385
+Packet Throughput: 0.0579602
+Average Flit Latency: 9.67774
+Average Packet Latency: 10.3289
+2021-04-27 08:05:06.169 INFO  UnReceived Packet：650
+
+2021-04-27 08:05:06.172 INFO  Warmup Cycle: 10000
+2021-04-27 08:05:06.172 INFO  Simulation Cycle: 100000
+2021-04-27 08:05:06.172 INFO  Injection Rate: 0.2
+2021-04-27 08:05:06.172 INFO  The number of ejection link: 2
+2021-04-27 08:05:06.172 INFO  The number of EXB: 1
+2021-04-27 08:05:06.172 INFO  Traffic Type: Transpose
+2021-04-27 08:05:06.172 INFO  Packet Size: Random
+2021-04-27 08:05:06.172 INFO  EXB Strategy: Max
+2021-04-27 08:05:06.172 INFO  Routing Strategy: Shortest
+2021-04-27 08:07:43.419 INFO  
+Number of Packet sent during warm up phrase: 37441
+Number of Packet sent during sim phrase: 374473
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1124377
+Received Packet: 374477
+Max Flit Delay: 262
+Max Packet Delay: 262
+Packet ID of Max Packet Delay: 297067
+Flit Throughput: 0.178473
+Packet Throughput: 0.0594408
+Average Flit Latency: 9.77786
+Average Packet Latency: 10.4272
+2021-04-27 08:07:43.421 INFO  UnReceived Packet：681
+
+2021-04-27 08:07:43.424 INFO  Warmup Cycle: 10000
+2021-04-27 08:07:43.424 INFO  Simulation Cycle: 100000
+2021-04-27 08:07:43.424 INFO  Injection Rate: 0.205
+2021-04-27 08:07:43.424 INFO  The number of ejection link: 2
+2021-04-27 08:07:43.424 INFO  The number of EXB: 1
+2021-04-27 08:07:43.424 INFO  Traffic Type: Transpose
+2021-04-27 08:07:43.424 INFO  Packet Size: Random
+2021-04-27 08:07:43.424 INFO  EXB Strategy: Max
+2021-04-27 08:07:43.424 INFO  Routing Strategy: Shortest
+2021-04-27 08:10:28.029 INFO  
+Number of Packet sent during warm up phrase: 38377
+Number of Packet sent during sim phrase: 383775
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1151710
+Received Packet: 383780
+Max Flit Delay: 250
+Max Packet Delay: 250
+Packet ID of Max Packet Delay: 236695
+Flit Throughput: 0.182811
+Packet Throughput: 0.0609175
+Average Flit Latency: 9.89355
+Average Packet Latency: 10.5388
+2021-04-27 08:10:28.031 INFO  UnReceived Packet：717
+
+2021-04-27 08:10:28.036 INFO  Warmup Cycle: 10000
+2021-04-27 08:10:28.036 INFO  Simulation Cycle: 100000
+2021-04-27 08:10:28.036 INFO  Injection Rate: 0.21
+2021-04-27 08:10:28.036 INFO  The number of ejection link: 2
+2021-04-27 08:10:28.036 INFO  The number of EXB: 1
+2021-04-27 08:10:28.036 INFO  Traffic Type: Transpose
+2021-04-27 08:10:28.036 INFO  Packet Size: Random
+2021-04-27 08:10:28.036 INFO  EXB Strategy: Max
+2021-04-27 08:10:28.036 INFO  Routing Strategy: Shortest
+2021-04-27 08:13:13.072 INFO  
+Number of Packet sent during warm up phrase: 39316
+Number of Packet sent during sim phrase: 393184
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1179476
+Received Packet: 393183
+Max Flit Delay: 337
+Max Packet Delay: 337
+Packet ID of Max Packet Delay: 260099
+Flit Throughput: 0.187218
+Packet Throughput: 0.06241
+Average Flit Latency: 9.96825
+Average Packet Latency: 10.62
+2021-04-27 08:13:13.074 INFO  UnReceived Packet：755
+
+2021-04-27 08:13:13.077 INFO  Warmup Cycle: 10000
+2021-04-27 08:13:13.077 INFO  Simulation Cycle: 100000
+2021-04-27 08:13:13.077 INFO  Injection Rate: 0.215
+2021-04-27 08:13:13.077 INFO  The number of ejection link: 2
+2021-04-27 08:13:13.077 INFO  The number of EXB: 1
+2021-04-27 08:13:13.077 INFO  Traffic Type: Transpose
+2021-04-27 08:13:13.077 INFO  Packet Size: Random
+2021-04-27 08:13:13.077 INFO  EXB Strategy: Max
+2021-04-27 08:13:13.077 INFO  Routing Strategy: Shortest
+2021-04-27 08:15:55.609 INFO  
+Number of Packet sent during warm up phrase: 40251
+Number of Packet sent during sim phrase: 402539
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1208269
+Received Packet: 402541
+Max Flit Delay: 235
+Max Packet Delay: 235
+Packet ID of Max Packet Delay: 192765
+Flit Throughput: 0.191789
+Packet Throughput: 0.0638954
+Average Flit Latency: 10.0785
+Average Packet Latency: 10.7262
+2021-04-27 08:15:55.611 INFO  UnReceived Packet：794
+
+2021-04-27 08:15:55.613 INFO  Warmup Cycle: 10000
+2021-04-27 08:15:55.613 INFO  Simulation Cycle: 100000
+2021-04-27 08:15:55.614 INFO  Injection Rate: 0.22
+2021-04-27 08:15:55.614 INFO  The number of ejection link: 2
+2021-04-27 08:15:55.614 INFO  The number of EXB: 1
+2021-04-27 08:15:55.614 INFO  Traffic Type: Transpose
+2021-04-27 08:15:55.614 INFO  Packet Size: Random
+2021-04-27 08:15:55.614 INFO  EXB Strategy: Max
+2021-04-27 08:15:55.614 INFO  Routing Strategy: Shortest
+2021-04-27 08:18:38.299 INFO  
+Number of Packet sent during warm up phrase: 41179
+Number of Packet sent during sim phrase: 411936
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1236345
+Received Packet: 411935
+Max Flit Delay: 271
+Max Packet Delay: 271
+Packet ID of Max Packet Delay: 137138
+Flit Throughput: 0.196245
+Packet Throughput: 0.0653865
+Average Flit Latency: 10.2876
+Average Packet Latency: 10.9349
+2021-04-27 08:18:38.301 INFO  UnReceived Packet：837
+
+2021-04-27 08:18:38.306 INFO  Warmup Cycle: 10000
+2021-04-27 08:18:38.306 INFO  Simulation Cycle: 100000
+2021-04-27 08:18:38.306 INFO  Injection Rate: 0.225
+2021-04-27 08:18:38.306 INFO  The number of ejection link: 2
+2021-04-27 08:18:38.306 INFO  The number of EXB: 1
+2021-04-27 08:18:38.306 INFO  Traffic Type: Transpose
+2021-04-27 08:18:38.306 INFO  Packet Size: Random
+2021-04-27 08:18:38.306 INFO  EXB Strategy: Max
+2021-04-27 08:18:38.306 INFO  Routing Strategy: Shortest
+2021-04-27 08:21:24.720 INFO  
+Number of Packet sent during warm up phrase: 42119
+Number of Packet sent during sim phrase: 421252
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1264067
+Received Packet: 421253
+Max Flit Delay: 569
+Max Packet Delay: 569
+Packet ID of Max Packet Delay: 428830
+Flit Throughput: 0.200646
+Packet Throughput: 0.0668656
+Average Flit Latency: 10.4984
+Average Packet Latency: 11.1329
+2021-04-27 08:21:24.723 INFO  UnReceived Packet：883
+
+2021-04-27 08:21:24.728 INFO  Warmup Cycle: 10000
+2021-04-27 08:21:24.728 INFO  Simulation Cycle: 100000
+2021-04-27 08:21:24.728 INFO  Injection Rate: 0.23
+2021-04-27 08:21:24.728 INFO  The number of ejection link: 2
+2021-04-27 08:21:24.728 INFO  The number of EXB: 1
+2021-04-27 08:21:24.728 INFO  Traffic Type: Transpose
+2021-04-27 08:21:24.728 INFO  Packet Size: Random
+2021-04-27 08:21:24.728 INFO  EXB Strategy: Max
+2021-04-27 08:21:24.728 INFO  Routing Strategy: Shortest
+2021-04-27 08:24:11.925 INFO  
+Number of Packet sent during warm up phrase: 43048
+Number of Packet sent during sim phrase: 430733
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1292867
+Received Packet: 430735
+Max Flit Delay: 478
+Max Packet Delay: 478
+Packet ID of Max Packet Delay: 221681
+Flit Throughput: 0.205217
+Packet Throughput: 0.0683706
+Average Flit Latency: 10.6887
+Average Packet Latency: 11.3073
+2021-04-27 08:24:11.927 INFO  UnReceived Packet：927
+
+2021-04-27 08:24:11.930 INFO  Warmup Cycle: 10000
+2021-04-27 08:24:11.930 INFO  Simulation Cycle: 100000
+2021-04-27 08:24:11.930 INFO  Injection Rate: 0.005
+2021-04-27 08:24:11.930 INFO  The number of ejection link: 2
+2021-04-27 08:24:11.930 INFO  The number of EXB: 1
+2021-04-27 08:24:11.930 INFO  Traffic Type: Transpose
+2021-04-27 08:24:11.930 INFO  Packet Size: Random
+2021-04-27 08:24:11.930 INFO  EXB Strategy: Avg
+2021-04-27 08:24:11.930 INFO  Routing Strategy: Shortest
+2021-04-27 08:24:44.293 INFO  
+Number of Packet sent during warm up phrase: 979
+Number of Packet sent during sim phrase: 9386
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 28033
+Received Packet: 9386
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 9360
+Flit Throughput: 0.00444968
+Packet Throughput: 0.00148984
+Average Flit Latency: 7.4163
+Average Packet Latency: 8.07522
+2021-04-27 08:24:44.295 INFO  UnReceived Packet：927
+
+2021-04-27 08:24:44.298 INFO  Warmup Cycle: 10000
+2021-04-27 08:24:44.298 INFO  Simulation Cycle: 100000
+2021-04-27 08:24:44.298 INFO  Injection Rate: 0.01
+2021-04-27 08:24:44.298 INFO  The number of ejection link: 2
+2021-04-27 08:24:44.298 INFO  The number of EXB: 1
+2021-04-27 08:24:44.298 INFO  Traffic Type: Transpose
+2021-04-27 08:24:44.298 INFO  Packet Size: Random
+2021-04-27 08:24:44.298 INFO  EXB Strategy: Avg
+2021-04-27 08:24:44.298 INFO  Routing Strategy: Shortest
+2021-04-27 08:25:19.963 INFO  
+Number of Packet sent during warm up phrase: 1915
+Number of Packet sent during sim phrase: 18744
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 56460
+Received Packet: 18742
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 3009
+Flit Throughput: 0.0089619
+Packet Throughput: 0.00297492
+Average Flit Latency: 7.49943
+Average Packet Latency: 8.1613
+2021-04-27 08:25:19.964 INFO  UnReceived Packet：929
+
+2021-04-27 08:25:19.967 INFO  Warmup Cycle: 10000
+2021-04-27 08:25:19.967 INFO  Simulation Cycle: 100000
+2021-04-27 08:25:19.967 INFO  Injection Rate: 0.015
+2021-04-27 08:25:19.967 INFO  The number of ejection link: 2
+2021-04-27 08:25:19.967 INFO  The number of EXB: 1
+2021-04-27 08:25:19.967 INFO  Traffic Type: Transpose
+2021-04-27 08:25:19.967 INFO  Packet Size: Random
+2021-04-27 08:25:19.967 INFO  EXB Strategy: Avg
+2021-04-27 08:25:19.967 INFO  Routing Strategy: Shortest
+2021-04-27 08:25:58.870 INFO  
+Number of Packet sent during warm up phrase: 2876
+Number of Packet sent during sim phrase: 28180
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 84701
+Received Packet: 28181
+Max Flit Delay: 21
+Max Packet Delay: 21
+Packet ID of Max Packet Delay: 9656
+Flit Throughput: 0.0134446
+Packet Throughput: 0.00447317
+Average Flit Latency: 7.53838
+Average Packet Latency: 8.2116
+2021-04-27 08:25:58.871 INFO  UnReceived Packet：933
+
+2021-04-27 08:25:58.874 INFO  Warmup Cycle: 10000
+2021-04-27 08:25:58.874 INFO  Simulation Cycle: 100000
+2021-04-27 08:25:58.874 INFO  Injection Rate: 0.02
+2021-04-27 08:25:58.874 INFO  The number of ejection link: 2
+2021-04-27 08:25:58.874 INFO  The number of EXB: 1
+2021-04-27 08:25:58.874 INFO  Traffic Type: Transpose
+2021-04-27 08:25:58.874 INFO  Packet Size: Random
+2021-04-27 08:25:58.874 INFO  EXB Strategy: Avg
+2021-04-27 08:25:58.874 INFO  Routing Strategy: Shortest
+2021-04-27 08:26:41.037 INFO  
+Number of Packet sent during warm up phrase: 3793
+Number of Packet sent during sim phrase: 37460
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 112825
+Received Packet: 37460
+Max Flit Delay: 22
+Max Packet Delay: 22
+Packet ID of Max Packet Delay: 18635
+Flit Throughput: 0.0179087
+Packet Throughput: 0.00594603
+Average Flit Latency: 7.5923
+Average Packet Latency: 8.27488
+2021-04-27 08:26:41.038 INFO  UnReceived Packet：938
+
+2021-04-27 08:26:41.041 INFO  Warmup Cycle: 10000
+2021-04-27 08:26:41.041 INFO  Simulation Cycle: 100000
+2021-04-27 08:26:41.041 INFO  Injection Rate: 0.025
+2021-04-27 08:26:41.041 INFO  The number of ejection link: 2
+2021-04-27 08:26:41.041 INFO  The number of EXB: 1
+2021-04-27 08:26:41.041 INFO  Traffic Type: Transpose
+2021-04-27 08:26:41.041 INFO  Packet Size: Random
+2021-04-27 08:26:41.041 INFO  EXB Strategy: Avg
+2021-04-27 08:26:41.041 INFO  Routing Strategy: Shortest
+2021-04-27 08:27:26.661 INFO  
+Number of Packet sent during warm up phrase: 4720
+Number of Packet sent during sim phrase: 46908
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 141354
+Received Packet: 46909
+Max Flit Delay: 24
+Max Packet Delay: 24
+Packet ID of Max Packet Delay: 30614
+Flit Throughput: 0.0224371
+Packet Throughput: 0.00744587
+Average Flit Latency: 7.66595
+Average Packet Latency: 8.32955
+2021-04-27 08:27:26.663 INFO  UnReceived Packet：943
+
+2021-04-27 08:27:26.667 INFO  Warmup Cycle: 10000
+2021-04-27 08:27:26.667 INFO  Simulation Cycle: 100000
+2021-04-27 08:27:26.667 INFO  Injection Rate: 0.03
+2021-04-27 08:27:26.667 INFO  The number of ejection link: 2
+2021-04-27 08:27:26.667 INFO  The number of EXB: 1
+2021-04-27 08:27:26.667 INFO  Traffic Type: Transpose
+2021-04-27 08:27:26.667 INFO  Packet Size: Random
+2021-04-27 08:27:26.667 INFO  EXB Strategy: Avg
+2021-04-27 08:27:26.667 INFO  Routing Strategy: Shortest
+2021-04-27 08:28:15.596 INFO  
+Number of Packet sent during warm up phrase: 5657
+Number of Packet sent during sim phrase: 56137
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 169041
+Received Packet: 56141
+Max Flit Delay: 26
+Max Packet Delay: 26
+Packet ID of Max Packet Delay: 22148
+Flit Throughput: 0.0268319
+Packet Throughput: 0.00891127
+Average Flit Latency: 7.69483
+Average Packet Latency: 8.36519
+2021-04-27 08:28:15.598 INFO  UnReceived Packet：948
+
+2021-04-27 08:28:15.601 INFO  Warmup Cycle: 10000
+2021-04-27 08:28:15.601 INFO  Simulation Cycle: 100000
+2021-04-27 08:28:15.601 INFO  Injection Rate: 0.035
+2021-04-27 08:28:15.601 INFO  The number of ejection link: 2
+2021-04-27 08:28:15.601 INFO  The number of EXB: 1
+2021-04-27 08:28:15.601 INFO  Traffic Type: Transpose
+2021-04-27 08:28:15.601 INFO  Packet Size: Random
+2021-04-27 08:28:15.601 INFO  EXB Strategy: Avg
+2021-04-27 08:28:15.601 INFO  Routing Strategy: Shortest
+2021-04-27 08:29:07.629 INFO  
+Number of Packet sent during warm up phrase: 6598
+Number of Packet sent during sim phrase: 65649
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 197450
+Received Packet: 65652
+Max Flit Delay: 38
+Max Packet Delay: 38
+Packet ID of Max Packet Delay: 31314
+Flit Throughput: 0.0313413
+Packet Throughput: 0.010421
+Average Flit Latency: 7.74791
+Average Packet Latency: 8.4246
+2021-04-27 08:29:07.630 INFO  UnReceived Packet：953
+
+2021-04-27 08:29:07.633 INFO  Warmup Cycle: 10000
+2021-04-27 08:29:07.633 INFO  Simulation Cycle: 100000
+2021-04-27 08:29:07.633 INFO  Injection Rate: 0.04
+2021-04-27 08:29:07.633 INFO  The number of ejection link: 2
+2021-04-27 08:29:07.633 INFO  The number of EXB: 1
+2021-04-27 08:29:07.633 INFO  Traffic Type: Transpose
+2021-04-27 08:29:07.633 INFO  Packet Size: Random
+2021-04-27 08:29:07.633 INFO  EXB Strategy: Avg
+2021-04-27 08:29:07.633 INFO  Routing Strategy: Shortest
+2021-04-27 08:30:03.177 INFO  
+Number of Packet sent during warm up phrase: 7529
+Number of Packet sent during sim phrase: 74963
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 225390
+Received Packet: 74968
+Max Flit Delay: 32
+Max Packet Delay: 32
+Packet ID of Max Packet Delay: 76197
+Flit Throughput: 0.0357762
+Packet Throughput: 0.0118997
+Average Flit Latency: 7.811
+Average Packet Latency: 8.48687
+2021-04-27 08:30:03.178 INFO  UnReceived Packet：958
+
+2021-04-27 08:30:03.181 INFO  Warmup Cycle: 10000
+2021-04-27 08:30:03.181 INFO  Simulation Cycle: 100000
+2021-04-27 08:30:03.181 INFO  Injection Rate: 0.045
+2021-04-27 08:30:03.181 INFO  The number of ejection link: 2
+2021-04-27 08:30:03.181 INFO  The number of EXB: 1
+2021-04-27 08:30:03.181 INFO  Traffic Type: Transpose
+2021-04-27 08:30:03.181 INFO  Packet Size: Random
+2021-04-27 08:30:03.181 INFO  EXB Strategy: Avg
+2021-04-27 08:30:03.181 INFO  Routing Strategy: Shortest
+2021-04-27 08:31:01.936 INFO  
+Number of Packet sent during warm up phrase: 8482
+Number of Packet sent during sim phrase: 84291
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 253472
+Received Packet: 84295
+Max Flit Delay: 30
+Max Packet Delay: 30
+Packet ID of Max Packet Delay: 45236
+Flit Throughput: 0.0402337
+Packet Throughput: 0.0133802
+Average Flit Latency: 7.85755
+Average Packet Latency: 8.53189
+2021-04-27 08:31:01.938 INFO  UnReceived Packet：964
+
+2021-04-27 08:31:01.942 INFO  Warmup Cycle: 10000
+2021-04-27 08:31:01.942 INFO  Simulation Cycle: 100000
+2021-04-27 08:31:01.942 INFO  Injection Rate: 0.05
+2021-04-27 08:31:01.942 INFO  The number of ejection link: 2
+2021-04-27 08:31:01.942 INFO  The number of EXB: 1
+2021-04-27 08:31:01.942 INFO  Traffic Type: Transpose
+2021-04-27 08:31:01.942 INFO  Packet Size: Random
+2021-04-27 08:31:01.942 INFO  EXB Strategy: Avg
+2021-04-27 08:31:01.942 INFO  Routing Strategy: Shortest
+2021-04-27 08:32:04.008 INFO  
+Number of Packet sent during warm up phrase: 9392
+Number of Packet sent during sim phrase: 93461
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 280646
+Received Packet: 93470
+Max Flit Delay: 26
+Max Packet Delay: 26
+Packet ID of Max Packet Delay: 74479
+Flit Throughput: 0.044547
+Packet Throughput: 0.0148365
+Average Flit Latency: 7.90892
+Average Packet Latency: 8.58424
+2021-04-27 08:32:04.010 INFO  UnReceived Packet：970
+
+2021-04-27 08:32:04.013 INFO  Warmup Cycle: 10000
+2021-04-27 08:32:04.013 INFO  Simulation Cycle: 100000
+2021-04-27 08:32:04.013 INFO  Injection Rate: 0.055
+2021-04-27 08:32:04.013 INFO  The number of ejection link: 2
+2021-04-27 08:32:04.013 INFO  The number of EXB: 1
+2021-04-27 08:32:04.013 INFO  Traffic Type: Transpose
+2021-04-27 08:32:04.013 INFO  Packet Size: Random
+2021-04-27 08:32:04.013 INFO  EXB Strategy: Avg
+2021-04-27 08:32:04.013 INFO  Routing Strategy: Shortest
+2021-04-27 08:33:09.788 INFO  
+Number of Packet sent during warm up phrase: 10301
+Number of Packet sent during sim phrase: 102970
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 309362
+Received Packet: 102976
+Max Flit Delay: 32
+Max Packet Delay: 32
+Packet ID of Max Packet Delay: 35501
+Flit Throughput: 0.0491051
+Packet Throughput: 0.0163454
+Average Flit Latency: 7.96539
+Average Packet Latency: 8.6407
+2021-04-27 08:33:09.790 INFO  UnReceived Packet：976
+
+2021-04-27 08:33:09.793 INFO  Warmup Cycle: 10000
+2021-04-27 08:33:09.793 INFO  Simulation Cycle: 100000
+2021-04-27 08:33:09.793 INFO  Injection Rate: 0.06
+2021-04-27 08:33:09.793 INFO  The number of ejection link: 2
+2021-04-27 08:33:09.793 INFO  The number of EXB: 1
+2021-04-27 08:33:09.793 INFO  Traffic Type: Transpose
+2021-04-27 08:33:09.793 INFO  Packet Size: Random
+2021-04-27 08:33:09.793 INFO  EXB Strategy: Avg
+2021-04-27 08:33:09.793 INFO  Routing Strategy: Shortest
+2021-04-27 08:34:18.921 INFO  
+Number of Packet sent during warm up phrase: 11216
+Number of Packet sent during sim phrase: 112338
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 337436
+Received Packet: 112343
+Max Flit Delay: 46
+Max Packet Delay: 46
+Packet ID of Max Packet Delay: 37667
+Flit Throughput: 0.0535613
+Packet Throughput: 0.0178322
+Average Flit Latency: 8.02748
+Average Packet Latency: 8.708
+2021-04-27 08:34:18.922 INFO  UnReceived Packet：984
+
+2021-04-27 08:34:18.925 INFO  Warmup Cycle: 10000
+2021-04-27 08:34:18.925 INFO  Simulation Cycle: 100000
+2021-04-27 08:34:18.925 INFO  Injection Rate: 0.065
+2021-04-27 08:34:18.925 INFO  The number of ejection link: 2
+2021-04-27 08:34:18.925 INFO  The number of EXB: 1
+2021-04-27 08:34:18.925 INFO  Traffic Type: Transpose
+2021-04-27 08:34:18.925 INFO  Packet Size: Random
+2021-04-27 08:34:18.925 INFO  EXB Strategy: Avg
+2021-04-27 08:34:18.925 INFO  Routing Strategy: Shortest
+2021-04-27 08:35:31.165 INFO  
+Number of Packet sent during warm up phrase: 12148
+Number of Packet sent during sim phrase: 121688
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 365314
+Received Packet: 121692
+Max Flit Delay: 34
+Max Packet Delay: 34
+Packet ID of Max Packet Delay: 73047
+Flit Throughput: 0.0579863
+Packet Throughput: 0.0193162
+Average Flit Latency: 8.08537
+Average Packet Latency: 8.75984
+2021-04-27 08:35:31.166 INFO  UnReceived Packet：994
+
+2021-04-27 08:35:31.169 INFO  Warmup Cycle: 10000
+2021-04-27 08:35:31.169 INFO  Simulation Cycle: 100000
+2021-04-27 08:35:31.169 INFO  Injection Rate: 0.07
+2021-04-27 08:35:31.169 INFO  The number of ejection link: 2
+2021-04-27 08:35:31.169 INFO  The number of EXB: 1
+2021-04-27 08:35:31.169 INFO  Traffic Type: Transpose
+2021-04-27 08:35:31.169 INFO  Packet Size: Random
+2021-04-27 08:35:31.169 INFO  EXB Strategy: Avg
+2021-04-27 08:35:31.169 INFO  Routing Strategy: Shortest
+2021-04-27 08:36:46.304 INFO  
+Number of Packet sent during warm up phrase: 13107
+Number of Packet sent during sim phrase: 130909
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 392925
+Received Packet: 130914
+Max Flit Delay: 39
+Max Packet Delay: 39
+Packet ID of Max Packet Delay: 19987
+Flit Throughput: 0.062369
+Packet Throughput: 0.02078
+Average Flit Latency: 8.1448
+Average Packet Latency: 8.81401
+2021-04-27 08:36:46.305 INFO  UnReceived Packet：1005
+
+2021-04-27 08:36:46.308 INFO  Warmup Cycle: 10000
+2021-04-27 08:36:46.308 INFO  Simulation Cycle: 100000
+2021-04-27 08:36:46.308 INFO  Injection Rate: 0.075
+2021-04-27 08:36:46.308 INFO  The number of ejection link: 2
+2021-04-27 08:36:46.308 INFO  The number of EXB: 1
+2021-04-27 08:36:46.308 INFO  Traffic Type: Transpose
+2021-04-27 08:36:46.308 INFO  Packet Size: Random
+2021-04-27 08:36:46.308 INFO  EXB Strategy: Avg
+2021-04-27 08:36:46.308 INFO  Routing Strategy: Shortest
+2021-04-27 08:38:05.770 INFO  
+Number of Packet sent during warm up phrase: 14039
+Number of Packet sent during sim phrase: 140345
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 421167
+Received Packet: 140346
+Max Flit Delay: 43
+Max Packet Delay: 43
+Packet ID of Max Packet Delay: 73068
+Flit Throughput: 0.0668519
+Packet Throughput: 0.0222771
+Average Flit Latency: 8.17679
+Average Packet Latency: 8.86237
+2021-04-27 08:38:05.771 INFO  UnReceived Packet：1019
+
+2021-04-27 08:38:05.774 INFO  Warmup Cycle: 10000
+2021-04-27 08:38:05.775 INFO  Simulation Cycle: 100000
+2021-04-27 08:38:05.775 INFO  Injection Rate: 0.08
+2021-04-27 08:38:05.775 INFO  The number of ejection link: 2
+2021-04-27 08:38:05.775 INFO  The number of EXB: 1
+2021-04-27 08:38:05.775 INFO  Traffic Type: Transpose
+2021-04-27 08:38:05.775 INFO  Packet Size: Random
+2021-04-27 08:38:05.775 INFO  EXB Strategy: Avg
+2021-04-27 08:38:05.775 INFO  Routing Strategy: Shortest
+2021-04-27 08:39:29.793 INFO  
+Number of Packet sent during warm up phrase: 14965
+Number of Packet sent during sim phrase: 149804
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 449350
+Received Packet: 149810
+Max Flit Delay: 36
+Max Packet Delay: 36
+Packet ID of Max Packet Delay: 90242
+Flit Throughput: 0.0713254
+Packet Throughput: 0.0237794
+Average Flit Latency: 8.23194
+Average Packet Latency: 8.90995
+2021-04-27 08:39:29.796 INFO  UnReceived Packet：1034
+
+2021-04-27 08:39:29.799 INFO  Warmup Cycle: 10000
+2021-04-27 08:39:29.799 INFO  Simulation Cycle: 100000
+2021-04-27 08:39:29.799 INFO  Injection Rate: 0.085
+2021-04-27 08:39:29.799 INFO  The number of ejection link: 2
+2021-04-27 08:39:29.799 INFO  The number of EXB: 1
+2021-04-27 08:39:29.799 INFO  Traffic Type: Transpose
+2021-04-27 08:39:29.799 INFO  Packet Size: Random
+2021-04-27 08:39:29.799 INFO  EXB Strategy: Avg
+2021-04-27 08:39:29.799 INFO  Routing Strategy: Shortest
+2021-04-27 08:40:56.176 INFO  
+Number of Packet sent during warm up phrase: 15901
+Number of Packet sent during sim phrase: 159131
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 477259
+Received Packet: 159135
+Max Flit Delay: 39
+Max Packet Delay: 39
+Packet ID of Max Packet Delay: 101224
+Flit Throughput: 0.0757554
+Packet Throughput: 0.0252595
+Average Flit Latency: 8.28074
+Average Packet Latency: 8.95672
+2021-04-27 08:40:56.177 INFO  UnReceived Packet：1049
+
+2021-04-27 08:40:56.180 INFO  Warmup Cycle: 10000
+2021-04-27 08:40:56.180 INFO  Simulation Cycle: 100000
+2021-04-27 08:40:56.180 INFO  Injection Rate: 0.09
+2021-04-27 08:40:56.180 INFO  The number of ejection link: 2
+2021-04-27 08:40:56.180 INFO  The number of EXB: 1
+2021-04-27 08:40:56.180 INFO  Traffic Type: Transpose
+2021-04-27 08:40:56.180 INFO  Packet Size: Random
+2021-04-27 08:40:56.180 INFO  EXB Strategy: Avg
+2021-04-27 08:40:56.180 INFO  Routing Strategy: Shortest
+2021-04-27 08:42:25.653 INFO  
+Number of Packet sent during warm up phrase: 16879
+Number of Packet sent during sim phrase: 168458
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 505078
+Received Packet: 168463
+Max Flit Delay: 47
+Max Packet Delay: 47
+Packet ID of Max Packet Delay: 28524
+Flit Throughput: 0.0801711
+Packet Throughput: 0.0267402
+Average Flit Latency: 8.34075
+Average Packet Latency: 9.01103
+2021-04-27 08:42:25.655 INFO  UnReceived Packet：1064
+
+2021-04-27 08:42:25.658 INFO  Warmup Cycle: 10000
+2021-04-27 08:42:25.658 INFO  Simulation Cycle: 100000
+2021-04-27 08:42:25.658 INFO  Injection Rate: 0.095
+2021-04-27 08:42:25.658 INFO  The number of ejection link: 2
+2021-04-27 08:42:25.658 INFO  The number of EXB: 1
+2021-04-27 08:42:25.658 INFO  Traffic Type: Transpose
+2021-04-27 08:42:25.658 INFO  Packet Size: Random
+2021-04-27 08:42:25.658 INFO  EXB Strategy: Avg
+2021-04-27 08:42:25.659 INFO  Routing Strategy: Shortest
+2021-04-27 08:43:59.163 INFO  
+Number of Packet sent during warm up phrase: 17860
+Number of Packet sent during sim phrase: 177711
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 533037
+Received Packet: 177714
+Max Flit Delay: 47
+Max Packet Delay: 47
+Packet ID of Max Packet Delay: 160694
+Flit Throughput: 0.084609
+Packet Throughput: 0.0282086
+Average Flit Latency: 8.38272
+Average Packet Latency: 9.06348
+2021-04-27 08:43:59.165 INFO  UnReceived Packet：1080
+
+2021-04-27 08:43:59.168 INFO  Warmup Cycle: 10000
+2021-04-27 08:43:59.168 INFO  Simulation Cycle: 100000
+2021-04-27 08:43:59.168 INFO  Injection Rate: 0.1
+2021-04-27 08:43:59.168 INFO  The number of ejection link: 2
+2021-04-27 08:43:59.168 INFO  The number of EXB: 1
+2021-04-27 08:43:59.168 INFO  Traffic Type: Transpose
+2021-04-27 08:43:59.168 INFO  Packet Size: Random
+2021-04-27 08:43:59.168 INFO  EXB Strategy: Avg
+2021-04-27 08:43:59.168 INFO  Routing Strategy: Shortest
+2021-04-27 08:45:35.955 INFO  
+Number of Packet sent during warm up phrase: 18798
+Number of Packet sent during sim phrase: 187133
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 561196
+Received Packet: 187139
+Max Flit Delay: 55
+Max Packet Delay: 55
+Packet ID of Max Packet Delay: 186483
+Flit Throughput: 0.0890787
+Packet Throughput: 0.0297046
+Average Flit Latency: 8.43295
+Average Packet Latency: 9.11393
+2021-04-27 08:45:35.957 INFO  UnReceived Packet：1097
+
+2021-04-27 08:45:35.962 INFO  Warmup Cycle: 10000
+2021-04-27 08:45:35.962 INFO  Simulation Cycle: 100000
+2021-04-27 08:45:35.962 INFO  Injection Rate: 0.105
+2021-04-27 08:45:35.962 INFO  The number of ejection link: 2
+2021-04-27 08:45:35.962 INFO  The number of EXB: 1
+2021-04-27 08:45:35.962 INFO  Traffic Type: Transpose
+2021-04-27 08:45:35.962 INFO  Packet Size: Random
+2021-04-27 08:45:35.962 INFO  EXB Strategy: Avg
+2021-04-27 08:45:35.962 INFO  Routing Strategy: Shortest
+2021-04-27 08:47:16.513 INFO  
+Number of Packet sent during warm up phrase: 19734
+Number of Packet sent during sim phrase: 196573
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 589666
+Received Packet: 196580
+Max Flit Delay: 46
+Max Packet Delay: 46
+Packet ID of Max Packet Delay: 33849
+Flit Throughput: 0.0935978
+Packet Throughput: 0.0312032
+Average Flit Latency: 8.47845
+Average Packet Latency: 9.16054
+2021-04-27 08:47:16.516 INFO  UnReceived Packet：1115
+
+2021-04-27 08:47:16.520 INFO  Warmup Cycle: 10000
+2021-04-27 08:47:16.521 INFO  Simulation Cycle: 100000
+2021-04-27 08:47:16.521 INFO  Injection Rate: 0.11
+2021-04-27 08:47:16.521 INFO  The number of ejection link: 2
+2021-04-27 08:47:16.521 INFO  The number of EXB: 1
+2021-04-27 08:47:16.521 INFO  Traffic Type: Transpose
+2021-04-27 08:47:16.521 INFO  Packet Size: Random
+2021-04-27 08:47:16.521 INFO  EXB Strategy: Avg
+2021-04-27 08:47:16.521 INFO  Routing Strategy: Shortest
+2021-04-27 08:48:58.951 INFO  
+Number of Packet sent during warm up phrase: 20705
+Number of Packet sent during sim phrase: 205862
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 617642
+Received Packet: 205864
+Max Flit Delay: 75
+Max Packet Delay: 75
+Packet ID of Max Packet Delay: 69188
+Flit Throughput: 0.0980384
+Packet Throughput: 0.0326768
+Average Flit Latency: 8.54439
+Average Packet Latency: 9.22257
+2021-04-27 08:48:58.952 INFO  UnReceived Packet：1136
+
+2021-04-27 08:48:58.955 INFO  Warmup Cycle: 10000
+2021-04-27 08:48:58.955 INFO  Simulation Cycle: 100000
+2021-04-27 08:48:58.955 INFO  Injection Rate: 0.115
+2021-04-27 08:48:58.955 INFO  The number of ejection link: 2
+2021-04-27 08:48:58.955 INFO  The number of EXB: 1
+2021-04-27 08:48:58.955 INFO  Traffic Type: Transpose
+2021-04-27 08:48:58.955 INFO  Packet Size: Random
+2021-04-27 08:48:58.955 INFO  EXB Strategy: Avg
+2021-04-27 08:48:58.955 INFO  Routing Strategy: Shortest
+2021-04-27 08:50:43.686 INFO  
+Number of Packet sent during warm up phrase: 21618
+Number of Packet sent during sim phrase: 215133
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 645366
+Received Packet: 215137
+Max Flit Delay: 58
+Max Packet Delay: 58
+Packet ID of Max Packet Delay: 81351
+Flit Throughput: 0.102439
+Packet Throughput: 0.0341487
+Average Flit Latency: 8.58121
+Average Packet Latency: 9.26487
+2021-04-27 08:50:43.688 INFO  UnReceived Packet：1158
+
+2021-04-27 08:50:43.691 INFO  Warmup Cycle: 10000
+2021-04-27 08:50:43.691 INFO  Simulation Cycle: 100000
+2021-04-27 08:50:43.691 INFO  Injection Rate: 0.12
+2021-04-27 08:50:43.691 INFO  The number of ejection link: 2
+2021-04-27 08:50:43.691 INFO  The number of EXB: 1
+2021-04-27 08:50:43.691 INFO  Traffic Type: Transpose
+2021-04-27 08:50:43.691 INFO  Packet Size: Random
+2021-04-27 08:50:43.691 INFO  EXB Strategy: Avg
+2021-04-27 08:50:43.691 INFO  Routing Strategy: Shortest
+2021-04-27 08:52:31.514 INFO  
+Number of Packet sent during warm up phrase: 22549
+Number of Packet sent during sim phrase: 224557
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 673287
+Received Packet: 224557
+Max Flit Delay: 67
+Max Packet Delay: 67
+Packet ID of Max Packet Delay: 162084
+Flit Throughput: 0.106871
+Packet Throughput: 0.035644
+Average Flit Latency: 8.63787
+Average Packet Latency: 9.32957
+2021-04-27 08:52:31.515 INFO  UnReceived Packet：1182
+
+2021-04-27 08:52:31.518 INFO  Warmup Cycle: 10000
+2021-04-27 08:52:31.518 INFO  Simulation Cycle: 100000
+2021-04-27 08:52:31.518 INFO  Injection Rate: 0.125
+2021-04-27 08:52:31.518 INFO  The number of ejection link: 2
+2021-04-27 08:52:31.518 INFO  The number of EXB: 1
+2021-04-27 08:52:31.518 INFO  Traffic Type: Transpose
+2021-04-27 08:52:31.518 INFO  Packet Size: Random
+2021-04-27 08:52:31.518 INFO  EXB Strategy: Avg
+2021-04-27 08:52:31.518 INFO  Routing Strategy: Shortest
+2021-04-27 08:54:23.845 INFO  
+Number of Packet sent during warm up phrase: 23484
+Number of Packet sent during sim phrase: 233876
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 701632
+Received Packet: 233877
+Max Flit Delay: 130
+Max Packet Delay: 130
+Packet ID of Max Packet Delay: 183054
+Flit Throughput: 0.11137
+Packet Throughput: 0.0371233
+Average Flit Latency: 8.70809
+Average Packet Latency: 9.38937
+2021-04-27 08:54:23.847 INFO  UnReceived Packet：1205
+
+2021-04-27 08:54:23.851 INFO  Warmup Cycle: 10000
+2021-04-27 08:54:23.851 INFO  Simulation Cycle: 100000
+2021-04-27 08:54:23.851 INFO  Injection Rate: 0.13
+2021-04-27 08:54:23.851 INFO  The number of ejection link: 2
+2021-04-27 08:54:23.851 INFO  The number of EXB: 1
+2021-04-27 08:54:23.851 INFO  Traffic Type: Transpose
+2021-04-27 08:54:23.851 INFO  Packet Size: Random
+2021-04-27 08:54:23.851 INFO  EXB Strategy: Avg
+2021-04-27 08:54:23.851 INFO  Routing Strategy: Shortest
+2021-04-27 08:56:18.516 INFO  
+Number of Packet sent during warm up phrase: 24393
+Number of Packet sent during sim phrase: 243311
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 729615
+Received Packet: 243309
+Max Flit Delay: 69
+Max Packet Delay: 69
+Packet ID of Max Packet Delay: 29241
+Flit Throughput: 0.115812
+Packet Throughput: 0.0386205
+Average Flit Latency: 8.7572
+Average Packet Latency: 9.44061
+2021-04-27 08:56:18.518 INFO  UnReceived Packet：1229
+
+2021-04-27 08:56:18.521 INFO  Warmup Cycle: 10000
+2021-04-27 08:56:18.521 INFO  Simulation Cycle: 100000
+2021-04-27 08:56:18.521 INFO  Injection Rate: 0.135
+2021-04-27 08:56:18.521 INFO  The number of ejection link: 2
+2021-04-27 08:56:18.521 INFO  The number of EXB: 1
+2021-04-27 08:56:18.521 INFO  Traffic Type: Transpose
+2021-04-27 08:56:18.521 INFO  Packet Size: Random
+2021-04-27 08:56:18.521 INFO  EXB Strategy: Avg
+2021-04-27 08:56:18.521 INFO  Routing Strategy: Shortest
+2021-04-27 08:58:15.767 INFO  
+Number of Packet sent during warm up phrase: 25293
+Number of Packet sent during sim phrase: 252884
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 759105
+Received Packet: 252884
+Max Flit Delay: 99
+Max Packet Delay: 99
+Packet ID of Max Packet Delay: 256657
+Flit Throughput: 0.120493
+Packet Throughput: 0.0401403
+Average Flit Latency: 8.82669
+Average Packet Latency: 9.50626
+2021-04-27 08:58:15.768 INFO  UnReceived Packet：1254
+
+2021-04-27 08:58:15.772 INFO  Warmup Cycle: 10000
+2021-04-27 08:58:15.772 INFO  Simulation Cycle: 100000
+2021-04-27 08:58:15.772 INFO  Injection Rate: 0.14
+2021-04-27 08:58:15.772 INFO  The number of ejection link: 2
+2021-04-27 08:58:15.772 INFO  The number of EXB: 1
+2021-04-27 08:58:15.772 INFO  Traffic Type: Transpose
+2021-04-27 08:58:15.772 INFO  Packet Size: Random
+2021-04-27 08:58:15.772 INFO  EXB Strategy: Avg
+2021-04-27 08:58:15.772 INFO  Routing Strategy: Shortest
+2021-04-27 09:00:16.893 INFO  
+Number of Packet sent during warm up phrase: 26220
+Number of Packet sent during sim phrase: 262291
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 787176
+Received Packet: 262293
+Max Flit Delay: 83
+Max Packet Delay: 83
+Packet ID of Max Packet Delay: 267367
+Flit Throughput: 0.124949
+Packet Throughput: 0.0416338
+Average Flit Latency: 8.879
+Average Packet Latency: 9.56405
+2021-04-27 09:00:16.895 INFO  UnReceived Packet：1280
+
+2021-04-27 09:00:16.897 INFO  Warmup Cycle: 10000
+2021-04-27 09:00:16.898 INFO  Simulation Cycle: 100000
+2021-04-27 09:00:16.898 INFO  Injection Rate: 0.145
+2021-04-27 09:00:16.898 INFO  The number of ejection link: 2
+2021-04-27 09:00:16.898 INFO  The number of EXB: 1
+2021-04-27 09:00:16.898 INFO  Traffic Type: Transpose
+2021-04-27 09:00:16.898 INFO  Packet Size: Random
+2021-04-27 09:00:16.898 INFO  EXB Strategy: Avg
+2021-04-27 09:00:16.898 INFO  Routing Strategy: Shortest
+2021-04-27 09:02:20.245 INFO  
+Number of Packet sent during warm up phrase: 27187
+Number of Packet sent during sim phrase: 271745
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 815714
+Received Packet: 271745
+Max Flit Delay: 123
+Max Packet Delay: 123
+Packet ID of Max Packet Delay: 256912
+Flit Throughput: 0.129478
+Packet Throughput: 0.0431341
+Average Flit Latency: 8.93608
+Average Packet Latency: 9.61877
+2021-04-27 09:02:20.248 INFO  UnReceived Packet：1306
+
+2021-04-27 09:02:20.252 INFO  Warmup Cycle: 10000
+2021-04-27 09:02:20.252 INFO  Simulation Cycle: 100000
+2021-04-27 09:02:20.252 INFO  Injection Rate: 0.15
+2021-04-27 09:02:20.252 INFO  The number of ejection link: 2
+2021-04-27 09:02:20.252 INFO  The number of EXB: 1
+2021-04-27 09:02:20.252 INFO  Traffic Type: Transpose
+2021-04-27 09:02:20.252 INFO  Packet Size: Random
+2021-04-27 09:02:20.252 INFO  EXB Strategy: Avg
+2021-04-27 09:02:20.252 INFO  Routing Strategy: Shortest
+2021-04-27 09:04:25.030 INFO  
+Number of Packet sent during warm up phrase: 28123
+Number of Packet sent during sim phrase: 281108
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 843604
+Received Packet: 281110
+Max Flit Delay: 104
+Max Packet Delay: 104
+Packet ID of Max Packet Delay: 135343
+Flit Throughput: 0.133905
+Packet Throughput: 0.0446206
+Average Flit Latency: 9.00156
+Average Packet Latency: 9.67822
+2021-04-27 09:04:25.032 INFO  UnReceived Packet：1331
+
+2021-04-27 09:04:25.036 INFO  Warmup Cycle: 10000
+2021-04-27 09:04:25.036 INFO  Simulation Cycle: 100000
+2021-04-27 09:04:25.036 INFO  Injection Rate: 0.155
+2021-04-27 09:04:25.036 INFO  The number of ejection link: 2
+2021-04-27 09:04:25.036 INFO  The number of EXB: 1
+2021-04-27 09:04:25.036 INFO  Traffic Type: Transpose
+2021-04-27 09:04:25.036 INFO  Packet Size: Random
+2021-04-27 09:04:25.036 INFO  EXB Strategy: Avg
+2021-04-27 09:04:25.036 INFO  Routing Strategy: Shortest
+2021-04-27 09:06:36.038 INFO  
+Number of Packet sent during warm up phrase: 29069
+Number of Packet sent during sim phrase: 290366
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 871238
+Received Packet: 290366
+Max Flit Delay: 127
+Max Packet Delay: 127
+Packet ID of Max Packet Delay: 250061
+Flit Throughput: 0.138292
+Packet Throughput: 0.0460898
+Average Flit Latency: 9.08109
+Average Packet Latency: 9.75402
+2021-04-27 09:06:36.040 INFO  UnReceived Packet：1357
+
+2021-04-27 09:06:36.043 INFO  Warmup Cycle: 10000
+2021-04-27 09:06:36.043 INFO  Simulation Cycle: 100000
+2021-04-27 09:06:36.043 INFO  Injection Rate: 0.16
+2021-04-27 09:06:36.043 INFO  The number of ejection link: 2
+2021-04-27 09:06:36.043 INFO  The number of EXB: 1
+2021-04-27 09:06:36.043 INFO  Traffic Type: Transpose
+2021-04-27 09:06:36.043 INFO  Packet Size: Random
+2021-04-27 09:06:36.043 INFO  EXB Strategy: Avg
+2021-04-27 09:06:36.043 INFO  Routing Strategy: Shortest
+2021-04-27 09:08:50.180 INFO  
+Number of Packet sent during warm up phrase: 30012
+Number of Packet sent during sim phrase: 299691
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 898881
+Received Packet: 299694
+Max Flit Delay: 131
+Max Packet Delay: 131
+Packet ID of Max Packet Delay: 164584
+Flit Throughput: 0.14268
+Packet Throughput: 0.0475705
+Average Flit Latency: 9.12723
+Average Packet Latency: 9.80788
+2021-04-27 09:08:50.181 INFO  UnReceived Packet：1382
+
+2021-04-27 09:08:50.184 INFO  Warmup Cycle: 10000
+2021-04-27 09:08:50.184 INFO  Simulation Cycle: 100000
+2021-04-27 09:08:50.184 INFO  Injection Rate: 0.165
+2021-04-27 09:08:50.184 INFO  The number of ejection link: 2
+2021-04-27 09:08:50.184 INFO  The number of EXB: 1
+2021-04-27 09:08:50.184 INFO  Traffic Type: Transpose
+2021-04-27 09:08:50.184 INFO  Packet Size: Random
+2021-04-27 09:08:50.184 INFO  EXB Strategy: Avg
+2021-04-27 09:08:50.184 INFO  Routing Strategy: Shortest
+2021-04-27 09:11:05.204 INFO  
+Number of Packet sent during warm up phrase: 30965
+Number of Packet sent during sim phrase: 309017
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 926946
+Received Packet: 309019
+Max Flit Delay: 159
+Max Packet Delay: 159
+Packet ID of Max Packet Delay: 321742
+Flit Throughput: 0.147134
+Packet Throughput: 0.0490506
+Average Flit Latency: 9.20643
+Average Packet Latency: 9.88429
+2021-04-27 09:11:05.206 INFO  UnReceived Packet：1407
+
+2021-04-27 09:11:05.209 INFO  Warmup Cycle: 10000
+2021-04-27 09:11:05.209 INFO  Simulation Cycle: 100000
+2021-04-27 09:11:05.209 INFO  Injection Rate: 0.17
+2021-04-27 09:11:05.209 INFO  The number of ejection link: 2
+2021-04-27 09:11:05.209 INFO  The number of EXB: 1
+2021-04-27 09:11:05.209 INFO  Traffic Type: Transpose
+2021-04-27 09:11:05.209 INFO  Packet Size: Random
+2021-04-27 09:11:05.209 INFO  EXB Strategy: Avg
+2021-04-27 09:11:05.209 INFO  Routing Strategy: Shortest
+2021-04-27 09:13:24.299 INFO  
+Number of Packet sent during warm up phrase: 31915
+Number of Packet sent during sim phrase: 318368
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 955276
+Received Packet: 318367
+Max Flit Delay: 203
+Max Packet Delay: 203
+Packet ID of Max Packet Delay: 317199
+Flit Throughput: 0.151631
+Packet Throughput: 0.0505344
+Average Flit Latency: 9.27657
+Average Packet Latency: 9.95027
+2021-04-27 09:13:24.301 INFO  UnReceived Packet：1437
+
+2021-04-27 09:13:24.304 INFO  Warmup Cycle: 10000
+2021-04-27 09:13:24.304 INFO  Simulation Cycle: 100000
+2021-04-27 09:13:24.304 INFO  Injection Rate: 0.175
+2021-04-27 09:13:24.304 INFO  The number of ejection link: 2
+2021-04-27 09:13:24.304 INFO  The number of EXB: 1
+2021-04-27 09:13:24.304 INFO  Traffic Type: Transpose
+2021-04-27 09:13:24.304 INFO  Packet Size: Random
+2021-04-27 09:13:24.304 INFO  EXB Strategy: Avg
+2021-04-27 09:13:24.304 INFO  Routing Strategy: Shortest
+2021-04-27 09:15:46.783 INFO  
+Number of Packet sent during warm up phrase: 32823
+Number of Packet sent during sim phrase: 327856
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 983199
+Received Packet: 327859
+Max Flit Delay: 175
+Max Packet Delay: 175
+Packet ID of Max Packet Delay: 289680
+Flit Throughput: 0.156063
+Packet Throughput: 0.0520411
+Average Flit Latency: 9.31354
+Average Packet Latency: 9.9993
+2021-04-27 09:15:46.785 INFO  UnReceived Packet：1460
+
+2021-04-27 09:15:46.788 INFO  Warmup Cycle: 10000
+2021-04-27 09:15:46.788 INFO  Simulation Cycle: 100000
+2021-04-27 09:15:46.788 INFO  Injection Rate: 0.18
+2021-04-27 09:15:46.788 INFO  The number of ejection link: 2
+2021-04-27 09:15:46.788 INFO  The number of EXB: 1
+2021-04-27 09:15:46.788 INFO  Traffic Type: Transpose
+2021-04-27 09:15:46.788 INFO  Packet Size: Random
+2021-04-27 09:15:46.788 INFO  EXB Strategy: Avg
+2021-04-27 09:15:46.788 INFO  Routing Strategy: Shortest
+2021-04-27 09:18:10.617 INFO  
+Number of Packet sent during warm up phrase: 33710
+Number of Packet sent during sim phrase: 337293
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1011944
+Received Packet: 337296
+Max Flit Delay: 203
+Max Packet Delay: 203
+Packet ID of Max Packet Delay: 177931
+Flit Throughput: 0.160626
+Packet Throughput: 0.053539
+Average Flit Latency: 9.44508
+Average Packet Latency: 10.1296
+2021-04-27 09:18:10.618 INFO  UnReceived Packet：1486
+
+2021-04-27 09:18:10.621 INFO  Warmup Cycle: 10000
+2021-04-27 09:18:10.621 INFO  Simulation Cycle: 100000
+2021-04-27 09:18:10.621 INFO  Injection Rate: 0.185
+2021-04-27 09:18:10.621 INFO  The number of ejection link: 2
+2021-04-27 09:18:10.621 INFO  The number of EXB: 1
+2021-04-27 09:18:10.621 INFO  Traffic Type: Transpose
+2021-04-27 09:18:10.621 INFO  Packet Size: Random
+2021-04-27 09:18:10.621 INFO  EXB Strategy: Avg
+2021-04-27 09:18:10.621 INFO  Routing Strategy: Shortest
+2021-04-27 09:20:37.207 INFO  
+Number of Packet sent during warm up phrase: 34649
+Number of Packet sent during sim phrase: 346509
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1040172
+Received Packet: 346509
+Max Flit Delay: 207
+Max Packet Delay: 207
+Packet ID of Max Packet Delay: 137371
+Flit Throughput: 0.165107
+Packet Throughput: 0.0550014
+Average Flit Latency: 9.4947
+Average Packet Latency: 10.1755
+2021-04-27 09:20:37.209 INFO  UnReceived Packet：1517
+
+2021-04-27 09:20:37.213 INFO  Warmup Cycle: 10000
+2021-04-27 09:20:37.213 INFO  Simulation Cycle: 100000
+2021-04-27 09:20:37.213 INFO  Injection Rate: 0.19
+2021-04-27 09:20:37.213 INFO  The number of ejection link: 2
+2021-04-27 09:20:37.213 INFO  The number of EXB: 1
+2021-04-27 09:20:37.213 INFO  Traffic Type: Transpose
+2021-04-27 09:20:37.213 INFO  Packet Size: Random
+2021-04-27 09:20:37.213 INFO  EXB Strategy: Avg
+2021-04-27 09:20:37.213 INFO  Routing Strategy: Shortest
+2021-04-27 09:23:06.205 INFO  
+Number of Packet sent during warm up phrase: 35630
+Number of Packet sent during sim phrase: 355791
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1067235
+Received Packet: 355793
+Max Flit Delay: 215
+Max Packet Delay: 215
+Packet ID of Max Packet Delay: 184233
+Flit Throughput: 0.169402
+Packet Throughput: 0.0564751
+Average Flit Latency: 9.5661
+Average Packet Latency: 10.2416
+2021-04-27 09:23:06.206 INFO  UnReceived Packet：1547
+
+2021-04-27 09:23:06.209 INFO  Warmup Cycle: 10000
+2021-04-27 09:23:06.209 INFO  Simulation Cycle: 100000
+2021-04-27 09:23:06.209 INFO  Injection Rate: 0.195
+2021-04-27 09:23:06.209 INFO  The number of ejection link: 2
+2021-04-27 09:23:06.209 INFO  The number of EXB: 1
+2021-04-27 09:23:06.209 INFO  Traffic Type: Transpose
+2021-04-27 09:23:06.209 INFO  Packet Size: Random
+2021-04-27 09:23:06.209 INFO  EXB Strategy: Avg
+2021-04-27 09:23:06.209 INFO  Routing Strategy: Shortest
+2021-04-27 09:25:41.628 INFO  
+Number of Packet sent during warm up phrase: 36540
+Number of Packet sent during sim phrase: 365148
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1095252
+Received Packet: 365149
+Max Flit Delay: 209
+Max Packet Delay: 209
+Packet ID of Max Packet Delay: 131698
+Flit Throughput: 0.17385
+Packet Throughput: 0.0579602
+Average Flit Latency: 9.67904
+Average Packet Latency: 10.3546
+2021-04-27 09:25:41.630 INFO  UnReceived Packet：1577
+
+2021-04-27 09:25:41.633 INFO  Warmup Cycle: 10000
+2021-04-27 09:25:41.633 INFO  Simulation Cycle: 100000
+2021-04-27 09:25:41.633 INFO  Injection Rate: 0.2
+2021-04-27 09:25:41.633 INFO  The number of ejection link: 2
+2021-04-27 09:25:41.633 INFO  The number of EXB: 1
+2021-04-27 09:25:41.633 INFO  Traffic Type: Transpose
+2021-04-27 09:25:41.633 INFO  Packet Size: Random
+2021-04-27 09:25:41.633 INFO  EXB Strategy: Avg
+2021-04-27 09:25:41.633 INFO  Routing Strategy: Shortest
+2021-04-27 09:28:11.703 INFO  
+Number of Packet sent during warm up phrase: 37441
+Number of Packet sent during sim phrase: 374473
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1124376
+Received Packet: 374476
+Max Flit Delay: 262
+Max Packet Delay: 262
+Packet ID of Max Packet Delay: 297067
+Flit Throughput: 0.178472
+Packet Throughput: 0.0594406
+Average Flit Latency: 9.7808
+Average Packet Latency: 10.4553
+2021-04-27 09:28:11.705 INFO  UnReceived Packet：1609
+
+2021-04-27 09:28:11.708 INFO  Warmup Cycle: 10000
+2021-04-27 09:28:11.708 INFO  Simulation Cycle: 100000
+2021-04-27 09:28:11.708 INFO  Injection Rate: 0.205
+2021-04-27 09:28:11.708 INFO  The number of ejection link: 2
+2021-04-27 09:28:11.708 INFO  The number of EXB: 1
+2021-04-27 09:28:11.708 INFO  Traffic Type: Transpose
+2021-04-27 09:28:11.708 INFO  Packet Size: Random
+2021-04-27 09:28:11.708 INFO  EXB Strategy: Avg
+2021-04-27 09:28:11.708 INFO  Routing Strategy: Shortest
+2021-04-27 09:30:48.717 INFO  
+Number of Packet sent during warm up phrase: 38377
+Number of Packet sent during sim phrase: 383775
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1151710
+Received Packet: 383781
+Max Flit Delay: 250
+Max Packet Delay: 250
+Packet ID of Max Packet Delay: 236695
+Flit Throughput: 0.182811
+Packet Throughput: 0.0609176
+Average Flit Latency: 9.90018
+Average Packet Latency: 10.5747
+2021-04-27 09:30:48.718 INFO  UnReceived Packet：1645
+
+2021-04-27 09:30:48.722 INFO  Warmup Cycle: 10000
+2021-04-27 09:30:48.722 INFO  Simulation Cycle: 100000
+2021-04-27 09:30:48.722 INFO  Injection Rate: 0.21
+2021-04-27 09:30:48.722 INFO  The number of ejection link: 2
+2021-04-27 09:30:48.722 INFO  The number of EXB: 1
+2021-04-27 09:30:48.722 INFO  Traffic Type: Transpose
+2021-04-27 09:30:48.722 INFO  Packet Size: Random
+2021-04-27 09:30:48.722 INFO  EXB Strategy: Avg
+2021-04-27 09:30:48.722 INFO  Routing Strategy: Shortest
+2021-04-27 09:33:25.999 INFO  
+Number of Packet sent during warm up phrase: 39316
+Number of Packet sent during sim phrase: 393184
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1179476
+Received Packet: 393183
+Max Flit Delay: 337
+Max Packet Delay: 337
+Packet ID of Max Packet Delay: 260099
+Flit Throughput: 0.187218
+Packet Throughput: 0.06241
+Average Flit Latency: 9.97048
+Average Packet Latency: 10.6499
+2021-04-27 09:33:26.001 INFO  UnReceived Packet：1683
+
+2021-04-27 09:33:26.005 INFO  Warmup Cycle: 10000
+2021-04-27 09:33:26.005 INFO  Simulation Cycle: 100000
+2021-04-27 09:33:26.005 INFO  Injection Rate: 0.215
+2021-04-27 09:33:26.005 INFO  The number of ejection link: 2
+2021-04-27 09:33:26.005 INFO  The number of EXB: 1
+2021-04-27 09:33:26.005 INFO  Traffic Type: Transpose
+2021-04-27 09:33:26.005 INFO  Packet Size: Random
+2021-04-27 09:33:26.005 INFO  EXB Strategy: Avg
+2021-04-27 09:33:26.005 INFO  Routing Strategy: Shortest
+2021-04-27 09:36:06.999 INFO  
+Number of Packet sent during warm up phrase: 40251
+Number of Packet sent during sim phrase: 402539
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1208269
+Received Packet: 402541
+Max Flit Delay: 235
+Max Packet Delay: 235
+Packet ID of Max Packet Delay: 192765
+Flit Throughput: 0.191789
+Packet Throughput: 0.0638954
+Average Flit Latency: 10.081
+Average Packet Latency: 10.7581
+2021-04-27 09:36:07.001 INFO  UnReceived Packet：1722
+
+2021-04-27 09:36:07.007 INFO  Warmup Cycle: 10000
+2021-04-27 09:36:07.007 INFO  Simulation Cycle: 100000
+2021-04-27 09:36:07.007 INFO  Injection Rate: 0.22
+2021-04-27 09:36:07.007 INFO  The number of ejection link: 2
+2021-04-27 09:36:07.007 INFO  The number of EXB: 1
+2021-04-27 09:36:07.007 INFO  Traffic Type: Transpose
+2021-04-27 09:36:07.007 INFO  Packet Size: Random
+2021-04-27 09:36:07.007 INFO  EXB Strategy: Avg
+2021-04-27 09:36:07.007 INFO  Routing Strategy: Shortest
+2021-04-27 09:38:58.056 INFO  
+Number of Packet sent during warm up phrase: 41179
+Number of Packet sent during sim phrase: 411936
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1236345
+Received Packet: 411935
+Max Flit Delay: 271
+Max Packet Delay: 271
+Packet ID of Max Packet Delay: 137138
+Flit Throughput: 0.196245
+Packet Throughput: 0.0653865
+Average Flit Latency: 10.2913
+Average Packet Latency: 10.9707
+2021-04-27 09:38:58.059 INFO  UnReceived Packet：1765
+
+2021-04-27 09:38:58.064 INFO  Warmup Cycle: 10000
+2021-04-27 09:38:58.064 INFO  Simulation Cycle: 100000
+2021-04-27 09:38:58.064 INFO  Injection Rate: 0.225
+2021-04-27 09:38:58.064 INFO  The number of ejection link: 2
+2021-04-27 09:38:58.064 INFO  The number of EXB: 1
+2021-04-27 09:38:58.064 INFO  Traffic Type: Transpose
+2021-04-27 09:38:58.064 INFO  Packet Size: Random
+2021-04-27 09:38:58.064 INFO  EXB Strategy: Avg
+2021-04-27 09:38:58.064 INFO  Routing Strategy: Shortest
+2021-04-27 09:41:53.426 INFO  
+Number of Packet sent during warm up phrase: 42119
+Number of Packet sent during sim phrase: 421252
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1264067
+Received Packet: 421253
+Max Flit Delay: 569
+Max Packet Delay: 569
+Packet ID of Max Packet Delay: 428830
+Flit Throughput: 0.200646
+Packet Throughput: 0.0668656
+Average Flit Latency: 10.4984
+Average Packet Latency: 11.1644
+2021-04-27 09:41:53.428 INFO  UnReceived Packet：1811
+
+2021-04-27 09:41:53.431 INFO  Warmup Cycle: 10000
+2021-04-27 09:41:53.431 INFO  Simulation Cycle: 100000
+2021-04-27 09:41:53.431 INFO  Injection Rate: 0.23
+2021-04-27 09:41:53.431 INFO  The number of ejection link: 2
+2021-04-27 09:41:53.431 INFO  The number of EXB: 1
+2021-04-27 09:41:53.431 INFO  Traffic Type: Transpose
+2021-04-27 09:41:53.431 INFO  Packet Size: Random
+2021-04-27 09:41:53.431 INFO  EXB Strategy: Avg
+2021-04-27 09:41:53.431 INFO  Routing Strategy: Shortest
+2021-04-27 09:44:46.726 INFO  
+Number of Packet sent during warm up phrase: 43048
+Number of Packet sent during sim phrase: 430733
+Total Warm up cycle: 10000
+Total Sim cycle 100000
+Received Flit: 1292867
+Received Packet: 430735
+Max Flit Delay: 478
+Max Packet Delay: 478
+Packet ID of Max Packet Delay: 221681
+Flit Throughput: 0.205217
+Packet Throughput: 0.0683706
+Average Flit Latency: 10.6982
+Average Packet Latency: 11.349
+2021-04-27 09:44:46.728 INFO  UnReceived Packet：1855
+

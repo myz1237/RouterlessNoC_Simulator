@@ -109,6 +109,7 @@ void configure() {
     }
     int node_sum = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x;
 
+/*
     if(GlobalParameter::traffic_type == Uniform){
         GlobalParameter::traffic = new TrafficUniform(node_sum);
     }else if(GlobalParameter::traffic_type == Transpose){
@@ -118,6 +119,7 @@ void configure() {
     }else if(GlobalParameter::traffic_type == Hotspot){
         GlobalParameter::traffic = new TrafficHotspot(node_sum);
     }
+*/
 
     GlobalParameter::sim_time += GlobalParameter::sim_warmup;
 }

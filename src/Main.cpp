@@ -26,19 +26,21 @@ int main() {
     plog::init(plog::debug, "../Log/runtime.txt", 1000000);
 #endif
     //plog::init<1>(plog::debug, "../Log/transposesecondresult.txt", 1000000);
-    plog::init<1>(plog::debug, "../Log/test.txt", 1000000);
+    plog::init<1>(plog::debug, "../Log/Intensive_Hotspot_Max&321.txt", 1000000);
     //plog::init<1>(plog::debug, "../Log/validate.txt", 1000000);
 
     /*Read Parameters from Yaml File*/
 
-/*    configure();
-    run();*/
+/*
+    configure();
+    run();
+*/
 
 /*TODO 记得运行前 改成5 flit的packet 注释掉configuration里面traffic的代码 记得文件名也改一下*/
 
-/*    int node_sum = 64;
+    int node_sum = 64;
 
-    for(int i = 0; i < 46; i++){
+/*    for(int i = 0; i < 46; i++){
         configure();
         GlobalParameter::traffic_type = Uniform;
         GlobalParameter::traffic = new TrafficUniform(node_sum);
@@ -52,9 +54,9 @@ int main() {
         GlobalParameter::traffic = new TrafficTranspose(node_sum);
         GlobalParameter::injection_rate += 0.005 * i;
         run();
-    }
+    }*/
 
-    for(int i = 0; i < 46; i++){
+/*    for(int i = 0; i < 46; i++){
         configure();
         GlobalParameter::traffic_type = BitReverse;
         GlobalParameter::traffic = new TrafficBitReverse(node_sum);
@@ -67,7 +69,7 @@ int main() {
         GlobalParameter::traffic_type = Uniform;
         GlobalParameter::traffic = new TrafficUniform(node_sum);
         GlobalParameter::exb_strategy = Avg;
-        GlobalParameter::exb_size = 3;
+        GlobalParameter::exb_size = 2;
         GlobalParameter::enable_interrupt = true;
         GlobalParameter::injection_rate += 0.005 * i;
         run();
@@ -78,7 +80,7 @@ int main() {
         GlobalParameter::traffic_type = Transpose;
         GlobalParameter::traffic = new TrafficTranspose(node_sum);
         GlobalParameter::exb_strategy = Avg;
-        GlobalParameter::exb_size = 3;
+        GlobalParameter::exb_size = 2;
         GlobalParameter::enable_interrupt = true;
         GlobalParameter::injection_rate += 0.005 * i;
         run();
@@ -88,6 +90,59 @@ int main() {
         configure();
         GlobalParameter::traffic_type = BitReverse;
         GlobalParameter::traffic = new TrafficBitReverse(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }
+
+    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Uniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }
+
+    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }
+
+    *//*这一部分还没有跑完*//*
+    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = BitReverse;
+        GlobalParameter::traffic = new TrafficBitReverse(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }*/
+
+/*    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }
+
+    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
         GlobalParameter::exb_strategy = Avg;
         GlobalParameter::exb_size = 3;
         GlobalParameter::enable_interrupt = true;
@@ -95,6 +150,27 @@ int main() {
         run();
     }*/
 
+/*    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }
+
+    for(int i = 0; i < 46; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }*/
 
 
 /*    for(int i = 0; i < 24; i++){
@@ -141,17 +217,183 @@ int main() {
     run();
 */
 
-    for(int i = 0; i < 46; i++){
+/*    for(int i = 0; i < 46; i++){
         configure();
         GlobalParameter::injection_rate += 0.005 * i;
         run();
-    }
-    for(int i = 0; i < 46; i++) {
+    }*/
+/*    for(int i = 0; i < 46; i++) {
         configure();
         GlobalParameter::exb_strategy = Avg;
         GlobalParameter::exb_size = 3;
         GlobalParameter::enable_interrupt = true;
         GlobalParameter::injection_rate += 0.005 * i;
+        run();
+    }*/
+/*    for(int i = 1; i < 11; i++){
+        configure();
+        GlobalParameter::packet_size_with_ratio[0] = make_pair(i,2);
+        GlobalParameter::exb_size = i;
+        run();
+    }*/
+
+    /*0.01-0.5*/
+/*
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Uniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Uniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 3;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Uniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Uniform;
+        GlobalParameter::traffic = new TrafficUniform(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    */
+/*0.01-0.30*//*
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 3;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = Transpose;
+        GlobalParameter::traffic = new TrafficTranspose(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = BitReverse;
+        GlobalParameter::traffic = new TrafficBitReverse(node_sum);
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = BitReverse;
+        GlobalParameter::traffic = new TrafficBitReverse(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 3;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 30; i++){
+        configure();
+        GlobalParameter::traffic_type = BitReverse;
+        GlobalParameter::traffic = new TrafficBitReverse(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+*/
+
+    for(int i = 0; i < 12; i++){
+        configure();
+        GlobalParameter::traffic_type = Hotspot;
+        GlobalParameter::traffic = new TrafficHotspot(node_sum);
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 12; i++){
+        configure();
+        GlobalParameter::traffic_type = Hotspot;
+        GlobalParameter::traffic = new TrafficHotspot(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 3;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 12; i++){
+        configure();
+        GlobalParameter::traffic_type = Hotspot;
+        GlobalParameter::traffic = new TrafficHotspot(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 2;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
+        run();
+    }
+
+    for(int i = 0; i < 12; i++){
+        configure();
+        GlobalParameter::traffic_type = Hotspot;
+        GlobalParameter::traffic = new TrafficHotspot(node_sum);
+        GlobalParameter::exb_strategy = Avg;
+        GlobalParameter::exb_size = 1;
+        GlobalParameter::enable_interrupt = true;
+        GlobalParameter::injection_rate += 0.02 * i;
         run();
     }
 
@@ -164,6 +406,7 @@ void config_output(){
     PLOG_INFO_(1) << "Injection Rate: " <<GlobalParameter::injection_rate;
     PLOG_INFO_(1) << "The number of ejection link: " << GlobalParameter::ej_port_nu;
     PLOG_INFO_(1) << "The number of EXB: " << GlobalParameter::exb_num;
+    PLOG_INFO_(1) << "EXB Size: " << GlobalParameter::exb_size;
     PLOG_INFO_IF_(1,GlobalParameter::traffic_type == Uniform) << "Traffic Type: " << "Uniform";
     PLOG_INFO_IF_(1,GlobalParameter::traffic_type == Transpose) << "Traffic Type: " << "Transpose";
     PLOG_INFO_IF_(1,GlobalParameter::traffic_type == BitReverse) << "Traffic Type: " << "BitReverse";

@@ -75,7 +75,6 @@ void Noc::run() {
     /*File Output*/
     PLOG_INFO_(1) << endl
          << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
-         << "Number of Packet sent during warm up phrase: " << warm_up_packet << endl
          << "Number of Packet sent during sim phrase: " << GlobalParameter::packet_id - warm_up_packet + 1 << endl
          << "Total Warm up cycle: " << GlobalParameter::sim_warmup << endl
          << "Total Sim cycle " << GlobalParameter::sim_time - GlobalParameter::sim_warmup << endl

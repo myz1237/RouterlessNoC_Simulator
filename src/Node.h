@@ -139,6 +139,9 @@ private:
      * */
     int m_self_loop_counter;
 
+    /*Record the number of flit to be forwarded when interruption occurs*/
+    int m_forward_exb_length;
+
     Stat m_stat;
 
     /*A pointer to implement EXB functions*/

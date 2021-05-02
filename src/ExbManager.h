@@ -68,13 +68,20 @@ public:
     int get_exb_remaining_size(int exb_index)const;
 
     void push(int exb_index, Flit* flit);
-    void pop_and_push(int exb_index, Flit* flit);
+
+    void pop_and_push(int exb_index, Flit* flit, int node_id, bool interrupt);
 
     /**
     * @brief  Pop one flit from an exb. Release it if empty after the pop action
     * @param  node_id   Just to print a log
     */
     void pop(int exb_index, int node_id);
+
+    void interrupt_pop(int exb_index, int node_id);
+
+    int cal_forward_packet_length(int exb_index, long single_flit_packet_id);
+
+    int cal_forward_packet_length(int exb_index, long single_flit_packet_id, int original_length);
 
     ExbManager();
     ~ExbManager();

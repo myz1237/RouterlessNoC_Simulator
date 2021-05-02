@@ -78,6 +78,7 @@ Node::Node(int node_id):m_node_id(node_id){
     m_exb_manager = new ExbManager;
     m_inject = new Injection(m_node_id, &m_curr_ring_id);
     m_stat.reset();
+    m_forward_exb_length = 0;
 }
 
 Node::~Node() {
@@ -259,8 +260,8 @@ void Node::ej_arbitrator() {
         if(m_single_buffer[i] != nullptr &&
         m_single_buffer[i]->get_flit_dst() == m_node_id){
             //TODO 注意！
-            if(m_single_buffer[i]->get_hop() > 255)
-                exit(0);
+//            if(m_single_buffer[i]->get_hop() > 255)
+//                exit(0);
             FlitType type = m_single_buffer[i]->get_flit_type();
             long packet_id = m_single_buffer[i]->get_packet_id();
             int seq = m_single_buffer[i]->get_sequence();
@@ -381,7 +382,9 @@ void Node::handle_rest_flit(int action, int single_flit_index) {
     }else{
         /*Action = -1 or >=0*/
         if(exb_index != -1){
-            m_exb_manager->pop_and_push(exb_index,m_single_buffer[single_flit_index]);
+            m_exb_manager->pop_and_push(exb_index,
+                  m_single_buffer[single_flit_index], m_node_id,
+                  GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
         }else{
             forward(m_single_buffer[single_flit_index]);
         }
@@ -514,20 +517,35 @@ void Node::continue_inject_packet() {
     << " in Cycle " << GlobalParameter::global_cycle;*/
 
     if(action == -2 || action == -3){
-
-        p->set_flit_status(flit_index, Routing);
-
         if(action == -3){
             ejection(m_single_buffer[ring_index],
                             m_curr_ring_id[ring_index]);
         }
 
         /*Act if avg is used*/
-        if(GlobalParameter::enable_interrupt&&m_inject->is_injection_interrupted()){
-            m_inject->set_interrupt(false);
-            PLOG_WARNING << "EXB " << exb_index << " disables interrupt " << " at Node "
-            << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+            m_forward_exb_length != 0){
+
+            m_exb_manager->interrupt_pop(exb_index, m_node_id);
+
+            m_forward_exb_length--;
+
+            PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop at Node "
+                         << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+
+            p = nullptr;
+            return;
         }
+
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+           m_forward_exb_length == 0){
+
+            m_inject->set_interrupt(false);
+            PLOG_WARNING << "EXB " << exb_index << " disables interrupt " << "at Node "
+                         << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+        }
+
+        p->set_flit_status(flit_index, Routing);
 
         if(p->get_flit_type(flit_index) == Tail){
             /*Complete this injection after tail flit injection*/
@@ -547,23 +565,50 @@ void Node::continue_inject_packet() {
 
     }else{
 
-        if(GlobalParameter::enable_interrupt&&m_inject->is_injection_interrupted()){
-            /*Interrupt the injection again*/
-            m_inject->set_interrupt(true);
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+            m_forward_exb_length != 0){
 
-            m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
+            m_forward_exb_length =
+                    m_exb_manager->cal_forward_packet_length(exb_index,
+                          m_single_buffer[ring_index]->get_packet_id(),
+                                m_forward_exb_length);
 
-            PLOG_WARNING << "EXB " << exb_index << " enables interrupt again " << " at Node "
+            m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index], m_node_id,
+                                        GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
+
+            PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop&Push at Node "
                          << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+
+            m_forward_exb_length--;
+
         }else{
             if(remaining_exb_size == 0){
+
+                /*No injection in this cycle*/
+                PLOG_WARNING << "EXB " << exb_index << " enables interrupt " << "at Node "
+                             << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
                 /*No space in exb, trigger the interrupt*/
                 m_inject->set_interrupt(true);
-                m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
-                /*No injection in this cycle*/
-                PLOG_WARNING << "EXB " << exb_index << " enables interrupt " << " at Node "
-                << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                m_forward_exb_length =
+                        m_exb_manager->cal_forward_packet_length(exb_index,
+                           m_single_buffer[ring_index]->get_packet_id());
+                m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index], m_node_id,
+                                            GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
+                m_forward_exb_length--;
+
+                PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop&Push at Node "
+                             << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
             }else{
+
+                /*Only valid when interrupt is on and m_forward_exb_length is 0*/
+                if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+                   m_forward_exb_length == 0){
+
+                    m_inject->set_interrupt(false);
+                    PLOG_WARNING << "EXB " << exb_index << " disables interrupt " << " at Node "
+                                 << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                }
+
                 /*Normal injection without interrupt*/
                 p->set_flit_status(flit_index, Routing);
 
