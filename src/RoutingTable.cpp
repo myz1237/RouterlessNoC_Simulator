@@ -1,54 +1,43 @@
 #include "RoutingTable.h"
 
+void RoutingTable::table_sort() {
+    sort(routing.begin(), routing.end(), table_comp);
+    //sort(routing.begin(), routing.end(), table_comp_with_ring_size);
+}
+
+RoutingTable::~RoutingTable(){
+    vector<pair<int, int>>().swap(routing);
+}
+
 void update_routing_table(vector<Routingsnifer*>&snifer, vector<RoutingTable*>&temp, int ring_id){
     int counter = 0;
     for(int i = 0;i < snifer.size(); i++){
-        //检查该temp里面有没有这个node_id
         counter = 0;
         for(int j = 0; j< temp.size(); j++){
-            //有的话 应该只能找到一个匹配
+            /*Check whether there has been a record about this node*/
             if(snifer[i]->node_id == temp[j]->node_id){
-                swap(snifer[i],temp[j], ring_id);
+                temp[j]->routing.emplace_back(make_pair(ring_id, snifer[i]->hop_count));
                 break;
             }
             counter++;
         }
-
+        /*New node, add it to the routing*/
         if(counter == temp.size()){
-            //没找到 加入该节点
+
             RoutingTable *p = new RoutingTable;
+            p->routing_index = 0;
             p->node_id = snifer[i]->node_id;
-            p->ring1_id = ring_id;
-            p->ring1_hop = snifer[i]->hop_count;
-            p->ring2_id = ring_id;
-            p->ring2_hop = snifer[i]->hop_count;
+            p->routing.emplace_back(make_pair(ring_id, snifer[i]->hop_count));
             temp.push_back(p);
         }
-
     }
+
 }
-void swap(Routingsnifer* snifer, RoutingTable* table, int ring_id){
-    int test = snifer->hop_count;
-    int ring1_hop = table->ring1_hop;
-    int ring2_hop = table->ring2_hop;
-    int ring1 = table->ring1_id;
-    int ring2 = table->ring2_id;
-    if(test <= ring1_hop){
-        if(ring1_hop < ring2_hop){
-            table->ring2_id = ring1;
-            table->ring2_hop = table->ring1_hop;
-            table->ring1_id = ring_id;
-            table->ring1_hop = test;
-        }else{
-            table->ring1_id = ring_id;
-            table->ring1_hop = test;
-        }
-    }else if(test < ring2_hop){
-        table->ring2_id = ring_id;
-        table->ring2_hop = test;
-    }else if(test > ring2_hop && ring1 == ring2){
-        table->ring2_id = ring_id;
-        table->ring2_hop = test;
-    }
 
+static bool table_comp_with_ring_size(pair<int, int>&a, pair<int, int>&b){
+    int test_1 = a.second;
+    int test_2 = b.second;
+    vector<Ring*>& ring = GlobalParameter::ring;
+    if(test_1 != test_2) return test_1 < test_2;
+    if(test_1 == test_2) return ring[a.first]->get_ring_size() < ring[b.first]->get_ring_size();
 }

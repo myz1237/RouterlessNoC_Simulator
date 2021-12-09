@@ -1,27 +1,46 @@
 #include "Node.h"
 void Node::run(long cycle) {
-
+#if DEBUG
+    PLOG_INFO << "Node " << m_node_id << " First Print ";
+    m_exb_manager->Exb_tracer();
+#endif
     int handled_ring_index;
     int index;
+
+    reset_routing_table_index();
+    reset_self_loop_counter();
+
     m_inject->packetinfo_generator(cycle, *GlobalParameter::traffic);
     recv_flit();
-    get_ej_order();
-    //优先处理要注入的那条ring
+    ej_arbitrator();
     handled_ring_index = inject_eject();
-    //处理剩下的single flit
+
+    /*Handle the rest of packets*/
     for(int i = 0; i < m_ej_order.size(); i++){
         index = m_ej_order[i].first;
+        /*Except the single buffer handled above*/
         if(index == handled_ring_index){
             continue;
         }else{
             handle_rest_flit(m_ej_order[i].second, index);
         }
     }
-
-    //TODO 记得最后清零所有singleflit 和ej order
-    //不要应该也可用做到
+    /*Clear Input Buffer, wait for next cycle*/
     reset_single_buffer();
     vector<pair<int,int>>().swap(m_ej_order);
+
+#if DEBUG
+    PLOG_INFO << "Node " << m_node_id << " Second Print ";
+    PLOG_INFO << "Node " << m_node_id << " EXB Tracer";
+    m_exb_manager->Exb_tracer();
+#endif
+}
+
+void Node::sort_routing_table() {
+    int size = m_table.size();
+    for(int i = 0; i < size; i++){
+        m_table[i]->table_sort();
+    }
 }
 
 void Node::reset_stat() {
@@ -33,39 +52,33 @@ void Node::inject_control_packet() {
 }
 
 void Node::handle_control_packet() {
-    //先从ring上接收包
+
     recv_flit();
-    //检查每个包并记录状态
-    get_ej_order();
-    //处理包
-    ej_control_packet();
+    ej_arbitrator();
+    ej_fwd_control_packet();
 }
 
-void Node::ej_control_packet() {
-    for(int i = 0; i < m_ej_order.size(); i++){
-        //只要是到达该node的control 不按照ejectionlink的数目收回而是全部收回
-        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
-            ejection(m_single_buffer[m_ej_order[i].first],
-                     m_curr_ring_id[m_ej_order[i].first]);
-        } else if(m_ej_order[i].second == -1){
-            forward(m_single_buffer[m_ej_order[i].first]);
-        }
-    }
-    reset_single_buffer();
-    vector<pair<int,int>>().swap(m_ej_order);
+int Node::left_injection_queue_packet()const{
+    return m_inject->left_packet_in_queue();
+}
+
+int Node::left_injection_queue_flit()const{
+    return m_inject->left_flit_in_queue();
 }
 
 void Node::init() {
+    /*Fixed array size */
     m_single_buffer.resize(m_curr_ring_id.size(), nullptr);
 }
 
 Node::Node(int node_id):m_node_id(node_id){
-    //TODO 这里reserve的数目可能不够 对于8*8是足够了
-    m_curr_ring_id.reserve(100);
+    /*Reserve array size with an estimated vale*/
+    m_curr_ring_id.reserve(50);
     m_table.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x-1);
     m_exb_manager = new ExbManager;
     m_inject = new Injection(m_node_id, &m_curr_ring_id);
     m_stat.reset();
+    m_forward_exb_length = 0;
 }
 
 Node::~Node() {
@@ -73,13 +86,40 @@ Node::~Node() {
     delete m_exb_manager;
     m_exb_manager = nullptr;
     m_inject = nullptr;
-    //注意这里只清空输入buffer的内容 释放空间交给Ring来做
+
+    /*Only to clear single buffer values not to delete flit objects*/
     clear_vector<Flit*>(m_single_buffer);
     free_vetor<RoutingTable*>(m_table);
     vector<pair<int, int>>().swap(m_ej_order);
+    vector<pair<long, int>>().swap(m_ej_record);
+}
+
+void Node::node_info_output() {
+    cout << m_stat;
+}
+
+void Node::print_routing_table() {
+    int size = m_table.size();
+    for(int i = 0; i < size; i++){
+        RoutingTable* table = m_table[i];
+        PLOG_INFO_(1) << "Node: " << m_node_id << " To Node: " << table->node_id;
+        int table_size = table->routing.size();
+        for(int j = 0;j < table_size; j++){
+            PLOG_INFO_(1) << "Available Ring: " << table->routing[j].first
+            << " Hop Count: " << table->routing[j].second;
+        }
+    }
+}
+
+void Node::reset_routing_table_index() {
+    int size =m_table.size();
+    for(int i = 0; i < size; i++){
+        m_table[i]->reset_index();
+    }
 }
 
 void Node::update_flit_stat(int latency) {
+
     m_stat.received_flit++;
     m_stat.flit_delay += latency;
 
@@ -88,16 +128,33 @@ void Node::update_flit_stat(int latency) {
     }
 }
 
+void Node::update_packet_stat(int latency, long packet_id) {
 
-void Node::update_packet_stat(int latency) {
     m_stat.received_packet++;
     m_stat.packet_delay += latency;
 
     if(latency > m_stat.max_packet_delay){
         m_stat.max_packet_delay = latency;
+        m_stat.packet_id_for_max_delay = packet_id;
     }
 }
 
+void Node::ej_fwd_control_packet() {
+    /*First value of pari<int, int> in m_ej_order records index of single buffer or ring across current node*/
+    for(int i = 0; i < m_ej_order.size(); i++){
+        if(m_ej_order[i].second >= 0 || m_ej_order[i].second == -3){
+            ejection(m_single_buffer[m_ej_order[i].first],
+                     m_curr_ring_id[m_ej_order[i].first]);
+        } else if(m_ej_order[i].second == -1){
+            forward(m_single_buffer[m_ej_order[i].first]);
+        }
+    }
+
+    reset_single_buffer();
+    vector<pair<int,int>>().swap(m_ej_order);
+}
+
+/*Call ring's function, flit_check, to figure out arrival flits*/
 void Node::recv_flit() {
     for(int i = 0; i<m_curr_ring_id.size(); i++){
         m_single_buffer[i] = GlobalParameter::
@@ -106,44 +163,53 @@ void Node::recv_flit() {
 }
 
 void Node::ejection(Flit *flit, int ring_id) {
-    //尝试Ejection
+
     FlitType type = flit->get_flit_type();
     flit->update_hop();
-    flit->set_flit_type(Ejected);
+    flit->set_flit_status(Ejected);
     flit->set_atime(GlobalParameter::global_cycle);
     update_flit_stat(flit->calc_flit_latency());
 
-    PLOG_DEBUG_IF(type == Payload) << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
-                                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
-
     if (type == Control){
+        /*Extract Routing msg from the control Packet and Update the current routing routing*/
         update_routing_table(flit->get_flit_routing(),m_table, ring_id);
-        update_packet_stat(flit->calc_flit_latency());
+        update_packet_stat(flit->calc_flit_latency(),flit->get_packet_id());
 
-        //清除该Packet
+        /*Erase and delete this control packet from the ring*/
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+        return;
     }else if (type == Header){
-        //单个flit的Packet
-        //TODO 之后改进的地方 改为sequence判断 sequence为0 说明后面没有flit了
+
         if(GlobalParameter::ring[ring_id]->
-                find_packet_length(flit->get_packet_id()) == 1){
-            update_packet_stat(flit->calc_flit_latency());
+                find_packet_length_by_id(flit->get_packet_id()) == 1){
+            update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
 
             PLOG_DEBUG << "Single Packet " << flit->get_packet_id() << " Arrived at Node "
                        << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
 
-            //清除该packet
+            /*Erase and delete this packet with one flit from the ring*/
             GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
+            return;
         }else{
             PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Header Flit Arrived at Node "
                        << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+            /*For long packet header, add a new packet record*/
+            update_record(flit->get_packet_id(), type);
+            return;
         }
-    }else if (type == Tail){
+    } else if(type == Payload){
+
+        PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Payload Flit Arrived at Node "
+                   << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
+        update_record(flit->get_packet_id(), type);
+        return;
+    } else if (type == Tail){
 
         PLOG_DEBUG << "Long Packet " << flit->get_packet_id() << " Tail Flit Arrived at Node "
                    << m_node_id << " in Cycle " << GlobalParameter::global_cycle << " Sequence No " << flit->get_sequence();
-        update_packet_stat(flit->calc_flit_latency());
-        //清除该packet
+        update_packet_stat(flit->calc_flit_latency(), flit->get_packet_id());
+        update_record(flit->get_packet_id(), type);
+
         GlobalParameter::ring[ring_id]->dettach(flit->get_packet_id());
     }
 }
@@ -152,10 +218,13 @@ void Node::forward(Flit *flit) {
     FlitType type = flit->get_flit_type();
     flit->update_hop();
     if(type == Control){
-        //记录当前的node_id和hop_count
+        /*Update routing msg of non-destination control flit*/
         flit->update_routing_snifer();
+    } else{
+        /* No action for other types
+         * Wait for the next cycle
+         * */
     }
-    //其余需要Forward不用动 等着Ring update就行了
 }
 
 void Node::reset_single_buffer() {
@@ -163,44 +232,141 @@ void Node::reset_single_buffer() {
         m_single_buffer[i] = nullptr;
     }
 }
-
-void Node::get_ej_order() {
+/* Arbitrator Process:
+ *                    Initial ejection order, pari<int, int>.
+ *                    Assign single buffer index to the first value, another field is for creation time
+ *                    Divide single buffers into two parts, non-dst and in-dst buffers
+ *                    Non-dst: Tag the second data field with -1
+ *                    In-dst with the packet record:
+ *                           Tag header, payload, and tail with 2, 1, 0 respectively
+ *                           Record the numbers of each group
+ *                    In-dst without the packet record: Tag with -1
+ *                    Empty Buffer: Tag -2
+ *                    Sort all pairs by the second data field in descending order
+ *                    e.g: 2.........2  1.........1  0.........0  -1.........-1  -2.........-2
+ *                           Header       Payload       Tail         Non-dst         Null
+ *                    Sort three groups by creationg time in descending order seperately
+ *                    e.g: 18........3  9.........0  20........5  -1.........-1  -2.........-2
+ *                           Header       Payload       Tail         Non-dst         Null
+ *                    Reverse it and assign -3 to the first two(Ejection links num) non-negative values
+ *                    Except these buffers with the tag -3, others will be forwarded to the next node
+ * */
+void Node::ej_arbitrator() {
+    int tail_index = 0, payload_index = 0, header_index = 0;
     vector<pair<int,int>> ctime(m_single_buffer.size());
     for(int i = 0;i < ctime.size(); i++){
-        //代表这是index为i的ring上的single flit 用这个index找到对应的ring_id
+        /*Store index for m_curr_ring_id and m_single_buffer*/
         ctime[i].first = i;
-        //在非空的buffer里选择要在这里注入的single buffer
         if(m_single_buffer[i] != nullptr &&
         m_single_buffer[i]->get_flit_dst() == m_node_id){
-            ctime[i].second = m_single_buffer[i]->get_flit_ctime();
+            //TODO 注意！
+//            if(m_single_buffer[i]->get_hop() > 255)
+//                exit(0);
+            FlitType type = m_single_buffer[i]->get_flit_type();
+            long packet_id = m_single_buffer[i]->get_packet_id();
+            int seq = m_single_buffer[i]->get_sequence();
+            if(type == Tail){
+                if(check_record(packet_id,seq)){
+                    ctime[i].second = 0;
+                    tail_index++;
+                }else{
+                    /*No record, forward it*/
+                    ctime[i].second = -1;
+                }
+            }else if(type == Payload){
+                if(check_record(packet_id,seq)){
+                    ctime[i].second = 1;
+                    payload_index++;
+                }else{
+                    ctime[i].second = -1;
+                }
+            }else if(type == Control){
+                /*Ignore it, for compatibility*/
+                ctime[i].second = m_single_buffer[i]->get_flit_ctime();
+            }else{
+                /*Header*/
+                ctime[i].second = 2;
+                header_index++;
+            }
         } else if(m_single_buffer[i] != nullptr &&
                 m_single_buffer[i]->get_flit_dst() != m_node_id){
-            //收到了但非目的地就赋值为-1
+            /*Non-dst buffer*/
             ctime[i].second = -1;
         }else if(m_single_buffer[i] == nullptr) {
-            //空
             ctime[i].second = -2;
         }
     }
-    //从大到小排列
     sort(ctime.begin(),ctime.end(),comp);
-    //把前ej_port_nu 需要注入的ctime设定为-3作区分
-    //取二者的小值 防止ej比总的buffer数量大 造成访问不到
+    /*Group Sort*/
+    int index;
+    for(int j = 0;j < header_index; j++){
+        index = ctime[j].first;
+        ctime[j].second = m_single_buffer[index]->get_flit_ctime();
+    }
+    sort(ctime.begin(), ctime.begin()+header_index, comp);
+    for(int k = header_index; k < payload_index; k++){
+        index = ctime[k].first;
+        ctime[k].second = m_single_buffer[index]->get_flit_ctime();
+    }
+    sort(ctime.begin()+header_index, ctime.begin()+header_index+payload_index, comp);
+    for(int q = payload_index; q < tail_index; q++){
+        index = ctime[q].first;
+        ctime[q].second = m_single_buffer[index]->get_flit_ctime();
+    }
+    sort(ctime.begin()+header_index+payload_index, ctime.begin()+header_index+payload_index+tail_index, comp);
+
+    reverse(ctime.begin(),ctime.end());
+
     int edge = min<int>(GlobalParameter::ej_port_nu, m_single_buffer.size());
-    for(int j = 0; j < edge; j++){
-        if(ctime[j].second >= 0){
-            ctime[j].second = -3;
+    //int edge = GlobalParameter::ej_port_nu;
+    index = 0;
+    for(int t = 0; t < ctime.size(); t++){
+        /*Ejection Tag*/
+        if(ctime[t].second >= 0 && index < edge){
+            ctime[t].second = -3;
+            index++;
+            if(index == edge) break;
         }
     }
     m_ej_order.swap(ctime);
     vector<pair<int,int>>().swap(ctime);
 }
 
-bool Node::comp(pair<int, int> &a, pair<int, int> &b) {
-    return a.second > b.second;
+bool Node::check_record(long packet_id, int seq){
+    vector<pair<long, int>>::iterator it = find(m_ej_record.begin(),
+                                               m_ej_record.end(),make_pair(packet_id,seq));
+    if(it == m_ej_record.end()){
+        /*No Record Found*/
+        return false;
+    }else{
+        return true;
+    }
 }
 
+void Node::update_record(long packet_id, int type){
+    int i;
+    if(type == Header){
+        /*Register a new record and wait for the flit with sequence num 1*/
+        m_ej_record.emplace_back(packet_id, 1);
+        return;
+    }
+    for(i = 0; i < m_ej_record.size(); i++){
+        if(m_ej_record[i].first == packet_id){
+            if(type == Tail){
+                m_ej_record.erase(m_ej_record.begin()+i);
+                return;
+            }
+            /*Increase the Expected Sequence Number by 1*/
+            m_ej_record[i].second++;
+            return;
+        }
+    }
+}
 
+/* Null buffer or buffer to be ejected, check whether this buffer is bound with an EXB
+ * If so, pop one flit from the EXB
+ * Buffer to be forwarded, if bound, pop one flit and push this buffer into the exb
+ * */
 void Node::handle_rest_flit(int action, int single_flit_index) {
     int exb_index = m_exb_manager->check_exb_bound(single_flit_index);
     if(action == -2){
@@ -214,212 +380,108 @@ void Node::handle_rest_flit(int action, int single_flit_index) {
             m_exb_manager->pop(exb_index, m_node_id);
         }
     }else{
-        // Action = -1/ >=0
+        /*Action = -1 or >=0*/
         if(exb_index != -1){
-            m_exb_manager->pop_and_push(exb_index,m_single_buffer[single_flit_index]);
+            m_exb_manager->pop_and_push(exb_index,
+                  m_single_buffer[single_flit_index], m_node_id,
+                  GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
         }else{
             forward(m_single_buffer[single_flit_index]);
         }
     }
 }
 
-int Node::inject_eject() {
-
-    int try_again = 0;
-    //记录这次处理的ring_index 如果注入失败 就返回-1
+/*Please check the paper for details*/
+int Node::inject_eject(){
     int return_ring_index;
     int ring_index;
     int action;
     int length;
     int exb_index;
     int exb_available_index;
-    int remaining_exb_size;
     Packetinfo *p;
 
     if(!is_injection_ongoing()){
-        //此时injection闲
+
         if(!m_inject->is_packetinfo_empty()){
-            //Not Empty
+
+            /*Retrieve the oldest packetinfo*/
             p = m_inject->get_new_packetinfo();
             length = p->length;
 
-            here:       //选ring 并拿到ring_index
-            ring_index = ring_selection(p->dst, try_again);
+here:       ring_index = ring_selection(p->dst);
+            /*Have tries all options, No rings available this cycle*/
+            if(ring_index == -1) return -1;
+
             action = get_single_buffer_action(ring_index);
             exb_index = m_exb_manager->check_exb_bound(ring_index);
             exb_available_index = m_exb_manager->exb_available();
-            //注入成不成功 这条ring的single buffer已经处理过了
             return_ring_index = ring_index;
 
-            //Length判断
-            if(length == 1){
+            if(action == -2 || action == -3){
 
-                if(action == -2 || action == -3){
+                if(exb_index != -1){
 
-                    if(exb_index == -1){
-                        //没有绑定 直接注
-                        //直接注入这个长度为1的Packet
-                        m_inject->inject_new_packet(ring_index);
-                    }else{
-
-                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                            try_again++;
-                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                            goto here;
-                        }
-
-                        //还有绑定 需要转发exb内的内容
-                        m_exb_manager->pop(exb_index, m_node_id);
-                    }
-
-                    if(action == -3){
-                        //处理该ring上的flit
-                        ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
-                    }
-
-
+                    /*Bound, fail to inject*/
+                    /*Try another Ring*/
+                    goto here;
                 }else{
 
-                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                        try_again++;
-                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                        goto here;
-                    }
-                    //不会注入了 查看该ring有没有绑定EXB 处理该选中的ring上的flit
-                    //exb_index = m_exb_manager->check_exb_bound(ring_index);
-                    if(exb_index != -1){
-                        //绑定了
-                        //放入EXB中 并弹出EXB第一个flit 此时EXB一定至少一个flit
-                        m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
+                    /*No bound*/
+                    if(length == 1){
+                        /*Inject this single packet*/
+                        m_inject->inject_new_packet(ring_index);
+
+                        if(action == -3){
+                            /*Do not forget to handle the buffer to be ejected*/
+                            ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
+                        }
+
                     }else{
-                        //没绑定直接Forward
-                        forward(m_single_buffer[ring_index]);
+
+                        /*Long Packet Injection*/
+                        if(exb_available_index != -1){
+
+                            /*EXB Availbale. Bind it and inject the packet*/
+                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
+                            PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
+                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                            /*Inject the header flit of the long packet*/
+                            m_inject->inject_new_packet(ring_index);
+
+                            if(action == -3){
+                                ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
+                            }
+
+                        }else{
+                            /*No action if exb unavailable*/
+                            /*Wait for next cycle to inject*/
+                            return_ring_index = -1;
+                        }
                     }
                 }
             }else{
-                //长度大于1
 
-                if(action == -2){
-
-                    if(exb_index != -1){
-                        //绑定中
-                        //不在注入
-
-                        if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                            try_again++;
-                            PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                         << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                            goto here;
-                        }
-
-                        //TODO 按照论文 这里不做注入 但是action为-3时 同样的情况就在buffer size够下 注入了
-                        m_exb_manager->pop(exb_index, m_node_id);
-                    }else{
-                        //未绑定
-                        //有没有可用的exb呢
-                        if(exb_available_index != -1){
-                            //有可用exb 绑上
-                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
-                            PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
-                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-                            //产生新的packet
-                            m_inject->inject_new_packet(ring_index);
-                        }else{
-                            //无可用exb No Action
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                                goto here;
-                            }
-                        }
-                    }
-
-                }else if(action == -3){
-
-                    if(exb_index != -1){
-                        //绑定中
-                        //还有位置吗 记得加上single flit自己的一个size
-                        remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index) + 1;
-                        if(remaining_exb_size >= length){
-                            PLOG_WARNING << "EXB " << exb_index << " is Rebound with single buffer "
-                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-                            //还有位置
-                            m_inject->inject_new_packet(ring_index);
-                        }else{
-                            //没位置了 不注入新的packet了 弹出exb中的一个flit
-
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                             << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                                goto here;
-                            }
-
-                            m_exb_manager->pop(exb_index, m_node_id);
-                        }
-                    }else{
-                        //未绑定
-                        //有没有可用的exb呢
-                        if(exb_available_index != -1){
-                            //有可用exb 绑上
-                            m_exb_manager->set_exb_status(exb_available_index, true, ring_index);
-                            PLOG_WARNING << "EXB " << exb_available_index << " is Bound with single buffer "
-                                         << ring_index << " at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-                            //产生新的packet
-                            m_inject->inject_new_packet(ring_index);
-                        }else{
-                            //无可用exb No Action
-                            if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                                try_again++;
-                                goto here;
-                            }
-
-                        }
-                    }
-                    //Ejection一定要放到所有判断
-                    ejection(m_single_buffer[ring_index], m_curr_ring_id[ring_index]);
-                }else{
-                    //都是要转发的flit了
-                    //不会再注入了
-                    //是否被绑定了
-
-                    if(GlobalParameter::routing_strategy == Secondwinner&&!try_again){
-                        try_again++;
-                        PLOG_WARNING << "Busy Ring " <<  ring_index << " at Node " << m_node_id
-                                     << " in Cycle " << GlobalParameter::global_cycle << " Try again " ;
-                        goto here;
-                    }
-
-                    if(exb_index != -1){
-                        m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index]);
-                    }else{
-                        forward(m_single_buffer[ring_index]);
-                    }
-                }
-
+                /*Flit in the input buffer needs to be forwarded*/
+                /*Fail to Inject*/
+                goto here;
             }
 
         }else{
-            //没有Packetinfo 不需要注入
+
+            /*Empty injection queue*/
             return_ring_index = -1;
         }
-    }else{
-        //true
-        //Inject the second flit of the previous packet
-        //先拿到之前注入的ring index
-        ring_index = m_inject->get_ongoing_ring_index();
-        //查看此时的action
-        action = get_single_buffer_action(ring_index);
-        continue_inject_packet(action);
 
-        return_ring_index = ring_index;
+    }else{
+        /*Injection is going on, inject the rest flits of the previous packet*/
+        continue_inject_packet();
+        return_ring_index = m_inject->get_ongoing_ring_index();
     }
     p = nullptr;
     return return_ring_index;
 }
+
 
 bool Node::is_injection_ongoing() {
     if(m_inject->get_ongoing_packet() == nullptr){
@@ -427,101 +489,176 @@ bool Node::is_injection_ongoing() {
     }else{
         return true;
     }
-
 }
 
-void Node::continue_inject_packet(int action) {
+/*Please check the paper for details*/
+void Node::continue_inject_packet() {
+    /*Indicate the index of the flit to be injected*/
     int flit_index;
 
-    //此时Injection里面一定有未注入完成的Packet
+    /*Retrieve the pointer to the previous long packet*/
     Packet* p = m_inject->get_ongoing_packet();
-    //拿到此时的ring_index 也是single buffer index
-    int ring_index = m_inject->get_ongoing_ring_index();
 
-    //拿到此时这个ring上对应的EXB的index
-    //TODO 记得检查此处会不会为-1
-    //正常来说不会用 因为已经绑定了
+    int ring_index = m_inject->get_ongoing_ring_index();
+    int action = get_single_buffer_action(ring_index);
+
     int exb_index = m_exb_manager->check_exb_bound(ring_index);
-    PLOG_ERROR_IF(exb_index == -1) << "Error in checking EXB Bound in Continue Injection";
+    /*PLOG_ERROR_IF(exb_index == -1) << "Error in checking EXB Bound in Continue Injection";*/
     int remaining_exb_size = m_exb_manager->get_exb_remaining_size(exb_index);
-    //查询第一个为Injecting的Flit的位置
-    //一定能查到 循环不可能走完的 i最大为长度减一
+
+    /*Find the first flit to be injected*/
     for(flit_index = 0; flit_index < p->get_length(); ++flit_index){
         if(p->get_flit_status(flit_index) == Injecting){
             break;
         }
     }
-    PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection"
+    /*PLOG_ERROR_IF(flit_index == p->get_length()) << "Error in Continue Injection"
     << " Packet ID " << p->get_id() << " Size " << p->get_length() << " in Node " << m_node_id
-    << " in Cycle " << GlobalParameter::global_cycle;
-    //TODO 记得检查此处的有没有循环走完的情况！！！
-
-    //更改这个flit的状态
-    p->set_flit_status(flit_index, Routing);
+    << " in Cycle " << GlobalParameter::global_cycle;*/
 
     if(action == -2 || action == -3){
-        //处理可能的注入
         if(action == -3){
             ejection(m_single_buffer[ring_index],
                             m_curr_ring_id[ring_index]);
         }
 
+        /*Act if avg is used*/
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+            m_forward_exb_length != 0){
+
+            m_exb_manager->interrupt_pop(exb_index, m_node_id);
+
+            m_forward_exb_length--;
+
+            PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop at Node "
+                         << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+
+            p = nullptr;
+            return;
+        }
+
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+           m_forward_exb_length == 0){
+
+            m_inject->set_interrupt(false);
+            PLOG_WARNING << "EXB " << exb_index << " disables interrupt " << "at Node "
+                         << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+        }
+
+        p->set_flit_status(flit_index, Routing);
+
         if(p->get_flit_type(flit_index) == Tail){
-            //注出完成 清空m_ongoing_packet
+            /*Complete this injection after tail flit injection*/
             m_inject->complete_ongoing_packet();
             PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete Tail Injection at Node " << m_node_id
                        << " in Cycle " << GlobalParameter::global_cycle;
-            //检查此时EXB有没有存下来的flit
+
             if(remaining_exb_size == GlobalParameter::exb_size){
-                //还为空 及时释放
+                /*Release bound EXB if empty*/
                 m_exb_manager->release_exb(exb_index, m_node_id);
             }
         }else{
+            /*Payload Injeciton Log*/
             PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete injection Flit "<< flit_index
                        <<" at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
         }
 
     }else{
-        //处理single buffer的转发
-        m_exb_manager->push(exb_index, m_single_buffer[ring_index]);
 
-        if(p->get_flit_type(flit_index) == Tail){
-            //注出完成 清空m_ongoing_packet
-            m_inject->complete_ongoing_packet();
-            PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete Tail Injection at Node " << m_node_id
-                       << " in Cycle " << GlobalParameter::global_cycle;
-            //检查此时EXB有没有存下来的flit
+        if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+            m_forward_exb_length != 0){
+
+            m_forward_exb_length =
+                    m_exb_manager->cal_forward_packet_length(exb_index,
+                          m_single_buffer[ring_index]->get_packet_id(),
+                                m_forward_exb_length);
+
+            m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index], m_node_id,
+                                        GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
+
+            PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop&Push at Node "
+                         << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+
+            m_forward_exb_length--;
+
         }else{
-            PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete injection Flit "<< flit_index
-                       <<" at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
-        }
+            if(remaining_exb_size == 0){
 
+                /*No injection in this cycle*/
+                PLOG_WARNING << "EXB " << exb_index << " enables interrupt " << "at Node "
+                             << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                /*No space in exb, trigger the interrupt*/
+                m_inject->set_interrupt(true);
+                m_forward_exb_length =
+                        m_exb_manager->cal_forward_packet_length(exb_index,
+                           m_single_buffer[ring_index]->get_packet_id());
+                m_exb_manager->pop_and_push(exb_index, m_single_buffer[ring_index], m_node_id,
+                                            GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted());
+                m_forward_exb_length--;
+
+                PLOG_WARNING << "Packet " << p->get_id() << " Flit " << flit_index << " is blocked by Interrupt Pop&Push at Node "
+                             << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+            }else{
+
+                /*Only valid when interrupt is on and m_forward_exb_length is 0*/
+                if(GlobalParameter::enable_interrupt && m_inject->is_injection_interrupted() &&
+                   m_forward_exb_length == 0){
+
+                    m_inject->set_interrupt(false);
+                    PLOG_WARNING << "EXB " << exb_index << " disables interrupt " << " at Node "
+                                 << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                }
+
+                /*Normal injection without interrupt*/
+                p->set_flit_status(flit_index, Routing);
+
+                m_exb_manager->push(exb_index, m_single_buffer[ring_index]);
+
+                if(p->get_flit_type(flit_index) == Tail){
+                    m_inject->complete_ongoing_packet();
+                    PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete Tail Injection at Node " << m_node_id
+                               << " in Cycle " << GlobalParameter::global_cycle;
+                    /*No need to check whether the EXB is empty, because you've pushed one into it*/
+                }else{
+                    PLOG_DEBUG << "Long Packet " << p->get_id() << " Complete injection Flit "<< flit_index
+                               <<" at Node " << m_node_id << " in Cycle " << GlobalParameter::global_cycle;
+                }
+
+            }
+        }
     }
     p = nullptr;
 }
 
-RoutingTable *Node::check_routing_table(int dst_id) {
-    for(int i =0; i < m_table.size(); i++){
+RoutingTable *Node::search_routing_table(int dst_id) {
+    int size = m_table.size();
+    for(int i =0; i < size; i++){
         if(dst_id == m_table[i]->node_id){
             return m_table[i];
         }
     }
-
 }
 
-int Node::ring_selection(int dst, int index) {
-    RoutingTable* table = check_routing_table(dst);
-    if(index){
-        return ring_to_index(table->ring2_id);
-    }else{
-        return ring_to_index(table->ring1_id);;
+int Node::ring_selection(int dst) {
+    if(dst == m_node_id){
+        int size = m_curr_ring_id.size();
+        /*Have tries all options, No rings available this cycle*/
+        if(m_self_loop_counter == size) return -1;
+        return m_self_loop_counter++;
     }
+    RoutingTable* table = search_routing_table(dst);
+    int routing_table_size = table->routing.size();
+    int &routing_index = table->routing_index;
 
+    /*Have tries all options, No rings available this cycle*/
+    if(routing_index == routing_table_size) return -1;
+
+    return ring_to_index(table->routing[routing_index++].first);
 }
 
 int Node::ring_to_index(int ring_id) {
     vector<int>::iterator it = find(m_curr_ring_id.begin(), m_curr_ring_id.end(), ring_id);
-    //拿到该ringid对应的索引
+    /*Get the index of rings across this node*/
     return distance(m_curr_ring_id.begin(), it);
 }
 
@@ -533,35 +670,21 @@ int Node::get_single_buffer_action(int ring_index) {
     }
 }
 
-void Node::node_info_output() {
-    cout << m_stat;
-}
-
 ostream& operator<<(ostream& out, Stat& stat){
-    out << "\t" << "Received Flit:" << stat.received_flit << endl
-         << "\t" << "Received Packet:" << stat.received_packet << endl
-         << "\t" << "Max Flit Delay:" << stat.max_flit_delay << endl
-         << "\t" << "Max Packet Delay:" << stat.max_packet_delay << endl;
-    //不等0说明是NoC调用 因为Node是不计算下面四个指标的 默认为0
+    out << "\t" << "Received Flit: " << stat.received_flit << endl
+         << "\t" << "Received Packet: " << stat.received_packet << endl
+         << "\t" << "Max Flit Delay: " << stat.max_flit_delay << endl
+         << "\t" << "Max Packet Delay: " << stat.max_packet_delay << endl
+         << "\t" << "Packet ID of Max Packet Delay: " << stat.packet_id_for_max_delay << endl;
+    /*Only used for NoC Statistics, Node Statistics won't enter this statement*/
     if(stat.flit_throughput != 0)
-        out  << "\t" << "Flit Throughput:" << stat.flit_throughput << endl
-              << "\t" << "Packet Throughput:" << stat.packet_throughput << endl
-              << "\t" << "Average Flit Latency:" << stat.avg_flit_latency << endl
-              << "\t" << "Average Packet Latency:" << stat.avg_packet_latency << endl;
+        out  << "\t" << "Flit Throughput: " << stat.flit_throughput << endl
+             << "\t" << "Packet Throughput: " << stat.packet_throughput << endl
+             << "\t" << "Average Flit Latency: " << stat.avg_flit_latency << endl
+             << "\t" << "Average Packet Latency: " << stat.avg_packet_latency << endl;
     return out;
 }
 
-
-ostream& operator<<(ostream& out, Node& node){
-    int size = node.m_table.size();
-    out << "Node" << node.get_node_id() << " " << "Routing Table:"<< endl;
-    out << "Number of list: " << size  <<endl;
-    for(int j = 0; j < size; j++){
-        out << node.m_table[j]->node_id
-            << "   " << node.m_table[j]->ring1_id
-            << "   " << node.m_table[j]->ring1_hop
-            << "   " <<node.m_table[j]->ring2_id
-            << "   " << node.m_table[j]->ring2_hop << endl;
-    }
-    return out;
+bool operator==(const pair<long, int>& a, const pair<long, int>& b){
+    return a.first == b.first && a.second == b.second;
 }

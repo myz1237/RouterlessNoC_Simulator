@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator
+CMAKE_SOURCE_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator-master
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug
+CMAKE_BINARY_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/NocSim.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/NocSim.dir/flags.make
 
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o: ../src/GlobalParameter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/GlobalParameter.cpp
 
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.cpp > CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/GlobalParameter.cpp > CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.i
 
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/GlobalParameter.cpp -o CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/GlobalParameter.cpp -o CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.s
 
 CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/NocSim.dir/src/GlobalParameter.cpp.o.provides.build: CMakeFiles/NocSi
 
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o: ../src/ConfigureManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ConfigureManager.cpp
 
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.cpp > CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ConfigureManager.cpp > CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.i
 
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ConfigureManager.cpp -o CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ConfigureManager.cpp -o CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.s
 
 CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/NocSim.dir/src/ConfigureManager.cpp.o.provides.build: CMakeFiles/NocS
 
 CMakeFiles/NocSim.dir/src/Node.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Node.cpp.o: ../src/Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/NocSim.dir/src/Node.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Node.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/NocSim.dir/src/Node.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Node.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Node.cpp
 
 CMakeFiles/NocSim.dir/src/Node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Node.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp > CMakeFiles/NocSim.dir/src/Node.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Node.cpp > CMakeFiles/NocSim.dir/src/Node.cpp.i
 
 CMakeFiles/NocSim.dir/src/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Node.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Node.cpp -o CMakeFiles/NocSim.dir/src/Node.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Node.cpp -o CMakeFiles/NocSim.dir/src/Node.cpp.s
 
 CMakeFiles/NocSim.dir/src/Node.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/NocSim.dir/src/Node.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/N
 
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Ring.cpp.o: ../src/Ring.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/NocSim.dir/src/Ring.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Ring.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/NocSim.dir/src/Ring.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Ring.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Ring.cpp
 
 CMakeFiles/NocSim.dir/src/Ring.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Ring.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp > CMakeFiles/NocSim.dir/src/Ring.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Ring.cpp > CMakeFiles/NocSim.dir/src/Ring.cpp.i
 
 CMakeFiles/NocSim.dir/src/Ring.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Ring.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Ring.cpp -o CMakeFiles/NocSim.dir/src/Ring.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Ring.cpp -o CMakeFiles/NocSim.dir/src/Ring.cpp.s
 
 CMakeFiles/NocSim.dir/src/Ring.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/NocSim.dir/src/Ring.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/R
 
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Noc.cpp.o: ../src/Noc.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/NocSim.dir/src/Noc.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Noc.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/NocSim.dir/src/Noc.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Noc.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Noc.cpp
 
 CMakeFiles/NocSim.dir/src/Noc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Noc.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.cpp > CMakeFiles/NocSim.dir/src/Noc.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Noc.cpp > CMakeFiles/NocSim.dir/src/Noc.cpp.i
 
 CMakeFiles/NocSim.dir/src/Noc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Noc.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Noc.cpp -o CMakeFiles/NocSim.dir/src/Noc.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Noc.cpp -o CMakeFiles/NocSim.dir/src/Noc.cpp.s
 
 CMakeFiles/NocSim.dir/src/Noc.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/NocSim.dir/src/Noc.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/No
 
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o: ../src/ExbManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NocSim.dir/src/ExbManager.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ExbManager.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NocSim.dir/src/ExbManager.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ExbManager.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ExbManager.cpp
 
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/ExbManager.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.cpp > CMakeFiles/NocSim.dir/src/ExbManager.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ExbManager.cpp > CMakeFiles/NocSim.dir/src/ExbManager.cpp.i
 
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/ExbManager.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ExbManager.cpp -o CMakeFiles/NocSim.dir/src/ExbManager.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ExbManager.cpp -o CMakeFiles/NocSim.dir/src/ExbManager.cpp.s
 
 CMakeFiles/NocSim.dir/src/ExbManager.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/NocSim.dir/src/ExbManager.cpp.o.provides.build: CMakeFiles/NocSim.dir
 
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Flit.cpp.o: ../src/Flit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/NocSim.dir/src/Flit.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Flit.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/NocSim.dir/src/Flit.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Flit.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Flit.cpp
 
 CMakeFiles/NocSim.dir/src/Flit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Flit.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.cpp > CMakeFiles/NocSim.dir/src/Flit.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Flit.cpp > CMakeFiles/NocSim.dir/src/Flit.cpp.i
 
 CMakeFiles/NocSim.dir/src/Flit.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Flit.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Flit.cpp -o CMakeFiles/NocSim.dir/src/Flit.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Flit.cpp -o CMakeFiles/NocSim.dir/src/Flit.cpp.s
 
 CMakeFiles/NocSim.dir/src/Flit.cpp.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/NocSim.dir/src/Flit.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/F
 
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Injection.cpp.o: ../src/Injection.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/NocSim.dir/src/Injection.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Injection.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/NocSim.dir/src/Injection.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Injection.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Injection.cpp
 
 CMakeFiles/NocSim.dir/src/Injection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Injection.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp > CMakeFiles/NocSim.dir/src/Injection.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Injection.cpp > CMakeFiles/NocSim.dir/src/Injection.cpp.i
 
 CMakeFiles/NocSim.dir/src/Injection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Injection.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Injection.cpp -o CMakeFiles/NocSim.dir/src/Injection.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Injection.cpp -o CMakeFiles/NocSim.dir/src/Injection.cpp.s
 
 CMakeFiles/NocSim.dir/src/Injection.cpp.o.requires:
 
@@ -251,16 +251,16 @@ CMakeFiles/NocSim.dir/src/Injection.cpp.o.provides.build: CMakeFiles/NocSim.dir/
 
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o: ../src/Traffic.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/NocSim.dir/src/Traffic.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Traffic.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/NocSim.dir/src/Traffic.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Traffic.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Traffic.cpp
 
 CMakeFiles/NocSim.dir/src/Traffic.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Traffic.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp > CMakeFiles/NocSim.dir/src/Traffic.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Traffic.cpp > CMakeFiles/NocSim.dir/src/Traffic.cpp.i
 
 CMakeFiles/NocSim.dir/src/Traffic.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Traffic.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Traffic.cpp -o CMakeFiles/NocSim.dir/src/Traffic.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Traffic.cpp -o CMakeFiles/NocSim.dir/src/Traffic.cpp.s
 
 CMakeFiles/NocSim.dir/src/Traffic.cpp.o.requires:
 
@@ -275,16 +275,16 @@ CMakeFiles/NocSim.dir/src/Traffic.cpp.o.provides.build: CMakeFiles/NocSim.dir/sr
 
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o: ../src/ringalgorithm/RingAlgorithms.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ringalgorithm/RingAlgorithms.cpp
 
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.cpp > CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ringalgorithm/RingAlgorithms.cpp > CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.i
 
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/ringalgorithm/RingAlgorithms.cpp -o CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/ringalgorithm/RingAlgorithms.cpp -o CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.s
 
 CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o.requires:
 
@@ -299,16 +299,16 @@ CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o.provides.build: CMa
 
 CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o: ../src/RoutingTable.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RoutingTable.cpp
 
 CMakeFiles/NocSim.dir/src/RoutingTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/RoutingTable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.cpp > CMakeFiles/NocSim.dir/src/RoutingTable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RoutingTable.cpp > CMakeFiles/NocSim.dir/src/RoutingTable.cpp.i
 
 CMakeFiles/NocSim.dir/src/RoutingTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/RoutingTable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RoutingTable.cpp -o CMakeFiles/NocSim.dir/src/RoutingTable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/RoutingTable.cpp -o CMakeFiles/NocSim.dir/src/RoutingTable.cpp.s
 
 CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o.requires:
 
@@ -323,16 +323,16 @@ CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o.provides.build: CMakeFiles/NocSim.d
 
 CMakeFiles/NocSim.dir/src/Main.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/Main.cpp.o: ../src/Main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/NocSim.dir/src/Main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Main.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/NocSim.dir/src/Main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/Main.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Main.cpp
 
 CMakeFiles/NocSim.dir/src/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/Main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp > CMakeFiles/NocSim.dir/src/Main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Main.cpp > CMakeFiles/NocSim.dir/src/Main.cpp.i
 
 CMakeFiles/NocSim.dir/src/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/Main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/Main.cpp -o CMakeFiles/NocSim.dir/src/Main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/Main.cpp -o CMakeFiles/NocSim.dir/src/Main.cpp.s
 
 CMakeFiles/NocSim.dir/src/Main.cpp.o.requires:
 
@@ -345,42 +345,18 @@ CMakeFiles/NocSim.dir/src/Main.cpp.o.provides: CMakeFiles/NocSim.dir/src/Main.cp
 CMakeFiles/NocSim.dir/src/Main.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/Main.cpp.o
 
 
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o: CMakeFiles/NocSim.dir/flags.make
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o: ../src/RandomUtil.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.cpp
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.cpp > CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/RandomUtil.cpp -o CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires:
-
-.PHONY : CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
-	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides.build
-.PHONY : CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides
-
-CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
-
-
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: CMakeFiles/NocSim.dir/flags.make
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o: ../src/KnuthRngWrapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRngWrapper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp
 
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRngWrapper.cpp > CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp > CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.i
 
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator/src/KnuthRngWrapper.cpp -o CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KnuthRngWrapper.cpp -o CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.s
 
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.requires:
 
@@ -391,6 +367,30 @@ CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.provides: CMakeFiles/NocSim.dir/
 .PHONY : CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.provides
 
 CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o
+
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o: CMakeFiles/NocSim.dir/flags.make
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o: ../src/KunthRngDoubleWrapper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o -c /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp > CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.i
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myz1237/Desktop/RouterlessNoC_Simulator-master/src/KunthRngDoubleWrapper.cpp -o CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.s
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.requires:
+
+.PHONY : CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.requires
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.provides: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.requires
+	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.provides.build
+.PHONY : CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.provides
+
+CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.provides.build: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o
 
 
 # Object files for target NocSim
@@ -407,8 +407,8 @@ NocSim_OBJECTS = \
 "CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o" \
 "CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o" \
 "CMakeFiles/NocSim.dir/src/Main.cpp.o" \
-"CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o" \
-"CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o"
+"CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o" \
+"CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o"
 
 # External object files for target NocSim
 NocSim_EXTERNAL_OBJECTS =
@@ -425,11 +425,11 @@ NocSim: CMakeFiles/NocSim.dir/src/Traffic.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/Main.cpp.o
-NocSim: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
 NocSim: CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o
+NocSim: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o
 NocSim: CMakeFiles/NocSim.dir/build.make
 NocSim: CMakeFiles/NocSim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable NocSim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable NocSim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/NocSim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -449,8 +449,8 @@ CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/Traffic.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/ringalgorithm/RingAlgorithms.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/RoutingTable.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/Main.cpp.o.requires
-CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o.requires
 CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.o.requires
+CMakeFiles/NocSim.dir/requires: CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o.requires
 
 .PHONY : CMakeFiles/NocSim.dir/requires
 
@@ -459,6 +459,6 @@ CMakeFiles/NocSim.dir/clean:
 .PHONY : CMakeFiles/NocSim.dir/clean
 
 CMakeFiles/NocSim.dir/depend:
-	cd /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myz1237/Desktop/RouterlessNoC_Simulator /home/myz1237/Desktop/RouterlessNoC_Simulator /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles/NocSim.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myz1237/Desktop/RouterlessNoC_Simulator-master /home/myz1237/Desktop/RouterlessNoC_Simulator-master /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/NocSim.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/NocSim.dir/depend
 

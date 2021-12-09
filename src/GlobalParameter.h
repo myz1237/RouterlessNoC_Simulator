@@ -1,3 +1,16 @@
+/*****************************************************************************
+*  Routerless Network-on-Chip Simulator                                      *
+*                                                                            *
+*  @file     GlobalParameter.h                                                          *
+*  @brief    This file stores parameters read from ConfigureManager.h        *
+*            Global variable definition                                      *
+*                                                                            *
+*  @author   Yizhuo Meng                                                     *
+*  @email    myz2ylp@connect.hku.hk                                          *
+*  @date     2020.03.16                                                      *
+*                                                                            *
+*****************************************************************************/
+
 #ifndef NOCSIM_GLOBALPARAMETER_H
 #define NOCSIM_GLOBALPARAMETER_H
 #include <string>
@@ -9,84 +22,74 @@ class Traffic;
 class RingAlgorithms;
 class Ring;
 using namespace std;
+
+/**
+ * @brief Algorithm to generate ring's topology
+ */
 enum RingStrategy{
-    IMR,
-    RLrec
+    IMR,    /*Less efficient Alogrithm. DEPRECATED*/
+    RLrec   /*Proposed by a previous paper*/
 };
-
+/**
+ * @brief Determine the size of each EXB
+ */
 enum ExbStrategy{
-    Max,
-    Avg
-};
-
-enum EjStrategy{
-    Oldest,
-    Prio
+    Max,    /*Maximum size of one packet*/
+    Avg     /*Algorithm mean of packet size, cooperating pipeline strategy */
 };
 
 enum TrafficType{
     Uniform,
     Transpose,
     BitReverse,
-    Hotspot,
-    SPLASH,
-    PARSEC,
+    Hotspot
 };
 
 enum RoutingStrategy{
-    Shortest,
-    Secondwinner
-};
-
-enum SimType{
-    Latency,
-    Throughput
-};
-
-enum LatencyType{
-    Packets,
-    Flits,
-    Both
+    Shortest,      /*Always use the shortest path to the dst*/
 };
 
 namespace GlobalParameter{
+    /*Global Parameters from Yaml File*/
     extern int mesh_dim_x;
     extern int mesh_dim_y;
     extern double injection_rate;
     extern int long_packet_size;
     extern int short_packet_size;
-    extern int long_packet_ratio;
-    extern int short_packet_ratio;
-    extern int flit_size;
-    extern int bandwidth;
+    extern int method_size_generator;
+    extern vector<pair<int, int>> packet_size_with_ratio;
     extern RingStrategy ring_strategy;
-    //extern int ring_constraint;
     extern ExbStrategy exb_strategy;
     extern int exb_num;
-    extern int in_port_size;
     extern int ej_port_nu;
-    extern EjStrategy ej_strategy;
     extern RoutingStrategy routing_strategy;
     extern TrafficType traffic_type;
-    extern vector<pair<int, int>>hotspot;
+    extern vector<pair<int, int>> hotspot;
     extern int sim_time;
     extern int sim_warmup;
-    extern SimType sim_type;
-    extern LatencyType latency_type;
     extern int sim_detail;
 
-    //GlobalParameter used during the project
-    //injection_cycle = ceil(1/injection_rate)
-    extern int injection_cycle;
-    //static vector<RoutingTable*>routing_table;
-    //static vector<Ring*>ring;
+    /*Global Parameter for inner usages*/
     extern Traffic* traffic;
     extern RingAlgorithms* ring_algorithm;
-    //The size of buffer for each EXB
     extern int exb_size;
+    /*Global packet id for all traffics*/
     extern long packet_id;
+    /*Ring sets for NoC*/
     extern vector<Ring*> ring;
+    /*Time counter, one flit per cycle*/
     extern long global_cycle;
+    /*Switch for injection interrupt
+     *True if ExbStrategy, avg, is chosen */
+    extern bool enable_interrupt;
+    /*Record the number of packets in rings or injection queues*/
+    extern int unrecv_packet_num;
+
+    extern int psum;
+
+
+
+
 }
 
 

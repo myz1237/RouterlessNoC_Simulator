@@ -1,5 +1,5 @@
 #This is the configure file for NocSim
-#You may create a new file for your own routerless NoC
+#You may create a new file for your own Routerless NoC
 
 #The size of your NoC. Mesh topology is applied
 #Please note that these two parameters must be even.
@@ -7,47 +7,35 @@
 mesh_dim_x: 8
 mesh_dim_y: 8
 
-#The speed of injection of each node, expressed in packet per cycle per node
-injection_rate: 0.2
+#The speed of injection of each node, expressed in flit per cycle per node
+injection_rate: 0.01
 #The number of flit per long packet
 long_packet_size: 5
 #The number of flit per short packet
 short_packet_size: 1
+#Method of size generation
+#0-->generate size between short and long
+#1-->customize packet size with possibility
+method_size_generator: 1
 
-short_ratio: 8
-long_ratio: 2
-
-#The size of one flit, expressed in bit
-flit_size: 256
-#Bandwidth between two nodes, expressed in bit
-bandwidth: 256
+#Format:
+#       packet size: possibility(integer)
+#packet size and possibility must be integer
+packet_ratio:
+  5: 2
 
 #Ring configuration
 #Algorithm used to generate the layout of the NoC
 #Available algorithm:
 #RLrec
 ring_strategy: RLrec
-#Physical limit for the number of rings across each node
-ring_constraint: 6
-
-#Extension Buffer of each node
-#The size of each buffer in an exb pool, expressed in flit
-
-#exb_size: 6
-
-#The number of buffer in an exb pool
-
-#exb_number: 5
 
 #Strategy handling packets exceeding the buffer size
 #Available strategy:
 #Max--Use the max size of packet as buffer size. Isolated buffer
 #Avg--Use average size of packet as buffer size. Isolated buffer
 exb_strategy: Max
-exb_num: 2
-
-#Input port size configuration, measured by flit
-in_port_size: 1
+exb_num: 1
 
 #Ejection settings
 #The number of ejection port
@@ -55,13 +43,11 @@ ej_port_nu: 2
 #Algorithm for multiple incoming packets
 #Available algorithm:
 #Oldest--Oldest packets have the highest priority
-#Prio--Set different priority
 ej_strategy: Oldest
 
 #Routing Selection Strategy
 #Available algorithm:
 #Shortest
-#Secondwinner
 routing_strategy: Shortest
 
 
@@ -71,45 +57,29 @@ routing_strategy: Shortest
 #Transpose
 #BitReverse
 #Hotspot
-#SPLASH
-#PARSEC
-traffic_type: Uniform
+traffic_type: Hotspot
 #Only available when Hopspot is selected.
-#Type Node_ID: possibility
+#Type Node_ID: weight
 hotspot:
-  2: 5
-  5: 10
-  9: 15
-  12: 1
-  15: 20
+  3: 10
+  11: 10
+  19: 10
+  27: 10
+  35: 10
+  43: 10
+  54: 10
+  63: 10
 
 #Simulation parameters
 #Period for run-time simulation, expressed in cycle
-sim_time: 10000
+sim_time: 100000
 #Period for warm-up, expressed in cycle
-sim_warmup: 100
-#Simulation result type:
-#Throughput--drain NoC when reaching run-time period. Some packets may not be injected, ejected or forwarded
-#Latency--drain NoC until all ongoing packets have been ejected into nodes.
-sim_type: Latency
-#Latency type:
-#Packet--average packet latency
-#Flit--average flit latency
-#Both--Packet+Flit
-latency_type: both
-#Value short packet to long packet
-#Number of short packet/Number of long packet
-#s_to_l:
-#  short: 1
-#  long: 1
+sim_warmup: 10000
 #Output detailed information.
-#1--Enable
+#1--Enable, Output Routing Information and Statistics of each node
 #0--Disable
 sim_detail: 0
 
-#TODO
-clock_period_ps: 200
-reset_time: 10
 
 
 

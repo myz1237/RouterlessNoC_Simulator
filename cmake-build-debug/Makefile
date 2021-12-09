@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator
+CMAKE_SOURCE_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator-master
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug
+CMAKE_BINARY_DIR = /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/myz1237/Desktop/RouterlessNoC_Simulator/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/myz1237/Desktop/RouterlessNoC_Simulator-master/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -285,6 +285,33 @@ src/KnuthRngWrapper.cpp.s:
 	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/KnuthRngWrapper.cpp.s
 .PHONY : src/KnuthRngWrapper.cpp.s
 
+src/KunthRngDoubleWrapper.o: src/KunthRngDoubleWrapper.cpp.o
+
+.PHONY : src/KunthRngDoubleWrapper.o
+
+# target to build an object file
+src/KunthRngDoubleWrapper.cpp.o:
+	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.o
+.PHONY : src/KunthRngDoubleWrapper.cpp.o
+
+src/KunthRngDoubleWrapper.i: src/KunthRngDoubleWrapper.cpp.i
+
+.PHONY : src/KunthRngDoubleWrapper.i
+
+# target to preprocess a source file
+src/KunthRngDoubleWrapper.cpp.i:
+	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.i
+.PHONY : src/KunthRngDoubleWrapper.cpp.i
+
+src/KunthRngDoubleWrapper.s: src/KunthRngDoubleWrapper.cpp.s
+
+.PHONY : src/KunthRngDoubleWrapper.s
+
+# target to generate assembly for a file
+src/KunthRngDoubleWrapper.cpp.s:
+	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/KunthRngDoubleWrapper.cpp.s
+.PHONY : src/KunthRngDoubleWrapper.cpp.s
+
 src/Main.o: src/Main.cpp.o
 
 .PHONY : src/Main.o
@@ -365,33 +392,6 @@ src/Node.s: src/Node.cpp.s
 src/Node.cpp.s:
 	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/Node.cpp.s
 .PHONY : src/Node.cpp.s
-
-src/RandomUtil.o: src/RandomUtil.cpp.o
-
-.PHONY : src/RandomUtil.o
-
-# target to build an object file
-src/RandomUtil.cpp.o:
-	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RandomUtil.cpp.o
-.PHONY : src/RandomUtil.cpp.o
-
-src/RandomUtil.i: src/RandomUtil.cpp.i
-
-.PHONY : src/RandomUtil.i
-
-# target to preprocess a source file
-src/RandomUtil.cpp.i:
-	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RandomUtil.cpp.i
-.PHONY : src/RandomUtil.cpp.i
-
-src/RandomUtil.s: src/RandomUtil.cpp.s
-
-.PHONY : src/RandomUtil.s
-
-# target to generate assembly for a file
-src/RandomUtil.cpp.s:
-	$(MAKE) -f CMakeFiles/NocSim.dir/build.make CMakeFiles/NocSim.dir/src/RandomUtil.cpp.s
-.PHONY : src/RandomUtil.cpp.s
 
 src/Ring.o: src/Ring.cpp.o
 
@@ -528,6 +528,9 @@ help:
 	@echo "... src/KnuthRngWrapper.o"
 	@echo "... src/KnuthRngWrapper.i"
 	@echo "... src/KnuthRngWrapper.s"
+	@echo "... src/KunthRngDoubleWrapper.o"
+	@echo "... src/KunthRngDoubleWrapper.i"
+	@echo "... src/KunthRngDoubleWrapper.s"
 	@echo "... src/Main.o"
 	@echo "... src/Main.i"
 	@echo "... src/Main.s"
@@ -537,9 +540,6 @@ help:
 	@echo "... src/Node.o"
 	@echo "... src/Node.i"
 	@echo "... src/Node.s"
-	@echo "... src/RandomUtil.o"
-	@echo "... src/RandomUtil.i"
-	@echo "... src/RandomUtil.s"
 	@echo "... src/Ring.o"
 	@echo "... src/Ring.i"
 	@echo "... src/Ring.s"

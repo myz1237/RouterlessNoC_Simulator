@@ -5,17 +5,17 @@ YAML::Node conf;
 
 void configure() {
 
-    cout << "Load Configuration file.." << endl;
+    PLOG_INFO << "Load Configuration file.." << endl;
     try {
         conf = YAML::LoadFile("../configure/configure.yaml");
-        cout << "Done" << endl;
+        PLOG_INFO << "Done" << endl;
     }catch(YAML::BadFile &e){
-        cout << " Failed" << endl;
-        cerr << "Error: The specified YAML configuration file was not found!" << endl;
+        PLOG_ERROR << " Failed" << endl;
+        PLOG_ERROR << "Error: The specified YAML configuration file was not found!" << endl;
         exit(0);
     } catch (YAML::ParserException &pe){
-        cout << " Failed" << endl;
-        cerr << "ERROR at line " << pe.mark.line +1 << " column " << pe.mark.column + 1 << ": "<< pe.msg << ". Please check indentation." << endl;
+        PLOG_ERROR << " Failed" << endl;
+        PLOG_ERROR << "ERROR at line " << pe.mark.line +1 << " column " << pe.mark.column + 1 << ": "<< pe.msg << ". Please check indentation." << endl;
         exit(0);
     }
 
@@ -24,18 +24,10 @@ void configure() {
     GlobalParameter::injection_rate = readParam<double>(conf,"injection_rate",0.02);;
     GlobalParameter::long_packet_size = readParam<int>(conf,"long_packet_size",5);
     GlobalParameter::short_packet_size = readParam<int>(conf,"short_packet_size",1);
-    GlobalParameter::short_packet_ratio = readParam<int>(conf,"short_ratio",8);
-    GlobalParameter::long_packet_ratio = readParam<int>(conf,"long_ratio",2);
-    GlobalParameter::flit_size = readParam<int>(conf,"flit_size",256);
-    //TODO handle relationship between bandwidth and flit_size
-    GlobalParameter::bandwidth = readParam<int>(conf,"bandwidth",256);
+    GlobalParameter::method_size_generator = readParam<int>(conf,"method_size_generator",0);
     string ring_strategy = readParam<string>(conf,"ring_strategy","RLrec");
-
-    //GlobalParameter::ring_constraint = readParam<int>(conf,"ring_constraint",6);
-
     string exb_strategy = readParam<string>(conf,"exb_strategy","Max");
     GlobalParameter::exb_num = readParam<int>(conf,"exb_num",2);
-    GlobalParameter::in_port_size = readParam<int>(conf,"in_port_size",1);
     GlobalParameter::ej_port_nu = readParam<int>(conf,"ej_port_nu",1);
     string ej_strategy = readParam<string>(conf,"ej_strategy","Oldest");
     string routing_strategy = readParam<string>(conf, "routing_strategy", "Shortest");
@@ -44,12 +36,7 @@ void configure() {
     GlobalParameter::sim_warmup = readParam<int>(conf,"sim_warmup",1000);
     string sim_type = readParam<string>(conf,"sim_type","Latency");
     string latency_type = readParam<string>(conf,"latency_type","Both");
-    //GlobalParameter::short_percent = readParam<int>(conf,"s_to_l","short",2);
-    //GlobalParameter::long_percent = readParam<int>(conf,"s_to_l","long",1);
-
     GlobalParameter::sim_detail = readParam<int>(conf,"sim_detail",0);
-
-    GlobalParameter::injection_cycle = 1/(double)GlobalParameter::injection_rate;
 
     if(ring_strategy == "IMR") GlobalParameter::ring_strategy = IMR;
     else if(ring_strategy == "RLrec") GlobalParameter::ring_strategy = RLrec;
@@ -57,32 +44,22 @@ void configure() {
     if(exb_strategy == "Max") GlobalParameter::exb_strategy = Max;
     else if(exb_strategy == "Avg") GlobalParameter::exb_strategy = Avg;
 
-    //TODO 还没有设定好
-    if(ej_strategy == "Oldest") GlobalParameter::ej_strategy == Oldest;
-    else if(ej_strategy == "Prio") GlobalParameter::ej_strategy == Prio;
-
     if(routing_strategy == "Shortest") GlobalParameter::routing_strategy = Shortest;
-    else if(routing_strategy == "Secondwinner") GlobalParameter::routing_strategy = Secondwinner;
 
     if(traffic_type == "Uniform") GlobalParameter::traffic_type = Uniform;
     else if(traffic_type == "Transpose") GlobalParameter::traffic_type = Transpose;
     else if(traffic_type == "BitReverse") GlobalParameter::traffic_type = BitReverse;
     else if(traffic_type == "Hotspot") GlobalParameter::traffic_type = Hotspot;
 
-    if(sim_type == "Latency") GlobalParameter::sim_type = Latency;
-    else if(sim_type == "Throughput") GlobalParameter::sim_type = Throughput;
-
-    if(latency_type == "Packets") GlobalParameter::latency_type = Packets;
-    else if(latency_type == "Flits") GlobalParameter::latency_type = Flits;
-    else if(latency_type == "Both") GlobalParameter::latency_type = Both;
-
     //Decide exb parameters according to exb strategy
     switch (GlobalParameter::exb_strategy) {
         case Max:
             GlobalParameter::exb_size = GlobalParameter::long_packet_size;
+            GlobalParameter::enable_interrupt = false;
             break;
         case Avg:
             GlobalParameter::exb_size = get_exb_size(GlobalParameter::short_packet_size, GlobalParameter::long_packet_size);
+            GlobalParameter::enable_interrupt = true;
             break;
 
     }
@@ -106,19 +83,22 @@ void configure() {
         exit(0);
     }
 
-    //Check s_to_l
-/*    if(GlobalParameter::short_percent < 0){
-        cerr << "Error: short_percent must be greater than 0" << endl;
-        exit(0);
-    } else if (GlobalParameter::long_percent < 0){
-        cerr << "Error: long_percent must be greater than 0" << endl;
-        exit(0);
-    }*/
+    if(GlobalParameter::method_size_generator == 1){
+        int size;
+        int p;
+        for(YAML::const_iterator it= conf["packet_ratio"].begin(); it != conf["packet_ratio"].end();++it)
+        {
+            size = it->first.as<int>();
+            p = it->second.as<int>();
+            GlobalParameter::psum += p;
+            GlobalParameter::packet_size_with_ratio.emplace_back(size, p);
+        }
+    }
 
     if(GlobalParameter::traffic_type == Hotspot){
         int node;
         double p;
-        for(YAML::const_iterator it= conf["skills"].begin(); it != conf["skills"].end();++it)
+        for(YAML::const_iterator it= conf["hotspot"].begin(); it != conf["hotspot"].end();++it)
         {
             node = it->first.as<int>();
             p = it->second.as<int>();
@@ -128,7 +108,7 @@ void configure() {
         }
     }
     int node_sum = GlobalParameter::mesh_dim_y*GlobalParameter::mesh_dim_x;
-    //根据设置初始化各个对象
+
 
     if(GlobalParameter::traffic_type == Uniform){
         GlobalParameter::traffic = new TrafficUniform(node_sum);
@@ -139,6 +119,7 @@ void configure() {
     }else if(GlobalParameter::traffic_type == Hotspot){
         GlobalParameter::traffic = new TrafficHotspot(node_sum);
     }
+
 
     GlobalParameter::sim_time += GlobalParameter::sim_warmup;
 }
@@ -157,28 +138,6 @@ T readParam(YAML::Node node, const string& param, T default_value) {
 }
 
 template<typename T>
-T readParam(YAML::Node node, const string& param1, const string& param2, T default_value){
-    try {
-        return node[param1][param2].as<T>();
-    } catch(exception &e) {
-        /*
-        cerr << "WARNING: parameter " << param << " not present in YAML configuration file." << endl;
-        cerr << "Using command line value or default value " << default_value << endl;
-         */
-        return default_value;
-    }
-}
-
-template <typename T>
-T readParam(YAML::Node node, const string& param) {
-    try {
-        return node[param].as<T>();
-    } catch(exception &e) {
-        cerr << "ERROR: Cannot read param " << param << ". " << endl;
-        exit(0);
-    }
-}
-template<typename T>
 void checkRange(T min, T max, T test){
     if(test < min || test > max){
         cerr << "ERROR: Hopspot values are out of range. " << endl;
@@ -186,6 +145,8 @@ void checkRange(T min, T max, T test){
     }
 }
 
+/*Calculate Arithmetic mean
+Return the smallest integer value that is bigger than or equal to the mean*/
 int get_exb_size(const int min, const int max){
     int num = max-min+1;
     int sum = 0;

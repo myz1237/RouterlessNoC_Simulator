@@ -12,15 +12,14 @@ add_executable( NocSim
                 src/Node.cpp src/Node.h
                 src/Ring.cpp src/Ring.h
                 src/Noc.cpp src/Noc.h
-        src/Node.cpp src/Node.h
+                src/Node.cpp src/Node.h
                 src/ExbManager.cpp src/ExbManager.h
                 src/Flit.cpp src/Flit.h
-                src/RoutingTable.h
                 src/Injection.cpp src/Injection.h
                 src/Util.h
                 src/Traffic.cpp src/Traffic.h
                 src/ringalgorithm/RingAlgorithms.cpp src/ringalgorithm/RingAlgorithms.h
-                src/RoutingTable.cpp
-                src/Main.cpp src/RandomUtil.cpp src/RandomUtil.h src/KnuthRngWrapper.cpp)
+                src/RoutingTable.cpp src/RoutingTable.h
+                src/Main.cpp src/RandomUtil.h src/KnuthRngWrapper.cpp src/KunthRngDoubleWrapper.cpp src/Test.h)
 
 target_link_libraries(NocSim libyaml-cpp.a)

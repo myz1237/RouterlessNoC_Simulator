@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/yaml-cpp/include -I/home/myz1237/Desktop/RouterlessNoC_Simulator/lib/plog/include 
+CXX_INCLUDES = -I/home/myz1237/Desktop/RouterlessNoC_Simulator-master/lib/yaml-cpp/include -I/home/myz1237/Desktop/RouterlessNoC_Simulator-master/lib/plog/include 
 

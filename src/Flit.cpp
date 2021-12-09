@@ -6,26 +6,29 @@ int Flit::calc_flit_latency() const {
     return m_atime-m_ctime;
 }
 
-void Flit::update_routing_snifer() {
+Flit::Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq, const int ctime,
+           int hop, int curr_node, int atime): m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
+                                               m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){}
+
+ControlFlit::ControlFlit(const long packet_id, const int src, const int dst, const FlitType type, const int seq,
+                         const int ctime, int hop, int curr_node):Flit(packet_id, src, dst, type, seq, ctime, hop, curr_node) {
+    m_routing.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x);
+}
+
+ControlFlit::~ControlFlit() {
+    free_vetor<Routingsnifer*>(m_routing);
+}
+
+void ControlFlit::update_routing_snifer() {
     Routingsnifer* r = new Routingsnifer;
     r->hop_count = m_hop;
     r->node_id = m_curr_node;
     m_routing.push_back(r);
 }
 
-Flit::Flit(const long packet_id, const int src, const int dst, const FlitType type, const int seq, const int ctime,
-           int hop, int curr_node, int atime): m_packet_id(packet_id),m_src_id(src), m_dst_id(dst),m_type(type),m_sequence(seq), m_ctime(ctime),
-                                               m_atime(atime),m_hop(hop),m_curr_node(curr_node), m_status(Injecting){
-    if(type == Control) m_routing.reserve(GlobalParameter::mesh_dim_x*GlobalParameter::mesh_dim_x);
-}
-
-Flit::~Flit() {
-    free_vetor<Routingsnifer*>(m_routing);
-}
-
-Packet::Packet(long packet_id, int length, int src, int dst, int node, int ctime, bool finish):
+Packet::Packet(long packet_id, int length, int src, int dst, int node, int ctime):
         m_packet_id(packet_id), m_length(length),m_src_id(src),m_dst_id(dst),
-        m_curr_node(node),m_ctime(ctime), m_finish(finish){
+        m_curr_node(node),m_ctime(ctime){
     //Default arrivetime is -1, means not arrive
     m_flit.reserve(length);
     this->attach(new Flit(packet_id, m_src_id,m_dst_id,Header,0,m_ctime,0,m_curr_node));
@@ -42,16 +45,16 @@ Packet::Packet(long packet_id, int length, int src, int dst, int node, int ctime
     }
 }
 
-Packet::Packet(long packet_id, int length, int src, int ctime, bool finish):
+Packet::Packet(long packet_id, int length, int src, int ctime):
             m_packet_id(packet_id),m_src_id(src),m_dst_id(src),m_length(length),m_ctime(ctime),
-            m_curr_node(src),m_finish(finish) {
+            m_curr_node(src) {
     m_flit.reserve(length);
-    this->attach(new Flit(packet_id, src,src,Control,0,ctime,0,src));
+    this->attach(new ControlFlit(packet_id, src,src,Control,0,ctime,0,src));
 }
 
-Packet::Packet(int src, Packetinfo *packetinfo, bool finish):m_length(packetinfo->length),
+Packet::Packet(int src, Packetinfo *packetinfo):m_length(packetinfo->length),
         m_packet_id(packetinfo->id),m_src_id(packetinfo->src),m_dst_id(packetinfo->dst),m_curr_node(src),
-        m_ctime(packetinfo->ctime),m_finish(finish){
+        m_ctime(packetinfo->ctime){
     m_flit.reserve(m_length);
     this->attach(new Flit(m_packet_id, m_src_id,m_dst_id,Header,0,m_ctime,0,m_curr_node));
     if(m_length == 2){
